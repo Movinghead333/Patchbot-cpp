@@ -11,7 +11,7 @@
 class Colony
 {
 public:
-	//
+	// github commit test
 
 	Colony(const int p_width, const int p_height,
 		   Robot* p_patchbot, std::vector<Robot> p_enemy_robots, const std::vector<Tile> p_tiles);
