@@ -7,27 +7,11 @@ Tile::Tile(TileType p_tile_type) : m_tile_type(p_tile_type)
 
 Tile::Tile(const char& char_input)
 {
-	switch (char_input)
-	{
-	case 'p': m_tile_type = PATCHBOT_SPAWN; break;
-	case 'P': m_tile_type = ROOT_SERVER; break;
-	case ' ': m_tile_type = STEELPLANKS; break;
-	case '#': m_tile_type = INDESTRUCTABLE_WALL; break;
-	case 'M': m_tile_type = DESTRUCTABLE_WALL; break;
-	case 'd': m_tile_type = MANUAL_DOOR; break;
-	case 'D': m_tile_type = AUTO_DOOR; break;
-	case 'g': m_tile_type = ALIEN_GRASS; break;
-	case '.': m_tile_type = GRAVEL; break;
-	case 'x': m_tile_type = SECRET_ENTRANCE; break;
-	case 'o': m_tile_type = ABYSS; break;
-	case '~': m_tile_type = WATER; break;
-	default: throw "Unknown Character found: " + char_input;
-
-	}
+	
 
 }
 
-char Tile::get_source_char(Tile input_tile)
+const char Tile::get_source_char(const Tile input_tile)
 {
 	char result;
 	switch (input_tile.m_tile_type)
@@ -49,7 +33,7 @@ char Tile::get_source_char(Tile input_tile)
 	return result;
 }
 
-TileType Tile::get_tile_type() const
+const TileType Tile::get_tile_type() const
 {
 	return m_tile_type;
 }

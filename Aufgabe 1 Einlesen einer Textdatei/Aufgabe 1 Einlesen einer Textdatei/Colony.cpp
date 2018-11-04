@@ -10,6 +10,7 @@ Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
 	m_enemy_robots(p_enemy_robots), m_tiles(p_tiles) {}
 
 
+// getter methods for member-fields
 const Tile Colony::get_tile_by_coordinates(const int & x, const int & y) const
 {
 	return m_tiles[x + (m_width * y)];
@@ -42,7 +43,6 @@ const std::vector<Robot> Colony::get_enemy_robots() const
 
 
 // load a colony by filename and return a pointer to the created object
-//
 Colony * Colony::load_colony(const std::string& file_name)
 {
 	std::cout << "Loading Colony from file: "<< file_name << std::endl;
@@ -81,7 +81,7 @@ Colony * Colony::load_colony(const std::string& file_name)
 	std::vector<Tile> temp_tiles;
 	temp_tiles.reserve(width*height);
 
-	// setting up temporary vector for enemy robot starting points
+	// setting up temporary vector for enemy robots
 	std::vector<Robot>* temp_robots = new std::vector<Robot>;
 
 	// setting up temporary variable for the location of patch_bot
@@ -91,11 +91,12 @@ Colony * Colony::load_colony(const std::string& file_name)
 	bool hasEnd = false;
 
 	// iterate through the remaining lines of the textfile containing the level-data
-	for (int y = 0; y < height; y++)
+	int y = 0;
+	while (std::getline(input_file, current_line))
 	{
 		// check if there is a next line to read;
 		// if there is, check if the amount of chars matches the width
-		if (std::getline(input_file, current_line))
+		if (y < height)
 		{
 			// check if current line matches the specified width
 			if (current_line.size() == width)
@@ -120,16 +121,25 @@ Colony * Colony::load_colony(const std::string& file_name)
 					else
 					{
 						// throws exception if the current_char refers to an unknown symbol
-						temp_tiles.push_back(Tile(current_char));
+						temp_tiles.push_back(
+							Tile( Utility::char_to_tile_type(current_char))
+						);
 
 						// check if the current character is the player starting location
-						// if that is the case initialize the player object
+						// if that is the case initialize the player object;
+						// set the hasStart and hasEnd flags
 						if (current_char == 'p')
 						{
-							temp_patch_bot = new Robot(x, y, PATCHBOT);
-							hasStart = true;
-						}
-						else if (current_char == 'P')
+							if (!hasStart)
+							{
+								temp_patch_bot = new Robot(x, y, PATCHBOT);
+								hasStart = true;
+							}
+							else
+							{
+								throw Simple_Message_Exception("Colony can only have one starting point");
+							}
+						}else if (current_char == 'P')
 						{
 							hasEnd = true;
 						}
@@ -137,10 +147,16 @@ Colony * Colony::load_colony(const std::string& file_name)
 				}
 			}
 			// throw exception if the current line is either too short or too long
-			else
+			else if (current_line.size() < width)
 			{
 				std::stringstream temp_string_stream;
-				temp_string_stream << "Line " << (y + 1) << " does not match the specified width!";
+				temp_string_stream << "Line " << (y + 1) << " is shorter than the specified length!";
+				throw Simple_Message_Exception(temp_string_stream.str());
+			}
+			else if (current_line.size() > width)
+			{
+				std::stringstream temp_string_stream;
+				temp_string_stream << "Line " << (y + 1) << " is longer than the specified length!";
 				throw Simple_Message_Exception(temp_string_stream.str());
 			}
 		}
@@ -148,9 +164,18 @@ Colony * Colony::load_colony(const std::string& file_name)
 		// in order to initialize the colony object
 		else
 		{
-			throw Simple_Message_Exception("File does not contain the necessary number of lines!");
+			throw Simple_Message_Exception("File contains too many lines!");
 		}
+		y++;
 	}
+
+	// check if the file had enough lines
+	if (!(y == height))
+	{
+		throw Simple_Message_Exception("File contains less than the specified number of lines!");
+	}
+
+	// check the hasStart and hasEnd flags, if one of them or both are false throw an exception
 	if (hasStart == false)
 	{
 		throw Simple_Message_Exception("No starting point found!");
@@ -160,7 +185,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 		throw Simple_Message_Exception("No end point found!");
 	}
 
-
+	// if all values have been correctly setup create and return a pointer to the loaded colony
 	Colony* return_colony = new Colony(width, height, temp_patch_bot, *temp_robots, temp_tiles);
+	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
 }

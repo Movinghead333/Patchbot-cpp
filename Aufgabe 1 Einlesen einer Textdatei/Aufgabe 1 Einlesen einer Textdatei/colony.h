@@ -11,11 +11,12 @@
 class Colony
 {
 public:
-	// github commit test
 
+	// parameterized constructor for creating a colony with all the necessary information
 	Colony(const int p_width, const int p_height,
 		   Robot* p_patchbot, std::vector<Robot> p_enemy_robots, const std::vector<Tile> p_tiles);
 
+	// getter-methods
 	const Tile get_tile_by_coordinates(const int& x, const int& y) const;
 
 	const int get_width() const;
@@ -28,13 +29,23 @@ public:
 
 	const Robot* get_patch_bot() const;
 
+	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
 
 private:
+	// number of tiles along the x-axis
 	const int m_width;
+
+	// number of tiles along the y-axis
 	const int m_height;
+
+	// vector storing a Tile-object for each x,y-pair
 	const std::vector<Tile> m_tiles;
+
+	// vector storing all enemy robots and their properties (e.g. x and y coordiante)
 	std::vector<Robot> m_enemy_robots;
+
+	// variable storing patchbot itself for quick and easy access
 	Robot* m_patchbot;
 };
 

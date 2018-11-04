@@ -8,8 +8,10 @@ class Robot
 {
 public:
 
+	// constructor
 	Robot(const int p_x_coordinate, const int p_y_coordinate, RobotType pRobotType);
 
+	// getter methods for member-fields
 	int get_x_coordinate();
 
 	int get_y_coordinate();

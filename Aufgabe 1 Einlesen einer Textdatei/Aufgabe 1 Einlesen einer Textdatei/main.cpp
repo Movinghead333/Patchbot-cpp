@@ -6,15 +6,18 @@ void write_colony_to_file(Colony* input_colony, char* original_final_name);
 
 int main(int argc, char *argv[])
 {
+	// try loading a colony from commandline arg and rewrite it to a new file
 	try
 	{
 		Colony* new_colony = Colony::load_colony(argv[1]);
 		write_colony_to_file(new_colony, argv[1]);
 	}
+	// catch all specified exceptions
 	catch (Simple_Message_Exception e)
 	{
-		std::cout << e.m_error_message << std::endl;
+		std::cerr << e.m_error_message << std::endl;
 	}
+	// catch any non aticipated exceptions
 	catch (...)
 	{
 		std::cout << "Unchecked exception thrown" << std::endl;
@@ -40,7 +43,7 @@ void write_colony_to_file(Colony* input_colony, char* original_final_name)
 
 	// create vector for storing all the level-data in chars
 	std::vector<char> level_data(width*height);
-	std::cout << level_data.size() << std::endl; // debug
+	// std::cout << level_data.size() << std::endl; // debug
 
 	// get refernce-vector to all tiles in the current colony
 	const std::vector<Tile> temp_tiles = c.get_tiles();
@@ -56,7 +59,7 @@ void write_colony_to_file(Colony* input_colony, char* original_final_name)
 
 	// add the robots back to level_data
 	std::vector<Robot> temp_robots = c.get_enemy_robots();
-	std::cout << temp_robots.size() << std::endl;
+	// std::cout << temp_robots.size() << std::endl; // debug
 
 	for (Robot robot : temp_robots)
 	{
