@@ -2,6 +2,8 @@
 #include <fstream>
 #include "colony.h"
 
+// vc: 1
+
 void write_colony_to_file(Colony* input_colony, char* original_final_name);
 
 int main(int argc, char *argv[])
