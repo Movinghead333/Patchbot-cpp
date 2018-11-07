@@ -1,15 +1,9 @@
 #include "tile.h"
 #include "exceptions.h"
 
-Tile::Tile(TileType p_tile_type) : m_tile_type(p_tile_type)
+Tile::Tile(const TileType p_tile_type) : m_tile_type(p_tile_type)
 {
 };
-
-Tile::Tile(const char& char_input)
-{
-	
-
-}
 
 const char Tile::get_source_char(const Tile input_tile)
 {

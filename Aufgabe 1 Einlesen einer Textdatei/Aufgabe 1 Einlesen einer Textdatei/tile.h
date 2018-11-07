@@ -8,11 +8,7 @@ class Tile
 {
 public:
 	// constructor receiving a TileType for creating a new tile
-	Tile(TileType p_tile_type);
-
-	// constructor mapping the various chars from the mapfiles to the according
-	// TileType values
-	Tile(const char& char_input);
+	Tile(const TileType p_tile_type);
 	
 	// returns the char, from which the input tile-object was created
 	const static char get_source_char(const Tile input_tile);
@@ -22,7 +18,7 @@ public:
 
 private:
 	// stores the type of a given tile for later comparisons in game
-	TileType m_tile_type;
+	const TileType m_tile_type;
 };
 
 #endif

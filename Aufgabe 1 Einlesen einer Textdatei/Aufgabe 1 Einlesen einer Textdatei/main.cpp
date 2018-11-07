@@ -2,9 +2,9 @@
 #include <fstream>
 #include "colony.h"
 
-// vc: 1
+// vc: 2
 
-void write_colony_to_file(Colony* input_colony, char* original_final_name);
+void write_colony_to_file(const Colony* input_colony, const char* original_final_name);
 
 int main(int argc, char *argv[])
 {
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void write_colony_to_file(Colony* input_colony, char* original_final_name)
+void write_colony_to_file(const Colony* input_colony, const char* original_final_name)
 {
 	std::ofstream output_file;
 	std::string file_name = "new_";
