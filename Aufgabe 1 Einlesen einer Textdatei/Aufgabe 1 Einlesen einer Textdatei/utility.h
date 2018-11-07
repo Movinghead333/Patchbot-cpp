@@ -12,7 +12,7 @@ class Utility
 {
 public:
 	// checks wether a string can be converted to a number
-	static bool is_number(const std::string& s);
+	static const bool is_number(const std::string& s);
 
 	// return the TileType for a given input char parameter if the char is not
 	// a valid input it throws an Simple_Message_Exception stating the unknown char

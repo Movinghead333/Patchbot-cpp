@@ -2,7 +2,7 @@
 #include <fstream>
 #include "colony.h"
 
-// vc: 2
+// vc: 3
 
 void write_colony_to_file(const Colony* input_colony, const char* original_final_name);
 

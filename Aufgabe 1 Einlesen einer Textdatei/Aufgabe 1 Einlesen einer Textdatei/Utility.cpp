@@ -1,6 +1,6 @@
 #include "utility.h"
 
-bool Utility::is_number(const std::string& s)
+const bool Utility::is_number(const std::string& s)
 {
 	std::string::const_iterator it = s.begin();
 	while (it != s.end() && isdigit(*it)) ++it;
