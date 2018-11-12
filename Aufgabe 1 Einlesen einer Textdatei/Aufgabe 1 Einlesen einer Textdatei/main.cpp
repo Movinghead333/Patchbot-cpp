@@ -3,7 +3,7 @@
 
 #include "colony.h"
 
-// vc: 5
+// vc: 6
 
 void write_colony_to_file(
 	const Colony* input_colony,
@@ -15,8 +15,9 @@ int main(int argc, char *argv[])
 	// try loading a colony from commandline arg and rewrite it to a new file
 	try
 	{
-		Colony* new_colony = Colony::load_colony(argv[1]);
-		write_colony_to_file(new_colony, argv[1]);
+		std::shared_ptr<Colony> new_colony =
+			std::make_shared<Colony>(*Colony::load_colony(argv[1]));
+		write_colony_to_file(new_colony.get(), argv[1]);
 	}
 	// catch all specified exceptions
 	catch (const Simple_Message_Exception& e)

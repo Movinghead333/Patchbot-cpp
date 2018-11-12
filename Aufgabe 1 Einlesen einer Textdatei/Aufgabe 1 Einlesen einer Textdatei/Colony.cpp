@@ -49,7 +49,7 @@ const std::vector<Robot> Colony::get_enemy_robots() const
 
 
 // load a colony by filename and return a pointer to the created object
-Colony * Colony::load_colony(const std::string& file_name)
+Colony* Colony::load_colony(const std::string& file_name)
 {
 	std::cout << "Loading Colony from file: "<< file_name << std::endl;
 	std::ifstream input_file(file_name);
@@ -90,7 +90,7 @@ Colony * Colony::load_colony(const std::string& file_name)
 	temp_tiles.reserve(width*height);
 
 	// setting up temporary vector for enemy robots
-	std::vector<Robot>* temp_robots = new std::vector<Robot>;
+	std::vector<Robot> temp_robots;
 
 	// setting up temporary variable for the location of patch_bot
 	Robot* temp_patch_bot = nullptr;
@@ -123,7 +123,7 @@ Colony * Colony::load_colony(const std::string& file_name)
 						// if so add it to the enemy-robots vector
 						if (current_char <= 55 && current_char >= 49)
 						{
-							(*temp_robots).push_back(
+							temp_robots.push_back(
 								Robot(x,
 									  y,
 									  static_cast<RobotType>(current_char)
@@ -207,7 +207,7 @@ Colony * Colony::load_colony(const std::string& file_name)
 	}
 
 	// if all values have been correctly setup create and return a pointer to the loaded colony
-	Colony* return_colony = new Colony(width, height, temp_patch_bot, *temp_robots, temp_tiles);
+	Colony* return_colony = new Colony(width, height, temp_patch_bot, temp_robots, temp_tiles);
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
 }
