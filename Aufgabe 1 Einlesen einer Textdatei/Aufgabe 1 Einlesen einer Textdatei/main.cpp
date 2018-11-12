@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
+
 #include "colony.h"
 
-// vc: 3
+// vc: 4
 
 void write_colony_to_file(const Colony* input_colony, const char* original_final_name);
 
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
 		write_colony_to_file(new_colony, argv[1]);
 	}
 	// catch all specified exceptions
-	catch (Simple_Message_Exception e)
+	catch (const Simple_Message_Exception& e)
 	{
 		std::cerr << e.m_error_message << std::endl;
 	}
@@ -79,8 +80,6 @@ void write_colony_to_file(const Colony* input_colony, const char* original_final
 		}
 		output_file << level_data[i];
 	}
-	
-	
 
 	output_file.close();
 }

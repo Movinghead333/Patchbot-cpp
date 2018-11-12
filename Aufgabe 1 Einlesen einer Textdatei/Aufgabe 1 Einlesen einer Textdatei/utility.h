@@ -2,10 +2,11 @@
 #define __UTILITY_H_DEFINED__
 
 #include <string>
+#include <sstream>
+
 #include "tile_type.h"
 #include "tile.h"
 #include "exceptions.h"
-#include <sstream>
 
 // class containing utility methods which do not have a specific context
 class Utility

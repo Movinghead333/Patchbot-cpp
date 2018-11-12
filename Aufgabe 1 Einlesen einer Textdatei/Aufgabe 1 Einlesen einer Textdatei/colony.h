@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+
 #include "robot.h"
 #include "tile.h"
 #include "utility.h"
@@ -13,20 +14,19 @@ class Colony
 public:
 
 	// parameterized constructor for creating a colony with all the necessary information
-	Colony(const int p_width, const int p_height,
-		   Robot* p_patchbot, std::vector<Robot> p_enemy_robots, const std::vector<Tile> p_tiles);
+	Colony(
+		const int p_width, const int p_height,
+		Robot* p_patchbot, std::vector<Robot> p_enemy_robots, 
+		const std::vector<Tile> p_tiles);
 
 	// getter-methods
-	const Tile get_tile_by_coordinates(const int& x, const int& y) const;
-
 	const int get_width() const;
-
 	const int get_height() const;
 
-	const std::vector<Robot> get_enemy_robots() const;
-
 	const std::vector<Tile>& get_tiles() const;
+	const Tile get_tile_by_coordinates(int x, int y) const;
 
+	const std::vector<Robot> get_enemy_robots() const;
 	const Robot* get_patch_bot() const;
 
 	// static laoding method for creating a colony* for given filename

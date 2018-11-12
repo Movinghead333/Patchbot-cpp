@@ -9,14 +9,14 @@ class Robot
 public:
 
 	// constructor
-	Robot(const int p_x_coordinate, const int p_y_coordinate, const RobotType pRobotType);
+	Robot(int p_x_coordinate, int p_y_coordinate, RobotType pRobotType);
 
 	// getter methods for member-fields
-	const int get_x_coordinate() const;
+	int get_x_coordinate() const;
 
-	const int get_y_coordinate() const;
+	int get_y_coordinate() const;
 
-	const RobotType get_robot_type() const;
+	RobotType get_robot_type() const;
 
 
 private:

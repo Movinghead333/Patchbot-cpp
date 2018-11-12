@@ -1,4 +1,5 @@
 #include "tile.h"
+
 #include "exceptions.h"
 
 Tile::Tile(const TileType p_tile_type) : m_tile_type(p_tile_type)

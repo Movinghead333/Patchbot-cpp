@@ -1,17 +1,23 @@
+#include "colony.h"
+
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "colony.h"
 
 Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
-	std::vector<Robot> p_enemy_robots, std::vector<Tile> p_tiles) :
+	std::vector<Robot> p_enemy_robots, std::vector<Tile> p_tiles) 
+	:
 	m_width(p_width), m_height(p_height), m_patchbot(p_patchbot),
-	m_enemy_robots(p_enemy_robots), m_tiles(p_tiles) {}
+	m_enemy_robots(p_enemy_robots), m_tiles(p_tiles) 
+{
+	if (p_tiles.size() != p_width * p_height)
+		throw("asdasd");
+}
 
 
 // getter methods for member-fields
-const Tile Colony::get_tile_by_coordinates(const int & x, const int & y) const
+const Tile Colony::get_tile_by_coordinates(int x, int y) const
 {
 	return m_tiles[x + (m_width * y)];
 }
@@ -150,7 +156,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 			else if (current_line.size() < width)
 			{
 				std::stringstream temp_string_stream;
-				temp_string_stream << "Line " << (y + 1) << " is shorter than the specified length!";
+				temp_string_stream << "Line " << (y + 1);
+				temp_string_stream << " is shorter than the specified length!";
 				throw Simple_Message_Exception(temp_string_stream.str());
 			}
 			else if (current_line.size() > width)
