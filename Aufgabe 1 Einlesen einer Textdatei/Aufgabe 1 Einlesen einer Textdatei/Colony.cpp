@@ -11,8 +11,7 @@ Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
 	m_width(p_width), m_height(p_height), m_patchbot(p_patchbot),
 	m_enemy_robots(p_enemy_robots), m_tiles(p_tiles) 
 {
-	if (p_tiles.size() != p_width * p_height)
-		throw("asdasd");
+	// TODO: add checks in constructor if necessary
 }
 
 

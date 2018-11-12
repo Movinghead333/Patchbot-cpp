@@ -1,13 +1,13 @@
 #include "utility.h"
 
-const bool Utility::is_number(const std::string& s)
+ bool Utility::is_number(const std::string& s)
 {
 	std::string::const_iterator it = s.begin();
 	while (it != s.end() && isdigit(*it)) ++it;
 	return !s.empty() && it == s.end();
 }
 
-const TileType Utility::char_to_tile_type(const char& input_char)
+TileType Utility::char_to_tile_type(const char& input_char)
 {
 	TileType temp_tile_type;
 	switch (input_char)

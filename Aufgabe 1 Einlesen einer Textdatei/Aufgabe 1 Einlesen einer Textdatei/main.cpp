@@ -3,7 +3,7 @@
 
 #include "colony.h"
 
-// vc: 6
+// vc: 7
 
 void write_colony_to_file(
 	const Colony* input_colony,

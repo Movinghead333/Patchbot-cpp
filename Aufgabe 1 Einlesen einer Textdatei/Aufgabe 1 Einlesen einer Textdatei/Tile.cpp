@@ -2,11 +2,11 @@
 
 #include "exceptions.h"
 
-Tile::Tile(const TileType p_tile_type) : m_tile_type(p_tile_type)
+Tile::Tile(TileType p_tile_type) : m_tile_type(p_tile_type)
 {
 };
 
-const char Tile::get_source_char(const Tile input_tile)
+char Tile::get_source_char(const Tile input_tile)
 {
 	char result;
 	switch (input_tile.m_tile_type)
@@ -28,7 +28,7 @@ const char Tile::get_source_char(const Tile input_tile)
 	return result;
 }
 
-const TileType Tile::get_tile_type() const
+TileType Tile::get_tile_type() const
 {
 	return m_tile_type;
 }
