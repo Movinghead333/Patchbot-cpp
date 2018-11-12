@@ -12,16 +12,20 @@
 class Colony
 {
 public:
-
-	// parameterized constructor for creating a colony with all the necessary information
+	// constructor
+	// @param width and height of colony, the player instance in form of a robot
+	// object, a vector holding all enemy robots and a vector holding all
+	// maptiles
 	Colony(
-		const int p_width, const int p_height,
-		Robot* p_patchbot, std::vector<Robot> p_enemy_robots, 
+		const int p_width,
+		const int p_height,
+		Robot* p_patchbot,
+		std::vector<Robot> p_enemy_robots, 
 		const std::vector<Tile> p_tiles);
 
 	// getter-methods
-	const int get_width() const;
-	const int get_height() const;
+	int get_width() const;
+	int get_height() const;
 
 	const std::vector<Tile>& get_tiles() const;
 	const Tile get_tile_by_coordinates(int x, int y) const;
@@ -42,7 +46,8 @@ private:
 	// vector storing a Tile-object for each x,y-pair
 	const std::vector<Tile> m_tiles;
 
-	// vector storing all enemy robots and their properties (e.g. x and y coordiante)
+	// vector storing all enemy robots
+	// and their properties (e.g. x and y coordiante)
 	std::vector<Robot> m_enemy_robots;
 
 	// variable storing patchbot itself for quick and easy access

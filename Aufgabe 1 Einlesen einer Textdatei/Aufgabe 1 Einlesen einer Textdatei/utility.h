@@ -16,7 +16,8 @@ public:
 	static const bool is_number(const std::string& s);
 
 	// return the TileType for a given input char parameter if the char is not
-	// a valid input it throws an Simple_Message_Exception stating the unknown char
+	// a valid input it throws an Simple_Message_Exception stating the unknown
+	// char
 	static const TileType char_to_tile_type(const char& input_char);
 };
 

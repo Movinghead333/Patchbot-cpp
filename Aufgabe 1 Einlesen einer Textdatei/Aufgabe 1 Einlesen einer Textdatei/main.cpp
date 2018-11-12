@@ -3,9 +3,12 @@
 
 #include "colony.h"
 
-// vc: 4
+// vc: 5
 
-void write_colony_to_file(const Colony* input_colony, const char* original_final_name);
+void write_colony_to_file(
+	const Colony* input_colony,
+	const char* original_final_name
+);
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +33,10 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void write_colony_to_file(const Colony* input_colony, const char* original_final_name)
+void write_colony_to_file(
+	const Colony* input_colony,
+	const char* original_final_name
+)
 {
 	std::ofstream output_file;
 	std::string file_name = "new_";
@@ -66,7 +72,8 @@ void write_colony_to_file(const Colony* input_colony, const char* original_final
 
 	for (Robot robot : temp_robots)
 	{
-		int temp_index = robot.get_x_coordinate() + (robot.get_y_coordinate() * width);
+		int temp_index = robot.get_x_coordinate() + 
+						(robot.get_y_coordinate() * width);
 		level_data[temp_index] = (int)robot.get_robot_type();
 	}
 

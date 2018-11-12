@@ -22,12 +22,12 @@ const Tile Colony::get_tile_by_coordinates(int x, int y) const
 	return m_tiles[x + (m_width * y)];
 }
 
-const int Colony::get_width() const
+int Colony::get_width() const
 {
 	return m_width;
 }
 
-const int Colony::get_height() const
+int Colony::get_height() const
 {
 	return m_height;
 }
@@ -66,7 +66,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 		}
 		else
 		{
-			throw Simple_Message_Exception("Invalid Argument for parameter: <width>");
+			throw Simple_Message_Exception(
+				"Invalid Argument for parameter: <width>");
 		}
 	}
 
@@ -79,7 +80,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 		}
 		else
 		{
-			throw Simple_Message_Exception("Invalid Argument for parameter: <height>");
+			throw Simple_Message_Exception(
+				"Invalid Argument for parameter: <height>");
 		}
 	}
 
@@ -96,7 +98,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 	bool hasStart = false;
 	bool hasEnd = false;
 
-	// iterate through the remaining lines of the textfile containing the level-data
+	// iterate through the remaining lines of the textfile
+	// containing the level-data
 	int y = 0;
 	while (std::getline(input_file, current_line))
 	{
@@ -112,26 +115,36 @@ Colony * Colony::load_colony(const std::string& file_name)
 				for (int x = 0; x < width; x++)
 				{
 					char current_char = current_line[x];
-					// check if read char is a robot if so add it to the robots vector
+					// check if read char is a robot
+					// if so add it to the robots vector
 					if (isdigit(current_char))
 					{
-						// check if the number is in the valid range if so add it to the enemy-robots vector
+						// check if the number is in the valid range
+						// if so add it to the enemy-robots vector
 						if (current_char <= 55 && current_char >= 49)
 						{
-							(*temp_robots).push_back(Robot(x, y, static_cast<RobotType>(current_char)));
+							(*temp_robots).push_back(
+								Robot(x,
+									  y,
+									  static_cast<RobotType>(current_char)
+								)
+							);
 				
 							temp_tiles.push_back(Tile(ENEMY_SPAWN));
 						}
 					}
-					// if the read char is not a number it has to be a tile or throw an exception
+					// if the read char is not a number,
+					// then it has to be a tile or throw an exception
 					else
 					{
-						// throws exception if the current_char refers to an unknown symbol
+						// throws exception if the current_char
+						// refers to an unknown symbol
 						temp_tiles.push_back(
 							Tile( Utility::char_to_tile_type(current_char))
 						);
 
-						// check if the current character is the player starting location
+						// check if the current character is the player's
+						// starting location,
 						// if that is the case initialize the player object;
 						// set the hasStart and hasEnd flags
 						if (current_char == 'p')
@@ -143,7 +156,8 @@ Colony * Colony::load_colony(const std::string& file_name)
 							}
 							else
 							{
-								throw Simple_Message_Exception("Colony can only have one starting point");
+								throw Simple_Message_Exception(
+									"Colony can only have one starting point");
 							}
 						}else if (current_char == 'P')
 						{
