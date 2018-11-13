@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Aufgabe 1 Einlesen einer Textdatei", "Aufgabe 1 Einlesen einer Textdatei\Aufgabe 1 Einlesen einer Textdatei.vcxproj", "{09F9D622-F510-4E13-B821-B92A36F04B37}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Patchbot", "Patchbot_Project\Patchbot_Project.vcxproj", "{09F9D622-F510-4E13-B821-B92A36F04B37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

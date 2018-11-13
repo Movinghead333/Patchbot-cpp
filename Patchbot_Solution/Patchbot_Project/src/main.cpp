@@ -2,8 +2,9 @@
 #include <fstream>
 
 #include "colony.h"
+#include "texture.h"
 
-// vc: 7
+// vc: 8
 
 void write_colony_to_file(
 	const Colony* input_colony,
@@ -12,6 +13,26 @@ void write_colony_to_file(
 
 int main(int argc, char *argv[])
 {
+	// try loading a tga file and rewriting it to a tga file
+	try
+	{
+		std::shared_ptr<Texture> new_colony =
+			std::make_shared<Texture>( Texture::loadTexture(argv[1]) );
+	}
+	// catch all specified exceptions
+	catch (const Simple_Message_Exception& e)
+	{
+		std::cerr << e.m_error_message << std::endl;
+	}
+	// catch any non aticipated exceptions
+	catch (...)
+	{
+		std::cout << "Unchecked exception thrown" << std::endl;
+	}
+
+
+	/*
+	
 	// try loading a colony from commandline arg and rewrite it to a new file
 	try
 	{
@@ -30,10 +51,15 @@ int main(int argc, char *argv[])
 		std::cout << "Unchecked exception thrown" << std::endl;
 	}
 
+	*/
+
 	std::cin.get();
 	return 0;
 }
 
+
+
+// writes a colony back to a txt file for testing purposes
 void write_colony_to_file(
 	const Colony* input_colony,
 	const char* original_final_name
