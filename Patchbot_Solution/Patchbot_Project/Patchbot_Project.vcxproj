@@ -133,19 +133,28 @@
   <ItemGroup>
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pixel.cpp" />
     <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\tga_header.cpp" />
     <ClCompile Include="src\tile.cpp" />
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h" />
+    <ClInclude Include="src\exceptions.h" />
+    <ClInclude Include="src\pixel.h" />
     <ClInclude Include="src\texture.h" />
+    <ClInclude Include="src\tga_header.h" />
     <ClInclude Include="src\tile.h" />
     <ClInclude Include="src\robot.h" />
     <ClInclude Include="src\robot_type.h" />
     <ClInclude Include="src\tile_type.h" />
+    <ClInclude Include="src\type_definitions.h" />
     <ClInclude Include="src\utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\textures\umgebungen\wand_fels.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

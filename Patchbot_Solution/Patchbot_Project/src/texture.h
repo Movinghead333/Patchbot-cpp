@@ -3,63 +3,34 @@
 
 #include <vector>
 #include <iostream> // debug
+#include <string>
 
-typedef unsigned char uchar;
-
-struct Header
-{
-	Header(
-		uchar p_image_id_length,
-		uchar p_color_map_type,
-		uchar p_image_type_code,
-		uchar p_color_map_origin,
-		uchar p_color_map_length,
-		uchar p_color_map_entry_size,
-		uchar p_x_origin,
-		uchar p_y_origin,
-		uchar p_image_width,
-		uchar p_image_height,
-		uchar p_bits_per_pixel
-	);
-
-	const uchar m_image_id_length;
-	const uchar m_color_map_type;
-	const uchar m_image_type_code;
-	const uchar m_color_map_origin;
-	const uchar m_color_map_length;
-	const uchar m_color_map_entry_size;
-	const uchar m_x_origin;
-	const uchar m_y_origin;
-	const uchar m_image_width;
-	const uchar m_image_height;
-	const uchar m_bits_per_pixels;
-};
-
-struct Pixel
-{
-	Pixel(
-		uchar p_red,
-		uchar p_green,
-		uchar p_blue,
-		uchar p_alpha
-	);
-
-	const uchar m_red;
-	const uchar m_green;
-	const uchar m_blue;
-	const uchar m_alpha;
-};
+#include "tga_header.h"
+#include "pixel.h"
 
 class Texture
 {
 public:
-	Texture();
+	Texture(const Header p_header, const std::vector<Pixel> p_image_data);
 
-	static const Texture loadTexture(char* filename);
+	static const Texture load_texture(char* filename);
+
+	static void write_texture_to_file(
+		const std::string& filename,
+		const Texture& p_texture);
+
+	const Pixel& get_pixel_at_position(int p_x, int p_y) const;
+
+	const Header& get_header() const;
+
+	const std::vector<Pixel>& get_image_data() const;
 
 private:
-	//Header m_header;
-	//std::vector<Pixel> m_pixels;
+	// stores the header-information from the tga-file
+	Header m_header;
+
+	// stores every pixel from the input image in an ARGB Pixelobject
+	std::vector<Pixel> m_image_data; 
 };
 
 #endif 

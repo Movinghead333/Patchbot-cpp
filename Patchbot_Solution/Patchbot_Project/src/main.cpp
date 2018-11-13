@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <Windows.h>
 
 #include "colony.h"
 #include "texture.h"
@@ -16,8 +17,9 @@ int main(int argc, char *argv[])
 	// try loading a tga file and rewriting it to a tga file
 	try
 	{
-		std::shared_ptr<Texture> new_colony =
-			std::make_shared<Texture>( Texture::loadTexture(argv[1]) );
+		std::shared_ptr<Texture> new_tga =
+			std::make_shared<Texture>( Texture::load_texture(argv[1]) );
+		Texture::write_texture_to_file("new_file.tga", *new_tga.get());
 	}
 	// catch all specified exceptions
 	catch (const Simple_Message_Exception& e)

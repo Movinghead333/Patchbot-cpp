@@ -12,7 +12,9 @@ struct Simple_Message_Exception : public std::exception
 
 public:
 	// constructor for creating a simple exception with a given string message
-	Simple_Message_Exception(const std::string p_message): m_error_message(p_message)
+	Simple_Message_Exception(const std::string p_message)
+		:
+		m_error_message(p_message)
 	{}
 };
 
