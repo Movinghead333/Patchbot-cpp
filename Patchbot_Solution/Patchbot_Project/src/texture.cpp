@@ -16,6 +16,7 @@ Texture::Texture(const Header p_header, const std::vector<Pixel> p_image_data)
 	m_header(p_header),
 	m_image_data(p_image_data)
 {
+
 }
 
 const Texture Texture::load_texture(char * filename)
@@ -102,8 +103,8 @@ const Texture Texture::load_texture(char * filename)
 		}
 	}
 
-
-
+	// free manually allocated memory
+	delete(input_file);
 
 	return Texture(temp_header, temp_image_data);
 }

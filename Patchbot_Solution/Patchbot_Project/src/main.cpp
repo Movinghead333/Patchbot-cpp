@@ -5,7 +5,7 @@
 #include "colony.h"
 #include "texture.h"
 
-// vc: 8
+// vc: 9
 
 void write_colony_to_file(
 	const Colony* input_colony,
