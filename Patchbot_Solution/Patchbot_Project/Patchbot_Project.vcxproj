@@ -154,6 +154,33 @@
     <ClInclude Include="src\utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\Sven\Dropbox\Studium\3. Semester\Cpp Praktikum\Grafiken\grafiken\umgebungen\boden.tga" />
+    <Image Include="src\textures\pfeile\pfeil_links.tga" />
+    <Image Include="src\textures\pfeile\pfeil_oben.tga" />
+    <Image Include="src\textures\pfeile\pfeil_rechts.tga" />
+    <Image Include="src\textures\pfeile\pfeil_unten.tga" />
+    <Image Include="src\textures\roboter\dead.tga" />
+    <Image Include="src\textures\roboter\patchbot.tga" />
+    <Image Include="src\textures\roboter\typ1_bugger.tga" />
+    <Image Include="src\textures\roboter\typ2_pusher.tga" />
+    <Image Include="src\textures\roboter\typ3_digger.tga" />
+    <Image Include="src\textures\roboter\typ4_swimmer.tga" />
+    <Image Include="src\textures\roboter\typ5_follower.tga" />
+    <Image Include="src\textures\roboter\typ6_hunter.tga" />
+    <Image Include="src\textures\roboter\typ7_sniffer.tga" />
+    <Image Include="src\textures\umgebungen\boden_start_gegner.tga" />
+    <Image Include="src\textures\umgebungen\boden_start_patchbot.tga" />
+    <Image Include="src\textures\umgebungen\gefahr_abgrund.tga" />
+    <Image Include="src\textures\umgebungen\gefahr_wasser.tga" />
+    <Image Include="src\textures\umgebungen\hauptserver.tga" />
+    <Image Include="src\textures\umgebungen\hindernis_aliengras.tga" />
+    <Image Include="src\textures\umgebungen\hindernis_geheimgang.tga" />
+    <Image Include="src\textures\umgebungen\hindernis_schotter.tga" />
+    <Image Include="src\textures\umgebungen\tuer_automatisch_geschlossen.tga" />
+    <Image Include="src\textures\umgebungen\tuer_automatisch_offen.tga" />
+    <Image Include="src\textures\umgebungen\tuer_manuell_geschlossen.tga" />
+    <Image Include="src\textures\umgebungen\tuer_manuell_offen.tga" />
+    <Image Include="src\textures\umgebungen\wand_beton.tga" />
     <Image Include="src\textures\umgebungen\wand_fels.tga" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,6 +3,7 @@
 
 #include "type_definitions.h"
 
+// struct storing the implementation relevant information of tga file's header
 struct Header
 {
 	Header(
@@ -18,8 +19,6 @@ struct Header
 		uword p_image_height,
 		ubyte p_bits_per_pixel
 	);
-
-	static const bool debug = true;
 
 	const ubyte m_image_id_length;
 	const ubyte m_color_map_type;

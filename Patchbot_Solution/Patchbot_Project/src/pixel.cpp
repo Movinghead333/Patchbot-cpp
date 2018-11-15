@@ -1,5 +1,6 @@
 #include "pixel.h"
 
+// parameterized constructor
 Pixel::Pixel(
 	ubyte p_alpha,
 	ubyte p_red,

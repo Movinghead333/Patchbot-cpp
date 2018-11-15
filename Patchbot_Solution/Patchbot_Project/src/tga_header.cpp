@@ -1,5 +1,6 @@
 #include "tga_header.h"
 
+// parameterized constructor
 Header::Header(
 	ubyte p_image_id_length,
 	ubyte p_color_map_type,

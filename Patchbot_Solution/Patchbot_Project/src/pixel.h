@@ -3,6 +3,7 @@
 
 #include "type_definitions.h"
 
+// struct storing alpha, red, green and blue values of a Pixel
 struct Pixel
 {
 	Pixel(

@@ -10,15 +10,53 @@
 void read_next_uword(uword& buffer, FILE* file);
 
 
-
+// constructor for creating a texture object with a given header and image-data
+// also contains checks for validating the created texture
 Texture::Texture(const Header p_header, const std::vector<Pixel> p_image_data)
 	:
 	m_header(p_header),
 	m_image_data(p_image_data)
 {
+	// checks on m_image_id_length can be omitted due to the image_id attribute
+	// never being used
 
+	// checks on m_color_map_Type, m_color_map_origin, m_color_map_length,
+	// m_color_map_entry_size can be omitted, because image-data-type 2 does
+	// not use the image-palette feature
+
+	// m_image_width and m_image_height do not need to be check as well since
+	// the width and height of an image are variable values
+
+	// check if the image-data-type matches the image-code 2
+	if (m_header.m_image_type_code != 2)
+	{
+		std::stringstream exception_stream;
+		exception_stream << "Invalid image-data-type: ";
+		exception_stream << m_header.m_image_type_code;
+		throw Simple_Message_Exception(exception_stream.str());
+	}
+
+	// check if x and y origin are equal to 0
+	if (m_header.m_x_origin != 0)
+	{
+		throw Simple_Message_Exception("X-origin is not equal to 0");
+	}
+
+	if (m_header.m_y_origin != 0)
+	{
+		throw Simple_Message_Exception("Y-origin is not equal to 0");
+	}
+
+	// check if the bits per pixel are equal to 32 thus storing ARGB values
+	if (m_header.m_bits_per_pixels != 32)
+	{
+		throw Simple_Message_Exception(
+			"Bits per pixel are not equal to 32"
+		);
+	}
 }
 
+// loads an image into a Texture object from given filename
 const Texture Texture::load_texture(char * filename)
 {
 	std::cout << "Loading tga-file: " << filename << std::endl;
@@ -30,7 +68,7 @@ const Texture Texture::load_texture(char * filename)
 	errno_t err;
 
 	// try to open the input-file if it fails throw an exception
-	if ( (err = fopen_s(&input_file, filename, "r")) != 0)
+	if ( (err = fopen_s(&input_file, filename, "rb")) != 0)
 	{
 		std::stringstream temp_stream;
 		temp_stream << "Could not open file: ";
@@ -92,27 +130,35 @@ const Texture Texture::load_texture(char * filename)
 	{
 		for (int x = 0; x < temp_image_width; x++)
 		{
-			temp_alpha = fgetc(input_file);
-			temp_red = fgetc(input_file);
-			temp_green = fgetc(input_file);
 			temp_blue = fgetc(input_file);
+			temp_green = fgetc(input_file);
+			temp_red = fgetc(input_file);
+			temp_alpha = fgetc(input_file);
 
+			// create Pixel and add it to the image-data vector
 			temp_image_data.push_back(
 				Pixel( temp_alpha, temp_red, temp_green, temp_blue)
 			);
 		}
 	}
 
-	// free manually allocated memory
-	delete(input_file);
+	std::cout << "Image successfully loaded!" << std::endl;
+
+	fclose(input_file);
 
 	return Texture(temp_header, temp_image_data);
 }
 
+// writes a given texture object back to tga-file on hdd
 void Texture::write_texture_to_file(
 	const std::string& p_filename,
 	const Texture & p_texture)
 {
+	std::stringstream writing_file_message_stream;
+	writing_file_message_stream << "Writing texture to file: ";
+	writing_file_message_stream << p_filename;
+	std::cout << writing_file_message_stream.str() << std::endl;
+
 	// create output-stream
 	std::ofstream outputfile(p_filename.c_str(), std::ios::binary);
 	if (!outputfile)
@@ -143,15 +189,15 @@ void Texture::write_texture_to_file(
 		for (int x = 0; x < temp_header.m_image_width; x++)
 		{
 			Pixel temp_pixel = p_texture.get_pixel_at_position(x, y);
-			outputfile.put((char)temp_pixel.m_alpha);
-			outputfile.put((char)temp_pixel.m_red);
-			outputfile.put((char)temp_pixel.m_green);
 			outputfile.put((char)temp_pixel.m_blue);
+			outputfile.put((char)temp_pixel.m_green);
+			outputfile.put((char)temp_pixel.m_red);
+			outputfile.put((char)temp_pixel.m_alpha);
 		}
 	}
 	
 
-	// Optional file-end 
+	// file-end tag
 	static const char file_end[26] =
 		"\0\0\0\0"  // no extension area
 		"\0\0\0\0"  // no developer directory
@@ -159,15 +205,19 @@ void Texture::write_texture_to_file(
 		".";
 	outputfile.write(file_end, 26);
 	
-
+	// close the file to finish the writing process
 	outputfile.close();
+
+	std::cout << "Writing successful" << std::endl;
 }
 
+// returns a reference to the Pixel-object at a given (x, y)-position
 const Pixel& Texture::get_pixel_at_position(int p_x, int p_y) const
 {
 	return m_image_data[(p_y * m_header.m_image_height) + p_x];
 }
 
+// getter methods
 const Header& Texture::get_header() const
 {
 	return m_header;
@@ -178,6 +228,8 @@ const std::vector<Pixel>& Texture::get_image_data() const
 	return m_image_data;
 }
 
+// local free utility method used for reading 2 bytes from a given file into
+// a uword 2byte buffer
 void read_next_uword(uword& buffer, FILE* file)
 {
 	fread(&buffer, 2, 1, file);
