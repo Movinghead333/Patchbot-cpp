@@ -15,10 +15,10 @@ class Texture
 public:
 	// creates a Texture object by passing a header-object as well as a
 	// Pixel-vector holding the image-data
-	Texture(const Header p_header, const std::vector<Pixel> p_image_data);
+	Texture(const Header p_header, const std::vector<Pixel>& p_image_data);
 
 	// load Texture from filename
-	static const Texture load_texture(char* filename);
+	static const Texture load_texture(const std::string& p_filename);
 
 	// write a texture to a tga file in local directory
 	static void write_texture_to_file(

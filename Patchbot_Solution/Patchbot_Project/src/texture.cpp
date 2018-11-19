@@ -7,12 +7,10 @@
 #include "exceptions.h"
 #include "type_definitions.h"
 
-void read_next_uword(uword& buffer, FILE* file);
-
 
 // constructor for creating a texture object with a given header and image-data
 // also contains checks for validating the created texture
-Texture::Texture(const Header p_header, const std::vector<Pixel> p_image_data)
+Texture::Texture(const Header p_header, const std::vector<Pixel>& p_image_data)
 	:
 	m_header(p_header),
 	m_image_data(p_image_data)
@@ -57,49 +55,46 @@ Texture::Texture(const Header p_header, const std::vector<Pixel> p_image_data)
 }
 
 // loads an image into a Texture object from given filename
-const Texture Texture::load_texture(char * filename)
+const Texture Texture::load_texture(const std::string& p_filename)
 {
-	std::cout << "Loading tga-file: " << filename << std::endl;
+	std::cout << "Loading tga-file: " << p_filename << std::endl;
 
-	// create file-pointer
-	FILE* input_file;
+	// open input-file-stream
+	std::ifstream input_file(p_filename.c_str(),
+							 std::ios::in | std::ios::binary);
 
-	// holds the error code returned from a failed fopen_s
-	errno_t err;
-
-	// try to open the input-file if it fails throw an exception
-	if ( (err = fopen_s(&input_file, filename, "rb")) != 0)
+	if (!input_file.is_open())
 	{
 		std::stringstream temp_stream;
 		temp_stream << "Could not open file: ";
-		temp_stream << filename;
+		temp_stream << p_filename;
 		throw Simple_Message_Exception(temp_stream.str());
 	}
 
 	// read the necessary header info
-	ubyte temp_image_id_length = fgetc(input_file);
+	ubyte temp_image_id_length = input_file.get();
 
-	ubyte temp_color_map_type = fgetc(input_file);
+	ubyte temp_color_map_type = input_file.get();
 
-	ubyte temp_image_type_code = fgetc(input_file);
+	ubyte temp_image_type_code = input_file.get();
 
-	uword temp_color_map_origin;
-	read_next_uword(temp_color_map_origin, input_file);
-	uword temp_color_map_length;
-	read_next_uword(temp_color_map_length, input_file);
-	ubyte temp_color_map_entry_size = fgetc(input_file);
+	uword temp_color_map_origin = 0;
+	input_file.read((char*) &temp_color_map_origin, 2);
+	uword temp_color_map_length = 0;
+	input_file.read((char*) &temp_color_map_length, 2);
+	ubyte temp_color_map_entry_size = input_file.get();
 
-	uword temp_x_origin;
-	read_next_uword(temp_x_origin, input_file);
-	uword temp_y_origin;
-	read_next_uword(temp_y_origin, input_file);
+	uword temp_x_origin = 0;
+	input_file.read((char*) &temp_x_origin, 2);
+	uword temp_y_origin = 0;
+	input_file.read((char*) &temp_y_origin, 2);
 
-	uword temp_image_width;
-	read_next_uword(temp_image_width, input_file);
-	uword temp_image_height;
-	read_next_uword(temp_image_height, input_file);
+	uword temp_image_width = 0;
+	input_file.read((char*) &temp_image_width, 2);
+	uword temp_image_height = 0;
+	input_file.read((char*) &temp_image_height, 2);
 
-	ubyte temp_bits_per_pixel = fgetc(input_file);
+	ubyte temp_bits_per_pixel = input_file.get();
 
 	// create header from input
 	Header temp_header = Header(
@@ -117,10 +112,10 @@ const Texture Texture::load_texture(char * filename)
 	);
 
 	// skip byte with offset 17
-	fgetc(input_file);
+	input_file.get();
 
 	// temporal variables for reading the imagedata
-	ubyte temp_alpha, temp_red, temp_green, temp_blue;
+	ubyte temp_alpha = 0, temp_red = 0, temp_green = 0, temp_blue = 0;
 	std::vector<Pixel> temp_image_data = std::vector<Pixel>();
 	temp_image_data.reserve(temp_image_width * temp_image_height);
 
@@ -130,10 +125,10 @@ const Texture Texture::load_texture(char * filename)
 	{
 		for (int x = 0; x < temp_image_width; x++)
 		{
-			temp_blue = fgetc(input_file);
-			temp_green = fgetc(input_file);
-			temp_red = fgetc(input_file);
-			temp_alpha = fgetc(input_file);
+			temp_blue = input_file.get();
+			temp_green = input_file.get();
+			temp_red = input_file.get();
+			temp_alpha = input_file.get();
 
 			// create Pixel and add it to the image-data vector
 			temp_image_data.push_back(
@@ -144,7 +139,7 @@ const Texture Texture::load_texture(char * filename)
 
 	std::cout << "Image successfully loaded!" << std::endl;
 
-	fclose(input_file);
+	input_file.close();
 
 	return Texture(temp_header, temp_image_data);
 }
@@ -226,11 +221,4 @@ const Header& Texture::get_header() const
 const std::vector<Pixel>& Texture::get_image_data() const
 {
 	return m_image_data;
-}
-
-// local free utility method used for reading 2 bytes from a given file into
-// a uword 2byte buffer
-void read_next_uword(uword& buffer, FILE* file)
-{
-	fread(&buffer, 2, 1, file);
 }
