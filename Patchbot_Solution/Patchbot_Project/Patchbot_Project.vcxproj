@@ -136,7 +136,6 @@
     <ClCompile Include="src\pixel.cpp" />
     <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\texture.cpp" />
-    <ClCompile Include="src\tga_header.cpp" />
     <ClCompile Include="src\tile.cpp" />
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
@@ -145,7 +144,6 @@
     <ClInclude Include="src\exceptions.h" />
     <ClInclude Include="src\pixel.h" />
     <ClInclude Include="src\texture.h" />
-    <ClInclude Include="src\tga_header.h" />
     <ClInclude Include="src\tile.h" />
     <ClInclude Include="src\robot.h" />
     <ClInclude Include="src\robot_type.h" />

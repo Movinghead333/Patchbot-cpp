@@ -10,48 +10,17 @@
 
 // constructor for creating a texture object with a given header and image-data
 // also contains checks for validating the created texture
-Texture::Texture(const Header p_header, const std::vector<Pixel>& p_image_data)
+Texture::Texture(int p_width, int p_height, const std::vector<Pixel>& p_image_data)
 	:
-	m_header(p_header),
+	m_image_width(p_width),
+	m_image_height(p_height),
 	m_image_data(p_image_data)
 {
-	// checks on m_image_id_length can be omitted due to the image_id attribute
-	// never being used
+	
+	/* TODO shift these into load method
+	
 
-	// checks on m_color_map_Type, m_color_map_origin, m_color_map_length,
-	// m_color_map_entry_size can be omitted, because image-data-type 2 does
-	// not use the image-palette feature
-
-	// m_image_width and m_image_height do not need to be check as well since
-	// the width and height of an image are variable values
-
-	// check if the image-data-type matches the image-code 2
-	if (m_header.m_image_type_code != 2)
-	{
-		std::stringstream exception_stream;
-		exception_stream << "Invalid image-data-type: ";
-		exception_stream << m_header.m_image_type_code;
-		throw Simple_Message_Exception(exception_stream.str());
-	}
-
-	// check if x and y origin are equal to 0
-	if (m_header.m_x_origin != 0)
-	{
-		throw Simple_Message_Exception("X-origin is not equal to 0");
-	}
-
-	if (m_header.m_y_origin != 0)
-	{
-		throw Simple_Message_Exception("Y-origin is not equal to 0");
-	}
-
-	// check if the bits per pixel are equal to 32 thus storing ARGB values
-	if (m_header.m_bits_per_pixels != 32)
-	{
-		throw Simple_Message_Exception(
-			"Bits per pixel are not equal to 32"
-		);
-	}
+	*/
 }
 
 // loads an image into a Texture object from given filename
@@ -96,23 +65,25 @@ const Texture Texture::load_texture(const std::string& p_filename)
 
 	ubyte temp_bits_per_pixel = input_file.get();
 
-	// create header from input
-	Header temp_header = Header(
-		temp_image_id_length,
-		temp_color_map_type,
-		temp_image_type_code,
-		temp_color_map_origin,
-		temp_color_map_length,
-		temp_color_map_entry_size,
-		temp_x_origin,
-		temp_y_origin,
-		temp_image_width,
-		temp_image_height,
-		temp_bits_per_pixel
-	);
-
 	// skip byte with offset 17
 	input_file.get();
+
+	// check if the image type code matches uncompressed rgb
+	if (temp_image_type_code != 2)
+	{
+		std::stringstream exception_stream;
+		exception_stream << "Invalid image-data-type: ";
+		exception_stream << temp_image_type_code;
+		throw Simple_Message_Exception(exception_stream.str());
+	}
+
+	// check if the bits per pixel are equal to 32 thus storing ARGB values
+	if (temp_bits_per_pixel != 32)
+	{
+		throw Simple_Message_Exception(
+			"Bits per pixel are not equal to 32"
+		);
+	}
 
 	// temporal variables for reading the imagedata
 	ubyte temp_alpha = 0, temp_red = 0, temp_green = 0, temp_blue = 0;
@@ -141,7 +112,7 @@ const Texture Texture::load_texture(const std::string& p_filename)
 
 	input_file.close();
 
-	return Texture(temp_header, temp_image_data);
+	return Texture(temp_image_width, temp_image_height, temp_image_data);
 }
 
 // writes a given texture object back to tga-file on hdd
@@ -162,16 +133,15 @@ void Texture::write_texture_to_file(
 	}
 
 	ubyte raw_header[18] = { 0 };
-	Header temp_header = p_texture.get_header();
 
 	// write necessary information to the fileheader
-	raw_header[ 2] = temp_header.m_image_type_code;
+	raw_header[ 2] = 2;
 
-	raw_header[12] =  temp_header.m_image_width;
-	raw_header[13] = (temp_header.m_image_width >> 8) & 0xFF;
-	raw_header[14] = temp_header.m_image_height;
-	raw_header[15] = (temp_header.m_image_height >> 8) & 0xFF;
-	raw_header[16] = temp_header.m_bits_per_pixels;
+	raw_header[12] =  p_texture.m_image_width;
+	raw_header[13] = (p_texture.m_image_width >> 8) & 0xFF;
+	raw_header[14] = p_texture.m_image_height;
+	raw_header[15] = (p_texture.m_image_height >> 8) & 0xFF;
+	raw_header[16] = 32;
 
 	outputfile.write((const char*)raw_header, 18);
 
@@ -179,9 +149,9 @@ void Texture::write_texture_to_file(
 	std::vector<Pixel> temp_image_data = p_texture.get_image_data();
 
 	// write the actual image-data
-	for (int y = 0; y < temp_header.m_image_height; y++)
+	for (int y = 0; y < p_texture.m_image_height; y++)
 	{
-		for (int x = 0; x < temp_header.m_image_width; x++)
+		for (int x = 0; x < p_texture.m_image_width; x++)
 		{
 			Pixel temp_pixel = p_texture.get_pixel_at_position(x, y);
 			outputfile.put((char)temp_pixel.m_blue);
@@ -209,13 +179,18 @@ void Texture::write_texture_to_file(
 // returns a reference to the Pixel-object at a given (x, y)-position
 const Pixel& Texture::get_pixel_at_position(int p_x, int p_y) const
 {
-	return m_image_data[(p_y * m_header.m_image_height) + p_x];
+	return m_image_data[(p_y * this->m_image_height) + p_x];
 }
 
 // getter methods
-const Header& Texture::get_header() const
+int Texture::get_width()
 {
-	return m_header;
+	return m_image_width;
+}
+
+int Texture::get_height()
+{
+	return m_image_height;
 }
 
 const std::vector<Pixel>& Texture::get_image_data() const

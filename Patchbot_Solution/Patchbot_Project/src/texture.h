@@ -5,7 +5,6 @@
 #include <iostream> // debug
 #include <string>
 
-#include "tga_header.h"
 #include "pixel.h"
 
 // stores the important header and data information from a tga-file in
@@ -15,7 +14,7 @@ class Texture
 public:
 	// creates a Texture object by passing a header-object as well as a
 	// Pixel-vector holding the image-data
-	Texture(const Header p_header, const std::vector<Pixel>& p_image_data);
+	Texture(int p_width, int p_height, const std::vector<Pixel>& p_image_data);
 
 	// load Texture from filename
 	static const Texture load_texture(const std::string& p_filename);
@@ -29,13 +28,15 @@ public:
 	const Pixel& get_pixel_at_position(int p_x, int p_y) const;
 
 	// getter methods
-	const Header& get_header() const;
+	int get_width();
+	int get_height();
 
 	const std::vector<Pixel>& get_image_data() const;
 
 private:
-	// stores the header-information from the tga-file
-	Header m_header;
+	// width and height of the image
+	const int m_image_width;
+	const int m_image_height;
 
 	// stores every pixel from the input image in an ARGB Pixelobject
 	std::vector<Pixel> m_image_data; 
