@@ -12,8 +12,8 @@
 class Texture
 {
 public:
-	// creates a Texture object by passing a header-object as well as a
-	// Pixel-vector holding the image-data
+	// creates a Texture object by passing a width and height of the image
+	// as well as a Pixel-vector holding the image-data
 	Texture(int p_width, int p_height, const std::vector<Pixel>& p_image_data);
 
 	// load Texture from filename

@@ -8,19 +8,17 @@
 #include "type_definitions.h"
 
 
-// constructor for creating a texture object with a given header and image-data
-// also contains checks for validating the created texture
-Texture::Texture(int p_width, int p_height, const std::vector<Pixel>& p_image_data)
+// constructor for creating a texture object with a given image width and height
+// and image-data
+Texture::Texture(
+	int p_width,
+	int p_height,
+	const std::vector<Pixel>& p_image_data)
 	:
 	m_image_width(p_width),
 	m_image_height(p_height),
 	m_image_data(p_image_data)
 {
-	
-	/* TODO shift these into load method
-	
-
-	*/
 }
 
 // loads an image into a Texture object from given filename
