@@ -2,3 +2,6 @@ vc 14:
 	- added $(QTDIR)\include to project-includes
 	- added qt mainwindow
 	- application builds and shows a blank window
+
+vc 15:
+	- working on getting qt to run on surface book
