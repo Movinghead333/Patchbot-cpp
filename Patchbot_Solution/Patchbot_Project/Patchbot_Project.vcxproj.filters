@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\colony.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pixel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\robot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_main_window.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_main_window.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_window.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\colony.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\robot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\robot_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tile_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\type_definitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_main_window.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Sven\Dropbox\Studium\3. Semester\Cpp Praktikum\Grafiken\grafiken\umgebungen\boden.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\boden_start_gegner.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\boden_start_patchbot.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\dead.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\gefahr_abgrund.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\gefahr_wasser.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\hauptserver.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\hindernis_aliengras.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\hindernis_geheimgang.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\hindernis_schotter.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\patchbot.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\pfeile\pfeil_links.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\pfeile\pfeil_oben.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\pfeile\pfeil_rechts.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\pfeile\pfeil_unten.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\tuer_automatisch_geschlossen.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\tuer_automatisch_offen.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\tuer_manuell_geschlossen.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\tuer_manuell_offen.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ1_bugger.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ2_pusher.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ3_digger.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ4_swimmer.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ5_follower.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ6_hunter.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\roboter\typ7_sniffer.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\wand_beton.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+    <Image Include="src\textures\umgebungen\wand_fels.tga">
+      <Filter>Resource Files\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{55a5232c-a127-4dcb-a1d6-c0b0137dce57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\maps">
+      <UniqueIdentifier>{795a471e-abb8-4e64-9a5c-840f14282a37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\textures">
+      <UniqueIdentifier>{40eb229f-c9fe-4936-9085-1146580174f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{a8ee0196-d645-49d3-a41e-6dd9eb46a825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{727b4e5a-1e7b-4d1f-b4b9-dd521259cdf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="version.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="main_window.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="main_window.h">
+      <Filter>Header Files\ui</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

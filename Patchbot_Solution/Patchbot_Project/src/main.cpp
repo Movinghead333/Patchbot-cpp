@@ -4,8 +4,7 @@
 
 #include "colony.h"
 #include "texture.h"
-
-// vc: 13
+#include "main_window.h"
 
 void write_colony_to_file(
 	const Colony* input_colony,
@@ -14,49 +13,11 @@ void write_colony_to_file(
 
 int main(int argc, char *argv[])
 {
-	// try loading a tga file and rewriting it to a tga file
-	try
-	{
-		std::shared_ptr<Texture> new_tga =
-			std::make_shared<Texture>( Texture::load_texture(argv[1]) );
-		Texture::write_texture_to_file("new_file.tga", *new_tga.get());
-	}
-	// catch all specified exceptions
-	catch (const Simple_Message_Exception& e)
-	{
-		std::cerr << e.m_error_message << std::endl;
-	}
-	// catch any non aticipated exceptions
-	catch (...)
-	{
-		std::cout << "Unchecked exception thrown" << std::endl;
-	}
+	QApplication a(argc, argv);
+	MainWindow main_window;
+	main_window.show();
 
-
-	/*
-	
-	// try loading a colony from commandline arg and rewrite it to a new file
-	try
-	{
-		std::shared_ptr<Colony> new_colony =
-			std::make_shared<Colony>(*Colony::load_colony(argv[1]));
-		write_colony_to_file(new_colony.get(), argv[1]);
-	}
-	// catch all specified exceptions
-	catch (const Simple_Message_Exception& e)
-	{
-		std::cerr << e.m_error_message << std::endl;
-	}
-	// catch any non aticipated exceptions
-	catch (...)
-	{
-		std::cout << "Unchecked exception thrown" << std::endl;
-	}
-
-	*/
-
-	std::cin.get();
-	return 0;
+	return a.exec();
 }
 
 
@@ -118,4 +79,48 @@ void write_colony_to_file(
 	}
 
 	output_file.close();
+}
+
+// method for checking if specified map get loaded properly
+void test_map_loading(const std::string& p_file_name)
+{
+	// try loading a colony from commandline arg and rewrite it to a new file
+	try
+	{
+		std::shared_ptr<Colony> new_colony =
+			std::make_shared<Colony>(*Colony::load_colony(p_file_name));
+		write_colony_to_file(new_colony.get(), p_file_name.c_str());
+	}
+	// catch all specified exceptions
+	catch (const Simple_Message_Exception& e)
+	{
+		std::cerr << e.m_error_message << std::endl;
+	}
+	// catch any non aticipated exceptions
+	catch (...)
+	{
+		std::cout << "Unchecked exception thrown" << std::endl;
+	}
+}
+
+// method for checking if specified texture get loaded properly
+void test_texture_loading(const std::string& p_file_name)
+{
+	// try loading a tga file and rewriting it to a tga file
+	try
+	{
+		std::shared_ptr<Texture> new_tga =
+			std::make_shared<Texture>(Texture::load_texture(p_file_name));
+		Texture::write_texture_to_file("new_file.tga", *new_tga.get());
+	}
+	// catch all specified exceptions
+	catch (const Simple_Message_Exception& e)
+	{
+		std::cerr << e.m_error_message << std::endl;
+	}
+	// catch any non aticipated exceptions
+	catch (...)
+	{
+		std::cout << "Unchecked exception thrown" << std::endl;
+	}
 }
