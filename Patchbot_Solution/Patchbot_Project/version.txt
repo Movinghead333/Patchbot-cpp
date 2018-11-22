@@ -17,4 +17,7 @@ vc 18:
 	- first test button press working
 
 vc 19:
-	- implemented  a rough sketch of the main ui window
+	- implemented a rough sketch of the main ui window
+
+vc 20:
+	- the main window layout with widget-resizing is done

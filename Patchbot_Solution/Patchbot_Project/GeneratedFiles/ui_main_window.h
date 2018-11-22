@@ -34,13 +34,13 @@ public:
     QWidget *centralWidget;
     QWidget *widget;
     QGridLayout *gridLayout_2;
-    QLabel *label_3;
-    QPushButton *pushButton_7;
-    QGridLayout *game_window;
-    QLabel *placeholder;
+    QLabel *colonyName;
+    QPushButton *loadColony;
+    QGridLayout *gameWindow;
+    QLabel *placeHolder;
     QScrollBar *xScrollbar;
     QScrollBar *yScrollbar;
-    QGridLayout *gridLayout;
+    QGridLayout *gameProgramming;
     QVBoxLayout *currentProgramLayout;
     QLabel *label;
     QScrollBar *horizontalScrollBar;
@@ -68,8 +68,15 @@ public:
         if (main_window->objectName().isEmpty())
             main_window->setObjectName(QStringLiteral("main_window"));
         main_window->resize(800, 600);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(main_window->sizePolicy().hasHeightForWidth());
+        main_window->setSizePolicy(sizePolicy);
         centralWidget = new QWidget(main_window);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
+        centralWidget->setSizePolicy(sizePolicy);
         widget = new QWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setGeometry(QRect(10, 10, 771, 521));
@@ -78,43 +85,58 @@ public:
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_3 = new QLabel(widget);
-        label_3->setObjectName(QStringLiteral("label_3"));
+        colonyName = new QLabel(widget);
+        colonyName->setObjectName(QStringLiteral("colonyName"));
 
-        gridLayout_2->addWidget(label_3, 0, 0, 1, 1);
+        gridLayout_2->addWidget(colonyName, 0, 0, 1, 1);
 
-        pushButton_7 = new QPushButton(widget);
-        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        loadColony = new QPushButton(widget);
+        loadColony->setObjectName(QStringLiteral("loadColony"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(loadColony->sizePolicy().hasHeightForWidth());
+        loadColony->setSizePolicy(sizePolicy1);
+        loadColony->setMinimumSize(QSize(0, 0));
 
-        gridLayout_2->addWidget(pushButton_7, 0, 1, 1, 1);
+        gridLayout_2->addWidget(loadColony, 0, 1, 1, 1);
 
-        game_window = new QGridLayout();
-        game_window->setSpacing(6);
-        game_window->setObjectName(QStringLiteral("game_window"));
-        placeholder = new QLabel(widget);
-        placeholder->setObjectName(QStringLiteral("placeholder"));
-        placeholder->setEnabled(true);
+        gameWindow = new QGridLayout();
+        gameWindow->setSpacing(6);
+        gameWindow->setObjectName(QStringLiteral("gameWindow"));
+        placeHolder = new QLabel(widget);
+        placeHolder->setObjectName(QStringLiteral("placeHolder"));
+        placeHolder->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(placeHolder->sizePolicy().hasHeightForWidth());
+        placeHolder->setSizePolicy(sizePolicy2);
+        placeHolder->setMinimumSize(QSize(400, 400));
 
-        game_window->addWidget(placeholder, 0, 0, 1, 1);
+        gameWindow->addWidget(placeHolder, 0, 0, 1, 1);
 
         xScrollbar = new QScrollBar(widget);
         xScrollbar->setObjectName(QStringLiteral("xScrollbar"));
+        sizePolicy2.setHeightForWidth(xScrollbar->sizePolicy().hasHeightForWidth());
+        xScrollbar->setSizePolicy(sizePolicy2);
+        xScrollbar->setMinimumSize(QSize(300, 10));
         xScrollbar->setOrientation(Qt::Horizontal);
 
-        game_window->addWidget(xScrollbar, 1, 0, 1, 1);
+        gameWindow->addWidget(xScrollbar, 1, 0, 1, 1);
 
         yScrollbar = new QScrollBar(widget);
         yScrollbar->setObjectName(QStringLiteral("yScrollbar"));
         yScrollbar->setOrientation(Qt::Vertical);
 
-        game_window->addWidget(yScrollbar, 0, 1, 1, 1);
+        gameWindow->addWidget(yScrollbar, 0, 1, 1, 1);
 
 
-        gridLayout_2->addLayout(game_window, 1, 0, 2, 1);
+        gridLayout_2->addLayout(gameWindow, 1, 0, 2, 1);
 
-        gridLayout = new QGridLayout();
-        gridLayout->setSpacing(6);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gameProgramming = new QGridLayout();
+        gameProgramming->setSpacing(6);
+        gameProgramming->setObjectName(QStringLiteral("gameProgramming"));
         currentProgramLayout = new QVBoxLayout();
         currentProgramLayout->setSpacing(6);
         currentProgramLayout->setObjectName(QStringLiteral("currentProgramLayout"));
@@ -130,54 +152,55 @@ public:
         currentProgramLayout->addWidget(horizontalScrollBar);
 
 
-        gridLayout->addLayout(currentProgramLayout, 3, 3, 1, 1);
+        gameProgramming->addLayout(currentProgramLayout, 3, 3, 1, 1);
 
         comboBox = new QComboBox(widget);
         comboBox->setObjectName(QStringLiteral("comboBox"));
 
-        gridLayout->addWidget(comboBox, 1, 3, 1, 1);
+        gameProgramming->addWidget(comboBox, 1, 3, 1, 1);
 
         pushButton_5 = new QPushButton(widget);
         pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
 
-        gridLayout->addWidget(pushButton_5, 1, 1, 1, 1);
+        gameProgramming->addWidget(pushButton_5, 1, 1, 1, 1);
 
         pushButton_4 = new QPushButton(widget);
         pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
 
-        gridLayout->addWidget(pushButton_4, 2, 2, 1, 1);
+        gameProgramming->addWidget(pushButton_4, 2, 2, 1, 1);
 
         pushButton_3 = new QPushButton(widget);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
 
-        gridLayout->addWidget(pushButton_3, 2, 1, 1, 1);
+        gameProgramming->addWidget(pushButton_3, 2, 1, 1, 1);
 
         pushButton_6 = new QPushButton(widget);
         pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
 
-        gridLayout->addWidget(pushButton_6, 1, 2, 1, 1);
+        gameProgramming->addWidget(pushButton_6, 1, 2, 1, 1);
 
         pushButton_2 = new QPushButton(widget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
-        gridLayout->addWidget(pushButton_2, 3, 1, 1, 1);
+        gameProgramming->addWidget(pushButton_2, 3, 1, 1, 1);
 
         pushButton = new QPushButton(widget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
-        gridLayout->addWidget(pushButton, 2, 0, 1, 1);
+        gameProgramming->addWidget(pushButton, 2, 0, 1, 1);
 
         label_2 = new QLabel(widget);
         label_2->setObjectName(QStringLiteral("label_2"));
 
-        gridLayout->addWidget(label_2, 0, 0, 1, 4);
+        gameProgramming->addWidget(label_2, 0, 0, 1, 4);
 
 
-        gridLayout_2->addLayout(gridLayout, 1, 1, 1, 1);
+        gridLayout_2->addLayout(gameProgramming, 1, 1, 1, 1);
 
         missionControlLayout = new QGridLayout();
         missionControlLayout->setSpacing(6);
         missionControlLayout->setObjectName(QStringLiteral("missionControlLayout"));
+        missionControlLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         staticLabel1 = new QLabel(widget);
         staticLabel1->setObjectName(QStringLiteral("staticLabel1"));
 
@@ -214,8 +237,8 @@ public:
         main_window->setCentralWidget(centralWidget);
         xScrollbar->raise();
         yScrollbar->raise();
-        placeholder->raise();
-        placeholder->raise();
+        placeHolder->raise();
+        placeHolder->raise();
         staticLabel1->raise();
         missionStart->raise();
         missionCancel->raise();
@@ -232,8 +255,8 @@ public:
         label_2->raise();
         comboBox->raise();
         label_2->raise();
-        pushButton_7->raise();
-        label_3->raise();
+        loadColony->raise();
+        colonyName->raise();
         menuBar = new QMenuBar(main_window);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 800, 21));
@@ -253,9 +276,9 @@ public:
     void retranslateUi(QMainWindow *main_window)
     {
         main_window->setWindowTitle(QApplication::translate("main_window", "main_window", Q_NULLPTR));
-        label_3->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
-        pushButton_7->setText(QApplication::translate("main_window", "PushButton", Q_NULLPTR));
-        placeholder->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
+        colonyName->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
+        loadColony->setText(QApplication::translate("main_window", "PushButton", Q_NULLPTR));
+        placeHolder->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
         label->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("main_window", "PushButton", Q_NULLPTR));
         pushButton_4->setText(QApplication::translate("main_window", "PushButton", Q_NULLPTR));
