@@ -5,3 +5,7 @@ vc 14:
 
 vc 15:
 	- working on getting qt to run on surface book
+
+vc 16:
+	- changed window title to "PATCHBOT v1.0"
+	- experimented with qt-designer - no results though
