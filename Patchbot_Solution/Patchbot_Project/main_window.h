@@ -10,7 +10,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 private slots:
-	void on_testBtn_clicked();
+	//void on_testBtn_clicked();
 
 public :
 	MainWindow(QWidget *parent = Q_NULLPTR);

@@ -15,3 +15,6 @@ vc 17:
 
 vc 18:
 	- first test button press working
+
+vc 19:
+	- implemented  a rough sketch of the main ui window
