@@ -11,7 +11,7 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::on_button_clicked()
+void MainWindow::on_testBtn_clicked()
 {
-	ui.label->setText("button clicked");
+	ui.label_test->setText("button clicked");
 }

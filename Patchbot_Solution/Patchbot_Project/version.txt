@@ -12,3 +12,6 @@ vc 16:
 
 vc 17:
 	- started working with slots in qt
+
+vc 18:
+	- first test button press working

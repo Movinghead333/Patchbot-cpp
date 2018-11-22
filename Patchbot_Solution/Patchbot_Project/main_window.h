@@ -9,9 +9,8 @@ class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
-public slots:
-
-	void on_button_clicked();
+private slots:
+	void on_testBtn_clicked();
 
 public :
 	MainWindow(QWidget *parent = Q_NULLPTR);
