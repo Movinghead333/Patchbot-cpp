@@ -10,3 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 }
+
+void MainWindow::on_button_clicked()
+{
+	ui.label->setText("button clicked");
+}

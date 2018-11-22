@@ -9,3 +9,6 @@ vc 15:
 vc 16:
 	- changed window title to "PATCHBOT v1.0"
 	- experimented with qt-designer - no results though
+
+vc 17:
+	- started working with slots in qt

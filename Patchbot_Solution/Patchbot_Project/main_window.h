@@ -9,9 +9,14 @@ class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
-public:
+public slots:
+
+	void on_button_clicked();
+
+public :
 	MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
+
 
 private:
 	Ui::main_window ui;

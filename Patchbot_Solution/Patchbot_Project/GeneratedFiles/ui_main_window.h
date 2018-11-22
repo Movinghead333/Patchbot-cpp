@@ -13,10 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -27,8 +28,8 @@ class Ui_main_window
 {
 public:
     QWidget *centralWidget;
-    QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
+    QPushButton *pushButton;
+    QLabel *label;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -40,14 +41,12 @@ public:
         main_window->resize(1600, 1200);
         centralWidget = new QWidget(main_window);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(9, 9, 1581, 1081));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(140, 330, 150, 46));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(690, 300, 89, 25));
         main_window->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(main_window);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -68,6 +67,8 @@ public:
     void retranslateUi(QMainWindow *main_window)
     {
         main_window->setWindowTitle(QApplication::translate("main_window", "main_window", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("main_window", "PushButton", Q_NULLPTR));
+        label->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };
