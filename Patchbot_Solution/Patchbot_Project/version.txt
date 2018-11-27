@@ -27,3 +27,6 @@ vc 21:
 
 vc 22:
 	- further chagnes to ui-scaling
+
+vc 23:
+	- fixed a couple more ui issues regarding the programming panel
