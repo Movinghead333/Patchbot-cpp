@@ -42,3 +42,7 @@ vc 26:
 	- all button slots are now implemented and functional
 	- minor changes to the ui
 	- wrapped QApplication in main in qscopedpointer to prevent memory leaks
+
+vc 27:
+	- added some color to buttons and various other ui elements
+	- layout coloring wip
