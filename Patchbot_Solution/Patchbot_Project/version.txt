@@ -21,3 +21,6 @@ vc 19:
 
 vc 20:
 	- the main window layout with widget-resizing is done
+
+vc 21:
+	- revamped the ui for surface book resolution
