@@ -24,3 +24,6 @@ vc 20:
 
 vc 21:
 	- revamped the ui for surface book resolution
+
+vc 22:
+	- further chagnes to ui-scaling
