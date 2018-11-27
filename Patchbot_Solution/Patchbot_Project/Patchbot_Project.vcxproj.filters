@@ -31,6 +31,9 @@
     <ClCompile Include="main_window.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_Resource.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h">
@@ -199,6 +202,9 @@
     </CustomBuild>
     <CustomBuild Include="main_window.h">
       <Filter>Header Files\ui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resource.qrc">
+      <Filter>Resource Files</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

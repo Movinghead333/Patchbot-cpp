@@ -46,3 +46,7 @@ vc 26:
 vc 27:
 	- added some color to buttons and various other ui elements
 	- layout coloring wip
+
+vc 28:
+	- layout coloring almost complete
+	- scrollbar coloring still wip

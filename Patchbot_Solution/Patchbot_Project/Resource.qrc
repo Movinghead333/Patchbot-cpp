@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qt">
+        <file>src/textures/scrollbar/scrollArrowLeft.tga</file>
+        <file>src/textures/scrollbar/scrollArrowRight.tga</file>
+    </qresource>
+</RCC>
