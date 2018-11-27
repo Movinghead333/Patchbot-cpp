@@ -33,3 +33,7 @@ vc 23:
 
 vc 24:
 	- improved the scaling of programming and mission section
+
+vc 25:
+	- removed toolbar, menubar and progressbar from layout main_window
+	- improved ui scaling

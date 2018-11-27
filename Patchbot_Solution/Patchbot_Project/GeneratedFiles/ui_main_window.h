@@ -63,7 +63,6 @@ public:
     QLabel *placeHolder;
     QScrollBar *xScrollbar;
     QLabel *colonyName;
-    QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -130,6 +129,10 @@ public:
         sizePolicy2.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy2);
         label_2->setMinimumSize(QSize(0, 30));
+        label_2->setMaximumSize(QSize(16777215, 50));
+        QFont font;
+        font.setPointSize(10);
+        label_2->setFont(font);
         label_2->setAlignment(Qt::AlignCenter);
 
         gameProgramming->addWidget(label_2, 0, 0, 1, 5);
@@ -197,7 +200,7 @@ public:
 
         gridLayout->addLayout(gameProgramming, 1, 1, 1, 1);
 
-        verticalSpacer_2 = new QSpacerItem(20, 10, QSizePolicy::Minimum, QSizePolicy::Fixed);
+        verticalSpacer_2 = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
         gridLayout->addItem(verticalSpacer_2, 2, 1, 1, 1);
 
@@ -212,12 +215,12 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(missionStop->sizePolicy().hasHeightForWidth());
         missionStop->setSizePolicy(sizePolicy3);
-        missionStop->setMinimumSize(QSize(0, 40));
-        missionStop->setMaximumSize(QSize(130, 16777215));
-        QFont font;
-        font.setFamily(QStringLiteral("MS Shell Dlg 2"));
-        font.setPointSize(8);
-        missionStop->setFont(font);
+        missionStop->setMinimumSize(QSize(130, 40));
+        missionStop->setMaximumSize(QSize(16777215, 50));
+        QFont font1;
+        font1.setFamily(QStringLiteral("MS Shell Dlg 2"));
+        font1.setPointSize(8);
+        missionStop->setFont(font1);
 
         missionControlLayout->addWidget(missionStop, 3, 1, 1, 1);
 
@@ -225,9 +228,9 @@ public:
         missionStart->setObjectName(QStringLiteral("missionStart"));
         sizePolicy3.setHeightForWidth(missionStart->sizePolicy().hasHeightForWidth());
         missionStart->setSizePolicy(sizePolicy3);
-        missionStart->setMinimumSize(QSize(0, 40));
-        missionStart->setMaximumSize(QSize(130, 16777215));
-        missionStart->setFont(font);
+        missionStart->setMinimumSize(QSize(130, 40));
+        missionStart->setMaximumSize(QSize(16777215, 50));
+        missionStart->setFont(font1);
 
         missionControlLayout->addWidget(missionStart, 1, 0, 1, 1);
 
@@ -235,9 +238,9 @@ public:
         missionStep->setObjectName(QStringLiteral("missionStep"));
         sizePolicy3.setHeightForWidth(missionStep->sizePolicy().hasHeightForWidth());
         missionStep->setSizePolicy(sizePolicy3);
-        missionStep->setMinimumSize(QSize(0, 40));
-        missionStep->setMaximumSize(QSize(130, 16777215));
-        missionStep->setFont(font);
+        missionStep->setMinimumSize(QSize(130, 40));
+        missionStep->setMaximumSize(QSize(16777215, 50));
+        missionStep->setFont(font1);
 
         missionControlLayout->addWidget(missionStep, 2, 0, 1, 1);
 
@@ -245,9 +248,9 @@ public:
         missionAutomatic->setObjectName(QStringLiteral("missionAutomatic"));
         sizePolicy3.setHeightForWidth(missionAutomatic->sizePolicy().hasHeightForWidth());
         missionAutomatic->setSizePolicy(sizePolicy3);
-        missionAutomatic->setMinimumSize(QSize(0, 40));
-        missionAutomatic->setMaximumSize(QSize(130, 16777215));
-        missionAutomatic->setFont(font);
+        missionAutomatic->setMinimumSize(QSize(130, 40));
+        missionAutomatic->setMaximumSize(QSize(16777215, 50));
+        missionAutomatic->setFont(font1);
 
         missionControlLayout->addWidget(missionAutomatic, 2, 1, 1, 1);
 
@@ -255,9 +258,9 @@ public:
         missionCancel->setObjectName(QStringLiteral("missionCancel"));
         sizePolicy3.setHeightForWidth(missionCancel->sizePolicy().hasHeightForWidth());
         missionCancel->setSizePolicy(sizePolicy3);
-        missionCancel->setMinimumSize(QSize(0, 40));
-        missionCancel->setMaximumSize(QSize(130, 16777215));
-        missionCancel->setFont(font);
+        missionCancel->setMinimumSize(QSize(130, 40));
+        missionCancel->setMaximumSize(QSize(16777215, 50));
+        missionCancel->setFont(font1);
 
         missionControlLayout->addWidget(missionCancel, 1, 1, 1, 1);
 
@@ -270,6 +273,7 @@ public:
         staticLabel1->setSizePolicy(sizePolicy4);
         staticLabel1->setMinimumSize(QSize(0, 30));
         staticLabel1->setMaximumSize(QSize(16777215, 30));
+        staticLabel1->setFont(font);
         staticLabel1->setAlignment(Qt::AlignCenter);
 
         missionControlLayout->addWidget(staticLabel1, 0, 0, 1, 2);
@@ -315,10 +319,6 @@ public:
         colonyName->setObjectName(QStringLiteral("colonyName"));
 
         gridLayout->addWidget(colonyName, 0, 0, 1, 1);
-
-        verticalSpacer = new QSpacerItem(20, 199, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 4, 1, 1, 1);
 
         gridLayout->setColumnStretch(0, 80);
         gridLayout->setColumnStretch(1, 20);
