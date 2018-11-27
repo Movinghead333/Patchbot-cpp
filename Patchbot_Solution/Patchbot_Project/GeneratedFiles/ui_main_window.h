@@ -17,6 +17,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -36,18 +37,19 @@ public:
     QGridLayout *gridLayout;
     QPushButton *loadColony;
     QGridLayout *gameProgramming;
-    QLabel *label_2;
-    QComboBox *comboBox;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_5;
-    QPushButton *pushButton_6;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_6;
+    QLabel *label_2;
+    QPushButton *pushButton_5;
+    QSpacerItem *horizontalSpacer;
+    QComboBox *comboBox;
+    QPushButton *pushButton;
     QVBoxLayout *currentProgramLayout;
-    QLabel *label;
+    QSpacerItem *verticalSpacer_3;
+    QLineEdit *lineEdit;
     QScrollBar *horizontalScrollBar;
+    QPushButton *pushButton_4;
     QSpacerItem *verticalSpacer_2;
     QGridLayout *missionControlLayout;
     QPushButton *missionStop;
@@ -60,8 +62,8 @@ public:
     QScrollBar *yScrollbar;
     QLabel *placeHolder;
     QScrollBar *xScrollbar;
-    QSpacerItem *verticalSpacer;
     QLabel *colonyName;
+    QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -99,6 +101,27 @@ public:
         gameProgramming = new QGridLayout();
         gameProgramming->setSpacing(6);
         gameProgramming->setObjectName(QStringLiteral("gameProgramming"));
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setMinimumSize(QSize(40, 40));
+        pushButton_2->setMaximumSize(QSize(40, 40));
+
+        gameProgramming->addWidget(pushButton_2, 3, 1, 1, 1);
+
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setMinimumSize(QSize(40, 40));
+        pushButton_3->setMaximumSize(QSize(40, 40));
+
+        gameProgramming->addWidget(pushButton_3, 2, 1, 1, 1);
+
+        pushButton_6 = new QPushButton(centralWidget);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setMinimumSize(QSize(40, 40));
+        pushButton_6->setMaximumSize(QSize(40, 40));
+
+        gameProgramming->addWidget(pushButton_6, 1, 2, 1, 1);
+
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -111,83 +134,65 @@ public:
 
         gameProgramming->addWidget(label_2, 0, 0, 1, 5);
 
-        comboBox = new QComboBox(centralWidget);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
-        comboBox->setSizePolicy(sizePolicy3);
-        comboBox->setMinimumSize(QSize(50, 30));
-        comboBox->setMaximumSize(QSize(500, 30));
+        pushButton_5 = new QPushButton(centralWidget);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setMinimumSize(QSize(40, 40));
+        pushButton_5->setMaximumSize(QSize(40, 40));
 
-        gameProgramming->addWidget(comboBox, 1, 4, 1, 1);
+        gameProgramming->addWidget(pushButton_5, 1, 1, 1, 1);
 
         horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         gameProgramming->addItem(horizontalSpacer, 1, 3, 1, 1);
 
-        pushButton_5 = new QPushButton(centralWidget);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setMinimumSize(QSize(30, 30));
-        pushButton_5->setMaximumSize(QSize(30, 30));
+        comboBox = new QComboBox(centralWidget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        sizePolicy1.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
+        comboBox->setSizePolicy(sizePolicy1);
+        comboBox->setMinimumSize(QSize(50, 30));
+        comboBox->setMaximumSize(QSize(500, 30));
 
-        gameProgramming->addWidget(pushButton_5, 1, 1, 1, 1);
-
-        pushButton_6 = new QPushButton(centralWidget);
-        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
-        pushButton_6->setMinimumSize(QSize(30, 30));
-        pushButton_6->setMaximumSize(QSize(30, 30));
-
-        gameProgramming->addWidget(pushButton_6, 1, 2, 1, 1);
-
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setMinimumSize(QSize(30, 30));
-        pushButton_3->setMaximumSize(QSize(30, 30));
-
-        gameProgramming->addWidget(pushButton_3, 2, 1, 1, 1);
-
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setMinimumSize(QSize(30, 30));
-        pushButton_4->setMaximumSize(QSize(30, 30));
-
-        gameProgramming->addWidget(pushButton_4, 2, 2, 1, 1);
+        gameProgramming->addWidget(comboBox, 1, 4, 1, 1);
 
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
         pushButton->setSizePolicy(sizePolicy1);
-        pushButton->setMinimumSize(QSize(30, 30));
-        pushButton->setMaximumSize(QSize(30, 30));
+        pushButton->setMinimumSize(QSize(40, 40));
+        pushButton->setMaximumSize(QSize(40, 40));
 
         gameProgramming->addWidget(pushButton, 2, 0, 1, 1);
-
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setMinimumSize(QSize(30, 30));
-        pushButton_2->setMaximumSize(QSize(30, 30));
-
-        gameProgramming->addWidget(pushButton_2, 3, 1, 1, 1);
 
         currentProgramLayout = new QVBoxLayout();
         currentProgramLayout->setSpacing(0);
         currentProgramLayout->setObjectName(QStringLiteral("currentProgramLayout"));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setMinimumSize(QSize(120, 0));
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        currentProgramLayout->addWidget(label);
+        currentProgramLayout->addItem(verticalSpacer_3);
+
+        lineEdit = new QLineEdit(centralWidget);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEdit->setMinimumSize(QSize(80, 30));
+        lineEdit->setReadOnly(true);
+
+        currentProgramLayout->addWidget(lineEdit);
 
         horizontalScrollBar = new QScrollBar(centralWidget);
         horizontalScrollBar->setObjectName(QStringLiteral("horizontalScrollBar"));
+        horizontalScrollBar->setMinimumSize(QSize(0, 17));
         horizontalScrollBar->setOrientation(Qt::Horizontal);
 
         currentProgramLayout->addWidget(horizontalScrollBar);
 
 
         gameProgramming->addLayout(currentProgramLayout, 2, 4, 2, 1);
+
+        pushButton_4 = new QPushButton(centralWidget);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setMinimumSize(QSize(40, 40));
+        pushButton_4->setMaximumSize(QSize(40, 40));
+
+        gameProgramming->addWidget(pushButton_4, 2, 2, 1, 1);
 
 
         gridLayout->addLayout(gameProgramming, 1, 1, 1, 1);
@@ -202,12 +207,13 @@ public:
         missionControlLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         missionStop = new QPushButton(centralWidget);
         missionStop->setObjectName(QStringLiteral("missionStop"));
-        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(missionStop->sizePolicy().hasHeightForWidth());
-        missionStop->setSizePolicy(sizePolicy4);
-        missionStop->setMaximumSize(QSize(120, 16777215));
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(missionStop->sizePolicy().hasHeightForWidth());
+        missionStop->setSizePolicy(sizePolicy3);
+        missionStop->setMinimumSize(QSize(0, 40));
+        missionStop->setMaximumSize(QSize(130, 16777215));
         QFont font;
         font.setFamily(QStringLiteral("MS Shell Dlg 2"));
         font.setPointSize(8);
@@ -217,44 +223,51 @@ public:
 
         missionStart = new QPushButton(centralWidget);
         missionStart->setObjectName(QStringLiteral("missionStart"));
-        sizePolicy4.setHeightForWidth(missionStart->sizePolicy().hasHeightForWidth());
-        missionStart->setSizePolicy(sizePolicy4);
-        missionStart->setMaximumSize(QSize(120, 16777215));
+        sizePolicy3.setHeightForWidth(missionStart->sizePolicy().hasHeightForWidth());
+        missionStart->setSizePolicy(sizePolicy3);
+        missionStart->setMinimumSize(QSize(0, 40));
+        missionStart->setMaximumSize(QSize(130, 16777215));
         missionStart->setFont(font);
 
         missionControlLayout->addWidget(missionStart, 1, 0, 1, 1);
 
         missionStep = new QPushButton(centralWidget);
         missionStep->setObjectName(QStringLiteral("missionStep"));
-        sizePolicy4.setHeightForWidth(missionStep->sizePolicy().hasHeightForWidth());
-        missionStep->setSizePolicy(sizePolicy4);
-        missionStep->setMaximumSize(QSize(120, 16777215));
+        sizePolicy3.setHeightForWidth(missionStep->sizePolicy().hasHeightForWidth());
+        missionStep->setSizePolicy(sizePolicy3);
+        missionStep->setMinimumSize(QSize(0, 40));
+        missionStep->setMaximumSize(QSize(130, 16777215));
         missionStep->setFont(font);
 
         missionControlLayout->addWidget(missionStep, 2, 0, 1, 1);
 
         missionAutomatic = new QPushButton(centralWidget);
         missionAutomatic->setObjectName(QStringLiteral("missionAutomatic"));
-        sizePolicy4.setHeightForWidth(missionAutomatic->sizePolicy().hasHeightForWidth());
-        missionAutomatic->setSizePolicy(sizePolicy4);
-        missionAutomatic->setMaximumSize(QSize(120, 16777215));
+        sizePolicy3.setHeightForWidth(missionAutomatic->sizePolicy().hasHeightForWidth());
+        missionAutomatic->setSizePolicy(sizePolicy3);
+        missionAutomatic->setMinimumSize(QSize(0, 40));
+        missionAutomatic->setMaximumSize(QSize(130, 16777215));
         missionAutomatic->setFont(font);
 
         missionControlLayout->addWidget(missionAutomatic, 2, 1, 1, 1);
 
         missionCancel = new QPushButton(centralWidget);
         missionCancel->setObjectName(QStringLiteral("missionCancel"));
-        sizePolicy4.setHeightForWidth(missionCancel->sizePolicy().hasHeightForWidth());
-        missionCancel->setSizePolicy(sizePolicy4);
-        missionCancel->setMaximumSize(QSize(120, 16777215));
+        sizePolicy3.setHeightForWidth(missionCancel->sizePolicy().hasHeightForWidth());
+        missionCancel->setSizePolicy(sizePolicy3);
+        missionCancel->setMinimumSize(QSize(0, 40));
+        missionCancel->setMaximumSize(QSize(130, 16777215));
         missionCancel->setFont(font);
 
         missionControlLayout->addWidget(missionCancel, 1, 1, 1, 1);
 
         staticLabel1 = new QLabel(centralWidget);
         staticLabel1->setObjectName(QStringLiteral("staticLabel1"));
-        sizePolicy2.setHeightForWidth(staticLabel1->sizePolicy().hasHeightForWidth());
-        staticLabel1->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy4(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(staticLabel1->sizePolicy().hasHeightForWidth());
+        staticLabel1->setSizePolicy(sizePolicy4);
         staticLabel1->setMinimumSize(QSize(0, 30));
         staticLabel1->setMaximumSize(QSize(16777215, 30));
         staticLabel1->setAlignment(Qt::AlignCenter);
@@ -277,9 +290,9 @@ public:
         placeHolder = new QLabel(centralWidget);
         placeHolder->setObjectName(QStringLiteral("placeHolder"));
         placeHolder->setEnabled(true);
-        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy5.setHorizontalStretch(1);
-        sizePolicy5.setVerticalStretch(1);
+        QSizePolicy sizePolicy5(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
         sizePolicy5.setHeightForWidth(placeHolder->sizePolicy().hasHeightForWidth());
         placeHolder->setSizePolicy(sizePolicy5);
         placeHolder->setMinimumSize(QSize(0, 0));
@@ -298,19 +311,21 @@ public:
 
         gridLayout->addLayout(gameWindow, 1, 0, 4, 1);
 
-        verticalSpacer = new QSpacerItem(20, 199, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer, 4, 1, 1, 1);
-
         colonyName = new QLabel(centralWidget);
         colonyName->setObjectName(QStringLiteral("colonyName"));
 
         gridLayout->addWidget(colonyName, 0, 0, 1, 1);
 
+        verticalSpacer = new QSpacerItem(20, 199, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer, 4, 1, 1, 1);
+
+        gridLayout->setColumnStretch(0, 80);
+        gridLayout->setColumnStretch(1, 20);
         main_window->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(main_window);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 816, 38));
+        menuBar->setGeometry(QRect(0, 0, 816, 21));
         main_window->setMenuBar(menuBar);
         mainToolBar = new QToolBar(main_window);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -328,14 +343,14 @@ public:
     {
         main_window->setWindowTitle(QApplication::translate("main_window", "main_window", Q_NULLPTR));
         loadColony->setText(QApplication::translate("main_window", "Andere Kolonie...", Q_NULLPTR));
+        pushButton_2->setText(QString());
+        pushButton_3->setText(QApplication::translate("main_window", "W", Q_NULLPTR));
+        pushButton_6->setText(QApplication::translate("main_window", "<-", Q_NULLPTR));
         label_2->setText(QApplication::translate("main_window", "Programmieren", Q_NULLPTR));
         pushButton_5->setText(QString());
-        pushButton_6->setText(QApplication::translate("main_window", "<-", Q_NULLPTR));
-        pushButton_3->setText(QApplication::translate("main_window", "W", Q_NULLPTR));
-        pushButton_4->setText(QString());
         pushButton->setText(QString());
-        pushButton_2->setText(QString());
-        label->setText(QApplication::translate("main_window", "TextLabel", Q_NULLPTR));
+        lineEdit->setText(QApplication::translate("main_window", "W8W8W8", Q_NULLPTR));
+        pushButton_4->setText(QString());
         missionStop->setText(QApplication::translate("main_window", "Anhalten", Q_NULLPTR));
         missionStart->setText(QApplication::translate("main_window", "Start", Q_NULLPTR));
         missionStep->setText(QApplication::translate("main_window", "Einzelschritt", Q_NULLPTR));

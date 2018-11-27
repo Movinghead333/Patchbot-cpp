@@ -125,6 +125,17 @@
           <height>30</height>
          </size>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Programmieren</string>
         </property>
@@ -296,7 +307,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>10</height>
+        <height>30</height>
        </size>
       </property>
      </spacer>
@@ -316,14 +327,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>130</width>
           <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>16777215</height>
+          <width>16777215</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -347,14 +358,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>130</width>
           <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>16777215</height>
+          <width>16777215</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -378,14 +389,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>130</width>
           <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>16777215</height>
+          <width>16777215</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -409,14 +420,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>130</width>
           <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>16777215</height>
+          <width>16777215</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -440,14 +451,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>130</width>
           <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>16777215</height>
+          <width>16777215</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -480,6 +491,11 @@
           <width>16777215</width>
           <height>30</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Missionsablauf</string>
@@ -555,19 +571,6 @@
        <string>Aktuelle Kolonie:</string>
       </property>
      </widget>
-    </item>
-    <item row="4" column="1">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>199</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>

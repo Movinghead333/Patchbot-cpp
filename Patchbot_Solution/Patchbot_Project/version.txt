@@ -30,3 +30,6 @@ vc 22:
 
 vc 23:
 	- fixed a couple more ui issues regarding the programming panel
+
+vc 24:
+	- improved the scaling of programming and mission section
