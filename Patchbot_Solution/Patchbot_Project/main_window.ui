@@ -34,7 +34,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout" columnstretch="80,20">
     <item row="0" column="1" alignment="Qt::AlignRight">
-     <widget class="QPushButton" name="loadColony">
+     <widget class="QPushButton" name="changeColony">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QPushButton" name="wait">
+       <widget class="QPushButton" name="playerWait">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -145,7 +145,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="directioUp">
+       <widget class="QPushButton" name="directionUp">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -641,7 +641,7 @@
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
       <item row="3" column="1">
-       <widget class="QPushButton" name="missionStop">
+       <widget class="QPushButton" name="missionPause">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>

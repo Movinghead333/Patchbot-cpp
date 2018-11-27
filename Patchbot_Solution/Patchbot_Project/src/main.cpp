@@ -13,11 +13,13 @@ void write_colony_to_file(
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
+	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 	MainWindow main_window;
 	main_window.show();
 
-	return a.exec();
+	app->setQuitOnLastWindowClosed(true);
+
+	return app->exec();
 }
 
 

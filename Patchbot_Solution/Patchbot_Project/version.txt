@@ -37,3 +37,8 @@ vc 24:
 vc 25:
 	- removed toolbar, menubar and progressbar from layout main_window
 	- improved ui scaling
+
+vc 26:
+	- all button slots are now implemented and functional
+	- minor changes to the ui
+	- wrapped QApplication in main in qscopedpointer to prevent memory leaks
