@@ -2,6 +2,7 @@
 
 #include <qmessagebox.h>
 
+// constructor initializing the window
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -10,18 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
 	
 }
 
+// destructor
 MainWindow::~MainWindow()
 {
 }
 
-/*
 
-void MainWindow::on_testBtn_clicked()
-{
-	ui.label_test->setText("button clicked");
-}
-
-*/
 // slots for programming buttons
 void MainWindow::on_directionUp_clicked()
 {

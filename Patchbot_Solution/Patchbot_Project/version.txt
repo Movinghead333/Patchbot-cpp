@@ -57,3 +57,6 @@ vc 29:
 
 vc 30:
 	- minor code cleanup for presentation of task 3
+
+vc 31:
+	- removed unnecessary commented code
