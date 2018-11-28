@@ -50,3 +50,7 @@ vc 27:
 vc 28:
 	- layout coloring almost complete
 	- scrollbar coloring still wip
+
+vc 29:
+	- finished main_window ui
+	- added image resources

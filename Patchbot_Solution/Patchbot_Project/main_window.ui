@@ -59,14 +59,14 @@ background-color: rgb(53, 105, 122)
 }
 
 QScrollBar:horizontal {
-    border: 2px;
+    border: 1px solid black;
     background: rgb(74, 146, 170);
-    height: 15px;
+    height: 25px;
     margin: 0px 20px 0 20px;
 }
 QScrollBar::handle:horizontal {
     background:rgb(79, 68, 90);
-	border: 1px solid #000000;
+	border: 1px solid black;
     min-width: 20px;
 }
 QScrollBar::add-line:horizontal {
@@ -85,19 +85,60 @@ QScrollBar::sub-line:horizontal {
     subcontrol-origin: margin;
 }
 
-QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
-    background: rgb(79, 68, 90);
-}
-
 QScrollBar::left-arrow:horizontal{
-image: url(:/qt/src/textures/scrollbar/scrollArrowLeft.tga)
+background: rgb(79, 68, 90);
+image: url(:/qt/src/textures/scrollbar/scrollArrowLeft.tga);
 }
 
 QScrollBar::right-arrow:horizontal{
-image: url(:/qt/src/textures/scrollbar/scrollArrowRight.tga)
+background: rgb(79, 68, 90);
+image: url(:/qt/src/textures/scrollbar/scrollArrowRight.tga);
 }
 
 QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+
+
+QScrollBar:vertical {
+    border: 1px solid black;
+    background: rgb(74, 146, 170);
+    width: 25px;
+    margin: 20px 0px 20px 0px;
+}
+QScrollBar::handle:vertical {
+    background:rgb(79, 68, 90);
+	border: 1px solid black;
+    min-height: 20px;
+}
+QScrollBar::add-line:vertical {
+    border: 1px solid black;
+    background: none;
+    height: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    border: 1px solid black;
+    background: none;
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical{
+background: rgb(79, 68, 90);
+image: url(:/qt/src/textures/scrollbar/scrollArrowUp.tga)
+}
+
+QScrollBar::down-arrow:vertical{
+background: rgb(79, 68, 90);
+image: url(:/qt/src/textures/scrollbar/scrollArrowDown.tga)
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
 }</string>
   </property>
@@ -367,8 +408,8 @@ background-color: rgb(53, 105, 122)
       </property>
       <property name="minimumSize">
        <size>
-        <width>0</width>
-        <height>0</height>
+        <width>100</width>
+        <height>25</height>
        </size>
       </property>
       <property name="text">
@@ -438,6 +479,16 @@ background-color: rgb(53, 105, 122)
          <property name="text">
           <string/>
          </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/pfeil_unten.tga</normaloff>:/qt/src/textures/pfeile/pfeil_unten.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -455,7 +506,17 @@ background-color: rgb(53, 105, 122)
           </size>
          </property>
          <property name="text">
-          <string>W</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/waitCircle.tga</normaloff>:/qt/src/textures/pfeile/waitCircle.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -474,7 +535,17 @@ background-color: rgb(53, 105, 122)
           </size>
          </property>
          <property name="text">
-          <string>&lt;-</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/backArrow.tga</normaloff>:/qt/src/textures/pfeile/backArrow.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -529,6 +600,16 @@ background-color: rgb(53, 105, 122)
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/pfeil_oben.tga</normaloff>:/qt/src/textures/pfeile/pfeil_oben.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -640,6 +721,16 @@ background-color: rgb(53, 105, 122)
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/pfeil_links.tga</normaloff>:/qt/src/textures/pfeile/pfeil_links.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -1065,6 +1156,16 @@ background-color: rgb(53, 105, 122)
          <property name="text">
           <string/>
          </property>
+         <property name="icon">
+          <iconset resource="Resource.qrc">
+           <normaloff>:/qt/src/textures/pfeile/pfeil_rechts.tga</normaloff>:/qt/src/textures/pfeile/pfeil_rechts.tga</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1115,19 +1216,6 @@ background-color: rgb(111, 219, 255)
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QScrollBar" name="yScrollbar">
-         <property name="minimumSize">
-          <size>
-           <width>25</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QScrollBar" name="xScrollbar">
          <property name="sizePolicy">
@@ -1144,6 +1232,19 @@ background-color: rgb(111, 219, 255)
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QScrollBar" name="yScrollbar">
+         <property name="minimumSize">
+          <size>
+           <width>25</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>

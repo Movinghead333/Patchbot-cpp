@@ -2,5 +2,13 @@
     <qresource prefix="/qt">
         <file>src/textures/scrollbar/scrollArrowLeft.tga</file>
         <file>src/textures/scrollbar/scrollArrowRight.tga</file>
+        <file>src/textures/scrollbar/scrollArrowDown.tga</file>
+        <file>src/textures/scrollbar/scrollArrowUp.tga</file>
+        <file>src/textures/pfeile/pfeil_links.tga</file>
+        <file>src/textures/pfeile/pfeil_oben.tga</file>
+        <file>src/textures/pfeile/pfeil_rechts.tga</file>
+        <file>src/textures/pfeile/pfeil_unten.tga</file>
+        <file>src/textures/pfeile/backArrow.tga</file>
+        <file>src/textures/pfeile/waitCircle.tga</file>
     </qresource>
 </RCC>
