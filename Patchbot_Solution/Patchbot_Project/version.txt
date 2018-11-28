@@ -54,3 +54,6 @@ vc 28:
 vc 29:
 	- finished main_window ui
 	- added image resources
+
+vc 30:
+	- minor code cleanup for presentation of task 3
