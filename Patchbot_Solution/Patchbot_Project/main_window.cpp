@@ -2,6 +2,7 @@
 
 #include <qmessagebox.h>
 #include <qfiledialog.h>
+
 #include "src/colony.h"
 
 // constructor initializing the window
@@ -10,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 	this->setWindowTitle("PATCHBOT v1.0");
-	
+	m_game_controller = std::make_shared<GameController>(GameController());
 }
 
 // destructor
@@ -79,14 +80,26 @@ void MainWindow::on_missionPause_clicked()
 // changing colony
 void MainWindow::on_changeColony_clicked()
 {
-	//display_info_message_dialog("Change Colony button clicked!");
-	QString file_name = QFileDialog::getOpenFileName(this, "Open new Colony",
-		"C://");
-	display_info_message_dialog(file_name.toStdString());
-	std::shared_ptr<Colony> new_colony =
-		std::make_shared<Colony>(
-			*Colony::load_colony(file_name.toStdString())
-		);
+	QString filter = "Textfile (*.txt)";
+
+	std::string file_name = QFileDialog::getOpenFileName(
+		this, "Open new Colony", "C://", filter
+	).toStdString();
+
+	try
+	{
+		m_game_controller->load_and_initialize_colony(file_name);
+	}
+	// catch all specified exceptions
+	catch (const Simple_Message_Exception& e)
+	{
+		std::cerr << e.m_error_message << std::endl;
+	}
+	// catch any non aticipated exceptions
+	catch (...)
+	{
+		std::cout << "Unchecked exception thrown" << std::endl;
+	}
 }
 
 

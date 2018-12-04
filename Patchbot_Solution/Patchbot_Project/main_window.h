@@ -4,6 +4,7 @@
 
 
 #include "ui_main_window.h"
+#include "gamecontroller.h"
 
 
 class MainWindow : public QMainWindow
@@ -39,6 +40,9 @@ public :
 private:
 	// gui instance
 	Ui::main_window ui;
+
+	// game controller
+	std::shared_ptr<GameController> m_game_controller;
 
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes

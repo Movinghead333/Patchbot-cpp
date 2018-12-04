@@ -66,3 +66,7 @@ TASK 4:
 vc 32:
 	- fixed a missing &
 	- implemented qfiledialog to select a colony to be loaded
+
+vc 33:
+	- GameController implementation wip
+	- Colonys can now be loaded into the GameController

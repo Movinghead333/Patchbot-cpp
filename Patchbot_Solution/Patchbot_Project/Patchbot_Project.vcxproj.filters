@@ -34,6 +34,9 @@
     <ClCompile Include="GeneratedFiles\qrc_Resource.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="gamecontroller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h">
@@ -68,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_main_window.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gamecontroller.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,11 @@ Colony* Colony::load_colony(const std::string& file_name)
 	std::cout << "Loading Colony from file: "<< file_name << std::endl;
 	std::ifstream input_file(file_name);
 
+	if (!input_file.is_open())
+	{
+		throw Simple_Message_Exception("File could not be opened!");
+	}
+
 	std::string current_line;
 	int width, height;
 

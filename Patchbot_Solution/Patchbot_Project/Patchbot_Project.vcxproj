@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gamecontroller.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_main_window.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -198,6 +199,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -D_MBCS  "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtWidgets" "-I." "-I.\GeneratedFiles"</Command>
     </CustomBuild>
+    <ClInclude Include="gamecontroller.h" />
     <ClInclude Include="GeneratedFiles\ui_main_window.h" />
     <ClInclude Include="src\colony.h" />
     <ClInclude Include="src\exceptions.h" />
