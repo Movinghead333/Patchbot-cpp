@@ -60,3 +60,9 @@ vc 30:
 
 vc 31:
 	- removed unnecessary commented code
+
+
+TASK 4:
+vc 32:
+	- fixed a missing &
+	- implemented qfiledialog to select a colony to be loaded

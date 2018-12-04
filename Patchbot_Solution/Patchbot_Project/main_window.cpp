@@ -1,6 +1,8 @@
 #include "main_window.h"
 
 #include <qmessagebox.h>
+#include <qfiledialog.h>
+#include "src/colony.h"
 
 // constructor initializing the window
 MainWindow::MainWindow(QWidget *parent)
@@ -77,7 +79,14 @@ void MainWindow::on_missionPause_clicked()
 // changing colony
 void MainWindow::on_changeColony_clicked()
 {
-	display_info_message_dialog("Change Colony button clicked!");
+	//display_info_message_dialog("Change Colony button clicked!");
+	QString file_name = QFileDialog::getOpenFileName(this, "Open new Colony",
+		"C://");
+	display_info_message_dialog(file_name.toStdString());
+	std::shared_ptr<Colony> new_colony =
+		std::make_shared<Colony>(
+			*Colony::load_colony(file_name.toStdString())
+		);
 }
 
 

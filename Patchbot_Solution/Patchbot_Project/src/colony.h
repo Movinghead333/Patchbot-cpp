@@ -29,7 +29,7 @@ public:
 	int get_height() const;
 
 	const std::vector<Tile>& get_tiles() const;
-	const Tile get_tile_by_coordinates(int x, int y) const;
+	const Tile& get_tile_by_coordinates(int x, int y) const;
 
 	const std::vector<Robot> get_enemy_robots() const;
 	const Robot* get_patch_bot() const;

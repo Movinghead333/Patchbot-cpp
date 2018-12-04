@@ -16,7 +16,7 @@ Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
 
 
 // getter methods for member-fields
-const Tile Colony::get_tile_by_coordinates(int x, int y) const
+const Tile& Colony::get_tile_by_coordinates(int x, int y) const
 {
 	return m_tiles[x + (m_width * y)];
 }
