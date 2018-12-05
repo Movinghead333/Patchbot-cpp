@@ -70,3 +70,8 @@ vc 32:
 vc 33:
 	- GameController implementation wip
 	- Colonys can now be loaded into the GameController
+
+vc: 34:
+	- added paintEvent method to main_window
+	- copied some code which could work for rendering the pixel map
+	- rough idea on how the pixel-map will be rendered

@@ -36,6 +36,8 @@ public :
 	MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
 
+	void paintEvent(QPaintEvent*);
+
 
 private:
 	// gui instance

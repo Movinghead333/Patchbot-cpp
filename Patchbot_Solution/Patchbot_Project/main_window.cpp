@@ -19,6 +19,30 @@ MainWindow::~MainWindow()
 {
 }
 
+void MainWindow::paintEvent(QPaintEvent *)
+{
+	// render game
+	/*
+	// something along those lines
+	QRgb* pixels = new QRgb[width()*height()];
+        QTime time;
+        time.start();
+        for (int i = 0; i < ::loop; ++i) {
+            QPainter painter(this);
+            QImage image((uchar*)pixels, width(), height(), QImage::Format_ARGB32);
+            for (int x = 0; x < width(); ++x) {
+                for (int y = 0; y < height(); ++y) {
+                    pixels[x + y * height()] = static_cast<QRgb>(i+x+y);
+                }
+            }
+            painter.drawImage(0, 0, image);
+        }
+        qDebug() << "drawImage time:" << time.elapsed();
+        close();
+        delete[] pixels;
+	*/
+}
+
 
 // slots for programming buttons
 void MainWindow::on_directionUp_clicked()
