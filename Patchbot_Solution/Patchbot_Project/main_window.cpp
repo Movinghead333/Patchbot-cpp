@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
 	ui.setupUi(this);
 	this->setWindowTitle("PATCHBOT v1.0");
 	m_game_controller = std::make_shared<GameController>(GameController());
+
+
 }
 
 // destructor
@@ -21,6 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
+	std::cout << "AY: " << m_game_controller->render_width << std::endl;
 	// render game
 	/*
 	// something along those lines
@@ -41,6 +44,15 @@ void MainWindow::paintEvent(QPaintEvent *)
         close();
         delete[] pixels;
 	*/
+	
+}
+
+void MainWindow::resizeEvent(QResizeEvent * event)
+{
+	std::cout << "resize" << std::endl;
+	m_game_controller->update_render_dimensions(
+		ui.renderLabel->size().width(), ui.renderLabel->size().height()
+	);
 }
 
 

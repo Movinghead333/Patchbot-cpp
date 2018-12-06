@@ -1173,6 +1173,12 @@ background-color: rgb(53, 105, 122)
     </item>
     <item row="1" column="0" rowspan="4">
      <widget class="QWidget" name="gameWindow_2" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
         <width>1</width>
@@ -1190,12 +1196,12 @@ background-color: rgb(53, 105, 122)
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="QLabel" name="placeHolder">
+        <widget class="QLabel" name="renderLabel">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -1212,14 +1218,14 @@ background-color: rgb(111, 219, 255)
 }</string>
          </property>
          <property name="text">
-          <string>-- gamescreen --</string>
+          <string/>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QScrollBar" name="xScrollbar">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -1237,6 +1243,12 @@ background-color: rgb(111, 219, 255)
        </item>
        <item row="0" column="1">
         <widget class="QScrollBar" name="yScrollbar">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>25</width>

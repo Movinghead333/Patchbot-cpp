@@ -36,7 +36,12 @@ public :
 	MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
 
-	void paintEvent(QPaintEvent*);
+protected:
+	// gets called whenever a window property changes
+	void paintEvent(QPaintEvent *event);
+
+	// gets called whenever the size of the window changes
+	void resizeEvent(QResizeEvent *event);
 
 
 private:
@@ -45,6 +50,9 @@ private:
 
 	// game controller
 	std::shared_ptr<GameController> m_game_controller;
+
+	// render QLabel
+	QLabel render_label;
 
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes

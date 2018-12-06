@@ -61,7 +61,7 @@ public:
     QPushButton *directionRight;
     QWidget *gameWindow_2;
     QGridLayout *gameWindow;
-    QLabel *placeHolder;
+    QLabel *renderLabel;
     QScrollBar *xScrollbar;
     QScrollBar *yScrollbar;
 
@@ -513,31 +513,33 @@ public:
 
         gameWindow_2 = new QWidget(centralWidget);
         gameWindow_2->setObjectName(QStringLiteral("gameWindow_2"));
+        QSizePolicy sizePolicy6(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(gameWindow_2->sizePolicy().hasHeightForWidth());
+        gameWindow_2->setSizePolicy(sizePolicy6);
         gameWindow_2->setMinimumSize(QSize(1, 1));
         gameWindow = new QGridLayout(gameWindow_2);
         gameWindow->setSpacing(0);
         gameWindow->setContentsMargins(11, 11, 11, 11);
         gameWindow->setObjectName(QStringLiteral("gameWindow"));
         gameWindow->setContentsMargins(20, -1, 20, -1);
-        placeHolder = new QLabel(gameWindow_2);
-        placeHolder->setObjectName(QStringLiteral("placeHolder"));
-        placeHolder->setEnabled(true);
-        QSizePolicy sizePolicy6(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(placeHolder->sizePolicy().hasHeightForWidth());
-        placeHolder->setSizePolicy(sizePolicy6);
-        placeHolder->setMinimumSize(QSize(0, 0));
-        placeHolder->setStyleSheet(QLatin1String("QLabel#placeHolder{\n"
+        renderLabel = new QLabel(gameWindow_2);
+        renderLabel->setObjectName(QStringLiteral("renderLabel"));
+        renderLabel->setEnabled(true);
+        sizePolicy.setHeightForWidth(renderLabel->sizePolicy().hasHeightForWidth());
+        renderLabel->setSizePolicy(sizePolicy);
+        renderLabel->setMinimumSize(QSize(0, 0));
+        renderLabel->setStyleSheet(QLatin1String("QLabel#placeHolder{\n"
 "background-color: rgb(111, 219, 255)\n"
 "}"));
 
-        gameWindow->addWidget(placeHolder, 0, 0, 1, 1);
+        gameWindow->addWidget(renderLabel, 0, 0, 1, 1);
 
         xScrollbar = new QScrollBar(gameWindow_2);
         xScrollbar->setObjectName(QStringLiteral("xScrollbar"));
-        sizePolicy2.setHeightForWidth(xScrollbar->sizePolicy().hasHeightForWidth());
-        xScrollbar->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(xScrollbar->sizePolicy().hasHeightForWidth());
+        xScrollbar->setSizePolicy(sizePolicy3);
         xScrollbar->setMinimumSize(QSize(0, 25));
         xScrollbar->setOrientation(Qt::Horizontal);
 
@@ -545,6 +547,11 @@ public:
 
         yScrollbar = new QScrollBar(gameWindow_2);
         yScrollbar->setObjectName(QStringLiteral("yScrollbar"));
+        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(yScrollbar->sizePolicy().hasHeightForWidth());
+        yScrollbar->setSizePolicy(sizePolicy7);
         yScrollbar->setMinimumSize(QSize(25, 0));
         yScrollbar->setOrientation(Qt::Vertical);
 
@@ -593,7 +600,7 @@ public:
         directionLeft->setText(QString());
         currentProgramText->setText(QApplication::translate("main_window", "W8W8W8", Q_NULLPTR));
         directionRight->setText(QString());
-        placeHolder->setText(QApplication::translate("main_window", "-- gamescreen --", Q_NULLPTR));
+        renderLabel->setText(QString());
     } // retranslateUi
 
 };
