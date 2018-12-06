@@ -24,6 +24,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <renderwidget.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -61,9 +62,9 @@ public:
     QPushButton *directionRight;
     QWidget *gameWindow_2;
     QGridLayout *gameWindow;
-    QLabel *renderLabel;
     QScrollBar *xScrollbar;
     QScrollBar *yScrollbar;
+    RenderWidget *game;
 
     void setupUi(QMainWindow *main_window)
     {
@@ -524,18 +525,6 @@ public:
         gameWindow->setContentsMargins(11, 11, 11, 11);
         gameWindow->setObjectName(QStringLiteral("gameWindow"));
         gameWindow->setContentsMargins(20, -1, 20, -1);
-        renderLabel = new QLabel(gameWindow_2);
-        renderLabel->setObjectName(QStringLiteral("renderLabel"));
-        renderLabel->setEnabled(true);
-        sizePolicy.setHeightForWidth(renderLabel->sizePolicy().hasHeightForWidth());
-        renderLabel->setSizePolicy(sizePolicy);
-        renderLabel->setMinimumSize(QSize(0, 0));
-        renderLabel->setStyleSheet(QLatin1String("QLabel#placeHolder{\n"
-"background-color: rgb(111, 219, 255)\n"
-"}"));
-
-        gameWindow->addWidget(renderLabel, 0, 0, 1, 1);
-
         xScrollbar = new QScrollBar(gameWindow_2);
         xScrollbar->setObjectName(QStringLiteral("xScrollbar"));
         sizePolicy3.setHeightForWidth(xScrollbar->sizePolicy().hasHeightForWidth());
@@ -556,6 +545,13 @@ public:
         yScrollbar->setOrientation(Qt::Vertical);
 
         gameWindow->addWidget(yScrollbar, 0, 1, 1, 1);
+
+        game = new RenderWidget(gameWindow_2);
+        game->setObjectName(QStringLiteral("game"));
+        sizePolicy.setHeightForWidth(game->sizePolicy().hasHeightForWidth());
+        game->setSizePolicy(sizePolicy);
+
+        gameWindow->addWidget(game, 0, 0, 1, 1);
 
 
         gridLayout->addWidget(gameWindow_2, 1, 0, 4, 1);
@@ -600,7 +596,6 @@ public:
         directionLeft->setText(QString());
         currentProgramText->setText(QApplication::translate("main_window", "W8W8W8", Q_NULLPTR));
         directionRight->setText(QString());
-        renderLabel->setText(QString());
     } // retranslateUi
 
 };

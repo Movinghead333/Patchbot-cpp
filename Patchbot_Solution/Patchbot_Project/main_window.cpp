@@ -24,7 +24,6 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *)
 {
 	
-	
 }
 
 void MainWindow::resizeEvent(QResizeEvent * event)

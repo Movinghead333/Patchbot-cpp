@@ -1195,33 +1195,6 @@ background-color: rgb(53, 105, 122)
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="renderLabel">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel#placeHolder{
-background-color: rgb(111, 219, 255)
-}</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QScrollBar" name="xScrollbar">
          <property name="sizePolicy">
@@ -1260,6 +1233,16 @@ background-color: rgb(111, 219, 255)
          </property>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="RenderWidget" name="game" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -1267,6 +1250,14 @@ background-color: rgb(111, 219, 255)
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>RenderWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">renderwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="Resource.qrc"/>
  </resources>
