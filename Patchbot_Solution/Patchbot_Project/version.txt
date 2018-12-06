@@ -81,3 +81,6 @@ vc 35:
 
 vc 36:
 	- new concept: gui is handling rendering while the model just provides data
+
+vc 37:
+	- added a RenderWidget inheriting from QWidget to draw the game to (wip)
