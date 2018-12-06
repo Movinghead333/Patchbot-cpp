@@ -51,8 +51,6 @@ private:
 	// game controller
 	std::shared_ptr<GameController> m_game_controller;
 
-	// render QLabel
-	QLabel render_label;
 
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes

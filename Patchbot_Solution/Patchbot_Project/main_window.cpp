@@ -23,36 +23,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-	std::cout << "AY: " << m_game_controller->render_width << std::endl;
-	// render game
-	/*
-	// something along those lines
-	QRgb* pixels = new QRgb[width()*height()];
-        QTime time;
-        time.start();
-        for (int i = 0; i < ::loop; ++i) {
-            QPainter painter(this);
-            QImage image((uchar*)pixels, width(), height(), QImage::Format_ARGB32);
-            for (int x = 0; x < width(); ++x) {
-                for (int y = 0; y < height(); ++y) {
-                    pixels[x + y * height()] = static_cast<QRgb>(i+x+y);
-                }
-            }
-            painter.drawImage(0, 0, image);
-        }
-        qDebug() << "drawImage time:" << time.elapsed();
-        close();
-        delete[] pixels;
-	*/
+	
 	
 }
 
 void MainWindow::resizeEvent(QResizeEvent * event)
 {
-	std::cout << "resize" << std::endl;
-	m_game_controller->update_render_dimensions(
-		ui.renderLabel->size().width(), ui.renderLabel->size().height()
-	);
+	
 }
 
 

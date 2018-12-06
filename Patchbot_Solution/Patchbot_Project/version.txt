@@ -78,3 +78,6 @@ vc: 34:
 
 vc 35:
 	- render setup wip
+
+vc 36:
+	- new concept: gui is handling rendering while the model just provides data
