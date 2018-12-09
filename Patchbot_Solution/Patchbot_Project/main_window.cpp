@@ -11,9 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 	this->setWindowTitle("PATCHBOT v1.0");
+
+	// create Gamecontroller for data and game-logic management
 	m_game_controller = std::make_shared<GameController>(GameController());
 
-
+	// add refernce of gamecontroller to rendering widget
+	ui.game->set_game_controller_ref(m_game_controller);
 }
 
 // destructor

@@ -87,3 +87,7 @@ vc 37:
 
 vc 38:
 	- first example rectangle rendered on RenderWidget!
+
+vc 39:
+	- render-widget now has a shared_ptr ref to the current gamecontroller
+	- gamecontroller ref is set after creating the controller in mainwindow

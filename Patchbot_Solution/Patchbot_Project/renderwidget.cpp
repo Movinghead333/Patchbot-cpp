@@ -13,6 +13,14 @@ RenderWidget::~RenderWidget()
 {
 }
 
+void RenderWidget::set_game_controller_ref(
+	std::shared_ptr<GameController> p_game_controller
+)
+{
+	m_game_controller_ref = p_game_controller;
+}
+
+
 void RenderWidget::paintEvent(QPaintEvent * event)
 {
 	std::cout << "render area" << std::endl;
