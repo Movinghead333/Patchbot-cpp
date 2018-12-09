@@ -91,3 +91,6 @@ vc 38:
 vc 39:
 	- render-widget now has a shared_ptr ref to the current gamecontroller
 	- gamecontroller ref is set after creating the controller in mainwindow
+
+vc 40: 
+	-fixed qt path from M.M.'s PC

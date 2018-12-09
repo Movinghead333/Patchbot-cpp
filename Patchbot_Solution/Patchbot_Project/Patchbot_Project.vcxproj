@@ -150,7 +150,7 @@
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <QtMoc>
-      <QTDIR>C:\Qt\Qt5.9.1\5.9.1\msvc2017_64</QTDIR>
+      <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
       <OutputFile>.GeneratedFiles$(ConfigurationName)moc_%(Filename).cpp</OutputFile>
       <Define>QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_MBCS</Define>
@@ -159,7 +159,7 @@
       <IncludePath>$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.\;%(AdditionalIncludeDirectories)</IncludePath>
     </QtMoc>
     <QtRcc>
-      <QTDIR>C:\Qt\Qt5.9.1\5.9.1\msvc2017_64</QTDIR>
+      <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
       <OutputFile>.GeneratedFilesqrc_%(Filename).cpp</OutputFile>
       <InitFuncName>%(Filename)</InitFuncName>
@@ -168,7 +168,7 @@
       <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
     </QtRcc>
     <QtUic>
-      <QTDIR>C:\Qt\Qt5.9.1\5.9.1\msvc2017_64</QTDIR>
+      <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
       <OutputFile>.GeneratedFilesui_%(Filename).h</OutputFile>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
@@ -339,7 +339,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Qt5Version_x0020_x64="QT" />
+      <UserProperties Qt5Version_x0020_x64="QT 5.9" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
