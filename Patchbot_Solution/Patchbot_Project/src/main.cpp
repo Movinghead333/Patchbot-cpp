@@ -6,6 +6,8 @@
 #include "texture.h"
 #include "main_window.h"
 
+
+void test_texture_loading(const std::string& p_file_name);
 void write_colony_to_file(
 	const Colony* input_colony,
 	const char* original_final_name
