@@ -94,3 +94,8 @@ vc 39:
 
 vc 40: 
 	-fixed qt path from M.M.'s PC
+
+vc 41:
+	-all images are loaded in the gamecontroller constructor
+	-the images are stored in two vectors one for ground tiles one for robots
+	-the vectors are wrapped in shared_ptr to avoid memory-leaks
