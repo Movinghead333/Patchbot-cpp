@@ -4,7 +4,7 @@
 
 GameController::GameController()
 {
-	load_textures();
+	//load_textures();
 }
 
 
