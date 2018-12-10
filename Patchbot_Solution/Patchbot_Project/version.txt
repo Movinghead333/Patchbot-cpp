@@ -116,6 +116,11 @@ vc 45:
 	-scrollbars now scale with window size
 	-moving render region with scrollbars wip
 
+vc 46:
+	-smooth scrolling in x-direction
+	-code needs cleanup
+	-y-direction still missing
+
 
 TODO:
 	-rewrite pixel & Texture to a more easily traversable data-structure

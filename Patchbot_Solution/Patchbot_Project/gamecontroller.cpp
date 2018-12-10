@@ -115,6 +115,46 @@ const Texture & GameController::get_ground_texture_by_tile_type(
 	}
 }
 
+void GameController::set_x_scrollbar_pos(int p_new_pos)
+{
+	x_scrollbar_pos = p_new_pos;
+}
+
+void GameController::set_y_scrollbar_pos(int p_new_pos)
+{
+	y_scrollbar_pos = p_new_pos;
+}
+
+int GameController::get_x_scrollbar_pos()
+{
+	return x_scrollbar_pos;
+}
+
+int GameController::get_y_scrollbar_pos()
+{
+	return y_scrollbar_pos;
+}
+
+void GameController::set_render_width(int p_new_width)
+{
+	render_width = p_new_width;
+}
+
+void GameController::set_render_height(int p_new_height)
+{
+	render_height = p_new_height;
+}
+
+int GameController::get_render_width()
+{
+	return render_width;
+}
+
+int GameController::get_render_height()
+{
+	return render_height;
+}
+
 
 
 

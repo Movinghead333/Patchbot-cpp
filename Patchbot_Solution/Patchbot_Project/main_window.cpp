@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+	
 	this->setWindowTitle("PATCHBOT v1.0");
 
 	// create Gamecontroller for data and game-logic management
@@ -17,6 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 	// add refernce of gamecontroller to rendering widget
 	ui.game->set_game_controller_ref(m_game_controller);
+
+	// connect scrollbars
+	connect(ui.xScrollbar, SIGNAL(valueChanged(int)),
+		this, SLOT(scroll_x(int)));
+	connect(ui.yScrollbar, SIGNAL(valueChanged(int)),
+		this, SLOT(scroll_y(int)));
 }
 
 // destructor
@@ -43,6 +51,10 @@ void MainWindow::resizeEvent(QResizeEvent * event)
 		int render_width = ui.game->width();
 		int render_height = ui.game->height();
 
+		// max values for scrollbars
+		int m_scroll_x_max;
+		int m_scroll_y_max;
+
 
 		// X direction
 		if (render_width >= map_width)
@@ -65,6 +77,8 @@ void MainWindow::resizeEvent(QResizeEvent * event)
 		}
 		ui.xScrollbar->setMaximum(m_scroll_x_max);
 		ui.yScrollbar->setMaximum(m_scroll_y_max);
+		m_game_controller->set_render_width(ui.game->width());
+		m_game_controller->set_render_height(ui.game->height());
 	}
 
 	
@@ -153,6 +167,17 @@ void MainWindow::on_changeColony_clicked()
 	}
 }
 
+void MainWindow::scroll_x(int p_new_value)
+{
+	m_game_controller->set_x_scrollbar_pos(p_new_value);
+	ui.game->update();
+}
+
+void MainWindow::scroll_y(int p_new_value)
+{
+	m_game_controller->set_y_scrollbar_pos(p_new_value);
+	ui.game->update();
+}
 
 // shows short information dialog displaying that a button has been clicked
 // and message which button has been pressed (p_message)

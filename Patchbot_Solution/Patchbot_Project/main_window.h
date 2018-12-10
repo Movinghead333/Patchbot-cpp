@@ -30,8 +30,11 @@ private slots:
 
 	// change Colony slot
 	void on_changeColony_clicked();
+	
+	void scroll_x(int p_new_value);
+	void scroll_y(int p_new_value);
 
-public :
+public:
 	// constructor and destructor for MainWindow
 	MainWindow(QWidget *parent = Q_NULLPTR);
 	~MainWindow();
@@ -47,8 +50,7 @@ protected:
 private:
 	//TODO: maybe as local in resize event in mainwindow
 	// maximum scroll-values for x and y game scrollbar
-	int m_scroll_x_max;
-	int m_scroll_y_max;
+	
 
 	// gui instance
 	Ui::main_window ui;

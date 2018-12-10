@@ -26,7 +26,28 @@ public:
 
 	const Texture& get_robot_texture_by_robot(const RobotType& p_robot) const;
 
+	// scrollbar getters and setters
+	void set_x_scrollbar_pos(int p_new_pos);
+	void set_y_scrollbar_pos(int p_new_pos);
+
+	int get_x_scrollbar_pos();
+	int get_y_scrollbar_pos();
+
+	// scrollbar getters and setters
+	void set_render_width(int p_new_width);
+	void set_render_height(int p_new_height);
+
+	int get_render_width();
+	int get_render_height();
+
 private:
+	// current scrollbar positions
+	int x_scrollbar_pos = 0;
+	int y_scrollbar_pos = 0;
+
+	// size of the rendered area
+	int render_width;
+	int render_height;
 
 	// stores the currently displayed colony
 	std::shared_ptr<Colony> m_current_colony;
