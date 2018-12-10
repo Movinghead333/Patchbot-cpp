@@ -141,11 +141,14 @@ Colony* Colony::load_colony(const std::string& file_name)
 					// then it has to be a tile or throw an exception
 					else
 					{
+						TileType tile_type =
+							Utility::char_to_tile_type(current_char);
 						// throws exception if the current_char
 						// refers to an unknown symbol
 						temp_tiles.push_back(
-							Tile( Utility::char_to_tile_type(current_char))
+							Tile(Utility::char_to_tile_type(current_char))
 						);
+						
 
 						// check if the current character is the player's
 						// starting location,

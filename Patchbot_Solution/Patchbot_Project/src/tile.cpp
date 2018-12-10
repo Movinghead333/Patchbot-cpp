@@ -16,8 +16,8 @@ char Tile::get_source_char(const Tile input_tile)
 		case STEELPLANKS: result = ' '; break;
 		case INDESTRUCTABLE_WALL: result = '#'; break;
 		case DESTRUCTABLE_WALL: result = 'M'; break;
-		case MANUAL_DOOR: result = 'd'; break;
-		case AUTO_DOOR: result = 'D'; break;
+		case MANUAL_DOOR_CLOSED: result = 'd'; break;
+		case AUTO_DOOR_CLOSED: result = 'D'; break;
 		case ALIEN_GRASS: result = 'g'; break;
 		case GRAVEL: result = '.'; break;
 		case SECRET_ENTRANCE: result = 'x'; break;

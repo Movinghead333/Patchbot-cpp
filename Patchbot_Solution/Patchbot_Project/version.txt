@@ -99,3 +99,17 @@ vc 41:
 	-all images are loaded in the gamecontroller constructor
 	-the images are stored in two vectors one for ground tiles one for robots
 	-the vectors are wrapped in shared_ptr to avoid memory-leaks
+
+vc 42:
+	-render still wip
+	-mostly transition commit
+	-added closed and open enums for doors back in
+	-one return statement missing coming in next commit
+
+
+TODO:
+	-rewrite pixel & Texture to a more easily traversable data-structure
+	-render tiles as QImages
+	-return texture based on tile_ref
+	-remove DoorTile
+	-return image based on tile_Type enum object

@@ -42,12 +42,12 @@ void GameController::load_textures()
 		"wand_fels.tga"
 	};
 
-	ground_textures = std::make_shared<std::vector<Texture>>(
+	m_ground_textures = std::make_shared<std::vector<Texture>>(
 		std::vector<Texture>()
 		);
 	for (std::string current_file_name : ground_texture_paths)
 	{
-		ground_textures->push_back(Texture::load_texture(
+		m_ground_textures->push_back(Texture::load_texture(
 			(ground_texture_base_path + current_file_name) ));
 	}
 
@@ -66,13 +66,46 @@ void GameController::load_textures()
 		"dead.tga"
 	};
 
-	robot_textures = std::make_shared<std::vector<Texture>>(
+	m_robot_textures = std::make_shared<std::vector<Texture>>(
 		std::vector<Texture>()
 		);
 	for (std::string current_file_name : robot_texture_paths)
 	{
-		robot_textures->push_back(Texture::load_texture(
+		m_robot_textures->push_back(Texture::load_texture(
 			(robot_texture_base_path + current_file_name)));
+	}
+}
+
+const Colony& GameController::get_current_colony() const
+{
+	return *m_current_colony.get();
+}
+
+bool GameController::colony_loaded() const
+{
+	return m_current_colony != nullptr;
+}
+
+const Texture & GameController::get_ground_texture_by_tile(const TileType & p_tile) const
+{
+	switch (p_tile)
+	{
+		/*
+	case PATCHBOT_SPAWN: return m_ground_textures[0];  break;
+	case ROOT_SERVER: result = 'P'; break;
+	case STEELPLANKS: result = ' '; break;
+	case INDESTRUCTABLE_WALL: result = '#'; break;
+	case DESTRUCTABLE_WALL: result = 'M'; break;
+	case MANUAL_DOOR_CLOSED: result = 'd'; break;
+	case AUTO_DOOR_CLOSED: result = 'D'; break;
+	case ALIEN_GRASS: result = 'g'; break;
+	case GRAVEL: result = '.'; break;
+	case SECRET_ENTRANCE: result = 'x'; break;
+	case ABYSS: result = 'o'; break;
+	case WATER: result = '~'; break;
+	default: throw Simple_Message_Exception("Input tiletype non existent!");
+	*/
+		// TODO: add return
 	}
 }
 

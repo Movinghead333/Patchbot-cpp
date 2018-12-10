@@ -17,8 +17,8 @@ TileType Utility::char_to_tile_type(const char& input_char)
 	case ' ': temp_tile_type = STEELPLANKS; break;
 	case '#': temp_tile_type = INDESTRUCTABLE_WALL; break;
 	case 'M': temp_tile_type = DESTRUCTABLE_WALL; break;
-	case 'd': temp_tile_type = MANUAL_DOOR; break;
-	case 'D': temp_tile_type = AUTO_DOOR; break;
+	case 'd': temp_tile_type = MANUAL_DOOR_CLOSED; break;
+	case 'D': temp_tile_type = AUTO_DOOR_CLOSED; break;
 	case 'g': temp_tile_type = ALIEN_GRASS; break;
 	case '.': temp_tile_type = GRAVEL; break;
 	case 'x': temp_tile_type = SECRET_ENTRANCE; break;

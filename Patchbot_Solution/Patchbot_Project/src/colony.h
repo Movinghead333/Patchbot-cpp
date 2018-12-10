@@ -8,6 +8,7 @@
 #include "tile.h"
 #include "utility.h"
 #include "exceptions.h"
+#include "doortile.h"
 
 class Colony
 {

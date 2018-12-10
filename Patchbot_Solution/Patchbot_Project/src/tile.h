@@ -16,7 +16,8 @@ public:
 	// getter member field m_tile_type
 	TileType get_tile_type() const;
 
-private:
+	
+protected:
 	// stores the type of a given tile for later comparisons in game
 	const TileType m_tile_type;
 };

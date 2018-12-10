@@ -16,6 +16,8 @@ public:
 		std::shared_ptr<GameController> p_game_controller
 	);
 
+	void render();
+
 protected:
 	void paintEvent(QPaintEvent *event) override;
 
