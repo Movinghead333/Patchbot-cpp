@@ -7,9 +7,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\pixel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\robot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -22,26 +19,18 @@
     <ClCompile Include="src\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    
-    
     <ClCompile Include="main_window.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
-    
     <ClCompile Include="gamecontroller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    
-    
     <ClCompile Include="renderwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\robot.h">

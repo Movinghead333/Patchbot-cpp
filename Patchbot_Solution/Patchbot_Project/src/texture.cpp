@@ -13,7 +13,7 @@
 Texture::Texture(
 	int p_width,
 	int p_height,
-	const std::vector<Pixel>& p_image_data)
+	const std::vector<ubyte>& p_image_data)
 	:
 	m_image_width(p_width),
 	m_image_height(p_height),
@@ -84,9 +84,9 @@ const Texture Texture::load_texture(const std::string& p_filename)
 	}
 
 	// temporal variables for reading the imagedata
-	ubyte temp_alpha = 0, temp_red = 0, temp_green = 0, temp_blue = 0;
-	std::vector<Pixel> temp_image_data = std::vector<Pixel>();
-	temp_image_data.reserve(temp_image_width * temp_image_height);
+	std::vector<ubyte> temp_image_data = std::vector<ubyte>();
+	temp_image_data.reserve(temp_image_width * temp_image_height * 
+							(temp_bits_per_pixel / 8));
 
 	// go trough all pixels and read their ARGB values and
 	// store them in the temp_image_data vector
@@ -94,15 +94,11 @@ const Texture Texture::load_texture(const std::string& p_filename)
 	{
 		for (int x = 0; x < temp_image_width; x++)
 		{
-			temp_blue = input_file.get();
-			temp_green = input_file.get();
-			temp_red = input_file.get();
-			temp_alpha = input_file.get();
-
-			// create Pixel and add it to the image-data vector
-			temp_image_data.push_back(
-				Pixel( temp_alpha, temp_red, temp_green, temp_blue)
-			);
+			// push the 8bit values into the data vector
+			temp_image_data.push_back(input_file.get()); // blue
+			temp_image_data.push_back(input_file.get()); // green
+			temp_image_data.push_back(input_file.get()); // red
+			temp_image_data.push_back(input_file.get()); // alpha
 		}
 	}
 
@@ -144,18 +140,19 @@ void Texture::write_texture_to_file(
 	outputfile.write((const char*)raw_header, 18);
 
 	// get reference to image-data
-	std::vector<Pixel> temp_image_data = p_texture.get_image_data();
+	std::vector<ubyte> temp_image_data = p_texture.get_image_data();
 
 	// write the actual image-data
 	for (int y = 0; y < p_texture.m_image_height; y++)
 	{
 		for (int x = 0; x < p_texture.m_image_width; x++)
 		{
-			Pixel temp_pixel = p_texture.get_pixel_at_position(x, y);
-			outputfile.put((char)temp_pixel.m_blue);
-			outputfile.put((char)temp_pixel.m_green);
-			outputfile.put((char)temp_pixel.m_red);
-			outputfile.put((char)temp_pixel.m_alpha);
+			// multiply by 4 because of the 4byte pixels (ARGB, 32bit)
+			int temp_offset = (p_texture.m_image_height * y + x) * 4;
+			outputfile.put((char)temp_image_data[temp_offset]     ); // blue
+			outputfile.put((char)temp_image_data[temp_offset  + 1]); // green
+			outputfile.put((char)temp_image_data[temp_offset  + 2]); // red
+			outputfile.put((char)temp_image_data[temp_offset  + 3]); // alpha
 		}
 	}
 	
@@ -174,12 +171,6 @@ void Texture::write_texture_to_file(
 	std::cout << "Writing successful" << std::endl;
 }
 
-// returns a reference to the Pixel-object at a given (x, y)-position
-const Pixel& Texture::get_pixel_at_position(int p_x, int p_y) const
-{
-	return m_image_data[(p_y * this->m_image_height) + p_x];
-}
-
 // getter methods
 int Texture::get_width()
 {
@@ -191,7 +182,7 @@ int Texture::get_height()
 	return m_image_height;
 }
 
-const std::vector<Pixel>& Texture::get_image_data() const
+const std::vector<ubyte>& Texture::get_image_data() const
 {
 	return m_image_data;
 }

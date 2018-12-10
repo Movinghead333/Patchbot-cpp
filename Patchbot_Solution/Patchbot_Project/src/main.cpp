@@ -15,6 +15,7 @@ void write_colony_to_file(
 
 int main(int argc, char *argv[])
 {
+	test_texture_loading("src\\textures\\umgebungen\\boden_start_patchbot.tga");
 	// create QApplication object
 	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
