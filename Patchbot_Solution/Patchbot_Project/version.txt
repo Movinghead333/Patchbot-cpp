@@ -112,6 +112,10 @@ vc 43:
 vc 44:
 	-static render working
 
+vc 45:
+	-scrollbars now scale with window size
+	-moving render region with scrollbars wip
+
 
 TODO:
 	-rewrite pixel & Texture to a more easily traversable data-structure

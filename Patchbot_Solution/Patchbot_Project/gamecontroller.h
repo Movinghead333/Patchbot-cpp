@@ -27,11 +27,14 @@ public:
 	const Texture& get_robot_texture_by_robot(const RobotType& p_robot) const;
 
 private:
+
 	// stores the currently displayed colony
 	std::shared_ptr<Colony> m_current_colony;
 
+	// stores all graphics for ground tiles
 	std::shared_ptr<std::vector<Texture>> m_ground_textures;
 
+	// stores all robot-graphics
 	std::shared_ptr<std::vector<Texture>> m_robot_textures;
 };
 

@@ -45,6 +45,11 @@ protected:
 
 
 private:
+	//TODO: maybe as local in resize event in mainwindow
+	// maximum scroll-values for x and y game scrollbar
+	int m_scroll_x_max;
+	int m_scroll_y_max;
+
 	// gui instance
 	Ui::main_window ui;
 

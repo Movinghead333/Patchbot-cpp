@@ -31,6 +31,42 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::resizeEvent(QResizeEvent * event)
 {
+	if (m_game_controller->colony_loaded()) {
+		// get ref of current colony
+		const Colony& current_colony = m_game_controller->get_current_colony();
+
+		// get the width and height of the entire map in pixels
+		int map_width = current_colony.get_width() * 32;
+		int map_height = current_colony.get_height() * 32;
+
+		// get dimensions of the game widget
+		int render_width = ui.game->width();
+		int render_height = ui.game->height();
+
+
+		// X direction
+		if (render_width >= map_width)
+		{
+			m_scroll_x_max = 0;
+		}
+		else
+		{
+			m_scroll_x_max = map_width - render_width;
+		}
+
+		// Y direction
+		if (render_height >= map_height)
+		{
+			m_scroll_y_max = 0;
+		}
+		else
+		{
+			m_scroll_y_max = map_height - render_height;
+		}
+		ui.xScrollbar->setMaximum(m_scroll_x_max);
+		ui.yScrollbar->setMaximum(m_scroll_y_max);
+	}
+
 	
 }
 
