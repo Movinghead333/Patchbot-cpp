@@ -106,6 +106,9 @@ vc 42:
 	-added closed and open enums for doors back in
 	-one return statement missing coming in next commit
 
+vc 43:
+	-surface book branch and desktop branch conflict solved
+
 
 TODO:
 	-rewrite pixel & Texture to a more easily traversable data-structure
