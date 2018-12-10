@@ -109,6 +109,9 @@ vc 42:
 vc 43:
 	-surface book branch and desktop branch conflict solved
 
+vc 44:
+	-static render working
+
 
 TODO:
 	-rewrite pixel & Texture to a more easily traversable data-structure

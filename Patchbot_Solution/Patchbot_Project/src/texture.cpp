@@ -172,12 +172,12 @@ void Texture::write_texture_to_file(
 }
 
 // getter methods
-int Texture::get_width()
+int Texture::get_width() const
 {
 	return m_image_width;
 }
 
-int Texture::get_height()
+int Texture::get_height() const
 {
 	return m_image_height;
 }

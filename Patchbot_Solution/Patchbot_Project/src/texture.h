@@ -26,8 +26,8 @@ public:
 
 
 	// getter methods
-	int get_width();
-	int get_height();
+	int get_width()  const;
+	int get_height() const;
 
 	const std::vector<ubyte>& get_image_data() const;
 
@@ -37,7 +37,7 @@ private:
 	const int m_image_height;
 
 	// stores every pixel from the input image in an ARGB Pixelobject
-	std::vector<ubyte> m_image_data; 
+	const std::vector<ubyte> m_image_data; 
 };
 
 #endif 

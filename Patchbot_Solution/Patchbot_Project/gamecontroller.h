@@ -21,9 +21,10 @@ public:
 
 	bool colony_loaded() const;
 
-	const Texture& get_ground_texture_by_tile(const TileType& p_tile) const;
+	const Texture& get_ground_texture_by_tile_type(
+		const TileType& p_tile) const;
 
-	const Texture& get_robot_texture_by_robot(const Robot& p_robot) const;
+	const Texture& get_robot_texture_by_robot(const RobotType& p_robot) const;
 
 private:
 	// stores the currently displayed colony

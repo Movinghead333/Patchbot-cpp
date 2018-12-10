@@ -6,7 +6,7 @@ Tile::Tile(TileType p_tile_type) : m_tile_type(p_tile_type)
 {
 };
 
-char Tile::get_source_char(const Tile input_tile)
+char Tile::get_source_char(const Tile& input_tile)
 {
 	char result;
 	switch (input_tile.m_tile_type)
