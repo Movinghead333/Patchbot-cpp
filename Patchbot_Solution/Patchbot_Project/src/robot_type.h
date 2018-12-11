@@ -4,14 +4,15 @@
 // enum holding the robot-type for later comparisons
 enum RobotType
 {
-	PATCHBOT = 0,
+	PATCHBOT = 48,
 	BUGGER,
 	PUSHER,
 	DIGGER,
 	SWIMMER,
 	FOLLOWER,
 	HUNTER,
-	SNIFFER
+	SNIFFER,
+	DEAD
 };
 
 #endif

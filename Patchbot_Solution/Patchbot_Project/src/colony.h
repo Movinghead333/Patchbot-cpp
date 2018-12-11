@@ -24,6 +24,8 @@ public:
 		std::vector<Robot> p_enemy_robots, 
 		const std::vector<Tile> p_tiles);
 
+	~Colony();
+
 	// getter-methods
 	int get_width() const;
 	int get_height() const;
@@ -31,7 +33,7 @@ public:
 	const std::vector<Tile>& get_tiles() const;
 	const Tile& get_tile_by_coordinates(int x, int y) const;
 
-	const std::vector<Robot> get_enemy_robots() const;
+	std::vector<Robot>& get_enemy_robots();
 	const Robot* get_patch_bot() const;
 
 	// static laoding method for creating a colony* for given filename

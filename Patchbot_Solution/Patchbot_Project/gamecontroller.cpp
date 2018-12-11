@@ -115,6 +115,24 @@ const Texture & GameController::get_ground_texture_by_tile_type(
 	}
 }
 
+const Texture& GameController::get_robot_texture_by_robot_type(
+	const RobotType& p_robot_type) const
+{
+	std::vector<Texture>& temp_textures = *m_robot_textures;
+	switch (p_robot_type)
+	{
+	case PATCHBOT: return temp_textures[0];   break;
+	case BUGGER:   return temp_textures[1];   break;
+	case PUSHER:   return temp_textures[2];   break;
+	case DIGGER:   return temp_textures[3];   break;
+	case SWIMMER:  return temp_textures[4];   break;
+	case FOLLOWER: return temp_textures[5];   break;
+	case HUNTER:   return temp_textures[6];   break;
+	case SNIFFER:  return temp_textures[7];   break;
+	case DEAD:     return temp_textures[8];   break;
+	}
+}
+
 void GameController::set_x_scrollbar_pos(int p_new_pos)
 {
 	x_scrollbar_pos = p_new_pos;
@@ -154,7 +172,3 @@ int GameController::get_render_height()
 {
 	return render_height;
 }
-
-
-
-

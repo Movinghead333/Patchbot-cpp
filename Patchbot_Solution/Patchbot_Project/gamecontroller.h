@@ -24,7 +24,8 @@ public:
 	const Texture& get_ground_texture_by_tile_type(
 		const TileType& p_tile) const;
 
-	const Texture& get_robot_texture_by_robot(const RobotType& p_robot) const;
+	const Texture& get_robot_texture_by_robot_type(
+		const RobotType& p_robot_type) const;
 
 	// scrollbar getters and setters
 	void set_x_scrollbar_pos(int p_new_pos);

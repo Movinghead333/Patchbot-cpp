@@ -124,7 +124,11 @@ vc 46:
 vc 47:
 	-fixed a bug where the map wouldn't be displayed after loading
 
+vc 48:
+	- added scrolling for y-direction
+	- added render for robots
+	- patchbot render wip
+
 
 TODO:
-	-clean up code for scrolling
-	-implemented scrolling for y dimension
+	-add patchbot to robots vector for easier rendering and access

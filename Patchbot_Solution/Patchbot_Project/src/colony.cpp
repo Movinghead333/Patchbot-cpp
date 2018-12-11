@@ -14,6 +14,11 @@ Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
 	// TODO: add checks in constructor if necessary
 }
 
+Colony::~Colony()
+{
+	delete m_patchbot;
+}
+
 
 // getter methods for member-fields
 const Tile& Colony::get_tile_by_coordinates(int x, int y) const
@@ -41,7 +46,7 @@ const Robot* Colony::get_patch_bot() const
 	return m_patchbot;
 }
 
-const std::vector<Robot> Colony::get_enemy_robots() const
+std::vector<Robot>& Colony::get_enemy_robots()
 {
 	return m_enemy_robots;
 }

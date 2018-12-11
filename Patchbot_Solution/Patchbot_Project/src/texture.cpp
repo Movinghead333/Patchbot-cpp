@@ -102,11 +102,28 @@ const Texture Texture::load_texture(const std::string& p_filename)
 		}
 	}
 
+	std::vector<ubyte> temp_image_data_vert_mirrored = std::vector<ubyte>();
+	temp_image_data_vert_mirrored.reserve(
+		temp_image_width * temp_image_height * (temp_bits_per_pixel / 8));
+
+	
+
+	for (int y = 0; y < temp_image_height; y++)
+	{
+		for (int x = 0; x < temp_image_width * 4; x++)
+		{
+			temp_image_data_vert_mirrored.push_back(temp_image_data[
+					(4 * (temp_image_height - 1 - y) * temp_image_height + x)
+								 ]);
+		}
+	}
+
 	std::cout << "Image successfully loaded!" << std::endl;
 
 	input_file.close();
 
-	return Texture(temp_image_width, temp_image_height, temp_image_data);
+	return Texture(temp_image_width, temp_image_height,
+				   temp_image_data_vert_mirrored);
 }
 
 // writes a given texture object back to tga-file on hdd
@@ -155,7 +172,6 @@ void Texture::write_texture_to_file(
 			outputfile.put((char)temp_image_data[temp_offset  + 3]); // alpha
 		}
 	}
-	
 
 	// file-end tag
 	static const char file_end[26] =
