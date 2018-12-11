@@ -5,18 +5,17 @@
 #include <string>
 #include <sstream>
 
-Colony::Colony(const int p_width, const int p_height, Robot* p_patchbot,
+Colony::Colony(const int p_width, const int p_height,
 	std::vector<Robot> p_enemy_robots, std::vector<Tile> p_tiles) 
 	:
-	m_width(p_width), m_height(p_height), m_patchbot(p_patchbot),
-	m_enemy_robots(p_enemy_robots), m_tiles(p_tiles) 
+	m_width(p_width), m_height(p_height),
+	m_robots(p_enemy_robots), m_tiles(p_tiles) 
 {
 	// TODO: add checks in constructor if necessary
 }
 
 Colony::~Colony()
 {
-	delete m_patchbot;
 }
 
 
@@ -41,14 +40,14 @@ const std::vector<Tile>& Colony::get_tiles() const
 	return m_tiles;
 }
 
-const Robot* Colony::get_patch_bot() const
+ Robot& Colony::get_patch_bot() 
 {
-	return m_patchbot;
+	return m_robots[m_robots.size()-1];
 }
 
-std::vector<Robot>& Colony::get_enemy_robots()
+std::vector<Robot>& Colony::get_robots()
 {
-	return m_enemy_robots;
+	return m_robots;
 }
 
 
@@ -101,11 +100,13 @@ Colony* Colony::load_colony(const std::string& file_name)
 	// setting up temporary vector for enemy robots
 	std::vector<Robot> temp_robots;
 
-	// setting up temporary variable for the location of patch_bot
-	Robot* temp_patch_bot = nullptr;
-
 	bool hasStart = false;
 	bool hasEnd = false;
+
+	// save the coordinates to create and push the patchbot-robot object
+	// in the last position of the robots-vector
+	int patchbot_x;
+	int patchbot_y;
 
 	// iterate through the remaining lines of the textfile
 	// containing the level-data
@@ -163,7 +164,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 						{
 							if (!hasStart)
 							{
-								temp_patch_bot = new Robot(x, y, PATCHBOT);
+								patchbot_x = x;
+								patchbot_y = y;
 								hasStart = true;
 							}
 							else
@@ -178,7 +180,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 					}
 				}
 			}
-			// throw exception if the current line is either too short or too long
+			// throw exception if the current line is either too short or
+			// too long
 			else if (current_line.size() < width)
 			{
 				std::stringstream temp_string_stream;
@@ -189,7 +192,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 			else if (current_line.size() > width)
 			{
 				std::stringstream temp_string_stream;
-				temp_string_stream << "Line " << (y + 1) << " is longer than the specified length!";
+				temp_string_stream << "Line " << (y + 1) <<
+					" is longer than the specified length!";
 				throw Simple_Message_Exception(temp_string_stream.str());
 			}
 		}
@@ -205,21 +209,30 @@ Colony* Colony::load_colony(const std::string& file_name)
 	// check if the file had enough lines
 	if (!(y == height))
 	{
-		throw Simple_Message_Exception("File contains less than the specified number of lines!");
+		throw Simple_Message_Exception(
+			"File contains less than the specified number of lines!");
 	}
 
-	// check the hasStart and hasEnd flags, if one of them or both are false throw an exception
+	// check the hasStart and hasEnd flags, if one of them or both are false
+	// throw an exception
 	if (hasStart == false)
 	{
 		throw Simple_Message_Exception("No starting point found!");
 	}
-	else if (hasEnd == false)
+	else
+	{
+		temp_robots.push_back(Robot(patchbot_x, patchbot_y, PATCHBOT));
+	}
+	if (hasEnd == false)
 	{
 		throw Simple_Message_Exception("No end point found!");
 	}
 
-	// if all values have been correctly setup create and return a pointer to the loaded colony
-	Colony* return_colony = new Colony(width, height, temp_patch_bot, temp_robots, temp_tiles);
+
+	// if all values have been correctly setup create and return a pointer to
+	// the loaded colony
+	Colony* return_colony =
+		new Colony(width, height, temp_robots, temp_tiles);
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
 }

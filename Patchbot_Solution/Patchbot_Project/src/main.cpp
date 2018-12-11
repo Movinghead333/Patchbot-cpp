@@ -67,7 +67,7 @@ void write_colony_to_file(
 
 
 	// add the robots back to level_data
-	std::vector<Robot> temp_robots = c.get_enemy_robots();
+	std::vector<Robot> temp_robots = c.get_robots();
 	// std::cout << temp_robots.size() << std::endl; // debug
 
 	for (Robot robot : temp_robots)

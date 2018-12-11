@@ -24,7 +24,7 @@ void RenderWidget::render()
 {
 	//std::cout << m_game_controller_ref->get_x_scrollbar_pos() << std::endl;
 	// get refernce to the current colony
-	const Colony& temp_colony = m_game_controller_ref->get_current_colony();
+	Colony& temp_colony = m_game_controller_ref->get_current_colony();
 
 	// create painter for drawing on the renderwidget
 	QPainter painter(this);
@@ -89,49 +89,54 @@ void RenderWidget::render()
 	{
 		for (int y = 0; y < y_tiles_to_rendered; y++)
 		{
+			// if coordinates are beyond the environment skip them
+			// this happends for right and bottom boundaries
 			if (x + x_start_tile >= temp_colony.get_width() ||
 				y + y_start_tile >= temp_colony.get_height())
 			{
 				continue;
 			}
+			// get a ref to the tile which gets rendered next
 			const Tile& temp_tile = temp_colony.get_tile_by_coordinates(
 				x + x_start_tile, y + y_start_tile);
 
+			// retrieve its texture as a ref
 			const Texture& temp_texture =
 				m_game_controller_ref->get_ground_texture_by_tile_type(
 					temp_tile.get_tile_type()
 				);
 
+			// get the textures image data as ref
 			const std::vector<ubyte>& temp_image_data =
 				temp_texture.get_image_data();
 
-			
+			// convert the image-data into a QImage
 			QImage current_tile_image(
 				&temp_image_data[0],
 				temp_texture.get_width(),
 				temp_texture.get_height(),
 				QImage::Format_ARGB32);
+
+			int x_render_offset = temp_texture.get_width() * x + x_pixel_offset;
+			int y_render_offset = temp_texture.get_height()* y + y_pixel_offset;
 			
+			// draw the QImage at the earlier calculated coordinates
 			painter.drawImage(
-				QPoint(temp_texture.get_width()	 * x + x_pixel_offset,
-					   temp_texture.get_height() * y + y_pixel_offset ),
-				current_tile_image);
+				QPoint(x_render_offset, y_render_offset), current_tile_image);
 				
 		}
 	}
 
 	
 	// render robots on top
-	std::vector<Robot>& temp_robots = temp_colony.get_enemy_robots();
+	const std::vector<Robot>& temp_robots = temp_colony.get_robots();
 	
 	for (Robot temp_robot : temp_robots)
 	{
+		// get the robots position in tiles
 		int robot_x_tile = temp_robot.get_x_coordinate();
 		int robot_y_tile = temp_robot.get_y_coordinate();
-		std::cout << robot_x_tile << "  " << robot_y_tile << std::endl;
-		std::cout << temp_robot.get_robot_type() << std::endl;
 
-		
 		// check if the robot tile coordinates are within the rendered tiles
 		if (robot_x_tile >= x_start_tile &&
 			robot_x_tile < x_start_tile + x_tiles_to_rendered &&
@@ -157,6 +162,7 @@ void RenderWidget::render()
 				temp_texture.get_height(),
 				QImage::Format_ARGB32);
 			
+			// calculate render_offset from 0,0
 			int x_render_coordinate = (robot_x_tile - x_start_tile) * 32
 									   + x_pixel_offset;
 			int y_render_coordinate = (robot_y_tile - y_start_tile) * 32
@@ -166,30 +172,15 @@ void RenderWidget::render()
 			painter.drawImage(
 				QPoint(x_render_coordinate, y_render_coordinate),
 				current_tile_image);
-			
 		}
-		
 	}
 }
 
-
+// if a colony is loaded, render it
 void RenderWidget::paintEvent(QPaintEvent * event)
 {
 	if (m_game_controller_ref->colony_loaded())
 	{
 		render();
 	}
-
-
-	/*
-	std::cout << "render area" << std::endl;
-	QPainter p(this);
-	p.setRenderHint(QPainter::Antialiasing);
-	QPainterPath path;
-	path.addRoundedRect(QRectF(10, 10, 100, 50), 10, 10);
-	QPen pen(Qt::black, 10);
-	p.setPen(pen);
-	p.fillPath(path, Qt::red);
-	p.drawPath(path);
-	*/
 }

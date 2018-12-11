@@ -93,41 +93,48 @@ vc 39:
 	- gamecontroller ref is set after creating the controller in mainwindow
 
 vc 40: 
-	-fixed qt path from M.M.'s PC
+	- fixed qt path from M.M.'s PC
 
 vc 41:
-	-all images are loaded in the gamecontroller constructor
-	-the images are stored in two vectors one for ground tiles one for robots
-	-the vectors are wrapped in shared_ptr to avoid memory-leaks
+	- all images are loaded in the gamecontroller constructor
+	- the images are stored in two vectors one for ground tiles one for robots
+	- the vectors are wrapped in shared_ptr to avoid memory-leaks
 
 vc 42:
-	-render still wip
-	-mostly transition commit
-	-added closed and open enums for doors back in
-	-one return statement missing coming in next commit
+	- render still wip
+	- mostly transition commit
+	- added closed and open enums for doors back in
+	- one return statement missing coming in next commit
 
 vc 43:
-	-surface book branch and desktop branch conflict solved
+	- surface book branch and desktop branch conflict solved
 
 vc 44:
-	-static render working
+	- static render working
 
 vc 45:
-	-scrollbars now scale with window size
-	-moving render region with scrollbars wip
+	- scrollbars now scale with window size
+	- moving render region with scrollbars wip
 
 vc 46:
-	-smooth scrolling in x-direction
-	-code needs cleanup
-	-y-direction still missing
+	- smooth scrolling in x-direction
+	- code needs cleanup
+	- y-direction still missing
 
 vc 47:
-	-fixed a bug where the map wouldn't be displayed after loading
+	- fixed a bug where the map wouldn't be displayed after loading
 
 vc 48:
 	- added scrolling for y-direction
 	- added render for robots
 	- patchbot render wip
+
+vc 49:
+	- patchbot is now the last element of the robots vector
+	- patchbot is rendered together with the other robots
+	- images now get mirrored vertically to allow them to be correctly rendered
+	  by the qt-library
+	- task 4 finished (maybe some cleanup left)
 
 
 TODO:

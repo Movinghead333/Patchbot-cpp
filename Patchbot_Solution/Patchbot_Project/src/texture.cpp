@@ -107,7 +107,7 @@ const Texture Texture::load_texture(const std::string& p_filename)
 		temp_image_width * temp_image_height * (temp_bits_per_pixel / 8));
 
 	
-
+	// mirror the image vertically
 	for (int y = 0; y < temp_image_height; y++)
 	{
 		for (int x = 0; x < temp_image_width * 4; x++)

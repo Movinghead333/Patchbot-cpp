@@ -20,7 +20,6 @@ public:
 	Colony(
 		const int p_width,
 		const int p_height,
-		Robot* p_patchbot,
 		std::vector<Robot> p_enemy_robots, 
 		const std::vector<Tile> p_tiles);
 
@@ -33,8 +32,9 @@ public:
 	const std::vector<Tile>& get_tiles() const;
 	const Tile& get_tile_by_coordinates(int x, int y) const;
 
-	std::vector<Robot>& get_enemy_robots();
-	const Robot* get_patch_bot() const;
+	// get a ref to the vector storing all the robots from the current colony
+	std::vector<Robot>& get_robots();
+	Robot& get_patch_bot();
 
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
@@ -49,12 +49,10 @@ private:
 	// vector storing a Tile-object for each x,y-pair
 	const std::vector<Tile> m_tiles;
 
-	// vector storing all enemy robots
+	// vector storing all robots
 	// and their properties (e.g. x and y coordiante)
-	std::vector<Robot> m_enemy_robots;
-
-	// variable storing patchbot itself for quick and easy access
-	Robot* m_patchbot;
+	// stores the player in its last element
+	std::vector<Robot> m_robots;
 };
 
 #endif

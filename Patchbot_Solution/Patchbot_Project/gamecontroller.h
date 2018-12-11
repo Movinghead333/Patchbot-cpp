@@ -17,7 +17,7 @@ public:
 
 	void load_textures();
 
-	const Colony& get_current_colony() const;
+	Colony& get_current_colony();
 
 	bool colony_loaded() const;
 

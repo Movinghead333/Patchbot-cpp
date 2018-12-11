@@ -80,7 +80,7 @@ void GameController::load_textures()
 	}
 }
 
-const Colony& GameController::get_current_colony() const
+Colony& GameController::get_current_colony()
 {
 	return *m_current_colony.get();
 }
