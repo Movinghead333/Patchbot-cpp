@@ -121,10 +121,10 @@ vc 46:
 	-code needs cleanup
 	-y-direction still missing
 
+vc 47:
+	-fixed a bug where the map wouldn't be displayed after loading
+
 
 TODO:
-	-rewrite pixel & Texture to a more easily traversable data-structure
-	-render tiles as QImages
-	-return texture based on tile_ref
-	-remove DoorTile
-	-return image based on tile_Type enum object
+	-clean up code for scrolling
+	-implemented scrolling for y dimension

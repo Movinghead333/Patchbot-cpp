@@ -62,6 +62,9 @@ private:
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes
 	void display_info_message_dialog(const std::string& p_message);
+
+	// calculates render offsets based on window size and scrollbar-position
+	void calculate_render_details();
 };
 
 #endif

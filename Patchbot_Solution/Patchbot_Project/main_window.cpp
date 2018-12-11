@@ -39,49 +39,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::resizeEvent(QResizeEvent * event)
 {
-	if (m_game_controller->colony_loaded()) {
-		// get ref of current colony
-		const Colony& current_colony = m_game_controller->get_current_colony();
-
-		// get the width and height of the entire map in pixels
-		int map_width = current_colony.get_width() * 32;
-		int map_height = current_colony.get_height() * 32;
-
-		// get dimensions of the game widget
-		int render_width = ui.game->width();
-		int render_height = ui.game->height();
-
-		// max values for scrollbars
-		int m_scroll_x_max;
-		int m_scroll_y_max;
-
-
-		// X direction
-		if (render_width >= map_width)
-		{
-			m_scroll_x_max = 0;
-		}
-		else
-		{
-			m_scroll_x_max = map_width - render_width;
-		}
-
-		// Y direction
-		if (render_height >= map_height)
-		{
-			m_scroll_y_max = 0;
-		}
-		else
-		{
-			m_scroll_y_max = map_height - render_height;
-		}
-		ui.xScrollbar->setMaximum(m_scroll_x_max);
-		ui.yScrollbar->setMaximum(m_scroll_y_max);
-		m_game_controller->set_render_width(ui.game->width());
-		m_game_controller->set_render_height(ui.game->height());
-	}
-
-	
+	calculate_render_details();
 }
 
 
@@ -154,6 +112,7 @@ void MainWindow::on_changeColony_clicked()
 	try
 	{
 		m_game_controller->load_and_initialize_colony(file_name);
+		calculate_render_details();
 	}
 	// catch all specified exceptions
 	catch (const Simple_Message_Exception& e)
@@ -187,4 +146,50 @@ void MainWindow::display_info_message_dialog(const std::string& p_message)
 		this,
 		"Button clicked",
 		p_message.c_str());
+}
+
+// adjust scrollbars and calculate render area dimensions
+void MainWindow::calculate_render_details()
+{
+	if (m_game_controller->colony_loaded()) {
+		// get ref of current colony
+		const Colony& current_colony = m_game_controller->get_current_colony();
+
+		// get the width and height of the entire map in pixels
+		int map_width = current_colony.get_width() * 32;
+		int map_height = current_colony.get_height() * 32;
+
+		// get dimensions of the game widget
+		int render_width = ui.game->width();
+		int render_height = ui.game->height();
+
+		// max values for scrollbars
+		int m_scroll_x_max;
+		int m_scroll_y_max;
+
+
+		// X direction
+		if (render_width >= map_width)
+		{
+			m_scroll_x_max = 0;
+		}
+		else
+		{
+			m_scroll_x_max = map_width - render_width;
+		}
+
+		// Y direction
+		if (render_height >= map_height)
+		{
+			m_scroll_y_max = 0;
+		}
+		else
+		{
+			m_scroll_y_max = map_height - render_height;
+		}
+		ui.xScrollbar->setMaximum(m_scroll_x_max);
+		ui.yScrollbar->setMaximum(m_scroll_y_max);
+		m_game_controller->set_render_width(ui.game->width());
+		m_game_controller->set_render_height(ui.game->height());
+	}
 }
