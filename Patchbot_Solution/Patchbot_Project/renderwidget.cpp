@@ -13,6 +13,7 @@ RenderWidget::~RenderWidget()
 {
 }
 
+// get a gamecontroller reference from passed from MainWindow
 void RenderWidget::set_game_controller_ref(
 	std::shared_ptr<GameController> p_game_controller
 )
@@ -22,61 +23,66 @@ void RenderWidget::set_game_controller_ref(
 
 void RenderWidget::render()
 {
-	//std::cout << m_game_controller_ref->get_x_scrollbar_pos() << std::endl;
 	// get refernce to the current colony
 	Colony& temp_colony = m_game_controller_ref->get_current_colony();
 
 	// create painter for drawing on the renderwidget
 	QPainter painter(this);
 
+	// local variable for the dimensions the tiles are in
+	int tile_size = 32;
 
 	// all X and Y offsets and dimensions needed for rendering:
 
 	// create "local" variables for the x and y scrollbar position and the
 	// render width and height in pixels
-	int x_scrollbar_pos = m_game_controller_ref->get_x_scrollbar_pos();
-	int render_width_in_pixels = m_game_controller_ref->get_render_width();
-	int y_scrollbar_pos = m_game_controller_ref->get_y_scrollbar_pos();
+	int x_scrollbar_pos         = m_game_controller_ref->get_x_scrollbar_pos();
+	int render_width_in_pixels  = m_game_controller_ref->get_render_width();
+	int y_scrollbar_pos         = m_game_controller_ref->get_y_scrollbar_pos();
 	int render_height_in_pixels = m_game_controller_ref->get_render_height();
 
-	// calculate x tile where the rendering should start
-	int x_start_tile = (x_scrollbar_pos - (x_scrollbar_pos % 32)) / 32;
-	int y_start_tile = (y_scrollbar_pos - (y_scrollbar_pos % 32)) / 32;
+	// calculate x and y tile where the rendering should start
+	int x_start_tile = (x_scrollbar_pos -
+					    (x_scrollbar_pos % tile_size)) / tile_size;
+	int y_start_tile = (y_scrollbar_pos -
+						(y_scrollbar_pos % tile_size)) / tile_size;
 
 	// the number of tiles which get rendered in x-direction
 	int x_tiles_to_rendered;
 	// initialize x_tiles_to_rendered
-	if (render_width_in_pixels % 32 == 0)
+	if (render_width_in_pixels % tile_size == 0)
 	{
-		// if the render_width_in_pixels divides by 32 just devide it by 32
-		// for the amount of tiles to be rendered
-		x_tiles_to_rendered = render_width_in_pixels / 32;
+		// if the render_height_in_pixels divides by tile_size then just devide
+		// it by tile_size for the amount of tiles to be rendered
+		x_tiles_to_rendered = render_width_in_pixels / tile_size;
 	}
 	else
 	{
-		// if does not fit exactly then divide it by 32 round down
+		// if does not fit exactly then divide it by tile_size round down
 		// and add +1 because the minus modulo cuts one of and +1 for filling
 		// the screen so it is basicly the above + 1
 		x_tiles_to_rendered =
-		((render_width_in_pixels - (render_width_in_pixels % 32)) / 32) + 2;
+			((render_width_in_pixels -(render_width_in_pixels % tile_size))
+			/ tile_size) + 2;
 	}
 
 	// the number of tiles which get rendered in y-direction
 	int y_tiles_to_rendered;
 	// initialize y_tiles_to_rendered
-	if (render_height_in_pixels % 32 == 0)
+	if (render_height_in_pixels % tile_size == 0)
 	{
-		// if the render_height_in_pixels divides by 32 just devide it by 32
-		// for the amount of tiles to be rendered
-		y_tiles_to_rendered = render_height_in_pixels / 32;
+		// if the render_height_in_pixels divides by tile_size then just devide
+		// it by tile_size for the amount of tiles to be rendered
+		y_tiles_to_rendered = render_height_in_pixels / tile_size;
 	}
 	else
 	{
-		// if does not fit exactly then divide it by 32 round down
+		// if does not fit exactly then divide it by tile_size round down
 		// and add +1 because the minus modulo cuts one of and +1 for filling
 		// the screen so it is basicly the above + 1
 		y_tiles_to_rendered =
-		((render_height_in_pixels - (render_height_in_pixels % 32)) / 32) + 2;
+			((render_height_in_pixels - (render_height_in_pixels % tile_size))
+			/ tile_size) + 2;
 	}
 
 	// calculate the amount of offset needed to enable smooth pixel scrolling
@@ -100,30 +106,18 @@ void RenderWidget::render()
 			const Tile& temp_tile = temp_colony.get_tile_by_coordinates(
 				x + x_start_tile, y + y_start_tile);
 
-			// retrieve its texture as a ref
-			const Texture& temp_texture =
-				m_game_controller_ref->get_ground_texture_by_tile_type(
-					temp_tile.get_tile_type()
-				);
+			// load matching QImage for current tile from controller
+			QImage current_tile_image = m_game_controller_ref->
+				get_ground_texture_by_tile_type(temp_tile.get_tile_type()
+			);
 
-			// get the textures image data as ref
-			const std::vector<ubyte>& temp_image_data =
-				temp_texture.get_image_data();
-
-			// convert the image-data into a QImage
-			QImage current_tile_image(
-				&temp_image_data[0],
-				temp_texture.get_width(),
-				temp_texture.get_height(),
-				QImage::Format_ARGB32);
-
-			int x_render_offset = temp_texture.get_width() * x + x_pixel_offset;
-			int y_render_offset = temp_texture.get_height()* y + y_pixel_offset;
+			// calculate the x and y where the current tile should be rendered
+			int x_render_offset = tile_size * x + x_pixel_offset;
+			int y_render_offset = tile_size * y + y_pixel_offset;
 			
 			// draw the QImage at the earlier calculated coordinates
 			painter.drawImage(
 				QPoint(x_render_offset, y_render_offset), current_tile_image);
-				
 		}
 	}
 
@@ -139,36 +133,22 @@ void RenderWidget::render()
 
 		// check if the robot tile coordinates are within the rendered tiles
 		if (robot_x_tile >= x_start_tile &&
-			robot_x_tile < x_start_tile + x_tiles_to_rendered &&
+			robot_x_tile <  x_start_tile + x_tiles_to_rendered &&
 			robot_y_tile >= y_start_tile &&
-			robot_y_tile < y_start_tile + y_tiles_to_rendered)
+			robot_y_tile <  y_start_tile + y_tiles_to_rendered)
 		{
-			// robot is in the area which is being rendered so render him too
-
-			// get robot texture
-			const Texture& temp_texture =
-				m_game_controller_ref->get_robot_texture_by_robot_type(
-					temp_robot.get_robot_type()
-				);
-
-			// get data vector from texture
-			const std::vector<ubyte>& temp_image_data =
-				temp_texture.get_image_data();
-
-			// convert the image data into QImage object
-			QImage current_tile_image(
-				&temp_image_data[0],
-				temp_texture.get_width(),
-				temp_texture.get_height(),
-				QImage::Format_ARGB32);
+			// load matching QImage for current robot from controller
+			const QImage& current_tile_image = m_game_controller_ref->
+				get_robot_texture_by_robot_type(temp_robot.get_robot_type()
+			);
 			
 			// calculate render_offset from 0,0
-			int x_render_coordinate = (robot_x_tile - x_start_tile) * 32
+			int x_render_coordinate = (robot_x_tile - x_start_tile) * tile_size
 									   + x_pixel_offset;
-			int y_render_coordinate = (robot_y_tile - y_start_tile) * 32
+			int y_render_coordinate = (robot_y_tile - y_start_tile) * tile_size
 									   + y_pixel_offset;
 
-			// draw the QImage object at the robots position
+			// render the the QImage at the calcualted offset
 			painter.drawImage(
 				QPoint(x_render_coordinate, y_render_coordinate),
 				current_tile_image);
@@ -176,9 +156,9 @@ void RenderWidget::render()
 	}
 }
 
-// if a colony is loaded, render it
 void RenderWidget::paintEvent(QPaintEvent * event)
 {
+	// if a colony is loaded, render it
 	if (m_game_controller_ref->colony_loaded())
 	{
 		render();

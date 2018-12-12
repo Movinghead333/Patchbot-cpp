@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <qimage.h>
+
 #include "src/colony.h"
 #include "src/texture.h"
 
@@ -21,10 +23,12 @@ public:
 
 	bool colony_loaded() const;
 
-	const Texture& get_ground_texture_by_tile_type(
+	// get QImage ref according to passed TileType
+	const QImage& get_ground_texture_by_tile_type(
 		const TileType& p_tile) const;
 
-	const Texture& get_robot_texture_by_robot_type(
+	// get QImage ref according to passed RobotType
+	const QImage& get_robot_texture_by_robot_type(
 		const RobotType& p_robot_type) const;
 
 	// scrollbar getters and setters
@@ -34,7 +38,7 @@ public:
 	int get_x_scrollbar_pos();
 	int get_y_scrollbar_pos();
 
-	// scrollbar getters and setters
+	// render dimensions getters and setters
 	void set_render_width(int p_new_width);
 	void set_render_height(int p_new_height);
 
@@ -54,10 +58,10 @@ private:
 	std::shared_ptr<Colony> m_current_colony;
 
 	// stores all graphics for ground tiles
-	std::shared_ptr<std::vector<Texture>> m_ground_textures;
+	std::shared_ptr<std::vector<QImage>> m_ground_textures;
 
 	// stores all robot-graphics
-	std::shared_ptr<std::vector<Texture>> m_robot_textures;
+	std::shared_ptr<std::vector<QImage>> m_robot_textures;
 };
 
 #endif

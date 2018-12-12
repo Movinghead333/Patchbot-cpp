@@ -44,13 +44,27 @@ void GameController::load_textures()
 	};
 
 	// load the textures into the vector
-	m_ground_textures = std::make_shared<std::vector<Texture>>(
-		std::vector<Texture>()
+	m_ground_textures = std::make_shared<std::vector<QImage>>(
+		std::vector<QImage>()
 		);
 	for (std::string current_file_name : ground_texture_paths)
 	{
-		m_ground_textures->push_back(Texture::load_texture(
-			(ground_texture_base_path + current_file_name) ));
+		const Texture temp_texture = Texture::load_texture(
+			(ground_texture_base_path + current_file_name));
+
+		// get the textures image data as ref
+		const std::vector<ubyte>& temp_image_data =
+			temp_texture.get_image_data();
+
+		// convert the image-data into a QImage
+		QImage temp_image(
+			&temp_image_data[0],
+			temp_texture.get_width(),
+			temp_texture.get_height(),
+			QImage::Format_ARGB32);
+
+		// mirror the image and copy it into the vector
+		m_ground_textures->push_back(temp_image.mirrored(false, true).copy());
 	}
 
 
@@ -70,13 +84,27 @@ void GameController::load_textures()
 	};
 
 	// create and fill the vector with the robot images
-	m_robot_textures = std::make_shared<std::vector<Texture>>(
-		std::vector<Texture>()
+	m_robot_textures = std::make_shared<std::vector<QImage>>(
+		std::vector<QImage>()
 		);
 	for (std::string current_file_name : robot_texture_paths)
 	{
-		m_robot_textures->push_back(Texture::load_texture(
-			(robot_texture_base_path + current_file_name)));
+		const Texture temp_texture = Texture::load_texture(
+			(robot_texture_base_path + current_file_name));
+
+		// get the textures image data as ref
+		const std::vector<ubyte>& temp_image_data =
+			temp_texture.get_image_data();
+
+		// convert the image-data into a QImage
+		QImage temp_image(
+			&temp_image_data[0],
+			temp_texture.get_width(),
+			temp_texture.get_height(),
+			QImage::Format_ARGB32);
+
+		// mirror the image and copy it into the vector
+		m_robot_textures->push_back(temp_image.mirrored(false, true).copy());
 	}
 }
 
@@ -90,10 +118,10 @@ bool GameController::colony_loaded() const
 	return m_current_colony != nullptr;
 }
 
-const Texture & GameController::get_ground_texture_by_tile_type(
+const QImage& GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
 {
-	std::vector<Texture>& temp_textures = *m_ground_textures;
+	std::vector<QImage>& temp_textures = *m_ground_textures.get();
 	switch (p_tile)
 	{
 	case STEELPLANKS:		  return temp_textures[0];   break;
@@ -111,14 +139,13 @@ const Texture & GameController::get_ground_texture_by_tile_type(
 	case AUTO_DOOR_CLOSED:	  return temp_textures[12];  break;
 	case INDESTRUCTABLE_WALL: return temp_textures[13];  break;
 	case DESTRUCTABLE_WALL:   return temp_textures[14];  break;
-	default: throw Simple_Message_Exception("Input tiletype non existent!");
 	}
 }
 
-const Texture& GameController::get_robot_texture_by_robot_type(
+const QImage& GameController::get_robot_texture_by_robot_type(
 	const RobotType& p_robot_type) const
 {
-	std::vector<Texture>& temp_textures = *m_robot_textures;
+	std::vector<QImage>& temp_textures = *m_robot_textures.get();
 	switch (p_robot_type)
 	{
 	case PATCHBOT: return temp_textures[0];   break;

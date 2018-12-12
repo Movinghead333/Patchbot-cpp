@@ -136,6 +136,13 @@ vc 49:
 	  by the qt-library
 	- task 4 finished (maybe some cleanup left)
 
+vc 50:
+	- GameController now stores QImages instead of Texture objects
+	- mirroring the images for rendering is now done when loading in controller
+	  instead of doing it to the raw image data
+	- added tile_Size variable to render
+	- reworked render to work with the new way of loading images from controller
+
 
 TODO:
 	-add patchbot to robots vector for easier rendering and access
