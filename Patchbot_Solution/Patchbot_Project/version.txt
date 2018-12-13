@@ -143,6 +143,8 @@ vc 50:
 	- added tile_Size variable to render
 	- reworked render to work with the new way of loading images from controller
 
+vc 51:
+	- added exception handling for loading maps and textures via gamecontroller
+
 
 TODO:
-	-add patchbot to robots vector for easier rendering and access
