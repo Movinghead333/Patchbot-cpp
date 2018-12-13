@@ -35,15 +35,15 @@ public:
 	void set_x_scrollbar_pos(int p_new_pos);
 	void set_y_scrollbar_pos(int p_new_pos);
 
-	int get_x_scrollbar_pos();
-	int get_y_scrollbar_pos();
+	int get_x_scrollbar_pos() const;
+	int get_y_scrollbar_pos() const;
 
 	// render dimensions getters and setters
 	void set_render_width(int p_new_width);
 	void set_render_height(int p_new_height);
 
-	int get_render_width();
-	int get_render_height();
+	int get_render_width() const;
+	int get_render_height() const;
 
 private:
 	// current scrollbar positions

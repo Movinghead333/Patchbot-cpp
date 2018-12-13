@@ -187,6 +187,7 @@ void MainWindow::calculate_render_details()
 		{
 			m_scroll_y_max = map_height - render_height;
 		}
+		
 		ui.xScrollbar->setMaximum(m_scroll_x_max);
 		ui.yScrollbar->setMaximum(m_scroll_y_max);
 		m_game_controller->set_render_width(ui.game->width());

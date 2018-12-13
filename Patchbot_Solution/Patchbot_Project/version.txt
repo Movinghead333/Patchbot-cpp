@@ -149,5 +149,14 @@ vc 51:
 vc 52:
 	-fixed a const in renderwdiget
 
+vc 53:
+	- test for task 4 done! (22.5 / 24 points)
+	- minor adjustments from supervisor (see TODO list)
+
 
 TODO:
+	- delete empty default constructors and destructors
+	- foreach loops with const&
+	- const for getters especially
+	- throw exception to a higher level which can handle them (in MainWindow)
+	- save textures in maps instead of vectors

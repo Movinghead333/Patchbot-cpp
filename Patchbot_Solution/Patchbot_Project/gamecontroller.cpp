@@ -64,7 +64,7 @@ void GameController::load_textures()
 	m_ground_textures = std::make_shared<std::vector<QImage>>(
 		std::vector<QImage>()
 		);
-	for (std::string current_file_name : ground_texture_paths)
+	for (const std::string& current_file_name : ground_texture_paths)
 	{
 		const Texture temp_texture = Texture::load_texture(
 			(ground_texture_base_path + current_file_name));
@@ -102,8 +102,8 @@ void GameController::load_textures()
 
 	// create and fill the vector with the robot images
 	m_robot_textures = std::make_shared<std::vector<QImage>>(
-		std::vector<QImage>()
-		);
+		std::vector<QImage>());
+
 	for (std::string current_file_name : robot_texture_paths)
 	{
 		const Texture temp_texture = Texture::load_texture(
@@ -187,12 +187,12 @@ void GameController::set_y_scrollbar_pos(int p_new_pos)
 	y_scrollbar_pos = p_new_pos;
 }
 
-int GameController::get_x_scrollbar_pos()
+int GameController::get_x_scrollbar_pos() const
 {
 	return x_scrollbar_pos;
 }
 
-int GameController::get_y_scrollbar_pos()
+int GameController::get_y_scrollbar_pos() const
 {
 	return y_scrollbar_pos;
 }
@@ -207,12 +207,12 @@ void GameController::set_render_height(int p_new_height)
 	render_height = p_new_height;
 }
 
-int GameController::get_render_width()
+int GameController::get_render_width() const
 {
 	return render_width;
 }
 
-int GameController::get_render_height()
+int GameController::get_render_height() const
 {
 	return render_height;
 }
