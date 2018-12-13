@@ -146,5 +146,8 @@ vc 50:
 vc 51:
 	- added exception handling for loading maps and textures via gamecontroller
 
+vc 52:
+	-fixed a const in renderwdiget
+
 
 TODO:

@@ -107,7 +107,7 @@ void RenderWidget::render()
 				x + x_start_tile, y + y_start_tile);
 
 			// load matching QImage for current tile from controller
-			QImage current_tile_image = m_game_controller_ref->
+			const QImage current_tile_image = m_game_controller_ref->
 				get_ground_texture_by_tile_type(temp_tile.get_tile_type()
 			);
 
