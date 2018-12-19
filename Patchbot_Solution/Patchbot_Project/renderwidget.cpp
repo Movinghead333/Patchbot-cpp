@@ -119,7 +119,7 @@ void RenderWidget::render()
 	// render robots on top
 	const std::vector<Robot>& temp_robots = temp_colony.get_robots();
 	
-	for (Robot temp_robot : temp_robots)
+	for (const Robot& temp_robot : temp_robots)
 	{
 		// get the robots position in tiles
 		int robot_x_tile = temp_robot.get_x_coordinate();

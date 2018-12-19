@@ -99,7 +99,7 @@ void GameController::load_textures()
 	m_robot_textures = std::make_shared<std::vector<QImage>>(
 		std::vector<QImage>());
 
-	for (std::string current_file_name : robot_texture_paths)
+	for (const std::string& current_file_name : robot_texture_paths)
 	{
 		const Texture temp_texture = Texture::load_texture(
 			(robot_texture_base_path + current_file_name));

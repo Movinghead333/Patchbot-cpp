@@ -18,11 +18,11 @@ Colony::Colony(const int p_width, const int p_height,
 const Tile& Colony::get_tile_by_coordinates(int x, int y) const
 {
 	return m_tiles[x + (m_width * y)];
-}
-
-int Colony::get_width() const
-{
-	return m_width;
+}											
+											
+int Colony::get_width() const				
+{											
+	return m_width;							
 }
 
 int Colony::get_height() const

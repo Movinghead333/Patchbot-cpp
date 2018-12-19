@@ -70,7 +70,7 @@ void write_colony_to_file(
 	std::vector<Robot> temp_robots = c.get_robots();
 	// std::cout << temp_robots.size() << std::endl; // debug
 
-	for (Robot robot : temp_robots)
+	for (const Robot& robot : temp_robots)
 	{
 		int temp_index = robot.get_x_coordinate() + 
 						(robot.get_y_coordinate() * width);

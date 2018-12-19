@@ -156,8 +156,10 @@ vc 53:
 vc 54:
 	- removed unecessary empty destructors
 
+vc 55:
+	- added const& to for-each loops
+
 TODO:
-	- delete empty default constructors and destructors
 	- foreach loops with const&
 	- const for getters especially
 	- throw exception to a higher level which can handle them (in MainWindow)
