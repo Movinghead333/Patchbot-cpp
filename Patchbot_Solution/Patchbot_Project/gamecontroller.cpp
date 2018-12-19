@@ -40,14 +40,14 @@ void GameController::load_textures()
 		"wand_fels.tga"
 	};
 
-	// load the textures into the vector
-	m_ground_textures = std::make_shared<std::vector<QImage>>(
-		std::vector<QImage>()
-		);
-	for (const std::string& current_file_name : ground_texture_paths)
+	// load the textures into the map
+	m_ground_textures = std::make_shared<std::map<TileType, QImage>>(
+		std::map<TileType, QImage>());
+
+	for (int i = 0; i < LAST_TILE; i++)
 	{
 		const Texture temp_texture = Texture::load_texture(
-			(ground_texture_base_path + current_file_name));
+			(ground_texture_base_path + ground_texture_paths[i]));
 
 		// get the textures image data as ref
 		const std::vector<ubyte>& temp_image_data =
@@ -60,8 +60,12 @@ void GameController::load_textures()
 			temp_texture.get_height(),
 			QImage::Format_ARGB32);
 
-		// mirror the image and copy it into the vector
-		m_ground_textures->push_back(temp_image.mirrored(false, true).copy());
+		// mirror the image and copy it into the map with a given TileType,
+		// returned by a static cast
+		m_ground_textures->insert(
+			std::pair<TileType, QImage>(
+				static_cast<TileType>(i),
+				temp_image.mirrored(false, true).copy() ));
 	}
 
 
@@ -80,14 +84,15 @@ void GameController::load_textures()
 		"dead.tga"
 	};
 
-	// create and fill the vector with the robot images
-	m_robot_textures = std::make_shared<std::vector<QImage>>(
-		std::vector<QImage>());
+	// create and fill the map with the robot images
+	m_robot_textures = std::make_shared<std::map<RobotType, QImage>>(
+		std::map<RobotType, QImage>());
 
-	for (const std::string& current_file_name : robot_texture_paths)
+	// calculate length of robot_type enum and load all robot images
+	for (int i = 0; i < (LAST_ROBOT - PATCHBOT); i++)
 	{
 		const Texture temp_texture = Texture::load_texture(
-			(robot_texture_base_path + current_file_name));
+			(robot_texture_base_path + robot_texture_paths[i]));
 
 		// get the textures image data as ref
 		const std::vector<ubyte>& temp_image_data =
@@ -101,7 +106,10 @@ void GameController::load_textures()
 			QImage::Format_ARGB32);
 
 		// mirror the image and copy it into the vector
-		m_robot_textures->push_back(temp_image.mirrored(false, true).copy());
+		m_robot_textures->insert(
+			std::pair<RobotType, QImage>(
+				static_cast<RobotType>( (i + PATCHBOT) ),
+				temp_image.mirrored(false, true).copy() ));
 	}
 }
 
@@ -118,43 +126,13 @@ bool GameController::colony_loaded() const
 const QImage& GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
 {
-	std::vector<QImage>& temp_textures = *m_ground_textures.get();
-	switch (p_tile)
-	{
-	case STEELPLANKS:		  return temp_textures[0];   break;
-	case PATCHBOT_SPAWN:	  return temp_textures[1];   break;
-	case ENEMY_SPAWN:		  return temp_textures[2];   break;
-	case ABYSS:				  return temp_textures[3];   break;
-	case WATER:				  return temp_textures[4];   break;
-	case ROOT_SERVER:		  return temp_textures[5];   break;
-	case ALIEN_GRASS:		  return temp_textures[6];   break;
-	case GRAVEL:			  return temp_textures[7];   break;
-	case SECRET_ENTRANCE:     return temp_textures[8];   break;
-	case MANUAL_DOOR_OPEN:    return temp_textures[9];   break;
-	case MANUAL_DOOR_CLOSED:  return temp_textures[10];  break;
-	case AUTO_DOOR_OPEN:	  return temp_textures[11];  break;
-	case AUTO_DOOR_CLOSED:	  return temp_textures[12];  break;
-	case INDESTRUCTABLE_WALL: return temp_textures[13];  break;
-	case DESTRUCTABLE_WALL:   return temp_textures[14];  break;
-	}
+	return m_ground_textures->find(p_tile)->second;
 }
 
 const QImage& GameController::get_robot_texture_by_robot_type(
 	const RobotType& p_robot_type) const
 {
-	std::vector<QImage>& temp_textures = *m_robot_textures.get();
-	switch (p_robot_type)
-	{
-	case PATCHBOT: return temp_textures[0];   break;
-	case BUGGER:   return temp_textures[1];   break;
-	case PUSHER:   return temp_textures[2];   break;
-	case DIGGER:   return temp_textures[3];   break;
-	case SWIMMER:  return temp_textures[4];   break;
-	case FOLLOWER: return temp_textures[5];   break;
-	case HUNTER:   return temp_textures[6];   break;
-	case SNIFFER:  return temp_textures[7];   break;
-	case DEAD:     return temp_textures[8];   break;
-	}
+	return m_robot_textures->find(p_robot_type)->second;
 }
 
 void GameController::set_x_scrollbar_pos(int p_new_pos)

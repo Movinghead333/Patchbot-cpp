@@ -165,7 +165,11 @@ vc 56:
 vc 57:
 	- exception are now caught a top level in ui class
 
+vc 58:
+	- controller now stores all necessary QImages in std::maps rather than
+	  in std::vectors
+
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
-	- save textures in maps instead of vectors

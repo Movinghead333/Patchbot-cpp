@@ -12,7 +12,8 @@ enum RobotType
 	FOLLOWER,
 	HUNTER,
 	SNIFFER,
-	DEAD
+	DEAD,
+	LAST_ROBOT
 };
 
 #endif

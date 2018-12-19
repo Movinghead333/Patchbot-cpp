@@ -4,7 +4,7 @@
 // enum containing the type of a tile for later comparisons
 enum TileType
 {
-	STEELPLANKS, 
+	STEELPLANKS = 0, 
 	PATCHBOT_SPAWN,
 	ENEMY_SPAWN,
 	ABYSS,
@@ -18,7 +18,8 @@ enum TileType
 	AUTO_DOOR_OPEN,
 	AUTO_DOOR_CLOSED,
 	INDESTRUCTABLE_WALL,
-	DESTRUCTABLE_WALL
+	DESTRUCTABLE_WALL,
+	LAST_TILE
 };
 
 #endif

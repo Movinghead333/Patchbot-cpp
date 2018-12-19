@@ -57,10 +57,10 @@ private:
 	std::shared_ptr<Colony> m_current_colony;
 
 	// stores all graphics for ground tiles
-	std::shared_ptr<std::vector<QImage>> m_ground_textures;
+	std::shared_ptr<std::map<TileType, QImage>> m_ground_textures;
 
 	// stores all robot-graphics
-	std::shared_ptr<std::vector<QImage>> m_robot_textures;
+	std::shared_ptr<std::map<RobotType, QImage>> m_robot_textures;
 };
 
 #endif
