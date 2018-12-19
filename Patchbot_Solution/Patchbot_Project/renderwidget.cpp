@@ -9,10 +9,6 @@ RenderWidget::RenderWidget(QWidget *parent)
 {
 }
 
-RenderWidget::~RenderWidget()
-{
-}
-
 // get a gamecontroller reference from passed from MainWindow
 void RenderWidget::set_game_controller_ref(
 	std::shared_ptr<GameController> p_game_controller)

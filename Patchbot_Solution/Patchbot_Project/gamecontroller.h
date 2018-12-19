@@ -12,7 +12,6 @@ class GameController
 {
 public:
 	GameController();
-	~GameController();
 
 	// loads a colony from a given filename and takes care of the setup
 	void load_and_initialize_colony(const std::string& p_file_path);

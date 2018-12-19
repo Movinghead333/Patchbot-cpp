@@ -27,11 +27,6 @@ MainWindow::MainWindow(QWidget *parent)
 		this, SLOT(scroll_y(int)));
 }
 
-// destructor
-MainWindow::~MainWindow()
-{
-}
-
 void MainWindow::paintEvent(QPaintEvent *)
 {
 	

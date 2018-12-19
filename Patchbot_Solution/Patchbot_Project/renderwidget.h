@@ -10,7 +10,6 @@ class RenderWidget : public QWidget
 
 public:
 	RenderWidget(QWidget *parent = 0);
-	~RenderWidget();
 
 	void set_game_controller_ref(
 		std::shared_ptr<GameController> p_game_controller

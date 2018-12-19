@@ -153,6 +153,8 @@ vc 53:
 	- test for task 4 done! (22.5 / 24 points)
 	- minor adjustments from supervisor (see TODO list)
 
+vc 54:
+	- removed unecessary empty destructors
 
 TODO:
 	- delete empty default constructors and destructors

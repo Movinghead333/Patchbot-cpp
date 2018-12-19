@@ -15,11 +15,6 @@ GameController::GameController()
 	}
 }
 
-
-GameController::~GameController()
-{
-}
-
 void GameController::load_and_initialize_colony(
 	const std::string& p_file_path)
 {

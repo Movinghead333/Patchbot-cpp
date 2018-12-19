@@ -37,7 +37,6 @@ private slots:
 public:
 	// constructor and destructor for MainWindow
 	MainWindow(QWidget *parent = Q_NULLPTR);
-	~MainWindow();
 
 protected:
 	// gets called whenever a window property changes

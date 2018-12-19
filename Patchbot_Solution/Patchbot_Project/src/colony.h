@@ -23,8 +23,6 @@ public:
 		std::vector<Robot> p_enemy_robots, 
 		const std::vector<Tile> p_tiles);
 
-	~Colony();
-
 	// getter-methods
 	int get_width() const;
 	int get_height() const;
