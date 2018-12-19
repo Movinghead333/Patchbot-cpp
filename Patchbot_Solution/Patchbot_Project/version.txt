@@ -159,8 +159,11 @@ vc 54:
 vc 55:
 	- added const& to for-each loops
 
+vc 56:
+	- fixed missing const in fornt of member-getters
+
 TODO:
-	- foreach loops with const&
-	- const for getters especially
+	- robtots and patchbot getter might receive a const depending on game
+	  implementation
 	- throw exception to a higher level which can handle them (in MainWindow)
 	- save textures in maps instead of vectors

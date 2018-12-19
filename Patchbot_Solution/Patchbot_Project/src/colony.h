@@ -31,6 +31,8 @@ public:
 	const Tile& get_tile_by_coordinates(int x, int y) const;
 
 	// get a ref to the vector storing all the robots from the current colony
+	// these getters are no const so the returned references can change the 
+	// current colony object
 	std::vector<Robot>& get_robots();
 	Robot& get_patch_bot();
 
