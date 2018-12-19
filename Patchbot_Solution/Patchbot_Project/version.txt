@@ -162,8 +162,10 @@ vc 55:
 vc 56:
 	- fixed missing const in fornt of member-getters
 
+vc 57:
+	- exception are now caught a top level in ui class
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
-	- throw exception to a higher level which can handle them (in MainWindow)
 	- save textures in maps instead of vectors

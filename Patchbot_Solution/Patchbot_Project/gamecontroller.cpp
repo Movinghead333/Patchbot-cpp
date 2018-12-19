@@ -5,31 +5,16 @@
 GameController::GameController()
 {
 	// load images into controller
-	try
-	{
-		load_textures();
-	}
-	catch (const Simple_Message_Exception& exception)
-	{
-		std::cerr << exception.m_error_message << std::endl;
-	}
+	// throws Simple_Message_Exception which is caught in MainWindow
+	load_textures();
 }
 
 void GameController::load_and_initialize_colony(
 	const std::string& p_file_path)
 {
 	// load a colony from file into controller
-	try
-	{
-		m_current_colony = std::make_shared<Colony>(
-			*Colony::load_colony(p_file_path)
-			);
-	}
-	catch (const Simple_Message_Exception& exception)
-	{
-		std::cerr << exception.m_error_message << std::endl;
-	}
-	
+	m_current_colony = std::make_shared<Colony>(
+		*Colony::load_colony(p_file_path));
 }
 
 void GameController::load_textures()

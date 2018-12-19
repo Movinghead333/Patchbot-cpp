@@ -14,8 +14,21 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	this->setWindowTitle("PATCHBOT v1.0");
 
-	// create Gamecontroller for data and game-logic management
-	m_game_controller = std::make_shared<GameController>(GameController());
+
+	try
+	{
+		// create Gamecontroller for data and game-logic management
+		m_game_controller = std::make_shared<GameController>(GameController());
+	}
+	catch (const Simple_Message_Exception& exception)
+	{
+		// catch errors, which occured during image loading
+		std::cerr << exception.m_error_message << std::endl;
+
+		display_error_message_dialog("Error loading textures:",
+									 exception.m_error_message);
+	}
+	
 
 	// add refernce of gamecontroller to rendering widget
 	ui.game->set_game_controller_ref(m_game_controller);
@@ -113,6 +126,8 @@ void MainWindow::on_changeColony_clicked()
 	catch (const Simple_Message_Exception& e)
 	{
 		std::cerr << e.m_error_message << std::endl;
+		display_error_message_dialog("Error occured during map loading:",
+									 e.m_error_message);
 	}
 	// catch any non aticipated exceptions
 	catch (...)
@@ -140,6 +155,15 @@ void MainWindow::display_info_message_dialog(const std::string& p_message)
 	QMessageBox::information(
 		this,
 		"Button clicked",
+		p_message.c_str());
+}
+
+void MainWindow::display_error_message_dialog(const std::string& p_title,
+	const std::string& p_message)
+{
+	QMessageBox::critical(
+		this,
+		p_title.c_str(),
 		p_message.c_str());
 }
 

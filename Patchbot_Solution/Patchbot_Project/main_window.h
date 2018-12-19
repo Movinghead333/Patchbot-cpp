@@ -62,6 +62,10 @@ private:
 	// as title. only for debugging purposes
 	void display_info_message_dialog(const std::string& p_message);
 
+	// display an error-dialog with a given title as well as a given message
+	void display_error_message_dialog(const std::string& p_title,
+									 const std::string& p_message);
+
 	// calculates render offsets based on window size and scrollbar-position
 	void calculate_render_details();
 };
