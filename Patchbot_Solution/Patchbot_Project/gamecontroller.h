@@ -23,11 +23,11 @@ public:
 	bool colony_loaded() const;
 
 	// get QImage ref according to passed TileType
-	const QImage& get_ground_texture_by_tile_type(
+	const std::shared_ptr<QImage> get_ground_texture_by_tile_type(
 		const TileType& p_tile) const;
 
 	// get QImage ref according to passed RobotType
-	const QImage& get_robot_texture_by_robot_type(
+	const std::shared_ptr<QImage> get_robot_texture_by_robot_type(
 		const RobotType& p_robot_type) const;
 
 	// scrollbar getters and setters
@@ -57,10 +57,10 @@ private:
 	std::shared_ptr<Colony> m_current_colony;
 
 	// stores all graphics for ground tiles
-	std::shared_ptr<std::map<TileType, QImage>> m_ground_textures;
+	std::map<TileType, std::shared_ptr<QImage>> m_ground_textures;
 
 	// stores all robot-graphics
-	std::shared_ptr<std::map<RobotType, QImage>> m_robot_textures;
+	std::map<RobotType, std::shared_ptr<QImage>> m_robot_textures;
 };
 
 #endif

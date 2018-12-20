@@ -102,8 +102,9 @@ void RenderWidget::render()
 				x + x_start_tile, y + y_start_tile);
 
 			// load matching QImage for current tile from controller
-			const QImage& current_tile_image = m_game_controller_ref->
-				get_ground_texture_by_tile_type(temp_tile.get_tile_type());
+			const std::shared_ptr<QImage> current_tile_image =
+				m_game_controller_ref->
+					get_ground_texture_by_tile_type(temp_tile.get_tile_type());
 
 			// calculate the x and y where the current tile should be rendered
 			int x_render_offset = tile_size * x + x_pixel_offset;
@@ -111,7 +112,7 @@ void RenderWidget::render()
 			
 			// draw the QImage at the earlier calculated coordinates
 			painter.drawImage(
-				QPoint(x_render_offset, y_render_offset), current_tile_image);
+				QPoint(x_render_offset, y_render_offset), *current_tile_image);
 		}
 	}
 
@@ -132,8 +133,10 @@ void RenderWidget::render()
 			robot_y_tile <  y_start_tile + y_tiles_to_rendered)
 		{
 			// load matching QImage for current robot from controller
-			const QImage& current_tile_image = m_game_controller_ref->
-				get_robot_texture_by_robot_type(temp_robot.get_robot_type());
+			const std::shared_ptr<QImage> current_tile_image =
+				m_game_controller_ref->
+					get_robot_texture_by_robot_type(
+						temp_robot.get_robot_type());
 			
 			// calculate render_offset from 0,0
 			int x_render_coordinate = (robot_x_tile - x_start_tile) * tile_size
@@ -144,7 +147,7 @@ void RenderWidget::render()
 			// render the the QImage at the calcualted offset
 			painter.drawImage(
 				QPoint(x_render_coordinate, y_render_coordinate),
-				current_tile_image);
+				*current_tile_image);
 		}
 	}
 }

@@ -172,6 +172,11 @@ vc 58:
 vc 59:
 	- TileType QImage map needs another rework
 
+vc 60:
+	- reworked QImage maps in controller to now hold a enumobject plus a 
+	  shared_ptr to a QImage
+	- also the map itself is now a normal member instead of a shared_ptr
+
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
