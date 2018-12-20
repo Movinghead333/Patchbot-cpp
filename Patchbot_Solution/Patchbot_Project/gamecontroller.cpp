@@ -40,6 +40,9 @@ void GameController::load_textures()
 		"wand_fels.tga"
 	};
 
+	/*std::map<TileType, std::string> tile_paths;
+	tile_paths.insert(std::make_pair(TileType::PATCHBOT_SPAWN, "..."));*/
+
 	// load the textures into the map
 	m_ground_textures = std::make_shared<std::map<TileType, QImage>>(
 		std::map<TileType, QImage>());

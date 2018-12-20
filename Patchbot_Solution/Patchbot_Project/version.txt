@@ -169,7 +169,11 @@ vc 58:
 	- controller now stores all necessary QImages in std::maps rather than
 	  in std::vectors
 
+vc 59:
+	- TileType QImage map needs another rework
+
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
+	- change map to TileType, shared_ptr<QImage>
