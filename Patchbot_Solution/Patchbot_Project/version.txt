@@ -177,8 +177,33 @@ vc 60:
 	  shared_ptr to a QImage
 	- also the map itself is now a normal member instead of a shared_ptr
 
+vc 61:
+	- added roadmap for task 5
+
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
-	- change map to TileType, shared_ptr<QImage>
+
+TASK 5:
+	- patchbot controls left, right, up, down and wait buttons with repititions
+	- back button to remove last added command
+
+	- startbutton: disable program-button-interface, sets itself to unwritable
+	- stepbutton: do one step patchbot moves first, then all opposing robots
+	  and lastly the whole environment receives an update
+	- automaticbutton: automatic modus executes one step each second and sets
+	  the stepbutton as well as the autmaticbutton itself to unwritable
+	- stopbutton: stops the currently executed automatic-mode and sets the step
+	  and automaticbutton back to writeable; disabled by default
+	- cancelbutton / resetbutton: 
+		- stops the current program-execution
+		- removes patchbot from map
+		- resets the environment (in this task only doors get reset)
+
+	- program single step function and interaction with the environment
+	  (patchbot opening door, falling into abyss, etc.)
+	- implement win and loose conditions (reaching rootserver, the program
+	  running out before patchbot reaches his goal, etc.)
+	- update environment (doors in this task, mentioned abobe)
+	- create classes for doors as well as for patchbot to minimize runtime
