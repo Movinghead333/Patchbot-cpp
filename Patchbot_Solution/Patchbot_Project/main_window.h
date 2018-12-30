@@ -30,11 +30,12 @@ private slots:
 	void on_changeColony_clicked();
 
 	// dropdown update slot
-	void on_repitions_changed(const QString& p_new_text);
+	void repititions_changed(const QString& p_new_text);
 
 	// scrollbar slots
 	void scroll_x(int p_new_value);
 	void scroll_y(int p_new_value);
+	void scroll_program(int p_new_value);
 
 public:
 	// constructor and destructor for MainWindow
@@ -70,6 +71,9 @@ private:
 
 	// calculates render offsets based on window size and scrollbar-position
 	void calculate_render_details();
+
+	// update the program scrollbar
+	void update_program_scroll_max();
 };
 
 #endif

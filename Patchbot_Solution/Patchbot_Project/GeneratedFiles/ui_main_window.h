@@ -595,7 +595,7 @@ public:
          << QApplication::translate("main_window", "X", Q_NULLPTR)
         );
         directionLeft->setText(QString());
-        currentProgramText->setText(QApplication::translate("main_window", "W8W8W8", Q_NULLPTR));
+        currentProgramText->setText(QApplication::translate("main_window", "W8W8W8W8W8", Q_NULLPTR));
         directionRight->setText(QString());
     } // retranslateUi
 

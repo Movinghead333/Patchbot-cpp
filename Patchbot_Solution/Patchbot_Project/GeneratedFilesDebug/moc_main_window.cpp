@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[19];
-    char stringdata0[368];
+    char stringdata0[367];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,11 +45,11 @@ QT_MOC_LITERAL(10, 207, 22), // "on_missionStep_clicked"
 QT_MOC_LITERAL(11, 230, 27), // "on_missionAutomatic_clicked"
 QT_MOC_LITERAL(12, 258, 23), // "on_missionPause_clicked"
 QT_MOC_LITERAL(13, 282, 23), // "on_changeColony_clicked"
-QT_MOC_LITERAL(14, 306, 20), // "on_repitions_changed"
-QT_MOC_LITERAL(15, 327, 10), // "p_new_text"
-QT_MOC_LITERAL(16, 338, 8), // "scroll_x"
-QT_MOC_LITERAL(17, 347, 11), // "p_new_value"
-QT_MOC_LITERAL(18, 359, 8) // "scroll_y"
+QT_MOC_LITERAL(14, 306, 19), // "repititions_changed"
+QT_MOC_LITERAL(15, 326, 10), // "p_new_text"
+QT_MOC_LITERAL(16, 337, 8), // "scroll_x"
+QT_MOC_LITERAL(17, 346, 11), // "p_new_value"
+QT_MOC_LITERAL(18, 358, 8) // "scroll_y"
 
     },
     "MainWindow\0on_directionUp_clicked\0\0"
@@ -62,8 +62,8 @@ QT_MOC_LITERAL(18, 359, 8) // "scroll_y"
     "on_missionStep_clicked\0"
     "on_missionAutomatic_clicked\0"
     "on_missionPause_clicked\0on_changeColony_clicked\0"
-    "on_repitions_changed\0p_new_text\0"
-    "scroll_x\0p_new_value\0scroll_y"
+    "repititions_changed\0p_new_text\0scroll_x\0"
+    "p_new_value\0scroll_y"
 };
 #undef QT_MOC_LITERAL
 
@@ -135,7 +135,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 9: _t->on_missionAutomatic_clicked(); break;
         case 10: _t->on_missionPause_clicked(); break;
         case 11: _t->on_changeColony_clicked(); break;
-        case 12: _t->on_repitions_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 12: _t->repititions_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 13: _t->scroll_x((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 14: _t->scroll_y((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;

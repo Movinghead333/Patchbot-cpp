@@ -986,7 +986,7 @@ background-color: rgb(53, 105, 122)
             </font>
            </property>
            <property name="text">
-            <string>W8W8W8</string>
+            <string>W8W8W8W8W8</string>
            </property>
            <property name="readOnly">
             <bool>true</bool>

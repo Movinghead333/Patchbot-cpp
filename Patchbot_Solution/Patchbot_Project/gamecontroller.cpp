@@ -219,6 +219,21 @@ void GameController::display_current_program() const
 	}
 }
 
+int GameController::calcualte_program_scrollbar_max() const
+{
+	int temp_max_scroll = m_current_program.size() -
+						  m_max_commands_in_lineedit;
+
+	if (temp_max_scroll > 0)
+	{
+		return temp_max_scroll;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 const std::shared_ptr<QImage> GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
 {
@@ -241,6 +256,11 @@ void GameController::set_y_scrollbar_pos(int p_new_pos)
 	y_scrollbar_pos = p_new_pos;
 }
 
+void GameController::set_program_scrollbar_pos(int p_new_pos)
+{
+	program_scrollbar_pos = p_new_pos;
+}
+
 int GameController::get_x_scrollbar_pos() const
 {
 	return x_scrollbar_pos;
@@ -249,6 +269,11 @@ int GameController::get_x_scrollbar_pos() const
 int GameController::get_y_scrollbar_pos() const
 {
 	return y_scrollbar_pos;
+}
+
+int GameController::get_program_scrollbar_pos() const
+{
+	return program_scrollbar_pos;
 }
 
 void GameController::set_render_width(int p_new_width)
@@ -282,4 +307,14 @@ void GameController::set_m_repititions(QString p_combo_box_input)
 	{
 		m_repititions = current_value.toLatin1() - '0';
 	}
+}
+
+void GameController::set_m_max_commands_in_lineedit(int p_max_chars)
+{
+	m_max_commands_in_lineedit = p_max_chars;
+}
+
+int GameController::get_m_max_commands_in_lineedit()
+{
+	return m_max_commands_in_lineedit;
 }

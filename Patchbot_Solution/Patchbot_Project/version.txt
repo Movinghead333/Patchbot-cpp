@@ -192,6 +192,10 @@ vc 64:
 	- added the ability to program patchbot
 	- the programming interface buttons are now all functional
 
+vc 65:
+	- scrollbar for programming window almost working
+	- transfer commit
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
