@@ -7,6 +7,7 @@
 
 #include "src/colony.h"
 #include "src/texture.h"
+#include "patchbot_move.h"
 
 class GameController
 {

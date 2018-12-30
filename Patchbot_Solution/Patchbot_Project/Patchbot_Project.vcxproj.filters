@@ -28,6 +28,9 @@
     <ClCompile Include="renderwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="patchbot_move.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h">
@@ -61,6 +64,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="gamecontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="move_type.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

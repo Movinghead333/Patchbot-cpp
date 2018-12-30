@@ -38,6 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
 		this, SLOT(scroll_x(int)));
 	connect(ui.yScrollbar, SIGNAL(valueChanged(int)),
 		this, SLOT(scroll_y(int)));
+
+	// connect dropdown
+	connect(ui.repititionComboBox, SIGNAL(currentTextChanged(QString)),
+		this, SLOT(on_repitions_changed(QString)));
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -134,6 +138,11 @@ void MainWindow::on_changeColony_clicked()
 	{
 		std::cout << "Unchecked exception thrown" << std::endl;
 	}
+}
+
+void MainWindow::on_repitions_changed(const QString & p_new_text)
+{
+	display_info_message_dialog("combobox changed");
 }
 
 void MainWindow::scroll_x(int p_new_value)

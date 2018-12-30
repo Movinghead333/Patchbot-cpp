@@ -263,6 +263,7 @@
   <ItemGroup>
     <ClCompile Include="gamecontroller.cpp" />
     <ClCompile Include="main_window.cpp" />
+    <ClCompile Include="patchbot_move.h" />
     <ClCompile Include="renderwidget.cpp" />
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="GeneratedFiles\ui_main_window.h" />
     <QtMoc Include="renderwidget.h">
     </QtMoc>
+    <ClInclude Include="move_type.h" />
     <ClInclude Include="src\colony.h" />
     <ClInclude Include="src\exceptions.h" />
     <ClInclude Include="src\texture.h" />

@@ -1,8 +1,6 @@
 #ifndef __MAIN_WINDOW_H_DEFINED__
 #define __MAIN_WINDOW_H_DEFINED__
 
-
-
 #include "ui_main_window.h"
 #include "gamecontroller.h"
 
@@ -30,7 +28,11 @@ private slots:
 
 	// change Colony slot
 	void on_changeColony_clicked();
-	
+
+	// dropdown update slot
+	void on_repitions_changed(const QString& p_new_text);
+
+	// scrollbar slots
 	void scroll_x(int p_new_value);
 	void scroll_y(int p_new_value);
 

@@ -184,6 +184,10 @@ vc 62:
 	- fixed corrupted mocking paths
 	- added X to the repitions dropdown menu
 
+vc 63:
+	- combobox slot implemented
+	- basic datatypes for patchbot moves are now implemented
+
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
