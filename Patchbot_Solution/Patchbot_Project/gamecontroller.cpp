@@ -7,6 +7,7 @@ GameController::GameController()
 	// load images into controller
 	// throws Simple_Message_Exception which is caught in MainWindow
 	load_textures();
+	m_current_program = std::vector<PatchbotMove>();
 }
 
 void GameController::load_and_initialize_colony(
@@ -182,6 +183,42 @@ bool GameController::colony_loaded() const
 	return m_current_colony != nullptr;
 }
 
+void GameController::add_move_to_current_program(MoveType p_move_type)
+{
+	if (m_repititions == -1 && p_move_type == MoveType::WAIT)
+	{
+		throw Simple_Message_Exception("Cannot add command \"wait until "
+			"obstacle\"");
+	}
+	else
+	{
+		m_current_program.push_back(PatchbotMove(m_repititions, p_move_type));
+	}
+}
+
+void GameController::remove_most_recently_added_move()
+{
+	if (m_current_program.size() > 0)
+	{
+		m_current_program.pop_back();
+	}
+	else
+	{
+		throw Simple_Message_Exception("Cannot remove command from empty "
+			"program!");
+	}
+}
+
+void GameController::display_current_program() const
+{
+	std::cout << "Current program:" << std::endl;
+	for (int i = 0; i < m_current_program.size(); i++)
+	{
+		std::cout << (char)m_current_program[i].m_move_type << ": ";
+		std::cout << m_current_program[i].m_steps			<< std::endl;
+	}
+}
+
 const std::shared_ptr<QImage> GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
 {
@@ -232,4 +269,17 @@ int GameController::get_render_width() const
 int GameController::get_render_height() const
 {
 	return render_height;
+}
+
+void GameController::set_m_repititions(QString p_combo_box_input)
+{
+	QChar current_value = p_combo_box_input[0];
+	if (current_value == 'X')
+	{
+		m_repititions = -1;
+	}
+	else
+	{
+		m_repititions = current_value.toLatin1() - '0';
+	}
 }

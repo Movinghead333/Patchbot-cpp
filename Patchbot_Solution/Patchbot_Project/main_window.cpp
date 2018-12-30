@@ -58,38 +58,55 @@ void MainWindow::resizeEvent(QResizeEvent * event)
 // slots for programming buttons
 void MainWindow::on_directionUp_clicked()
 {
-	display_info_message_dialog("Up direction button clicked!");
+	m_game_controller->add_move_to_current_program(MoveType::UP);
 }
 
 void MainWindow::on_directionRight_clicked()
 {
-	display_info_message_dialog("Right direction button clicked!");
+	m_game_controller->add_move_to_current_program(MoveType::RIGHT);
 }
 
 void MainWindow::on_directionDown_clicked()
 {
-	display_info_message_dialog("Down direction button clicked!");
+	m_game_controller->add_move_to_current_program(MoveType::DOWN);
 }
 
 void MainWindow::on_directionLeft_clicked()
 {
-	display_info_message_dialog("Left direction button clicked!");
+	m_game_controller->add_move_to_current_program(MoveType::LEFT);
 }
 
 void MainWindow::on_removeCommand_clicked()
 {
-	display_info_message_dialog("Remove command button clicked!");
+	try
+	{
+		m_game_controller->remove_most_recently_added_move();
+	}
+	catch (const Simple_Message_Exception& exception)
+	{
+		display_error_message_dialog("An error occured:",
+									 exception.m_error_message);
+	}
 }
 
 void MainWindow::on_playerWait_clicked()
 {
-	display_info_message_dialog("Wait button clicked!");
+	try
+	{
+		m_game_controller->add_move_to_current_program(MoveType::WAIT);
+	}
+	catch (const Simple_Message_Exception& exception)
+	{
+		display_error_message_dialog("An error occured:",
+									 exception.m_error_message);
+	}
 }
 
 // slots for mission control buttons
 void MainWindow::on_missionStart_clicked()
 {
-	display_info_message_dialog("Mission-start button clicked!");
+	m_game_controller->display_current_program();
+	//display_info_message_dialog("Mission-start button clicked!");
 }
 
 void MainWindow::on_missionCancel_clicked()
@@ -140,11 +157,13 @@ void MainWindow::on_changeColony_clicked()
 	}
 }
 
+// dropdown slot for program repititions
 void MainWindow::on_repitions_changed(const QString & p_new_text)
 {
-	display_info_message_dialog("combobox changed");
+	m_game_controller->set_m_repititions(p_new_text);
 }
 
+// scrollbar slots
 void MainWindow::scroll_x(int p_new_value)
 {
 	m_game_controller->set_x_scrollbar_pos(p_new_value);

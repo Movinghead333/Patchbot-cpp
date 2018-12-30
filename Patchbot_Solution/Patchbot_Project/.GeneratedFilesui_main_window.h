@@ -579,7 +579,7 @@ public:
         directionDown->setText(QString());
         playerWait->setText(QString());
         removeCommand->setText(QString());
-        staticProgramText->setText(QApplication::translate("main_window", "Programmieren", Q_NULLPTR));
+        staticProgramText->setText(QApplication::translate("main_window", "test", Q_NULLPTR));
         directionUp->setText(QString());
         repititionComboBox->clear();
         repititionComboBox->insertItems(0, QStringList()

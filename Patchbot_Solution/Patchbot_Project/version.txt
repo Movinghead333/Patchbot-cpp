@@ -188,14 +188,16 @@ vc 63:
 	- combobox slot implemented
 	- basic datatypes for patchbot moves are now implemented
 
+vc 64:
+	- added the ability to program patchbot
+	- the programming interface buttons are now all functional
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
+	- add functionality to program scrolling window
 
 TASK 5:
-	- patchbot controls left, right, up, down and wait buttons with repititions
-	- back button to remove last added command
 
 	- startbutton: disable program-button-interface, sets itself to unwritable
 	- stepbutton: do one step patchbot moves first, then all opposing robots

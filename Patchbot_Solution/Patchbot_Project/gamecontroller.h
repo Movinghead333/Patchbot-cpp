@@ -23,6 +23,14 @@ public:
 
 	bool colony_loaded() const;
 
+	void add_move_to_current_program(MoveType p_move_type);
+
+	// removes the most recently added command from the current program
+	void remove_most_recently_added_move();
+
+	// writes out the current program to console
+	void display_current_program() const;
+
 	// get QImage ref according to passed TileType
 	const std::shared_ptr<QImage> get_ground_texture_by_tile_type(
 		const TileType& p_tile) const;
@@ -45,6 +53,11 @@ public:
 	int get_render_width() const;
 	int get_render_height() const;
 
+	// set repititionsS
+	void set_m_repititions(QString p_combo_box_input);
+
+	
+
 private:
 	// current scrollbar positions
 	int x_scrollbar_pos = 0;
@@ -53,6 +66,12 @@ private:
 	// size of the rendered area
 	int render_width;
 	int render_height;
+
+	// currently selected amount of repetitions
+	int m_repititions = 1; //TODO change default value
+
+	// vector storing the current program
+	std::vector<PatchbotMove> m_current_program;
 
 	// stores the currently displayed colony
 	std::shared_ptr<Colony> m_current_colony;
