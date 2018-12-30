@@ -180,6 +180,10 @@ vc 60:
 vc 61:
 	- added roadmap for task 5
 
+vc 62:
+	- fixed corrupted mocking paths
+	- added X to the repitions dropdown menu
+
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game

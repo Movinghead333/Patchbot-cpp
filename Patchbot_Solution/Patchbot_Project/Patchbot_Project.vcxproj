@@ -152,16 +152,16 @@
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
-      <OutputFile>.GeneratedFiles$(ConfigurationName)moc_%(Filename).cpp</OutputFile>
+      <OutputFile>.\GeneratedFiles$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <Define>QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_MBCS</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.\;%(AdditionalIncludeDirectories)</IncludePath>
+      <IncludePath>.\GeneratedFiles;.\;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;%(AdditionalIncludeDirectories)</IncludePath>
     </QtMoc>
     <QtRcc>
       <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
-      <OutputFile>.GeneratedFilesqrc_%(Filename).cpp</OutputFile>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
       <InitFuncName>%(Filename)</InitFuncName>
       <Compression>default</Compression>
       <NoCompression>true</NoCompression>
@@ -170,7 +170,7 @@
     <QtUic>
       <QTDIR>$(QTDIR)</QTDIR>
       <InputFile>%(FullPath)</InputFile>
-      <OutputFile>.GeneratedFilesui_%(Filename).h</OutputFile>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
       <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
     </QtUic>
   </ItemDefinitionGroup>

@@ -592,6 +592,7 @@ public:
          << QApplication::translate("main_window", "7x", Q_NULLPTR)
          << QApplication::translate("main_window", "8x", Q_NULLPTR)
          << QApplication::translate("main_window", "9x", Q_NULLPTR)
+         << QApplication::translate("main_window", "X", Q_NULLPTR)
         );
         directionLeft->setText(QString());
         currentProgramText->setText(QApplication::translate("main_window", "W8W8W8", Q_NULLPTR));
