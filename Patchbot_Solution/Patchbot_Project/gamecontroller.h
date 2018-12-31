@@ -66,9 +66,16 @@ public:
 
 	// getter and setter for m_max_chars
 	void set_m_max_commands_in_lineedit(int p_max_chars);
-	int get_m_max_commands_in_lineedit();
+	int get_m_max_commands_in_lineedit() const;
+
+	// getter and setter for program_executing
+	void set_program_executing(bool p_program_executing);
+	bool get_program_executing() const;
 
 private:
+	// indicates if the current program has been started
+	bool program_executing = false;
+
 	// current scrollbar positions
 	int x_scrollbar_pos = 0;
 	int y_scrollbar_pos = 0;

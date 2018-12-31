@@ -200,10 +200,12 @@ vc 66:
 	- programming field is now fully implemented
 	- scrolling the program textfield works too
 
+vc 67:
+	- mission buttons now disable each other according to task
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
-	- add functionality to program scrolling window
 
 TASK 5:
 

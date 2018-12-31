@@ -11,7 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	
+	set_mission_ui_enabled(false);
+	ui.missionPause->setEnabled(false);
+
 	this->setWindowTitle("PATCHBOT v1.0");
 
 
@@ -54,6 +56,25 @@ void MainWindow::paintEvent(QPaintEvent *)
 void MainWindow::resizeEvent(QResizeEvent * event)
 {
 	calculate_render_details();
+}
+
+void MainWindow::set_programming_ui_enabled(bool enabled)
+{
+	ui.directionLeft->setEnabled(enabled);
+	ui.directionRight->setEnabled(enabled);
+	ui.directionUp->setEnabled(enabled);
+	ui.directionDown->setEnabled(enabled);
+	ui.playerWait->setEnabled(enabled);
+	ui.removeCommand->setEnabled(enabled);
+	ui.repititionComboBox->setEnabled(enabled);
+}
+
+void MainWindow::set_mission_ui_enabled(bool enabled)
+{
+	ui.missionAutomatic->setEnabled(enabled);
+	ui.missionStep->setEnabled(enabled);
+	ui.missionCancel->setEnabled(enabled);
+	ui.missionStart->setEnabled(!enabled);
 }
 
 
@@ -114,12 +135,16 @@ void MainWindow::on_playerWait_clicked()
 void MainWindow::on_missionStart_clicked()
 {
 	m_game_controller->display_current_program();
+	set_programming_ui_enabled(false);
+	set_mission_ui_enabled(true);
+	
 	//display_info_message_dialog("Mission-start button clicked!");
 }
 
 void MainWindow::on_missionCancel_clicked()
 {
-	display_info_message_dialog("Mission-cancel button clicked!");
+	set_mission_ui_enabled(false);
+	set_programming_ui_enabled(true);
 }
 
 void MainWindow::on_missionStep_clicked()
@@ -129,12 +154,16 @@ void MainWindow::on_missionStep_clicked()
 
 void MainWindow::on_missionAutomatic_clicked()
 {
-	display_info_message_dialog("Mission-automatic button clicked!");
+	ui.missionAutomatic->setEnabled(false);
+	ui.missionStep->setEnabled(false);
+	ui.missionPause->setEnabled(true);
 }
 
 void MainWindow::on_missionPause_clicked()
 {
-	display_info_message_dialog("Mission-pause button clicked!");
+	ui.missionAutomatic->setEnabled(true);
+	ui.missionStep->setEnabled(true);
+	ui.missionPause->setEnabled(false);
 }
 
 // changing colony

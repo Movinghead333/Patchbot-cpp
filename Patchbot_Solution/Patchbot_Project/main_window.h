@@ -50,9 +50,12 @@ protected:
 
 
 private:
-	//TODO: maybe as local in resize event in mainwindow
-	// maximum scroll-values for x and y game scrollbar
-	
+	// TODO maybe combine the following two methods
+	// enables or disables the programming ui
+	void set_programming_ui_enabled(bool enabled);
+
+	// enables or disables the mission interface
+	void set_mission_ui_enabled(bool enabled);
 
 	// gui instance
 	Ui::main_window ui;

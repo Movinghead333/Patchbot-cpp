@@ -336,7 +336,7 @@ void GameController::set_m_max_commands_in_lineedit(int p_max_chars)
 	m_max_commands_in_lineedit = p_max_chars;
 }
 
-int GameController::get_m_max_commands_in_lineedit()
+int GameController::get_m_max_commands_in_lineedit() const
 {
 	return m_max_commands_in_lineedit;
 }
