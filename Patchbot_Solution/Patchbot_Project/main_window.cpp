@@ -141,7 +141,6 @@ void MainWindow::on_missionPause_clicked()
 void MainWindow::on_changeColony_clicked()
 {
 	QString filter = "Textfile (*.txt)";
-
 	std::string file_name = QFileDialog::getOpenFileName(
 		this, "Open new Colony", "C://", filter
 	).toStdString();
@@ -186,9 +185,12 @@ void MainWindow::scroll_y(int p_new_value)
 
 void MainWindow::scroll_program(int p_new_value)
 {
+	// send new scrollbar position to controller
 	m_game_controller->set_program_scrollbar_pos(p_new_value);
-	// TODO add current text to display
-	QString temp_str = "";
+
+	// update current program textfield
+	ui.currentProgramText->setText(
+		m_game_controller->get_currently_displayed_program_string());
 	
 }
 
@@ -260,15 +262,17 @@ void MainWindow::calculate_render_details()
 	// add resizing for current program scrollbar
 
 		// get max character width of the line edit's font
-//	int maxWidth = QFontMetrics(ui.currentProgramText->font()).
-//			maxWidth();
+	int maxWidth = QFontMetrics(ui.currentProgramText->font()).
+			maxWidth();
+
+	maxWidth /= 2;
 
 	// find the character limit based on the max width and send it to the
 	// controller
 	m_game_controller->set_m_max_commands_in_lineedit(
-		ui.currentProgramText->width() / 30);
+		(ui.currentProgramText->width() / maxWidth) - 2);
 	std::cout << "max chars for current program" << std::endl;
-	std::cout << ui.currentProgramText->width() / 30 << std::endl;
+	std::cout << (ui.currentProgramText->width() / maxWidth) - 2 << std::endl;
 	update_program_scroll_max();
 }
 
@@ -276,4 +280,6 @@ void MainWindow::update_program_scroll_max()
 {
 	ui.scrollProgram->setMaximum(
 		m_game_controller->calcualte_program_scrollbar_max());
+	ui.currentProgramText->setText(
+		m_game_controller->get_currently_displayed_program_string());
 }

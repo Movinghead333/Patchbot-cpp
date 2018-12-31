@@ -196,6 +196,28 @@ void GameController::add_move_to_current_program(MoveType p_move_type)
 	}
 }
 
+const QString GameController::get_currently_displayed_program_string() const
+{
+	QString temp_string = "";
+
+	int iterations = m_max_commands_in_lineedit;
+	if (m_max_commands_in_lineedit > m_current_program.size())
+	{
+		iterations = m_current_program.size();
+	}
+
+	for (int i = 0; i < iterations; i++)
+	{
+		// todo fix digit display
+		int temp_pos = program_scrollbar_pos + i;
+		const PatchbotMove& temp_move = m_current_program[temp_pos];
+		temp_string.append(temp_move.m_move_type);
+		temp_string.append(QString::number(temp_move.m_steps));
+		std::cout << temp_move.m_steps << std::endl;
+	}
+	return temp_string;
+}
+
 void GameController::remove_most_recently_added_move()
 {
 	if (m_current_program.size() > 0)

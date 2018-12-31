@@ -25,6 +25,9 @@ public:
 
 	void add_move_to_current_program(MoveType p_move_type);
 
+	//
+	const QString get_currently_displayed_program_string() const;
+
 	// removes the most recently added command from the current program
 	void remove_most_recently_added_move();
 
