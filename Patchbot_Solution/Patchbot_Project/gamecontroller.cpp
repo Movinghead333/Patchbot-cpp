@@ -292,6 +292,14 @@ void GameController::start_current_program()
 void GameController::execute_single_step()
 {
 	Robot& patchbot_ref = m_current_colony->get_patch_bot();
+
+	// check if patchbot is blocked from aliengrass
+	if (patchbot_ref.get_m_blocked())
+	{
+		patchbot_ref.set_m_blocked(false);
+		return;
+	}
+
 	int current_x = patchbot_ref.get_x_coordinate();
 	int current_y = patchbot_ref.get_y_coordinate();
 
@@ -333,7 +341,6 @@ void GameController::execute_single_step()
 	}
 
 	// decrease the step count
-	std::cout << m_current_move.m_steps << std::endl;
 	m_current_move.m_steps--;
 
 	// if the current index is equal to program-vectors size than the program
@@ -350,13 +357,39 @@ void GameController::execute_single_step()
 			m_current_move = m_current_program[m_program_index];
 		}
 	}
-
-	
 }
 
 bool GameController::calculate_collision(int x, int y)
 {
-	return true;
+	switch (m_current_colony->get_tile_by_coordinates(x, y).get_tile_type())
+	{
+	case TileType::ABYSS:
+		set_game_state(GameState::FELL_INTO_ABYSS);
+		return true;
+	case TileType::WATER:
+		set_game_state(GameState::FELL_INTO_WATER);
+		return true;
+	case TileType::ROOT_SERVER:
+		set_game_state(GameState::SERVER_REACHED);
+		return false;
+	case TileType::SECRET_ENTRANCE:
+	case TileType::GRAVEL:
+	case TileType::AUTO_DOOR_OPEN:
+	case TileType::MANUAL_DOOR_CLOSED:
+	case TileType::PATCHBOT_SPAWN:
+	case TileType::ENEMY_SPAWN:
+	case TileType::STEELPLANKS:
+		return true;
+	case TileType::ALIEN_GRASS:
+		m_current_colony->get_patch_bot().set_m_blocked(true);
+		return true;
+	case TileType::INDESTRUCTABLE_WALL:
+	case TileType::DESTRUCTABLE_WALL:
+	case TileType::AUTO_DOOR_CLOSED:
+		return false;
+
+	default: return false;
+	}
 }
 
 void GameController::reset_robots()

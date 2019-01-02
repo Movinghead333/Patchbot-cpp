@@ -27,6 +27,9 @@ public:
 
 	void reset_position();
 
+	void set_m_blocked(bool p_blocked);
+	bool get_m_blocked() const;
+
 
 private:
 
@@ -41,6 +44,8 @@ private:
 
 	// A robot's type for later runtime-comparisons
 	const RobotType m_robot_type;
+
+	bool m_blocked = false;
 };
 
 #endif

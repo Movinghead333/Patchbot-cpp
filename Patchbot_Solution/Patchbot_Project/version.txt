@@ -223,6 +223,12 @@ vc 71:
 	- fixed a bug where programs would end up in endless loops
 	- all robots now have their positions reset when a game sessions ends
 
+vc 72:
+	- collision for patchbot is now almost complete only manual doors and
+	  their implementation are missing
+	- added a blocked attribute to robot to indicate a robot is waiting on 
+	  the environment
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation

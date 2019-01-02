@@ -39,3 +39,13 @@ void Robot::reset_position()
 	m_y_coordinate = m_back_up_y;
 }
 
+void Robot::set_m_blocked(bool p_blocked)
+{
+	m_blocked = p_blocked;
+}
+
+bool Robot::get_m_blocked() const
+{
+	return m_blocked;
+}
+
