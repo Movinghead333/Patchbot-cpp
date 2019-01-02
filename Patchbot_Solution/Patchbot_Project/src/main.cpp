@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 {
 	//test_texture_loading("src\\textures\\umgebungen\\boden_start_patchbot.tga");
 	// create QApplication object
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
 	// create and show the main window

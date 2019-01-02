@@ -210,6 +210,9 @@ vc 68:
 	- improved controller class documentation
 	- added flag to represent wether automatic mode is active or not
 
+vc 69:
+	- added support for high density screens
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
