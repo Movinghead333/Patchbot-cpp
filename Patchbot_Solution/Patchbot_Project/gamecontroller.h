@@ -12,20 +12,26 @@
 class GameController
 {
 public:
+	/* LOGICAL CALCULATIONS AND INITIALIZATIONS FOR THE GAME */
+
+	// creates an instance of the game controller loading all images
+	// and initializing the current-program vector
 	GameController();
 
 	// loads a colony from a given filename and takes care of the setup
 	void load_and_initialize_colony(const std::string& p_file_path);
 
+	// loads all necessary textures for the game
 	void load_textures();
 
-	Colony& get_current_colony();
-
+	// returns wether a colony is currently stored in memory
 	bool colony_loaded() const;
 
+	// adds a move to current program based on the MoveType parameter
+	// and the repititions variable saved in the controller
 	void add_move_to_current_program(MoveType p_move_type);
 
-	//
+	// returns a QString for the current program QLineEdit
 	const QString get_currently_displayed_program_string() const;
 
 	// removes the most recently added command from the current program
@@ -37,6 +43,11 @@ public:
 	// get amount of commands which can be displayed in the qlineedit
 	int calcualte_program_scrollbar_max() const;
 
+	// check if the current program is not empty
+	void validate_current_program() const;
+
+	/* GETTERS AND SETTERS */
+
 	// get QImage ref according to passed TileType
 	const std::shared_ptr<QImage> get_ground_texture_by_tile_type(
 		const TileType& p_tile) const;
@@ -44,6 +55,9 @@ public:
 	// get QImage ref according to passed RobotType
 	const std::shared_ptr<QImage> get_robot_texture_by_robot_type(
 		const RobotType& p_robot_type) const;
+
+	// return a reference to currently loaded colony
+	Colony& get_current_colony();
 
 	// scrollbar getters and setters
 	void set_x_scrollbar_pos(int p_new_pos);
@@ -69,12 +83,15 @@ public:
 	int get_m_max_commands_in_lineedit() const;
 
 	// getter and setter for program_executing
-	void set_program_executing(bool p_program_executing);
-	bool get_program_executing() const;
+	void set_m_automatic_mode_enabled(bool p_m_automatic_mode_enabled);
+	bool get_m_automatic_mode_enabled() const;
 
 private:
-	// indicates if the current program has been started
-	bool program_executing = false;
+	/* PRIVATE MEMBERS AND GUI DATA */
+
+	// flag which determins wether automatic mode is currently on or off
+	// off by default
+	bool m_automatic_mode_enabled = false;
 
 	// current scrollbar positions
 	int x_scrollbar_pos = 0;

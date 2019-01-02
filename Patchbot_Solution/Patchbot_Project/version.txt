@@ -203,13 +203,20 @@ vc 66:
 vc 67:
 	- mission buttons now disable each other according to task
 
+vc 68:
+	- added a different style for disabled buttons and the combobox
+	- all buttons now enable / disable the ui correctly
+	- added a check for if the program is empty so it cannot be started
+	- improved controller class documentation
+	- added flag to represent wether automatic mode is active or not
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
 
 TASK 5:
 
-	- startbutton: disable program-button-interface, sets itself to unwritable
+DONE: startbutton: disable program-button-interface, sets itself to unwritable
 	- stepbutton: do one step patchbot moves first, then all opposing robots
 	  and lastly the whole environment receives an update
 	- automaticbutton: automatic modus executes one step each second and sets

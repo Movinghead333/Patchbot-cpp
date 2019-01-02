@@ -1,7 +1,7 @@
 #include "gamecontroller.h"
 
 
-
+// loads textures into memory and initializes the current program vector
 GameController::GameController()
 {
 	// load images into controller
@@ -10,14 +10,18 @@ GameController::GameController()
 	m_current_program = std::vector<PatchbotMove>();
 }
 
+// loads a colony from a given filepath into memory and resets the current
+// program vector
 void GameController::load_and_initialize_colony(
 	const std::string& p_file_path)
 {
 	// load a colony from file into controller
 	m_current_colony = std::make_shared<Colony>(
 		*Colony::load_colony(p_file_path));
+	m_current_program = std::vector<PatchbotMove>();
 }
 
+// loads all needed textures into memory for later rendering
 void GameController::load_textures()
 {
 	// load ground textures
@@ -173,16 +177,21 @@ void GameController::load_textures()
 	}
 }
 
+// return a editable reference to the current colony
 Colony& GameController::get_current_colony()
 {
 	return *m_current_colony.get();
 }
 
+// checks if there is a colony loaded into the game
 bool GameController::colony_loaded() const
 {
 	return m_current_colony != nullptr;
 }
 
+// adds a command to current program based on the selected MoveType and the 
+// selected repititions
+// throws if Move is "wait until obstacle"
 void GameController::add_move_to_current_program(MoveType p_move_type)
 {
 	if (m_repititions == -1 && p_move_type == MoveType::WAIT)
@@ -196,6 +205,8 @@ void GameController::add_move_to_current_program(MoveType p_move_type)
 	}
 }
 
+// calculates the current string to be displayed by the current program
+// lineedit and returns it
 const QString GameController::get_currently_displayed_program_string() const
 {
 	QString temp_string = "";
@@ -213,11 +224,12 @@ const QString GameController::get_currently_displayed_program_string() const
 		const PatchbotMove& temp_move = m_current_program[temp_pos];
 		temp_string.append(temp_move.m_move_type);
 		temp_string.append(QString::number(temp_move.m_steps));
-		std::cout << temp_move.m_steps << std::endl;
 	}
 	return temp_string;
 }
 
+// controller method for removing the most recently added command
+// throws exception if the program is already emtpy
 void GameController::remove_most_recently_added_move()
 {
 	if (m_current_program.size() > 0)
@@ -231,6 +243,7 @@ void GameController::remove_most_recently_added_move()
 	}
 }
 
+// debug method for printing the current program to console
 void GameController::display_current_program() const
 {
 	std::cout << "Current program:" << std::endl;
@@ -241,6 +254,8 @@ void GameController::display_current_program() const
 	}
 }
 
+// calculates the maximum for the program scrollbar depending on program length
+// as well as available render space
 int GameController::calcualte_program_scrollbar_max() const
 {
 	int temp_max_scroll = m_current_program.size() -
@@ -256,6 +271,17 @@ int GameController::calcualte_program_scrollbar_max() const
 	}
 }
 
+// checks if the current program is not empty
+// if the current program is empty throw an exception
+void GameController::validate_current_program() const
+{
+	if (m_current_program.size() == 0)
+	{
+		throw Simple_Message_Exception("Cannot start with empty program!");
+	}
+}
+
+// image getters for retreiving image resources from controller
 const std::shared_ptr<QImage> GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
 {
@@ -268,6 +294,7 @@ const std::shared_ptr<QImage> GameController::get_robot_texture_by_robot_type(
 	return m_robot_textures.find(p_robot_type)->second;
 }
 
+// getters and setters for scrollbars
 void GameController::set_x_scrollbar_pos(int p_new_pos)
 {
 	x_scrollbar_pos = p_new_pos;
@@ -298,6 +325,7 @@ int GameController::get_program_scrollbar_pos() const
 	return program_scrollbar_pos;
 }
 
+// getters and setters for render dimensions
 void GameController::set_render_width(int p_new_width)
 {
 	render_width = p_new_width;
@@ -318,6 +346,7 @@ int GameController::get_render_height() const
 	return render_height;
 }
 
+// setter for command repititions
 void GameController::set_m_repititions(QString p_combo_box_input)
 {
 	QChar current_value = p_combo_box_input[0];
@@ -331,6 +360,8 @@ void GameController::set_m_repititions(QString p_combo_box_input)
 	}
 }
 
+// getter and setter for the number of commands display int current program
+// line-edit
 void GameController::set_m_max_commands_in_lineedit(int p_max_chars)
 {
 	m_max_commands_in_lineedit = p_max_chars;
@@ -339,4 +370,16 @@ void GameController::set_m_max_commands_in_lineedit(int p_max_chars)
 int GameController::get_m_max_commands_in_lineedit() const
 {
 	return m_max_commands_in_lineedit;
+}
+
+// getter and setter for automatic mode flag
+void GameController::set_m_automatic_mode_enabled(
+	bool p_m_automatic_mode_enabled)
+{
+	m_automatic_mode_enabled = p_m_automatic_mode_enabled;
+}
+
+bool GameController::get_m_automatic_mode_enabled() const
+{
+	return m_automatic_mode_enabled;
 }

@@ -11,8 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 
+	// mission ui disabled by when starting up the game
 	set_mission_ui_enabled(false);
-	ui.missionPause->setEnabled(false);
+
+	// programming ui is also disabled until a colony gets loaded
+	set_programming_ui_enabled(false);
 
 	this->setWindowTitle("PATCHBOT v1.0");
 
@@ -74,7 +77,8 @@ void MainWindow::set_mission_ui_enabled(bool enabled)
 	ui.missionAutomatic->setEnabled(enabled);
 	ui.missionStep->setEnabled(enabled);
 	ui.missionCancel->setEnabled(enabled);
-	ui.missionStart->setEnabled(!enabled);
+	ui.missionStart->setEnabled(enabled);
+	ui.missionPause->setEnabled(enabled);
 }
 
 
@@ -134,22 +138,46 @@ void MainWindow::on_playerWait_clicked()
 // slots for mission control buttons
 void MainWindow::on_missionStart_clicked()
 {
-	m_game_controller->display_current_program();
-	set_programming_ui_enabled(false);
-	set_mission_ui_enabled(true);
-	
-	//display_info_message_dialog("Mission-start button clicked!");
+	try
+	{
+		// validate the current program
+		m_game_controller->validate_current_program();
+
+		//debug
+		m_game_controller->display_current_program();
+
+		// disabled programming interface
+		set_programming_ui_enabled(false);
+
+		// update mission control interface
+		ui.missionStart->setEnabled(false);
+		ui.missionAutomatic->setEnabled(true);
+		ui.missionStep->setEnabled(true);
+		ui.missionCancel->setEnabled(true);
+	}
+	catch (const Simple_Message_Exception& exception)
+	{
+		display_error_message_dialog("An error occured",
+									 exception.m_error_message);
+	}
 }
 
 void MainWindow::on_missionCancel_clicked()
 {
+	// update mission interface
 	set_mission_ui_enabled(false);
+	ui.missionStart->setEnabled(true);
+
+	// re-enable programming interface
 	set_programming_ui_enabled(true);
+
+	// disable automatic mode if it is active
+	m_game_controller->set_m_automatic_mode_enabled(false);
 }
 
 void MainWindow::on_missionStep_clicked()
 {
-	display_info_message_dialog("MIssion-step button clicked!");
+	display_info_message_dialog("Mission-step button clicked!");
 }
 
 void MainWindow::on_missionAutomatic_clicked()
@@ -157,6 +185,7 @@ void MainWindow::on_missionAutomatic_clicked()
 	ui.missionAutomatic->setEnabled(false);
 	ui.missionStep->setEnabled(false);
 	ui.missionPause->setEnabled(true);
+	m_game_controller->set_m_automatic_mode_enabled(true);
 }
 
 void MainWindow::on_missionPause_clicked()
@@ -164,6 +193,7 @@ void MainWindow::on_missionPause_clicked()
 	ui.missionAutomatic->setEnabled(true);
 	ui.missionStep->setEnabled(true);
 	ui.missionPause->setEnabled(false);
+	m_game_controller->set_m_automatic_mode_enabled(false);
 }
 
 // changing colony
@@ -178,6 +208,8 @@ void MainWindow::on_changeColony_clicked()
 	{
 		m_game_controller->load_and_initialize_colony(file_name);
 		calculate_render_details();
+		set_programming_ui_enabled(true);
+		ui.missionStart->setEnabled(true);
 	}
 	// catch all specified exceptions
 	catch (const Simple_Message_Exception& e)
