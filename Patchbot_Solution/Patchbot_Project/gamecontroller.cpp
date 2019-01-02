@@ -333,6 +333,7 @@ void GameController::execute_single_step()
 	}
 
 	// decrease the step count
+	std::cout << m_current_move.m_steps << std::endl;
 	m_current_move.m_steps--;
 
 	// if the current index is equal to program-vectors size than the program
@@ -340,21 +341,30 @@ void GameController::execute_single_step()
 	if (m_current_move.m_steps == 0)
 	{
 		m_program_index++;
+		if (m_program_index >= m_current_program.size())
+		{
+			m_game_state = GameState::PROGRAM_ENDED;
+		}
+		else
+		{
+			m_current_move = m_current_program[m_program_index];
+		}
 	}
 
-	if (m_program_index >= m_current_program.size())
-	{
-		m_game_state = GameState::PROGRAM_ENDED;
-	}
-	else
-	{
-		m_current_move = m_current_program[m_program_index];
-	}
+	
 }
 
 bool GameController::calculate_collision(int x, int y)
 {
 	return true;
+}
+
+void GameController::reset_robots()
+{
+	for (Robot& robot : m_current_colony->get_robots())
+	{
+		robot.reset_position();
+	}
 }
 
 // image getters for retreiving image resources from controller

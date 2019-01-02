@@ -25,6 +25,8 @@ public:
 
 	void update_position(int p_new_x, int p_new_y);
 
+	void reset_position();
+
 
 private:
 
@@ -32,6 +34,10 @@ private:
 	// representing the tile in top left corner
 	int m_x_coordinate;
 	int m_y_coordinate;
+
+	// backup coordinates for reset
+	int m_back_up_x;
+	int m_back_up_y;
 
 	// A robot's type for later runtime-comparisons
 	const RobotType m_robot_type;

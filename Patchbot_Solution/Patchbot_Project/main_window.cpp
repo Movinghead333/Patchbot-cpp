@@ -381,6 +381,12 @@ void MainWindow::check_win_and_loose_conditions()
 		break;
 	}
 
+	// display dialog
+	display_info_message_dialog(title, message);
+
+	// reset robots
+	m_game_controller->reset_robots();
+
 	// reset gamestate
 	m_game_controller->set_game_state(GameState::GAME_NOT_STARTED);
 
@@ -388,7 +394,4 @@ void MainWindow::check_win_and_loose_conditions()
 	set_mission_ui_enabled(false);
 	ui.missionStart->setEnabled(true);
 	set_programming_ui_enabled(true);
-
-	// display dialog
-	display_info_message_dialog(title, message);
 }

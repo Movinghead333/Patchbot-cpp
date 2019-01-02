@@ -53,7 +53,11 @@ public:
 	// execute a single time step in the current program
 	void execute_single_step();
 
+	// patchbot can make a move or false if
 	bool calculate_collision(int x, int y);
+
+	// reset all robots after the game ends
+	void reset_robots();
 
 
 

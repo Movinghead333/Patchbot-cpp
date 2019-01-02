@@ -7,6 +7,8 @@ Robot::Robot(
 	RobotType p_robot_type) :
 	m_x_coordinate(p_x_coordinate),
 	m_y_coordinate(p_y_coordinate),
+	m_back_up_x(p_x_coordinate),
+	m_back_up_y(p_y_coordinate),
 	m_robot_type(p_robot_type)
 {
 }
@@ -29,5 +31,11 @@ void Robot::update_position(int p_new_x, int p_new_y)
 {
 	m_x_coordinate = p_new_x;
 	m_y_coordinate = p_new_y;
+}
+
+void Robot::reset_position()
+{
+	m_x_coordinate = m_back_up_x;
+	m_y_coordinate = m_back_up_y;
 }
 

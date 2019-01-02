@@ -219,6 +219,10 @@ vc 70:
 	- if the current programs ends before patchbot reaches a server the game 
 	  is lost
 
+vc 71:
+	- fixed a bug where programs would end up in endless loops
+	- all robots now have their positions reset when a game sessions ends
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
