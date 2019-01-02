@@ -276,6 +276,7 @@
   <ItemGroup>
     <QtMoc Include="main_window.h">
     </QtMoc>
+    <ClInclude Include="door.h" />
     <ClInclude Include="gamecontroller.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="GeneratedFiles\ui_main_window.h" />

@@ -387,6 +387,9 @@ void MainWindow::check_win_and_loose_conditions()
 	// reset robots
 	m_game_controller->reset_robots();
 
+	// reset environment
+	m_game_controller->reset_doors();
+
 	// reset gamestate
 	m_game_controller->set_game_state(GameState::GAME_NOT_STARTED);
 

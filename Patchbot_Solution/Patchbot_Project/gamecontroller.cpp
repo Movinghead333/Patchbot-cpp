@@ -357,35 +357,42 @@ void GameController::execute_single_step()
 			m_current_move = m_current_program[m_program_index];
 		}
 	}
+
+	//update doors
+	update_doors(current_x, current_y);
 }
 
 bool GameController::calculate_collision(int x, int y)
 {
 	switch (m_current_colony->get_tile_by_coordinates(x, y).get_tile_type())
 	{
+	// true cases --> no collision
+	case TileType::SECRET_ENTRANCE:
+	case TileType::GRAVEL:
+	case TileType::AUTO_DOOR_OPEN:
+	case TileType::PATCHBOT_SPAWN:
+	case TileType::ENEMY_SPAWN:
+	case TileType::STEELPLANKS:
+	case TileType::MANUAL_DOOR_OPEN:
+		return true;
+	case TileType::ALIEN_GRASS:
+		m_current_colony->get_patch_bot().set_m_blocked(true);
+		return true;
 	case TileType::ABYSS:
 		set_game_state(GameState::FELL_INTO_ABYSS);
 		return true;
 	case TileType::WATER:
 		set_game_state(GameState::FELL_INTO_WATER);
-		return true;
+return true;
+
+// false cases --> collision
 	case TileType::ROOT_SERVER:
 		set_game_state(GameState::SERVER_REACHED);
 		return false;
-	case TileType::SECRET_ENTRANCE:
-	case TileType::GRAVEL:
-	case TileType::AUTO_DOOR_OPEN:
-	case TileType::MANUAL_DOOR_CLOSED:
-	case TileType::PATCHBOT_SPAWN:
-	case TileType::ENEMY_SPAWN:
-	case TileType::STEELPLANKS:
-		return true;
-	case TileType::ALIEN_GRASS:
-		m_current_colony->get_patch_bot().set_m_blocked(true);
-		return true;
 	case TileType::INDESTRUCTABLE_WALL:
 	case TileType::DESTRUCTABLE_WALL:
 	case TileType::AUTO_DOOR_CLOSED:
+	case TileType::MANUAL_DOOR_CLOSED:
 		return false;
 
 	default: return false;
@@ -397,6 +404,85 @@ void GameController::reset_robots()
 	for (Robot& robot : m_current_colony->get_robots())
 	{
 		robot.reset_position();
+	}
+}
+
+void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
+{
+	std::vector<Door>& doors_ref = m_current_colony->get_doors();
+
+	for (Door& temp_door : doors_ref)
+	{
+		// if a door is already open meaning its timer is not equal to zero 
+		// then update it
+		if (temp_door.m_open_timer != 0)
+		{
+			temp_door.m_open_timer--;
+		}
+
+		Tile temp_tile = m_current_colony->get_tile_by_coordinates(
+			temp_door.m_x, temp_door.m_y);
+
+		// check if a door timer has ticked down if so change the door back to 
+		// closed
+		if (temp_door.m_open_timer == 0)
+		{
+			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
+			{
+				m_current_colony->set_tile_type_by_coordinates(
+					temp_door.m_x,
+					temp_door.m_y,
+					TileType::MANUAL_DOOR_CLOSED);
+			}
+			else if (temp_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
+			{
+				m_current_colony->set_tile_type_by_coordinates(
+					temp_door.m_x,
+					temp_door.m_y,
+					TileType::AUTO_DOOR_CLOSED);
+			}
+		}
+
+		if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
+		{
+			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_CLOSED)
+			{
+				temp_door.m_open_timer = 10;
+				m_current_colony->set_tile_type_by_coordinates(
+					temp_door.m_x,
+					temp_door.m_y,
+					TileType::MANUAL_DOOR_OPEN);
+			}
+		}
+	}
+}
+
+void GameController::reset_doors()
+{
+	std::vector<Door> temp_doors = m_current_colony->get_doors();
+	for (Door& temp_door : temp_doors)
+	{
+		const Tile& temp_tile = m_current_colony->get_tile_by_coordinates(
+			temp_door.m_x, temp_door.m_y);
+
+		if (temp_door.m_open_timer != 0)
+		{
+			temp_door.m_open_timer = 0;
+			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
+			{
+				m_current_colony->set_tile_type_by_coordinates(
+					temp_door.m_x,
+					temp_door.m_y,
+					TileType::MANUAL_DOOR_CLOSED);
+			}
+			else if (temp_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
+			{
+				m_current_colony->set_tile_type_by_coordinates(
+					temp_door.m_x,
+					temp_door.m_y,
+					TileType::AUTO_DOOR_CLOSED);
+			}
+		}
 	}
 }
 

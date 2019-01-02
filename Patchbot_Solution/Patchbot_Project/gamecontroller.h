@@ -59,6 +59,11 @@ public:
 	// reset all robots after the game ends
 	void reset_robots();
 
+	// update all doors on the map
+	void update_doors(int p_patchbot_x, int p_patchbot_y);
+
+	// reset all doors
+	void reset_doors();
 
 
 	/* GETTERS AND SETTERS */

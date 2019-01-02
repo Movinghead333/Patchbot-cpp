@@ -229,6 +229,12 @@ vc 72:
 	- added a blocked attribute to robot to indicate a robot is waiting on 
 	  the environment
 
+vc 73:
+	- doors are now implemented
+	- patchbot can open manual doors
+	- doors reset on game end
+
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation

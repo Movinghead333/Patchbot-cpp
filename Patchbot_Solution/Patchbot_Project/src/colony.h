@@ -8,7 +8,7 @@
 #include "tile.h"
 #include "utility.h"
 #include "exceptions.h"
-#include "doortile.h"
+#include "door.h"
 
 class Colony
 {
@@ -21,7 +21,8 @@ public:
 		const int p_width,
 		const int p_height,
 		std::vector<Robot> p_enemy_robots, 
-		const std::vector<Tile> p_tiles);
+		const std::vector<Tile> p_tiles,
+		std::vector<Door> p_doors);
 
 	// getter-methods
 	int get_width() const;
@@ -30,11 +31,16 @@ public:
 	const std::vector<Tile>& get_tiles() const;
 	const Tile& get_tile_by_coordinates(int x, int y) const;
 
+	void set_tile_type_by_coordinates(int x, int y, TileType p_tile_type);
+
 	// get a ref to the vector storing all the robots from the current colony
 	// these getters are no const so the returned references can change the 
 	// current colony object
 	std::vector<Robot>& get_robots();
 	Robot& get_patch_bot();
+
+	// get changable vector of all doors
+	std::vector<Door>& get_doors();
 
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
@@ -47,7 +53,11 @@ private:
 	const int m_height;
 
 	// vector storing a Tile-object for each x,y-pair
-	const std::vector<Tile> m_tiles;
+	std::vector<Tile> m_tiles;
+
+	// vector holding all doors in order to update them while the game is
+	// running
+	std::vector<Door> m_doors;
 
 	// vector storing all robots
 	// and their properties (e.g. x and y coordiante)

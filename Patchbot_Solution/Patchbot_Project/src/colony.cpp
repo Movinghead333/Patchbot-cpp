@@ -5,11 +5,18 @@
 #include <string>
 #include <sstream>
 
-Colony::Colony(const int p_width, const int p_height,
-	std::vector<Robot> p_enemy_robots, std::vector<Tile> p_tiles) 
+Colony::Colony(
+	const int p_width,
+	const int p_height,
+	std::vector<Robot> p_enemy_robots,
+	std::vector<Tile> p_tiles,
+	std::vector<Door> p_doors)
 	:
-	m_width(p_width), m_height(p_height),
-	m_robots(p_enemy_robots), m_tiles(p_tiles) 
+	m_width(p_width),
+	m_height(p_height),
+	m_robots(p_enemy_robots),
+	m_tiles(p_tiles),
+	m_doors(p_doors)
 {
 	// TODO: add checks in constructor if necessary
 }
@@ -18,7 +25,12 @@ Colony::Colony(const int p_width, const int p_height,
 const Tile& Colony::get_tile_by_coordinates(int x, int y) const
 {
 	return m_tiles[x + (m_width * y)];
-}											
+}
+
+void Colony::set_tile_type_by_coordinates(int x, int y, TileType p_tile_type)
+{
+	m_tiles[x + (m_width * y)].set_m_tile_type(p_tile_type);
+}
 											
 int Colony::get_width() const				
 {											
@@ -39,6 +51,11 @@ const std::vector<Tile>& Colony::get_tiles() const
 {
 	return m_robots[m_robots.size()-1];
 }
+
+ std::vector<Door>& Colony::get_doors()
+ {
+	 return m_doors;
+ }
 
 std::vector<Robot>& Colony::get_robots()
 {
@@ -95,6 +112,9 @@ Colony* Colony::load_colony(const std::string& file_name)
 	// setting up temporary vector for enemy robots
 	std::vector<Robot> temp_robots;
 
+	// setting up temp vector for doors
+	std::vector<Door> temp_doors;
+
 	bool hasStart = false;
 	bool hasEnd = false;
 
@@ -150,6 +170,11 @@ Colony* Colony::load_colony(const std::string& file_name)
 							Tile(Utility::char_to_tile_type(current_char))
 						);
 						
+						if (tile_type == TileType::MANUAL_DOOR_CLOSED ||
+							tile_type == TileType::AUTO_DOOR_CLOSED)
+						{
+							temp_doors.push_back(Door(x, y));
+						}
 
 						// check if the current character is the player's
 						// starting location,
@@ -227,7 +252,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 	// if all values have been correctly setup create and return a pointer to
 	// the loaded colony
 	Colony* return_colony =
-		new Colony(width, height, temp_robots, temp_tiles);
+		new Colony(width, height, temp_robots, temp_tiles, temp_doors);
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
 }

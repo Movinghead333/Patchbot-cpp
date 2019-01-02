@@ -32,3 +32,8 @@ TileType Tile::get_tile_type() const
 {
 	return m_tile_type;
 }
+
+void Tile::set_m_tile_type(TileType p_tile_type)
+{
+	m_tile_type = p_tile_type;
+}
