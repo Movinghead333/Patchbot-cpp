@@ -122,6 +122,13 @@ void RenderWidget::render()
 	
 	for (const Robot& temp_robot : temp_robots)
 	{
+		if (temp_robot.get_robot_type() == RobotType::PATCHBOT &&
+			m_game_controller_ref->get_game_state() ==
+			GameState::GAME_NOT_STARTED)
+		{
+			continue;
+		}
+
 		// get the robots position in tiles
 		int robot_x_tile = temp_robot.get_x_coordinate();
 		int robot_y_tile = temp_robot.get_y_coordinate();

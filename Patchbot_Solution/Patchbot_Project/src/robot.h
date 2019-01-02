@@ -23,6 +23,8 @@ public:
 
 	RobotType get_robot_type() const;
 
+	void update_position(int p_new_x, int p_new_y);
+
 
 private:
 

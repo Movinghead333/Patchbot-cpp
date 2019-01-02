@@ -8,6 +8,7 @@
 #include "src/colony.h"
 #include "src/texture.h"
 #include "patchbot_move.h"
+#include "game_state.h"
 
 class GameController
 {
@@ -45,6 +46,16 @@ public:
 
 	// check if the current program is not empty
 	void validate_current_program() const;
+
+	// start program execution
+	void start_current_program();
+
+	// execute a single time step in the current program
+	void execute_single_step();
+
+	bool calculate_collision(int x, int y);
+
+
 
 	/* GETTERS AND SETTERS */
 
@@ -86,12 +97,25 @@ public:
 	void set_m_automatic_mode_enabled(bool p_m_automatic_mode_enabled);
 	bool get_m_automatic_mode_enabled() const;
 
+	// getter and setter for current game state
+	GameState get_game_state() const;
+	void set_game_state(GameState p_game_state);
+
 private:
 	/* PRIVATE MEMBERS AND GUI DATA */
 
 	// flag which determins wether automatic mode is currently on or off
 	// off by default
 	bool m_automatic_mode_enabled = false;
+
+	// current gamestate
+	GameState m_game_state = GameState::GAME_NOT_STARTED;
+
+	// stores the index of the currently executed move
+	int m_program_index;
+
+	// stores the currently executed move
+	PatchbotMove m_current_move;
 
 	// current scrollbar positions
 	int x_scrollbar_pos = 0;

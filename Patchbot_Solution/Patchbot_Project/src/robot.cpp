@@ -25,3 +25,9 @@ RobotType Robot::get_robot_type() const
 	return m_robot_type;
 }
 
+void Robot::update_position(int p_new_x, int p_new_y)
+{
+	m_x_coordinate = p_new_x;
+	m_y_coordinate = p_new_y;
+}
+

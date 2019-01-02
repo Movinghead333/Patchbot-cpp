@@ -142,6 +142,7 @@ void MainWindow::on_missionStart_clicked()
 	{
 		// validate the current program
 		m_game_controller->validate_current_program();
+		m_game_controller->start_current_program();
 
 		//debug
 		m_game_controller->display_current_program();
@@ -154,6 +155,9 @@ void MainWindow::on_missionStart_clicked()
 		ui.missionAutomatic->setEnabled(true);
 		ui.missionStep->setEnabled(true);
 		ui.missionCancel->setEnabled(true);
+
+		// update gamewindow
+		ui.game->update();
 	}
 	catch (const Simple_Message_Exception& exception)
 	{
@@ -177,7 +181,9 @@ void MainWindow::on_missionCancel_clicked()
 
 void MainWindow::on_missionStep_clicked()
 {
-	display_info_message_dialog("Mission-step button clicked!");
+	m_game_controller->execute_single_step();
+	ui.game->update();
+	check_win_and_loose_conditions();
 }
 
 void MainWindow::on_missionAutomatic_clicked()
@@ -257,11 +263,12 @@ void MainWindow::scroll_program(int p_new_value)
 
 // shows short information dialog displaying that a button has been clicked
 // and message which button has been pressed (p_message)
-void MainWindow::display_info_message_dialog(const std::string& p_message)
+void MainWindow::display_info_message_dialog(const std::string& title,
+	const std::string& p_message)
 {
 	QMessageBox::information(
 		this,
-		"Button clicked",
+		title.c_str(),
 		p_message.c_str());
 }
 
@@ -343,4 +350,45 @@ void MainWindow::update_program_scroll_max()
 		m_game_controller->calcualte_program_scrollbar_max());
 	ui.currentProgramText->setText(
 		m_game_controller->get_currently_displayed_program_string());
+}
+
+void MainWindow::check_win_and_loose_conditions()
+{
+	if (m_game_controller->get_game_state() == GameState::IN_PROGRESS)
+	{
+		return;
+	}
+
+	std::string title = "Game lost!";
+	std::string message;
+
+	// generate dialog content
+	switch (m_game_controller->get_game_state())
+	{
+	case GameState::PROGRAM_ENDED:
+		message = "The program ended before patchbot reached a server. "
+				  "Mission failed!";
+		break;
+	case GameState::FELL_INTO_ABYSS:
+		message = "Patchbot fell into an abyss. Mission failed!";
+		break;
+	case GameState::FELL_INTO_WATER:
+		message = "Patchbot fell into water. Mission failed!";
+		break;
+	case GameState::SERVER_REACHED:
+		title = "Game won!";
+		message = "Patchbot reached a server. Mission successful!";
+		break;
+	}
+
+	// reset gamestate
+	m_game_controller->set_game_state(GameState::GAME_NOT_STARTED);
+
+	// update interface
+	set_mission_ui_enabled(false);
+	ui.missionStart->setEnabled(true);
+	set_programming_ui_enabled(true);
+
+	// display dialog
+	display_info_message_dialog(title, message);
 }

@@ -281,6 +281,82 @@ void GameController::validate_current_program() const
 	}
 }
 
+// starts the current program
+void GameController::start_current_program()
+{
+	m_program_index = 0;
+	m_current_move = m_current_program[m_program_index];
+	set_game_state(GameState::IN_PROGRESS);
+}
+
+void GameController::execute_single_step()
+{
+	Robot& patchbot_ref = m_current_colony->get_patch_bot();
+	int current_x = patchbot_ref.get_x_coordinate();
+	int current_y = patchbot_ref.get_y_coordinate();
+
+	// do current step
+	switch (m_current_move.m_move_type)
+	{
+	case MoveType::UP:
+		current_y--;
+		if (current_y >= 0 && calculate_collision(current_x, current_y))
+		{
+			patchbot_ref.update_position(current_x, current_y);
+		}
+		break;
+	case MoveType::RIGHT:
+		current_x++;
+		if (current_x < m_current_colony->get_width() &&
+			calculate_collision(current_x, current_y))
+		{
+			patchbot_ref.update_position(current_x, current_y);
+		}
+		break;
+	case MoveType::DOWN:
+		current_y++;
+		if (current_y < m_current_colony->get_height() &&
+			calculate_collision(current_x, current_y))
+		{
+			patchbot_ref.update_position(current_x, current_y);
+		}
+		break;
+	case MoveType::LEFT:
+		current_x--;
+		if (current_x >= 0 && calculate_collision(current_x, current_y))
+		{
+			patchbot_ref.update_position(current_x, current_y);
+		}
+		break;
+	case MoveType::WAIT:
+		break;
+	}
+
+	// decrease the step count
+	m_current_move.m_steps--;
+
+	// if the current index is equal to program-vectors size than the program
+	// is finished
+	if (m_current_move.m_steps == 0)
+	{
+		m_program_index++;
+	}
+
+	if (m_program_index >= m_current_program.size())
+	{
+		m_game_state = GameState::PROGRAM_ENDED;
+	}
+	else
+	{
+		m_current_move = m_current_program[m_program_index];
+	}
+}
+
+bool GameController::calculate_collision(int x, int y)
+{
+	return true;
+}
+
 // image getters for retreiving image resources from controller
 const std::shared_ptr<QImage> GameController::get_ground_texture_by_tile_type(
 	const TileType & p_tile) const
@@ -382,4 +458,14 @@ void GameController::set_m_automatic_mode_enabled(
 bool GameController::get_m_automatic_mode_enabled() const
 {
 	return m_automatic_mode_enabled;
+}
+
+GameState GameController::get_game_state() const
+{
+	return m_game_state;
+}
+
+void GameController::set_game_state(GameState p_game_state)
+{
+	m_game_state = p_game_state;
 }

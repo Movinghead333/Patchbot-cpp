@@ -12,6 +12,8 @@ struct PatchbotMove
 		m_steps(p_steps), m_move_type(p_move_type)
 	{
 	};
+
+	PatchbotMove();
 };
 
 #endif

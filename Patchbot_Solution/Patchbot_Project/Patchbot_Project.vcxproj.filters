@@ -31,6 +31,9 @@
     <ClCompile Include="patchbot_move.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="patchbot_move.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\colony.h">
@@ -67,6 +70,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="move_type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

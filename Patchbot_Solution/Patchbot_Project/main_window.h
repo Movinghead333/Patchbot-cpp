@@ -66,17 +66,21 @@ private:
 
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes
-	void display_info_message_dialog(const std::string& p_message);
+	void display_info_message_dialog(const std::string& title,
+									 const std::string& p_message);
 
 	// display an error-dialog with a given title as well as a given message
 	void display_error_message_dialog(const std::string& p_title,
-									 const std::string& p_message);
+									  const std::string& p_message);
 
 	// calculates render offsets based on window size and scrollbar-position
 	void calculate_render_details();
 
 	// update the program scrollbar
 	void update_program_scroll_max();
+
+	// check if the game is won or lost
+	void check_win_and_loose_conditions();
 };
 
 #endif

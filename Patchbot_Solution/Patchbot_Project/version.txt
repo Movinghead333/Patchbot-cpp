@@ -213,6 +213,12 @@ vc 68:
 vc 69:
 	- added support for high density screens
 
+vc 70:
+	- patch now only appears if the game is in progress
+	- patchbot now has basic movement but no collision yet
+	- if the current programs ends before patchbot reaches a server the game 
+	  is lost
+
 TODO:
 	- robtots and patchbot getter might receive a const depending on game
 	  implementation
