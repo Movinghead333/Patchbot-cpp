@@ -239,6 +239,9 @@ vc 74:
 	- fixed a bug where move until obstacle commands would be shows correctly
 	  in the game current program lineedit
 
+vc 75:
+	- automatic mode is now fully implemented
+	- TASK 5 main programming work complete
 
 TODO:
 	- robtots and patchbot getter might receive a const depending on game

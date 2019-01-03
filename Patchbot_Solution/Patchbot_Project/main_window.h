@@ -37,6 +37,9 @@ private slots:
 	void scroll_y(int p_new_value);
 	void scroll_program(int p_new_value);
 
+	// slot for the automatic mode timer
+	void automatic_mode_step();
+
 public:
 	// constructor and destructor for MainWindow
 	MainWindow(QWidget *parent = Q_NULLPTR);
@@ -63,6 +66,9 @@ private:
 	// game controller
 	std::shared_ptr<GameController> m_game_controller;
 
+	// shared pointer holding the timer object for automatic mode execution
+	std::shared_ptr<QTimer> m_automatic_mode_timer;
+
 
 	// creates a short info-dialog with a given message and "Button clicked"
 	// as title. only for debugging purposes
@@ -81,6 +87,9 @@ private:
 
 	// check if the game is won or lost
 	void check_win_and_loose_conditions();
+
+	// void do single step
+	void single_step();
 };
 
 #endif

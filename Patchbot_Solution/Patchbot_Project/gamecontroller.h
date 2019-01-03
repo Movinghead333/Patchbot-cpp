@@ -4,6 +4,7 @@
 #include <string>
 
 #include <qimage.h>
+#include <qtimer.h>
 
 #include "src/colony.h"
 #include "src/texture.h"

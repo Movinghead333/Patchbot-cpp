@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 	this->setWindowTitle("PATCHBOT v1.0");
 
+	m_automatic_mode_timer = std::make_shared<QTimer>(new QTimer(this));
 
 	try
 	{
@@ -39,16 +40,20 @@ MainWindow::MainWindow(QWidget *parent)
 	ui.game->set_game_controller_ref(m_game_controller);
 
 	// connect scrollbars
-	connect(ui.xScrollbar, SIGNAL(valueChanged(int)),
-		this, SLOT(scroll_x(int)));
-	connect(ui.yScrollbar, SIGNAL(valueChanged(int)),
-		this, SLOT(scroll_y(int)));
+	connect(ui.xScrollbar,	  SIGNAL(valueChanged(int)),
+			this,			  SLOT(scroll_x(int)));
+	connect(ui.yScrollbar,	  SIGNAL(valueChanged(int)),
+			this,			  SLOT(scroll_y(int)));
 	connect(ui.scrollProgram, SIGNAL(valueChanged(int)),
-		this, SLOT(scroll_program(int)));
+			this,			  SLOT(scroll_program(int)));
 
 	// connect dropdown
 	connect(ui.repititionComboBox, SIGNAL(currentTextChanged(QString)),
-		this, SLOT(repititions_changed(QString)));
+			this,				   SLOT(repititions_changed(QString)));
+
+	// connect the timer for automatic mode
+	connect(m_automatic_mode_timer.get(), SIGNAL(timeout()),
+			this,					      SLOT(automatic_mode_step()));
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
@@ -176,19 +181,19 @@ void MainWindow::on_missionCancel_clicked()
 	set_programming_ui_enabled(true);
 
 	// disable automatic mode if it is active
-	m_game_controller->set_m_automatic_mode_enabled(false);
+	if (m_game_controller->get_m_automatic_mode_enabled())
+	{
+		// if the automatic mode was on disabled it
+		m_game_controller->set_m_automatic_mode_enabled(false);
+
+		// and stop the timer
+		m_automatic_mode_timer->stop();
+	}
 }
 
 void MainWindow::on_missionStep_clicked()
 {
-	// execute a single time-step
-	m_game_controller->execute_single_step();
-
-	// update the game after the step
-	ui.game->update();
-
-	// check the win / loose conditions
-	check_win_and_loose_conditions();
+	single_step();
 }
 
 void MainWindow::on_missionAutomatic_clicked()
@@ -202,6 +207,9 @@ void MainWindow::on_missionAutomatic_clicked()
 
 	// set automatic mode to true
 	m_game_controller->set_m_automatic_mode_enabled(true);
+
+	// and start the timer
+	m_automatic_mode_timer->start(1000);
 }
 
 void MainWindow::on_missionPause_clicked()
@@ -215,6 +223,9 @@ void MainWindow::on_missionPause_clicked()
 
 	// set automatic mode to false
 	m_game_controller->set_m_automatic_mode_enabled(false);
+
+	// and stop the timer
+	m_automatic_mode_timer->stop();
 }
 
 // changing colony
@@ -274,6 +285,12 @@ void MainWindow::scroll_program(int p_new_value)
 	ui.currentProgramText->setText(
 		m_game_controller->get_currently_displayed_program_string());
 	
+}
+
+void MainWindow::automatic_mode_step()
+{
+	single_step();
+	std::cout << "Single step in automation mode executed" << std::endl;
 }
 
 // shows short information dialog displaying that a button has been clicked
@@ -412,4 +429,22 @@ void MainWindow::check_win_and_loose_conditions()
 	set_mission_ui_enabled(false);
 	ui.missionStart->setEnabled(true);
 	set_programming_ui_enabled(true);
+
+	if (m_game_controller->get_m_automatic_mode_enabled())
+	{
+		m_game_controller->set_m_automatic_mode_enabled(false);
+		m_automatic_mode_timer->stop();
+	}
+}
+
+void MainWindow::single_step()
+{
+	// execute a single time-step
+	m_game_controller->execute_single_step();
+
+	// update the game after the step
+	ui.game->update();
+
+	// check the win / loose conditions
+	check_win_and_loose_conditions();
 }
