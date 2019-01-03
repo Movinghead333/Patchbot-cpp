@@ -223,7 +223,14 @@ const QString GameController::get_currently_displayed_program_string() const
 		int temp_pos = program_scrollbar_pos + i;
 		const PatchbotMove& temp_move = m_current_program[temp_pos];
 		temp_string.append(temp_move.m_move_type);
-		temp_string.append(QString::number(temp_move.m_steps));
+		if (temp_move.m_steps != -1)
+		{
+			temp_string.append(QString::number(temp_move.m_steps));
+		}
+		else
+		{
+			temp_string.append('X');
+		}
 	}
 	return temp_string;
 }
@@ -308,40 +315,50 @@ void GameController::execute_single_step()
 	{
 	case MoveType::UP:
 		current_y--;
-		if (current_y >= 0 && calculate_collision(current_x, current_y))
-		{
-			patchbot_ref.update_position(current_x, current_y);
-		}
 		break;
+
 	case MoveType::RIGHT:
 		current_x++;
-		if (current_x < m_current_colony->get_width() &&
-			calculate_collision(current_x, current_y))
-		{
-			patchbot_ref.update_position(current_x, current_y);
-		}
 		break;
+
 	case MoveType::DOWN:
 		current_y++;
-		if (current_y < m_current_colony->get_height() &&
-			calculate_collision(current_x, current_y))
-		{
-			patchbot_ref.update_position(current_x, current_y);
-		}
 		break;
+
 	case MoveType::LEFT:
 		current_x--;
-		if (current_x >= 0 && calculate_collision(current_x, current_y))
-		{
-			patchbot_ref.update_position(current_x, current_y);
-		}
 		break;
+
 	case MoveType::WAIT:
 		break;
 	}
 
-	// decrease the step count
-	m_current_move.m_steps--;
+	// check if the current movetype is a direction if so check if patchbot
+	// needs to be moved
+	if (m_current_move.m_move_type != MoveType::WAIT)
+	{
+		if (calculate_collision(current_x, current_y))
+		{
+			patchbot_ref.update_position(current_x, current_y);
+		}
+	}
+
+	// if the repitions amount is set to go until obstacle then check if there
+	// was an obstacle at the current step if so increment steps from -1 to 0 
+	// so the program progresses to the next move
+	// NOTE: the current implementation does an extra step to confirm the next
+	//		 tile would be an obstacle
+	if (m_current_move.m_steps == -1 &&
+		!calculate_collision(current_x, current_y))
+	{
+		m_current_move.m_steps++;
+	}
+	// if repititions is different from -1 then just decreasen it each step
+	// until it reaches 0
+	else if (m_current_move.m_steps > 0)
+	{
+		m_current_move.m_steps--;
+	}
 
 	// if the current index is equal to program-vectors size than the program
 	// is finished
@@ -364,6 +381,13 @@ void GameController::execute_single_step()
 
 bool GameController::calculate_collision(int x, int y)
 {
+	// check the boundries if the move goes out of bounds return false
+	if (x < 0 || x >= m_current_colony->get_width() ||
+		y < 0 || y >= m_current_colony->get_height())
+	{
+		return false;
+	}
+
 	switch (m_current_colony->get_tile_by_coordinates(x, y).get_tile_type())
 	{
 	// true cases --> no collision

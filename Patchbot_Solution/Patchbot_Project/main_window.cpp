@@ -181,24 +181,39 @@ void MainWindow::on_missionCancel_clicked()
 
 void MainWindow::on_missionStep_clicked()
 {
+	// execute a single time-step
 	m_game_controller->execute_single_step();
+
+	// update the game after the step
 	ui.game->update();
+
+	// check the win / loose conditions
 	check_win_and_loose_conditions();
 }
 
 void MainWindow::on_missionAutomatic_clicked()
 {
+	// disable step and automation button
 	ui.missionAutomatic->setEnabled(false);
 	ui.missionStep->setEnabled(false);
+
+	// enable the pause button
 	ui.missionPause->setEnabled(true);
+
+	// set automatic mode to true
 	m_game_controller->set_m_automatic_mode_enabled(true);
 }
 
 void MainWindow::on_missionPause_clicked()
 {
+	// enable single step and automatic mode buttons
 	ui.missionAutomatic->setEnabled(true);
 	ui.missionStep->setEnabled(true);
+
+	// disable pause button
 	ui.missionPause->setEnabled(false);
+
+	// set automatic mode to false
 	m_game_controller->set_m_automatic_mode_enabled(false);
 }
 
