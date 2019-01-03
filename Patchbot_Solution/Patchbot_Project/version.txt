@@ -243,27 +243,11 @@ vc 75:
 	- automatic mode is now fully implemented
 	- TASK 5 main programming work complete
 
+vc 76:
+	- updated TODO
+
 TODO:
-	- robtots and patchbot getter might receive a const depending on game
-	  implementation
+	- maybe some code cleanup here and there
 
-TASK 5:
 
-DONE: startbutton: disable program-button-interface, sets itself to unwritable
-	- stepbutton: do one step patchbot moves first, then all opposing robots
-	  and lastly the whole environment receives an update
-	- automaticbutton: automatic modus executes one step each second and sets
-	  the stepbutton as well as the autmaticbutton itself to unwritable
-	- stopbutton: stops the currently executed automatic-mode and sets the step
-	  and automaticbutton back to writeable; disabled by default
-	- cancelbutton / resetbutton: 
-		- stops the current program-execution
-		- removes patchbot from map
-		- resets the environment (in this task only doors get reset)
 
-	- program single step function and interaction with the environment
-	  (patchbot opening door, falling into abyss, etc.)
-	- implement win and loose conditions (reaching rootserver, the program
-	  running out before patchbot reaches his goal, etc.)
-	- update environment (doors in this task, mentioned abobe)
-	- create classes for doors as well as for patchbot to minimize runtime
