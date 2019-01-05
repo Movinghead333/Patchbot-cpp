@@ -264,6 +264,10 @@ vc 80:
 	- complete rework of the current project file structure
 	- added new filters for better visibility
 
+vc 81:
+	- deleted oudated files
+	- put patchbot_move.h in include
+
 TODO:
 	- maybe move timer in controller though it is Qt object and thus requires
 	  ownership from main_window

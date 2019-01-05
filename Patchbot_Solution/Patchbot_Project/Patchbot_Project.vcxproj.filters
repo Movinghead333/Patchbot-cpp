@@ -75,6 +75,9 @@
     <ClInclude Include="include\gamecontroller.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="include\patchbot_move.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\Sven\Dropbox\Studium\3. Semester\Cpp Praktikum\Grafiken\grafiken\umgebungen\boden.tga">
