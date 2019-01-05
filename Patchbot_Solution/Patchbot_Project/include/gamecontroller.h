@@ -6,8 +6,8 @@
 #include <qimage.h>
 #include <qtimer.h>
 
-#include "src/colony.h"
-#include "src/texture.h"
+#include "colony.h"
+#include "texture.h"
 #include "patchbot_move.h"
 #include "game_state.h"
 

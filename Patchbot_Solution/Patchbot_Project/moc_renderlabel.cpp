@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'renderwidget.h'
+** Meta object code from reading C++ file 'renderlabel.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../renderwidget.h"
+#include "include/renderlabel.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'renderwidget.h' doesn't include <QObject>."
+#error "The header file 'renderlabel.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.9.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_RenderWidget_t {
+struct qt_meta_stringdata_RenderLabel_t {
     QByteArrayData data[1];
-    char stringdata0[13];
+    char stringdata0[12];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_RenderWidget_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_RenderLabel_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_RenderWidget_t qt_meta_stringdata_RenderWidget = {
+static const qt_meta_stringdata_RenderLabel_t qt_meta_stringdata_RenderLabel = {
     {
-QT_MOC_LITERAL(0, 0, 12) // "RenderWidget"
+QT_MOC_LITERAL(0, 0, 11) // "RenderLabel"
 
     },
-    "RenderWidget"
+    "RenderLabel"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_RenderWidget[] = {
+static const uint qt_meta_data_RenderLabel[] = {
 
  // content:
        7,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_RenderWidget[] = {
        0        // eod
 };
 
-void RenderWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void RenderLabel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,28 +62,28 @@ void RenderWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     Q_UNUSED(_a);
 }
 
-const QMetaObject RenderWidget::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_RenderWidget.data,
-      qt_meta_data_RenderWidget,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject RenderLabel::staticMetaObject = {
+    { &QLabel::staticMetaObject, qt_meta_stringdata_RenderLabel.data,
+      qt_meta_data_RenderLabel,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *RenderWidget::metaObject() const
+const QMetaObject *RenderLabel::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *RenderWidget::qt_metacast(const char *_clname)
+void *RenderLabel::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_RenderWidget.stringdata0))
-        return static_cast<void*>(const_cast< RenderWidget*>(this));
-    return QWidget::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_RenderLabel.stringdata0))
+        return static_cast<void*>(const_cast< RenderLabel*>(this));
+    return QLabel::qt_metacast(_clname);
 }
 
-int RenderWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int RenderLabel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QLabel::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

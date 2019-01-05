@@ -1,82 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\colony.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\robot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utility.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main_window.cpp">
+    <ClCompile Include="src\main_window.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="gamecontroller.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\renderwidget.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="renderwidget.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\utility.cpp">
+      <Filter>Source Files\utility</Filter>
     </ClCompile>
-    <ClCompile Include="patchbot_move.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\tile.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\robot.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\patchbot_move.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gamecontroller.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\colony.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\colony.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\robot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\robot_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tile_type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\type_definitions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\exceptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_main_window.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="gamecontroller.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\tile_type.h">
+      <Filter>Header Files\enums</Filter>
     </ClInclude>
-    <ClInclude Include="move_type.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\robot_type.h">
+      <Filter>Header Files\enums</Filter>
     </ClInclude>
-    <ClInclude Include="game_state.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\move_type.h">
+      <Filter>Header Files\enums</Filter>
     </ClInclude>
-    <ClInclude Include="door.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\game_state.h">
+      <Filter>Header Files\enums</Filter>
     </ClInclude>
-    <ClInclude Include="patchbot_move.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\exceptions.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utility.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\type_definitions.h">
+      <Filter>Header Files\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\colony.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tile.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\robot.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\door.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gamecontroller.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,22 +198,39 @@
       <Extensions>ui</Extensions>
       <ParseFiles>true</ParseFiles>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="version.txt" />
+    <Filter Include="Header Files\enums">
+      <UniqueIdentifier>{18d0679f-4be2-42e0-93eb-b8d15501809e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utility">
+      <UniqueIdentifier>{c92af717-1bec-43f7-b4d5-6c792a74696a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{321d244a-8364-421e-8d2a-52eb369690e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utility">
+      <UniqueIdentifier>{9063eb8f-3bd8-45fd-8033-0ab769d3bb55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{c8da5779-ca81-4140-aa46-941c71a05cb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="main_window.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="main_window.h">
-      <Filter>Header Files\ui</Filter>
-    </QtMoc>
     <QtRcc Include="Resource.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtMoc Include="renderwidget.h">
-      <Filter>Header Files</Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\main_window.h">
+      <Filter>Header Files\ui</Filter>
     </QtMoc>
+    <QtMoc Include="include\renderwidget.h">
+      <Filter>Header Files\ui</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="version.txt" />
   </ItemGroup>
 </Project>

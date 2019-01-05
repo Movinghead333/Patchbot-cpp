@@ -3,7 +3,7 @@
 #include <qmessagebox.h>
 #include <qfiledialog.h>
 
-#include "src/colony.h"
+#include "colony.h"
 
 // constructor initializing the window
 MainWindow::MainWindow(QWidget *parent)

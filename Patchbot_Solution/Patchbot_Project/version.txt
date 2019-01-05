@@ -260,6 +260,10 @@ vc 79:
 	- moved interface update after reset into reset method to minimize
 	  duplicate code
 
+vc 80:
+	- complete rework of the current project file structure
+	- added new filters for better visibility
+
 TODO:
 	- maybe move timer in controller though it is Qt object and thus requires
 	  ownership from main_window

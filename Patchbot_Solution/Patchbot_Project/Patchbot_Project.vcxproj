@@ -142,12 +142,12 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(Projectdir)include;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <QtMoc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -156,7 +156,7 @@
       <Define>QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;_MBCS</Define>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
-      <IncludePath>.\GeneratedFiles;.\;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;%(AdditionalIncludeDirectories)</IncludePath>
+      <IncludePath>$(ProjectDir)include;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.\;%(AdditionalIncludeDirectories)</IncludePath>
     </QtMoc>
     <QtRcc>
       <QTDIR>$(QTDIR)</QTDIR>
@@ -261,37 +261,52 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gamecontroller.cpp" />
-    <ClCompile Include="main_window.cpp" />
-    <ClCompile Include="patchbot_move.cpp" />
-    <ClInclude Include="patchbot_move.h" />
-    <ClCompile Include="renderwidget.cpp" />
     <ClCompile Include="src\colony.cpp" />
+    <ClCompile Include="src\gamecontroller.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\main_window.cpp" />
+    <ClCompile Include="src\patchbot_move.cpp" />
+    <ClCompile Include="src\renderwidget.cpp" />
     <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\tile.cpp" />
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="main_window.h">
+    <ClInclude Include="include\colony.h" />
+    <ClInclude Include="include\door.h" />
+    <ClInclude Include="include\exceptions.h" />
+    <ClInclude Include="include\gamecontroller.h" />
+    <ClInclude Include="include\game_state.h" />
+    <QtMoc Include="include\main_window.h">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)include;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
     </QtMoc>
-    <ClInclude Include="door.h" />
-    <ClInclude Include="gamecontroller.h" />
-    <ClInclude Include="game_state.h" />
+    <ClInclude Include="include\move_type.h" />
+    <ClInclude Include="include\robot.h" />
+    <ClInclude Include="include\robot_type.h" />
+    <ClInclude Include="include\texture.h" />
+    <ClInclude Include="include\tile.h" />
+    <ClInclude Include="include\tile_type.h" />
+    <ClInclude Include="include\type_definitions.h" />
+    <ClInclude Include="include\utility.h" />
+    <QtMoc Include="include\renderwidget.h">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)include;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;.\GeneratedFiles;.</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\moc_%(Filename).cpp</OutputFile>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
+    </QtMoc>
     <ClInclude Include="GeneratedFiles\ui_main_window.h" />
-    <QtMoc Include="renderwidget.h">
-    </QtMoc>
-    <ClInclude Include="move_type.h" />
-    <ClInclude Include="src\colony.h" />
-    <ClInclude Include="src\exceptions.h" />
-    <ClInclude Include="src\texture.h" />
-    <ClInclude Include="src\tile.h" />
-    <ClInclude Include="src\robot.h" />
-    <ClInclude Include="src\robot_type.h" />
-    <ClInclude Include="src\tile_type.h" />
-    <ClInclude Include="src\type_definitions.h" />
-    <ClInclude Include="src\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\Sven\Dropbox\Studium\3. Semester\Cpp Praktikum\Grafiken\grafiken\umgebungen\boden.tga" />
