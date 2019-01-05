@@ -251,9 +251,26 @@ vc 77:
 	- missing feature: keep doors open when patchbot blocks the tile
 	- maybe implement door blocking for all robots at once
 
+vc 78:
+	- doors now get blocked when patchbot stands on them
+	- resetting a run is now only one function in main_window
+	- fixed a bug where the cancel button would not udpate the game
+
 TODO:
-	- maybe some code cleanup here and there
-	- add doorblocking
+	- maybe move timer in controller though it is Qt object and thus requires
+	  ownership from main_window
+
+	- maybe declare QTimer as a raw pointer instead of a smart pointer since
+	  deletion is taken care off by the parent passed in its constructor
+
+	- doors currently only check if patchbot is blocking them future
+	  implementations of robots may require a rework to check wether any given
+	  robot is on the door tile
+	  -> maybe add flag to door class in order to save wether a robot is
+	     standing on a particular door
+	  -> blocked flag could be implemented for all tiles to make future
+	     collision detection with other robots easier
+
 
 
 

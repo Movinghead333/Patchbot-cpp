@@ -451,8 +451,13 @@ void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 		// closed
 		if (temp_door.m_open_timer == 0)
 		{
+			// close the door
 			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
 			{
+				if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
+				{
+					continue;
+				}
 				m_current_colony->set_tile_type_by_coordinates(
 					temp_door.m_x,
 					temp_door.m_y,
@@ -460,6 +465,10 @@ void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 			}
 			else if (temp_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
 			{
+				if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
+				{
+					continue;
+				}
 				m_current_colony->set_tile_type_by_coordinates(
 					temp_door.m_x,
 					temp_door.m_y,
@@ -508,6 +517,14 @@ void GameController::reset_doors()
 			}
 		}
 	}
+}
+
+void GameController::reset_current_run()
+{
+	reset_robots();
+	reset_doors();
+	set_game_state(GameState::GAME_NOT_STARTED);
+	set_m_automatic_mode_enabled(false);
 }
 
 // image getters for retreiving image resources from controller

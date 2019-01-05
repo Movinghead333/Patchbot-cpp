@@ -180,15 +180,8 @@ void MainWindow::on_missionCancel_clicked()
 	// re-enable programming interface
 	set_programming_ui_enabled(true);
 
-	// disable automatic mode if it is active
-	if (m_game_controller->get_m_automatic_mode_enabled())
-	{
-		// if the automatic mode was on disabled it
-		m_game_controller->set_m_automatic_mode_enabled(false);
-
-		// and stop the timer
-		m_automatic_mode_timer->stop();
-	}
+	reset_current_run_and_timer();
+	
 }
 
 void MainWindow::on_missionStep_clicked()
@@ -416,25 +409,12 @@ void MainWindow::check_win_and_loose_conditions()
 	// display dialog
 	display_info_message_dialog(title, message);
 
-	// reset robots
-	m_game_controller->reset_robots();
-
-	// reset environment
-	m_game_controller->reset_doors();
-
-	// reset gamestate
-	m_game_controller->set_game_state(GameState::GAME_NOT_STARTED);
+	reset_current_run_and_timer();
 
 	// update interface
 	set_mission_ui_enabled(false);
 	ui.missionStart->setEnabled(true);
 	set_programming_ui_enabled(true);
-
-	if (m_game_controller->get_m_automatic_mode_enabled())
-	{
-		m_game_controller->set_m_automatic_mode_enabled(false);
-		m_automatic_mode_timer->stop();
-	}
 }
 
 void MainWindow::single_step()
@@ -447,4 +427,15 @@ void MainWindow::single_step()
 
 	// check the win / loose conditions
 	check_win_and_loose_conditions();
+}
+
+void MainWindow::reset_current_run_and_timer()
+{
+	if (m_game_controller->get_m_automatic_mode_enabled())
+	{
+		m_automatic_mode_timer->stop();
+	}
+	m_game_controller->reset_current_run();
+
+	ui.game->update();
 }

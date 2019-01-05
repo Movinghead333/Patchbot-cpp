@@ -90,6 +90,9 @@ private:
 
 	// void do single step
 	void single_step();
+
+	// reset current run and the timer
+	void reset_current_run_and_timer();
 };
 
 #endif

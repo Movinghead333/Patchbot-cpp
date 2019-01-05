@@ -66,6 +66,9 @@ public:
 	// reset all doors
 	void reset_doors();
 
+	// reset current run
+	void reset_current_run();
+
 
 	/* GETTERS AND SETTERS */
 
