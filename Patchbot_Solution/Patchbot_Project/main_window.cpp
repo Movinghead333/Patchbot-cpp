@@ -173,15 +173,8 @@ void MainWindow::on_missionStart_clicked()
 
 void MainWindow::on_missionCancel_clicked()
 {
-	// update mission interface
-	set_mission_ui_enabled(false);
-	ui.missionStart->setEnabled(true);
-
-	// re-enable programming interface
-	set_programming_ui_enabled(true);
-
-	reset_current_run_and_timer();
-	
+	// reset the controller and ui for new program run
+	reset_current_run_and_ui();
 }
 
 void MainWindow::on_missionStep_clicked()
@@ -409,12 +402,8 @@ void MainWindow::check_win_and_loose_conditions()
 	// display dialog
 	display_info_message_dialog(title, message);
 
-	reset_current_run_and_timer();
-
-	// update interface
-	set_mission_ui_enabled(false);
-	ui.missionStart->setEnabled(true);
-	set_programming_ui_enabled(true);
+	// reset the controller and ui for new program run
+	reset_current_run_and_ui();
 }
 
 void MainWindow::single_step()
@@ -429,13 +418,22 @@ void MainWindow::single_step()
 	check_win_and_loose_conditions();
 }
 
-void MainWindow::reset_current_run_and_timer()
+void MainWindow::reset_current_run_and_ui()
 {
+	// stop the timer if it still running
 	if (m_game_controller->get_m_automatic_mode_enabled())
 	{
 		m_automatic_mode_timer->stop();
 	}
 	m_game_controller->reset_current_run();
 
+	// update mission interface
+	set_mission_ui_enabled(false);
+	ui.missionStart->setEnabled(true);
+
+	// re-enable programming interface
+	set_programming_ui_enabled(true);
+
+	// update the game
 	ui.game->update();
 }

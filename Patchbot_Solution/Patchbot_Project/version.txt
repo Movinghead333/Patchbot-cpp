@@ -256,6 +256,10 @@ vc 78:
 	- resetting a run is now only one function in main_window
 	- fixed a bug where the cancel button would not udpate the game
 
+vc 79:
+	- moved interface update after reset into reset method to minimize
+	  duplicate code
+
 TODO:
 	- maybe move timer in controller though it is Qt object and thus requires
 	  ownership from main_window

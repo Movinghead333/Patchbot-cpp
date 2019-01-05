@@ -92,7 +92,7 @@ private:
 	void single_step();
 
 	// reset current run and the timer
-	void reset_current_run_and_timer();
+	void reset_current_run_and_ui();
 };
 
 #endif
