@@ -264,7 +264,7 @@
     <ClCompile Include="gamecontroller.cpp" />
     <ClCompile Include="main_window.cpp" />
     <ClCompile Include="patchbot_move.cpp" />
-    <ClCompile Include="patchbot_move.h" />
+    <ClInclude Include="patchbot_move.h" />
     <ClCompile Include="renderwidget.cpp" />
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\main.cpp" />

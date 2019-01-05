@@ -246,8 +246,14 @@ vc 75:
 vc 76:
 	- updated TODO
 
+vc 77:
+	- fixed a bug where patchbot_move.h would not be compiled as header file
+	- missing feature: keep doors open when patchbot blocks the tile
+	- maybe implement door blocking for all robots at once
+
 TODO:
 	- maybe some code cleanup here and there
+	- add doorblocking
 
 
 
