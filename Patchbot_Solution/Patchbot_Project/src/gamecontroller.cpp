@@ -367,7 +367,10 @@ void GameController::execute_single_step()
 		m_program_index++;
 		if (m_program_index >= m_current_program.size())
 		{
-			m_game_state = GameState::PROGRAM_ENDED;
+			if (m_game_state == GameState::IN_PROGRESS)
+			{
+				m_game_state = GameState::PROGRAM_ENDED;
+			}
 		}
 		else
 		{
