@@ -272,7 +272,13 @@ vc 82:
 	- fixed a bug where reaching the end of the program would take priority
 	  over other win/loose conditions
 
+vc 83:
+	- testate for task 5 done (23.5 / 24)
+
 TODO:
+	const refs in der colony
+	tür update und reset in tür klasse auslagern
+
 	- maybe move timer in controller though it is Qt object and thus requires
 	  ownership from main_window
 
