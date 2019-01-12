@@ -17,6 +17,8 @@ struct Door
 	// the door object is referencing to
 	void update(int p_patchbot_x, int p_patchbot_y, Tile& p_door_tile);
 
+	// resets the door object and the corresponding tile object via the 
+	// passed reference
 	void reset(Tile& p_door_tile);
 };
 

@@ -278,16 +278,23 @@ vc 83:
 vc 84:
 	- fixed the missing const& refs in colony constructor
 
+vc 85:
+	- door functionality is now outsourced into door class
+	- door class cannot hold a tile reference since the tiles are stored in a
+	  dynamic vector, thus the update and reset methods receive their
+	  corresponding Tile& based on the coordinates save in the Door objects
+
+vc 86:
+	- edited the todo list
+	- added documentation for Door header
+
 
 TODO:
-	tür update und reset in tür klasse auslagern
 
-	- maybe move timer in controller though it is Qt object and thus requires
-	  ownership from main_window
+HIGH PRIORITY:
+	- fix doors so the only require one step instead of two time-steps
 
-	- maybe declare QTimer as a raw pointer instead of a smart pointer since
-	  deletion is taken care off by the parent passed in its constructor
-
+LOW PRIORITY:
 	- doors currently only check if patchbot is blocking them future
 	  implementations of robots may require a rework to check wether any given
 	  robot is on the door tile
