@@ -8,9 +8,9 @@
 Colony::Colony(
 	const int p_width,
 	const int p_height,
-	std::vector<Robot> p_enemy_robots,
-	std::vector<Tile> p_tiles,
-	std::vector<Door> p_doors)
+	const std::vector<Robot>& p_enemy_robots,
+	const std::vector<Tile>& p_tiles,
+	const std::vector<Door>& p_doors)
 	:
 	m_width(p_width),
 	m_height(p_height),
