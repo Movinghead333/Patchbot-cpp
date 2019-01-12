@@ -440,56 +440,9 @@ void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 
 	for (Door& temp_door : doors_ref)
 	{
-		// if a door is already open meaning its timer is not equal to zero 
-		// then update it
-		if (temp_door.m_open_timer != 0)
-		{
-			temp_door.m_open_timer--;
-		}
-
-		Tile temp_tile = m_current_colony->get_tile_by_coordinates(
+		Tile& temp_door_tile = get_editable_tile_ref_by_coordinates(
 			temp_door.m_x, temp_door.m_y);
-
-		// check if a door timer has ticked down if so change the door back to 
-		// closed
-		if (temp_door.m_open_timer == 0)
-		{
-			// close the door
-			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
-			{
-				if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
-				{
-					continue;
-				}
-				m_current_colony->set_tile_type_by_coordinates(
-					temp_door.m_x,
-					temp_door.m_y,
-					TileType::MANUAL_DOOR_CLOSED);
-			}
-			else if (temp_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
-			{
-				if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
-				{
-					continue;
-				}
-				m_current_colony->set_tile_type_by_coordinates(
-					temp_door.m_x,
-					temp_door.m_y,
-					TileType::AUTO_DOOR_CLOSED);
-			}
-		}
-
-		if (p_patchbot_x == temp_door.m_x && p_patchbot_y == temp_door.m_y)
-		{
-			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_CLOSED)
-			{
-				temp_door.m_open_timer = 10;
-				m_current_colony->set_tile_type_by_coordinates(
-					temp_door.m_x,
-					temp_door.m_y,
-					TileType::MANUAL_DOOR_OPEN);
-			}
-		}
+		temp_door.update(p_patchbot_x, p_patchbot_y, temp_door_tile);
 	}
 }
 
@@ -498,27 +451,9 @@ void GameController::reset_doors()
 	std::vector<Door> temp_doors = m_current_colony->get_doors();
 	for (Door& temp_door : temp_doors)
 	{
-		const Tile& temp_tile = m_current_colony->get_tile_by_coordinates(
+		Tile& temp_door_tile = get_editable_tile_ref_by_coordinates(
 			temp_door.m_x, temp_door.m_y);
-
-		if (temp_door.m_open_timer != 0)
-		{
-			temp_door.m_open_timer = 0;
-			if (temp_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
-			{
-				m_current_colony->set_tile_type_by_coordinates(
-					temp_door.m_x,
-					temp_door.m_y,
-					TileType::MANUAL_DOOR_CLOSED);
-			}
-			else if (temp_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
-			{
-				m_current_colony->set_tile_type_by_coordinates(
-					temp_door.m_x,
-					temp_door.m_y,
-					TileType::AUTO_DOOR_CLOSED);
-			}
-		}
+		temp_door.reset(temp_door_tile);
 	}
 }
 
@@ -528,6 +463,12 @@ void GameController::reset_current_run()
 	reset_doors();
 	set_game_state(GameState::GAME_NOT_STARTED);
 	set_m_automatic_mode_enabled(false);
+}
+
+Tile & GameController::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
+{
+	return m_current_colony->get_editable_tile_ref_by_coordiantes(
+		p_x, p_y);
 }
 
 // image getters for retreiving image resources from controller

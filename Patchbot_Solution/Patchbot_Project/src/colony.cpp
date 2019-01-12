@@ -57,6 +57,11 @@ const std::vector<Tile>& Colony::get_tiles() const
 	 return m_doors;
  }
 
+ Tile& Colony::get_editable_tile_ref_by_coordiantes(int p_x, int p_y)
+ {
+	 return m_tiles[p_x + (m_width * p_y)];
+ }
+
 std::vector<Robot>& Colony::get_robots()
 {
 	return m_robots;
@@ -173,7 +178,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 						if (tile_type == TileType::MANUAL_DOOR_CLOSED ||
 							tile_type == TileType::AUTO_DOOR_CLOSED)
 						{
-							temp_doors.push_back(Door(x, y));
+							temp_doors.push_back(
+								Door(x, y));
 						}
 
 						// check if the current character is the player's

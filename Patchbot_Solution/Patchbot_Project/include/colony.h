@@ -42,6 +42,8 @@ public:
 	// get changable vector of all doors
 	std::vector<Door>& get_doors();
 
+	Tile& get_editable_tile_ref_by_coordiantes(int p_x, int p_y);
+
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
 

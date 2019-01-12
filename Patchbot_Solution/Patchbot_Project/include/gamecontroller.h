@@ -69,6 +69,8 @@ public:
 	// reset current run
 	void reset_current_run();
 
+	Tile& get_editable_tile_ref_by_coordinates(int p_x, int p_y);
+
 
 	/* GETTERS AND SETTERS */
 

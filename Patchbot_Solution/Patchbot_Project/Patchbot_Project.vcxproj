@@ -262,6 +262,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\colony.cpp" />
+    <ClCompile Include="src\door.cpp" />
     <ClCompile Include="src\gamecontroller.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_window.cpp" />
