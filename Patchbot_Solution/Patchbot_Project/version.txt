@@ -295,6 +295,13 @@ vc 87:
 	  necessary code has been commented out (curren_move.m_steps++; in 
 	  calculate_collision method)
 
+vc 88:
+	- added enumeration best_direction to store the direction of the next best
+	  tile on the path to patchbot
+	- added generate_nav_mesh method to colony to calculate the current
+	  nav_mesh based on the given x and y coordinate of patchbot
+	- generate_nav_mesh WIP
+
 
 TODO:
 

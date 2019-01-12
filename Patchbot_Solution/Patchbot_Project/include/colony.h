@@ -47,6 +47,8 @@ public:
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
 
+	void generate_nav_mesh(int p_patchbot_x, int p_patchbot_y);
+
 private:
 	// number of tiles along the x-axis
 	const int m_width;

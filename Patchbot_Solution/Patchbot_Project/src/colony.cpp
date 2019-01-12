@@ -247,7 +247,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 	}
 	else
 	{
-		temp_robots.push_back(Robot(patchbot_x, patchbot_y, PATCHBOT));
+		temp_robots.push_back(
+			Robot(patchbot_x, patchbot_y, RobotType::PATCHBOT));
 	}
 	if (hasEnd == false)
 	{
@@ -261,4 +262,12 @@ Colony* Colony::load_colony(const std::string& file_name)
 		new Colony(width, height, temp_robots, temp_tiles, temp_doors);
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
+}
+
+void Colony::generate_nav_mesh(int p_patchbot_x, int p_patchbot_y)
+{
+	Tile& patchbot_tile = get_editable_tile_ref_by_coordiantes(
+		p_patchbot_x, p_patchbot_y);
+	patchbot_tile.set_m_best_direction(BestDirection::TARGET);
+
 }
