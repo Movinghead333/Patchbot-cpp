@@ -419,7 +419,10 @@ bool GameController::calculate_collision(int x, int y)
 	case TileType::INDESTRUCTABLE_WALL:
 	case TileType::DESTRUCTABLE_WALL:
 	case TileType::AUTO_DOOR_CLOSED:
+		return false;
 	case TileType::MANUAL_DOOR_CLOSED:
+		//TODO: decide wether a door takes one or 2 moves
+		//m_current_move.m_steps++;
 		return false;
 
 	default: return false;

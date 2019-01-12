@@ -288,6 +288,13 @@ vc 86:
 	- edited the todo list
 	- added documentation for Door header
 
+vc 87:
+	- tested implementation where doors take 2 steps but can be passed by
+	  programming a single step into program routine
+	- this however might lead to behaviour not intended by the user so the
+	  necessary code has been commented out (curren_move.m_steps++; in 
+	  calculate_collision method)
+
 
 TODO:
 
