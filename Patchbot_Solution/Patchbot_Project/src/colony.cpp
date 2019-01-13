@@ -145,6 +145,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 				for (int x = 0; x < width; x++)
 				{
 					char current_char = current_line[x];
+					BestPath current_nav_mesh_value =
+						Utility::char_to_nav_mesh_value(current_char);
 					// check if read char is a robot
 					// if so add it to the robots vector
 					if (isdigit(current_char))
@@ -160,20 +162,21 @@ Colony* Colony::load_colony(const std::string& file_name)
 								)
 							);
 				
-							temp_tiles.push_back(Tile(ENEMY_SPAWN));
+							temp_tiles.push_back(
+								Tile(ENEMY_SPAWN, current_nav_mesh_value));
 						}
 					}
 					// if the read char is not a number,
 					// then it has to be a tile or throw an exception
 					else
 					{
-						TileType tile_type =
-							Utility::char_to_tile_type(current_char);
 						// throws exception if the current_char
 						// refers to an unknown symbol
+						TileType tile_type =
+							Utility::char_to_tile_type(current_char);
+						
 						temp_tiles.push_back(
-							Tile(Utility::char_to_tile_type(current_char))
-						);
+							Tile(tile_type, current_nav_mesh_value));
 						
 						if (tile_type == TileType::MANUAL_DOOR_CLOSED ||
 							tile_type == TileType::AUTO_DOOR_CLOSED)
@@ -264,10 +267,136 @@ Colony* Colony::load_colony(const std::string& file_name)
 	return return_colony;
 }
 
-void Colony::generate_nav_mesh(int p_patchbot_x, int p_patchbot_y)
+void Colony::generate_nav_mesh()
 {
+	// reset nav_mesh
+	for (Tile& tile : m_tiles)
+	{
+		if (tile.get_m_best_path() != BestPath::UNREACHABLE)
+		{
+			tile.set_m_best_path(BestPath::UNSET);
+		}
+	}
+
+	// get patchbot from robots vector
+	const Robot& patchbot = m_robots.back();
+	int p_patchbot_x = patchbot.get_x_coordinate();
+	int p_patchbot_y = patchbot.get_y_coordinate();
+
+	// set the tile patchbot is on as target for pathfinding
 	Tile& patchbot_tile = get_editable_tile_ref_by_coordiantes(
 		p_patchbot_x, p_patchbot_y);
-	patchbot_tile.set_m_best_direction(BestPath::TARGET);
 
+	patchbot_tile.set_m_best_path(BestPath::TARGET);
+
+	// create the priority queue for dijkstra algorithm
+	std::priority_queue<Node> node_stack;
+
+	// create the first node which is patchbots's location with a distance of 0
+	node_stack.emplace(p_patchbot_x, p_patchbot_y, 0);
+
+	// go through the list until there no more nodes to be checked
+	while (!node_stack.empty())
+	{
+		// get the current node
+		const Node current_node = node_stack.top();
+
+		// now checks all four directions for unset tiles and set those based
+		// on the current shortest path
+		
+		// up
+		if (current_node.m_y - 1 >= 0)
+		{
+			// get a reference to the tile which currently processed
+			Tile& up_tile = get_editable_tile_ref_by_coordiantes(
+				current_node.m_x, current_node.m_y - 1);
+
+			// if the tile is not set then set it
+			if (up_tile.get_m_best_path() == BestPath::UNSET)
+			{
+				// set the tiles pathing variable 
+				up_tile.set_m_best_path(BestPath::PATH_DOWN);
+
+				// calculate the distance to this tile for further calculations
+				int distance = Utility::get_distance_from_tile_Type(
+					up_tile.get_tile_type()) + current_node.m_distance;
+				
+				// put the current tile in the list in order for it to have
+				// its neighbours be processed aswell
+				node_stack.emplace(
+					current_node.m_x,
+					current_node.m_y - 1,
+					distance);
+			}
+		}
+		
+
+		// right
+		if (current_node.m_x + 1 < m_width)
+		{
+			Tile& right_tile = get_editable_tile_ref_by_coordiantes(
+				current_node.m_x + 1, current_node.m_y);
+
+
+			if (right_tile.get_m_best_path() == BestPath::UNSET)
+			{
+				right_tile.set_m_best_path(BestPath::PATH_LEFT);
+
+				int distance = Utility::get_distance_from_tile_Type(
+					right_tile.get_tile_type()) + current_node.m_distance;
+
+				node_stack.emplace(
+					current_node.m_x + 1,
+					current_node.m_y,
+					distance);
+			}
+		}
+
+
+		// down
+		if (current_node.m_y + 1 < m_height)
+		{
+			Tile& down_tile = get_editable_tile_ref_by_coordiantes(
+				current_node.m_x, current_node.m_y + 1);
+
+
+			if (down_tile.get_m_best_path() == BestPath::UNSET)
+			{
+				down_tile.set_m_best_path(BestPath::PATH_UP);
+
+				int distance = Utility::get_distance_from_tile_Type(
+					down_tile.get_tile_type()) + current_node.m_distance;
+
+				node_stack.emplace(
+					current_node.m_x,
+					current_node.m_y + 1,
+					distance);
+			}
+		}
+
+
+		// left
+		if (current_node.m_x - 1 >= 0)
+		{
+			Tile& left_tile = get_editable_tile_ref_by_coordiantes(
+				current_node.m_x - 1, current_node.m_y);
+
+
+			if (left_tile.get_m_best_path() == BestPath::UNSET)
+			{
+				left_tile.set_m_best_path(BestPath::PATH_RIGHT);
+
+				int distance = Utility::get_distance_from_tile_Type(
+					left_tile.get_tile_type()) + current_node.m_distance;
+
+				node_stack.emplace(
+					current_node.m_x - 1,
+					current_node.m_y,
+					distance);
+			}
+		}
+		
+		// delete the current element from the priority queue
+		node_stack.pop();
+	}
 }

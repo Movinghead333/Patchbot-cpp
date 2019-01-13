@@ -113,6 +113,26 @@ void RenderWidget::render()
 			// draw the QImage at the earlier calculated coordinates
 			painter.drawImage(
 				QPoint(x_render_offset, y_render_offset), *current_tile_image);
+
+			BestPath temp_path = temp_tile.get_m_best_path();
+			
+			// check if the current tile holds a actual direction in its
+			// nav mesh value
+			if (temp_path != BestPath::TARGET &&
+				temp_path != BestPath::UNSET &&
+				temp_path != BestPath::UNREACHABLE)
+			{
+				// get texture
+				const std::shared_ptr<QImage> current_nav_mesh_image =
+					m_game_controller_ref->
+					get_arrow_texture_by_path_enum(
+						temp_tile.get_m_best_path());
+
+				// draw arrow
+				painter.drawImage(
+					QPoint(x_render_offset, y_render_offset),
+					*current_nav_mesh_image);
+			}
 		}
 	}
 

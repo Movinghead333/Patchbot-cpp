@@ -306,11 +306,14 @@ vc 89:
 	- added map to map BestPath enum to images in gamecontroller
 	- arrow images are now loaded by the gamecontroller
 
+vc 90:
+	- first implementation of dijkstra path-finding finished
+
 
 TODO:
 
 HIGH PRIORITY:
-	- fix doors so the only require one step instead of two time-steps
+	- cleanup dijkstra algorithm code
 
 LOW PRIORITY:
 	- doors currently only check if patchbot is blocking them future

@@ -3,12 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <queue>
 
 #include "robot.h"
 #include "tile.h"
 #include "utility.h"
 #include "exceptions.h"
 #include "door.h"
+#include "node.h"
 
 class Colony
 {
@@ -47,7 +49,8 @@ public:
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
 
-	void generate_nav_mesh(int p_patchbot_x, int p_patchbot_y);
+	// updates the colony's nav mesh for patchbots current position
+	void generate_nav_mesh();
 
 private:
 	// number of tiles along the x-axis

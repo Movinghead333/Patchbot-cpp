@@ -266,6 +266,7 @@
     <ClCompile Include="src\gamecontroller.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_window.cpp" />
+    <ClCompile Include="src\node.cpp" />
     <ClCompile Include="src\patchbot_move.cpp" />
     <ClCompile Include="src\renderwidget.cpp" />
     <ClCompile Include="src\robot.cpp" />
@@ -291,6 +292,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
     </QtMoc>
     <ClInclude Include="include\move_type.h" />
+    <ClInclude Include="include\node.h" />
     <ClInclude Include="include\patchbot_move.h" />
     <ClInclude Include="include\robot.h" />
     <ClInclude Include="include\robot_type.h" />

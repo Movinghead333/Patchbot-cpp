@@ -19,6 +19,9 @@ void GameController::load_and_initialize_colony(
 	m_current_colony = std::make_shared<Colony>(
 		*Colony::load_colony(p_file_path));
 	m_current_program = std::vector<PatchbotMove>();
+
+	//DEBUG:
+	m_current_colony->generate_nav_mesh();
 }
 
 // loads all needed textures into memory for later rendering
@@ -385,7 +388,11 @@ void GameController::execute_single_step()
 	{
 		if (calculate_collision(current_x, current_y))
 		{
+			//move the player
 			patchbot_ref.update_position(current_x, current_y);
+
+			// update the nav_mesh for the AI
+			m_current_colony->generate_nav_mesh();
 		}
 	}
 
@@ -531,6 +538,12 @@ const std::shared_ptr<QImage> GameController::get_robot_texture_by_robot_type(
 	const RobotType& p_robot_type) const
 {
 	return m_robot_textures.find(p_robot_type)->second;
+}
+
+const std::shared_ptr<QImage> GameController::get_arrow_texture_by_path_enum(
+	const BestPath & p_best_path) const
+{
+	return m_arrow_textures.find(p_best_path)->second;
 }
 
 // getters and setters for scrollbars

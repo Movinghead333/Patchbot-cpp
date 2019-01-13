@@ -7,8 +7,9 @@ enum BestPath
 	PATH_RIGHT,
 	PATH_DOWN,
 	PATH_LEFT,
-	TARGET,
-
+	UNSET,
+	UNREACHABLE,
+	TARGET
 };
 
 #endif

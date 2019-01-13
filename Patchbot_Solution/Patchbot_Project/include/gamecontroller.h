@@ -82,6 +82,10 @@ public:
 	const std::shared_ptr<QImage> get_robot_texture_by_robot_type(
 		const RobotType& p_robot_type) const;
 
+	// get QImage ref according to passed BestPath
+	const std::shared_ptr<QImage> get_arrow_texture_by_path_enum(
+		const BestPath& p_best_path) const;
+
 	// return a reference to currently loaded colony
 	Colony& get_current_colony();
 

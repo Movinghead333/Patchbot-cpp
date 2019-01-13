@@ -32,3 +32,53 @@ TileType Utility::char_to_tile_type(const char& input_char)
 	}
 	return temp_tile_type;
 }
+
+BestPath Utility::char_to_nav_mesh_value(const char & input_char)
+{
+	BestPath nav_mesh_value;
+	switch (input_char)
+	{
+	case 'p': 
+	case 'g': 
+	case '.': 
+	case ' ':
+	case 'd':
+	case 'D':
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+		return BestPath::UNSET;
+
+	case 'P':
+	case '#':
+	case 'M':
+	case 'O':
+	case '~':
+	case 'x':
+		return BestPath::UNREACHABLE;
+
+	default:
+		std::stringstream temp_string_stream;
+		temp_string_stream << "Unknown Character found: " << input_char;
+		throw Simple_Message_Exception(temp_string_stream.str());
+
+	}
+}
+
+int Utility::get_distance_from_tile_Type(TileType p_tile_type)
+{
+	if (p_tile_type == TileType::ALIEN_GRASS ||
+		p_tile_type == TileType::AUTO_DOOR_CLOSED ||
+		p_tile_type == TileType::MANUAL_DOOR_CLOSED)
+	{
+		return 2;
+	}
+	else
+	{
+		return 1;
+	}
+}
