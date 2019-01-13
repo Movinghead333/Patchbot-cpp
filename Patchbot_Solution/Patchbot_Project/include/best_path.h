@@ -1,12 +1,12 @@
 #ifndef __BEST_DIRECTION_H_DEFINED__
 #define __BEST_DIRECTION_H_DEFINED__
 
-enum BestDirection
+enum BestPath
 {
-	UP,
-	RIGHT,
-	DOWN,
-	LEFT,
+	PATH_UP,
+	PATH_RIGHT,
+	PATH_DOWN,
+	PATH_LEFT,
 	TARGET,
 
 };

@@ -81,7 +81,7 @@
     <ClInclude Include="include\patchbot_move.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\best_direction.h">
+    <ClInclude Include="include\best_path.h">
       <Filter>Header Files\enums</Filter>
     </ClInclude>
   </ItemGroup>

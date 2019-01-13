@@ -175,6 +175,52 @@ void GameController::load_textures()
 			)
 		);
 	}
+
+	// load arrows for dijkstra algorithm debugging
+	std::string arrows_texture_base_path = "src\\textures\\pfeile\\";
+
+	std::map<BestPath, std::string> arrow_resource_map;
+
+	arrow_resource_map.insert(
+		std::make_pair<BestPath, std::string>(
+			BestPath::PATH_UP, "pfeil_oben.tga"));
+	arrow_resource_map.insert(
+		std::make_pair<BestPath, std::string>(
+			BestPath::PATH_RIGHT, "pfeil_rechts.tga"));
+	arrow_resource_map.insert(
+		std::make_pair<BestPath, std::string>(
+			BestPath::PATH_DOWN, "pfeil_unten.tga"));
+	arrow_resource_map.insert(
+		std::make_pair<BestPath, std::string>(
+			BestPath::PATH_LEFT, "pfeil_links.tga"));
+
+	for (const std::pair<BestPath, std::string>& resource :
+			arrow_resource_map)
+	{
+		const Texture temp_texture = Texture::load_texture(
+			(arrows_texture_base_path + resource.second));
+
+		// get the textures image data as ref
+		const std::vector<ubyte>& temp_image_data =
+			temp_texture.get_image_data();
+
+		// convert the image-data into a QImage
+		QImage temp_image(
+			&temp_image_data[0],
+			temp_texture.get_width(),
+			temp_texture.get_height(),
+			QImage::Format_ARGB32);
+
+		// mirror the image and copy it into the vector
+		m_arrow_textures.insert(
+			std::pair<BestPath, std::shared_ptr<QImage>>(
+				resource.first,
+				std::make_shared<QImage>(
+					temp_image.mirrored(false, true).copy()
+					)
+				)
+		);
+	}
 }
 
 // return a editable reference to the current colony

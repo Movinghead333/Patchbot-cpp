@@ -274,7 +274,7 @@
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\best_direction.h" />
+    <ClInclude Include="include\best_path.h" />
     <ClInclude Include="include\colony.h" />
     <ClInclude Include="include\door.h" />
     <ClInclude Include="include\exceptions.h" />

@@ -160,6 +160,9 @@ private:
 
 	// stores all robot-graphics
 	std::map<RobotType, std::shared_ptr<QImage>> m_robot_textures;
+
+	// stores the images for debugging dijkstra algorithm
+	std::map<BestPath, std::shared_ptr<QImage>> m_arrow_textures;
 };
 
 #endif

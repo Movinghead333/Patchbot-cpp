@@ -268,6 +268,6 @@ void Colony::generate_nav_mesh(int p_patchbot_x, int p_patchbot_y)
 {
 	Tile& patchbot_tile = get_editable_tile_ref_by_coordiantes(
 		p_patchbot_x, p_patchbot_y);
-	patchbot_tile.set_m_best_direction(BestDirection::TARGET);
+	patchbot_tile.set_m_best_direction(BestPath::TARGET);
 
 }

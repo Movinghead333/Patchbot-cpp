@@ -38,12 +38,12 @@ void Tile::set_m_tile_type(TileType p_tile_type)
 	m_tile_type = p_tile_type;
 }
 
-void Tile::set_m_best_direction(BestDirection p_new_direction)
+void Tile::set_m_best_direction(BestPath p_new_direction)
 {
 	m_best_direction = p_new_direction;
 }
 
-BestDirection Tile::get_m_best_direction() const
+BestPath Tile::get_m_best_direction() const
 {
 	return m_best_direction;
 }
