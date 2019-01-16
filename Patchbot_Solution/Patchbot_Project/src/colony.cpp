@@ -267,6 +267,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 	return return_colony;
 }
 
+// generates the navigation mesh for the currently loaded colony 
+// upper complexity boundry: O(colony_width * colony_height)
 void Colony::generate_nav_mesh()
 {
 	// reset nav_mesh
@@ -300,6 +302,9 @@ void Colony::generate_nav_mesh()
 	{
 		// get the current node
 		const Node current_node = node_stack.top();
+
+		// delete the current element from the priority queue
+		node_stack.pop();
 
 		// now checks all four directions for unset tiles and set those based
 		// on the current shortest path
@@ -396,7 +401,6 @@ void Colony::generate_nav_mesh()
 			}
 		}
 		
-		// delete the current element from the priority queue
-		node_stack.pop();
+		
 	}
 }

@@ -309,20 +309,15 @@ vc 89:
 vc 90:
 	- first implementation of dijkstra path-finding finished
 
+vc 91:
+	- added more documentation to generate_nav_mesh() in colony.cpp
+
 
 TODO:
 
 HIGH PRIORITY:
-	- cleanup dijkstra algorithm code
 
 LOW PRIORITY:
-	- doors currently only check if patchbot is blocking them future
-	  implementations of robots may require a rework to check wether any given
-	  robot is on the door tile
-	  -> maybe add flag to door class in order to save wether a robot is
-	     standing on a particular door
-	  -> blocked flag could be implemented for all tiles to make future
-	     collision detection with other robots easier
 
 
 
