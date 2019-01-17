@@ -20,7 +20,6 @@ void GameController::load_and_initialize_colony(
 		*Colony::load_colony(p_file_path));
 	m_current_program = std::vector<PatchbotMove>();
 
-	//DEBUG:
 	m_current_colony->generate_nav_mesh();
 }
 
@@ -521,7 +520,7 @@ void GameController::reset_current_run()
 	set_m_automatic_mode_enabled(false);
 }
 
-Tile & GameController::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
+Tile& GameController::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
 {
 	return m_current_colony->get_editable_tile_ref_by_coordiantes(
 		p_x, p_y);
