@@ -312,6 +312,10 @@ vc 90:
 vc 91:
 	- added more documentation to generate_nav_mesh() in colony.cpp
 
+	vc 92:
+	- added documentation to node struct
+	- edited documentation for generate_nav_mesh()
+
 
 TODO:
 
