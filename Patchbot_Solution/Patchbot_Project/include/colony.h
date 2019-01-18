@@ -50,6 +50,8 @@ public:
 	static Colony* load_colony(const std::string& file_name);
 
 	// updates the colony's nav mesh for patchbots current position
+	// upper complexity boundry:
+	// O(colony_width * colony_height * log(colony_width * colony_height))
 	void generate_nav_mesh();
 
 private:

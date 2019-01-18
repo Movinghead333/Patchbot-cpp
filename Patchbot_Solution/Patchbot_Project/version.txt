@@ -317,6 +317,9 @@ vc 92:
 	- edited documentation for generate_nav_mesh()
 
 vc 93:
+	- moved generate_nav_mesh complexity description to colony.h
+
+vc 93:
 	- minor changes to code formatting
 
 

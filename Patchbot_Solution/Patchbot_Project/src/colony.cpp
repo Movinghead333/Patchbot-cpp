@@ -268,8 +268,6 @@ Colony* Colony::load_colony(const std::string& file_name)
 }
 
 // generates the navigation mesh for the currently loaded colony 
-// upper complexity boundry:
-// O(colony_width * colony_height * log(colony_width * colony_height))
 void Colony::generate_nav_mesh()
 {
 	// reset nav_mesh
