@@ -325,6 +325,10 @@ vc 94:
 vc 95:
 	- merged task 6 into master branch
 
+vc 96:
+	- robots are now stored in shared_ptr inside the robots vector in colony
+	  instead of just raw object to enable the use of polymorphism
+
 
 
 TODO:

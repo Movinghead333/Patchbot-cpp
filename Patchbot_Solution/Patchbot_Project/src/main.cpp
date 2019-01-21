@@ -68,14 +68,14 @@ void write_colony_to_file(
 
 
 	// add the robots back to level_data
-	std::vector<Robot> temp_robots = c.get_robots();
+	std::vector<std::shared_ptr<Robot>> temp_robots = c.get_robots();
 	// std::cout << temp_robots.size() << std::endl; // debug
 
-	for (const Robot& robot : temp_robots)
+	for (const std::shared_ptr<Robot>& robot : temp_robots)
 	{
-		int temp_index = robot.get_x_coordinate() + 
-						(robot.get_y_coordinate() * width);
-		level_data[temp_index] = (int)robot.get_robot_type();
+		int temp_index = robot->get_x_coordinate() + 
+						(robot->get_y_coordinate() * width);
+		level_data[temp_index] = (int)robot->get_robot_type();
 	}
 
 

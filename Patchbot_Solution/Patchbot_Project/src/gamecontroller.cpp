@@ -483,9 +483,9 @@ bool GameController::calculate_collision(int x, int y)
 
 void GameController::reset_robots()
 {
-	for (Robot& robot : m_current_colony->get_robots())
+	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
-		robot.reset_position();
+		robot->reset_position();
 	}
 }
 

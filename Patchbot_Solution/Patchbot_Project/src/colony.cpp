@@ -8,7 +8,7 @@
 Colony::Colony(
 	const int p_width,
 	const int p_height,
-	const std::vector<Robot>& p_enemy_robots,
+	const std::vector<std::shared_ptr<Robot>>& p_enemy_robots,
 	const std::vector<Tile>& p_tiles,
 	const std::vector<Door>& p_doors)
 	:
@@ -49,7 +49,7 @@ const std::vector<Tile>& Colony::get_tiles() const
 
  Robot& Colony::get_patch_bot() 
 {
-	return m_robots[m_robots.size()-1];
+	return *m_robots[m_robots.size()-1];
 }
 
  std::vector<Door>& Colony::get_doors()
@@ -62,7 +62,7 @@ const std::vector<Tile>& Colony::get_tiles() const
 	 return m_tiles[p_x + (m_width * p_y)];
  }
 
-std::vector<Robot>& Colony::get_robots()
+std::vector<std::shared_ptr<Robot>>& Colony::get_robots()
 {
 	return m_robots;
 }
@@ -115,7 +115,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 	temp_tiles.reserve(width*height);
 
 	// setting up temporary vector for enemy robots
-	std::vector<Robot> temp_robots;
+	std::vector<std::shared_ptr<Robot>> temp_robots;
 
 	// setting up temp vector for doors
 	std::vector<Door> temp_doors;
@@ -155,12 +155,12 @@ Colony* Colony::load_colony(const std::string& file_name)
 						// if so add it to the enemy-robots vector
 						if (current_char <= 55 && current_char >= 49)
 						{
-							temp_robots.push_back(
+							temp_robots.push_back(std::make_shared<Robot>(
 								Robot(x,
 									  y,
 									  static_cast<RobotType>(current_char)
 								)
-							);
+							));
 				
 							temp_tiles.push_back(
 								Tile(ENEMY_SPAWN, current_nav_mesh_value));
@@ -250,8 +250,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 	}
 	else
 	{
-		temp_robots.push_back(
-			Robot(patchbot_x, patchbot_y, RobotType::PATCHBOT));
+		temp_robots.push_back(std::make_shared<Robot>(
+			Robot(patchbot_x, patchbot_y, RobotType::PATCHBOT)));
 	}
 	if (hasEnd == false)
 	{
@@ -280,7 +280,7 @@ void Colony::generate_nav_mesh()
 	}
 
 	// get patchbot from robots vector
-	const Robot& patchbot = m_robots.back();
+	const Robot& patchbot = *m_robots.back();
 	int p_patchbot_x = patchbot.get_x_coordinate();
 	int p_patchbot_y = patchbot.get_y_coordinate();
 

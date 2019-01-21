@@ -22,7 +22,7 @@ public:
 	Colony(
 		const int p_width,
 		const int p_height,
-		const std::vector<Robot>& p_enemy_robots, 
+		const std::vector<std::shared_ptr<Robot>>& p_enemy_robots, 
 		const std::vector<Tile>& p_tiles,
 		const std::vector<Door>& p_doors);
 
@@ -38,7 +38,7 @@ public:
 	// get a ref to the vector storing all the robots from the current colony
 	// these getters are no const so the returned references can change the 
 	// current colony object
-	std::vector<Robot>& get_robots();
+	std::vector<std::shared_ptr<Robot>>& get_robots();
 	Robot& get_patch_bot();
 
 	// get changable vector of all doors
@@ -71,7 +71,7 @@ private:
 	// vector storing all robots
 	// and their properties (e.g. x and y coordiante)
 	// stores the player in its last element
-	std::vector<Robot> m_robots;
+	std::vector<std::shared_ptr<Robot>> m_robots;
 };
 
 #endif

@@ -138,11 +138,12 @@ void RenderWidget::render()
 
 	
 	// render robots on top
-	const std::vector<Robot>& temp_robots = temp_colony.get_robots();
+	const std::vector<std::shared_ptr<Robot>>& temp_robots =
+		temp_colony.get_robots();
 	
-	for (const Robot& temp_robot : temp_robots)
+	for (const std::shared_ptr<Robot>& temp_robot : temp_robots)
 	{
-		if (temp_robot.get_robot_type() == RobotType::PATCHBOT &&
+		if (temp_robot->get_robot_type() == RobotType::PATCHBOT &&
 			m_game_controller_ref->get_game_state() ==
 			GameState::GAME_NOT_STARTED)
 		{
@@ -150,8 +151,8 @@ void RenderWidget::render()
 		}
 
 		// get the robots position in tiles
-		int robot_x_tile = temp_robot.get_x_coordinate();
-		int robot_y_tile = temp_robot.get_y_coordinate();
+		int robot_x_tile = temp_robot->get_x_coordinate();
+		int robot_y_tile = temp_robot->get_y_coordinate();
 
 		// check if the robot tile coordinates are within the rendered tiles
 		if (robot_x_tile >= x_start_tile &&
@@ -163,7 +164,7 @@ void RenderWidget::render()
 			const std::shared_ptr<QImage> current_tile_image =
 				m_game_controller_ref->
 					get_robot_texture_by_robot_type(
-						temp_robot.get_robot_type());
+						temp_robot->get_robot_type());
 			
 			// calculate render_offset from 0,0
 			int x_render_coordinate = (robot_x_tile - x_start_tile) * tile_size
