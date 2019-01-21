@@ -319,8 +319,11 @@ vc 92:
 vc 93:
 	- moved generate_nav_mesh complexity description to colony.h
 
-vc 93:
+vc 94:
 	- minor changes to code formatting
+
+vc 95:
+	- merged task 6 into master branch
 
 
 
