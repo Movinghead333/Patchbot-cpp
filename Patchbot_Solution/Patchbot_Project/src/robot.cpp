@@ -12,6 +12,10 @@ Robot::Robot(
 	m_robot_type(p_robot_type)
 {
 }
+void Robot::update()
+{
+	std::cout << "robot updated!" << std::endl;
+}
 int Robot::get_x_coordinate() const
 {
 	return m_x_coordinate;

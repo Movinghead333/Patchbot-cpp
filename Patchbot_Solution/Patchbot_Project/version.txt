@@ -329,6 +329,12 @@ vc 96:
 	- robots are now stored in shared_ptr inside the robots vector in colony
 	  instead of just raw object to enable the use of polymorphism
 
+vc 97:
+	- added a Bugger, a LineRobot and PathfinderRobot subclass from Robot
+	- each subclass overrides an void update() method
+	- AI should be implemented as controller which receives robot instances
+	  as parameters and calculates their move
+
 
 
 TODO:

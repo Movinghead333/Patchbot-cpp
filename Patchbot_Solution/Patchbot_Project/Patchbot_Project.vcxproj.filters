@@ -16,9 +16,6 @@
     <ClCompile Include="src\texture.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\robot.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\patchbot_move.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
@@ -36,6 +33,18 @@
     </ClCompile>
     <ClCompile Include="src\node.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\robot.cpp">
+      <Filter>Source Files\core\robots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\bugger.cpp">
+      <Filter>Source Files\core\robots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\line_robot.cpp">
+      <Filter>Source Files\core\robots</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pathfinder_robot.cpp">
+      <Filter>Source Files\core\robots</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +81,6 @@
     <ClInclude Include="include\texture.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\robot.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\door.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -89,6 +95,18 @@
     </ClInclude>
     <ClInclude Include="include\node.h">
       <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\robot.h">
+      <Filter>Header Files\core\robots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bugger.h">
+      <Filter>Header Files\core\robots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\line_robot.h">
+      <Filter>Header Files\core\robots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pathfinder_robot.h">
+      <Filter>Header Files\core\robots</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +245,12 @@
     </Filter>
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{c8da5779-ca81-4140-aa46-941c71a05cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\robots">
+      <UniqueIdentifier>{b6fe8262-8b05-4e35-ae34-59701fca2dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\robots">
+      <UniqueIdentifier>{426d200d-4e59-4bcd-9dad-264291c27250}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

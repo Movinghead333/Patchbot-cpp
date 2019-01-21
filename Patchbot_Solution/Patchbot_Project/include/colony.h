@@ -6,6 +6,9 @@
 #include <queue>
 
 #include "robot.h"
+#include "bugger.h"
+#include "line_robot.h"
+#include "pathfinder_robot.h"
 #include "tile.h"
 #include "utility.h"
 #include "exceptions.h"

@@ -155,12 +155,51 @@ Colony* Colony::load_colony(const std::string& file_name)
 						// if so add it to the enemy-robots vector
 						if (current_char <= 55 && current_char >= 49)
 						{
-							temp_robots.push_back(std::make_shared<Robot>(
-								Robot(x,
-									  y,
-									  static_cast<RobotType>(current_char)
-								)
-							));
+							switch (current_char)
+							{
+							case 49:
+								temp_robots.push_back(std::make_shared<Bugger>(
+									Bugger(x,
+										y,
+										static_cast<RobotType>(current_char)
+									)
+									));
+								break;
+
+							case 50:
+							case 51:
+							case 52:
+								temp_robots.push_back(
+									std::make_shared<LineRobot>(
+									LineRobot(x,
+										y,
+										static_cast<RobotType>(current_char)
+									)
+									));
+								break;
+
+							case 53:
+							case 54:
+							case 55:
+								temp_robots.push_back(
+									std::make_shared<PathfinderRobot>(
+										PathfinderRobot(x,
+											y,
+											static_cast<RobotType>(current_char)
+										)
+										));
+								break;
+
+							default:
+								temp_robots.push_back(std::make_shared<Robot>(
+									Robot(x,
+										y,
+										static_cast<RobotType>(current_char)
+									)
+									));
+								break;
+							}
+							
 				
 							temp_tiles.push_back(
 								Tile(ENEMY_SPAWN, current_nav_mesh_value));

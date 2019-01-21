@@ -430,7 +430,13 @@ void GameController::execute_single_step()
 		}
 	}
 
-	//update doors
+	// update all robots
+	for (std::shared_ptr<Robot> robot : m_current_colony->get_robots())
+	{
+		robot->update();
+	}
+
+	// update doors
 	update_doors(current_x, current_y);
 }
 

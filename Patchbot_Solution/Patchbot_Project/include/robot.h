@@ -1,6 +1,8 @@
 #ifndef __ROBOT_H_DEFINED__
 #define __ROBOT_H_DEFINED__
 
+#include <iostream> //DEBUG
+
 #include "robot_type.h"
 
 // A base-class for all robots holding the core functionalities
@@ -15,6 +17,8 @@ public:
 		int p_y_coordinate,
 		RobotType pRobotType
 	);
+
+	virtual void update();
 
 	// getter methods for member-fields
 	int get_x_coordinate() const;

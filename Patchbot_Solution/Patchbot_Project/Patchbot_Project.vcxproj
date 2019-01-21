@@ -261,13 +261,16 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\bugger.cpp" />
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\door.cpp" />
     <ClCompile Include="src\gamecontroller.cpp" />
+    <ClCompile Include="src\line_robot.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_window.cpp" />
     <ClCompile Include="src\node.cpp" />
     <ClCompile Include="src\patchbot_move.cpp" />
+    <ClCompile Include="src\pathfinder_robot.cpp" />
     <ClCompile Include="src\renderwidget.cpp" />
     <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -276,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\best_path.h" />
+    <ClInclude Include="include\bugger.h" />
     <ClInclude Include="include\colony.h" />
     <ClInclude Include="include\door.h" />
     <ClInclude Include="include\exceptions.h" />
@@ -291,9 +295,11 @@
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\moc_%(Filename).cpp</OutputFile>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles$(ConfigurationName)\.;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_ProjectGeneratedFiles;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)include;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtCore;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtGui;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtANGLE;C:$(QTDIR)cpp_projects$(QTDIR)Patchbot-cpp$(QTDIR)Patchbot_Solution$(QTDIR)Patchbot_Project$(QTDIR)includeQtWidgets;C:cpp_projectsPatchbot-cppPatchbot_SolutionPatchbot_Project</IncludePath>
     </QtMoc>
+    <ClInclude Include="include\line_robot.h" />
     <ClInclude Include="include\move_type.h" />
     <ClInclude Include="include\node.h" />
     <ClInclude Include="include\patchbot_move.h" />
+    <ClInclude Include="include\pathfinder_robot.h" />
     <ClInclude Include="include\robot.h" />
     <ClInclude Include="include\robot_type.h" />
     <ClInclude Include="include\texture.h" />
