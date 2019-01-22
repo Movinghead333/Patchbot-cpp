@@ -31,6 +31,10 @@ void AIController::update_ai(std::shared_ptr<Robot>& p_robot)
 	// patchbot needs no ai update
 	case RobotType::PATCHBOT:
 		return;
+
+	case RobotType::DEAD:
+		p_robot->update_visible_time();
+		break;
 	}
 }
 

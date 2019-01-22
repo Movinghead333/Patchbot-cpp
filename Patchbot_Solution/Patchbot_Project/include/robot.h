@@ -21,7 +21,12 @@ public:
 
 	virtual void update();
 
+	void update_visible_time();
+	void setup_visible_time();
+
 	// getter methods for member-fields
+	bool get_visibility();
+
 	void set_x_coordinate(int p_x);
 	int get_x_coordinate() const;
 
@@ -52,8 +57,16 @@ protected:
 	int m_back_up_y;
 
 	// A robot's type for later runtime-comparisons
-	const RobotType m_robot_type;
+	RobotType m_robot_type;
 
+	RobotType m_back_up_robot_type;
+
+	// indicates how long the robot gravestone remains on the map after a robot
+	// crashed default value is -1 and means the robot is still alive
+	int time_visible = -1;
+
+	//TODO
+	// blocked flag for patchbot might be outsourced into controller later
 	bool m_blocked = false;
 };
 

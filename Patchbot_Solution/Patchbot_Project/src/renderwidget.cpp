@@ -143,6 +143,11 @@ void RenderWidget::render()
 	
 	for (const std::shared_ptr<Robot>& temp_robot : temp_robots)
 	{
+		if (temp_robot->get_visibility())
+		{
+			continue;
+		}
+
 		if (temp_robot->get_robot_type() == RobotType::PATCHBOT &&
 			m_game_controller_ref->get_game_state() ==
 			GameState::GAME_NOT_STARTED)

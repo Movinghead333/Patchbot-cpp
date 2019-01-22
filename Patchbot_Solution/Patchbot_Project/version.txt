@@ -340,6 +340,10 @@ vc 98:
 	- added AIController
 	- lots of code cleanup necessary
 
+vc 99:
+	- the bugger can now crash leaving a gravestone for 5 timesteps
+	- Robots are now properly reset
+
 
 
 TODO:

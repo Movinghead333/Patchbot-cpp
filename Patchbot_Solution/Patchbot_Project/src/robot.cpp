@@ -9,12 +9,31 @@ Robot::Robot(
 	m_y_coordinate(p_y_coordinate),
 	m_back_up_x(p_x_coordinate),
 	m_back_up_y(p_y_coordinate),
-	m_robot_type(p_robot_type)
+	m_robot_type(p_robot_type),
+	m_back_up_robot_type(p_robot_type)
 {
 }
 void Robot::update()
 {
 	std::cout << "robot updated!" << std::endl;
+}
+
+void Robot::update_visible_time()
+{
+	if (time_visible > 0)
+	{
+		time_visible--;
+	}
+}
+
+void Robot::setup_visible_time()
+{
+	time_visible = 5;
+}
+
+bool Robot::get_visibility()
+{
+	return time_visible == 0;
 }
 
 void Robot::set_x_coordinate(int p_x)
@@ -56,8 +75,15 @@ void Robot::update_position(int p_new_x, int p_new_y)
 
 void Robot::reset_robot()
 {
+	// reset the robot's coordinates
 	m_x_coordinate = m_back_up_x;
 	m_y_coordinate = m_back_up_y;
+
+	// reset RobotType
+	m_robot_type = m_back_up_robot_type;
+
+	// reset the robots death-timer
+	time_visible = -1;
 }
 
 void Robot::set_m_blocked(bool p_blocked)

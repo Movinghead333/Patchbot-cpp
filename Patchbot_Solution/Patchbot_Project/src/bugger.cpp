@@ -14,9 +14,8 @@ void Bugger::update()
 
 void Bugger::reset_robot()
 {
-	// reset robot position
-	m_x_coordinate = m_back_up_x;
-	m_y_coordinate = m_back_up_y;
+	// reset the robots coordinates
+	Robot::reset_robot();
 
 	// reset AI startpoint
 	m_start_position = Point2D(m_back_up_x, m_back_up_y);
@@ -38,10 +37,14 @@ bool Bugger::check_collision(Tile & p_target_tile)
 	case ENEMY_SPAWN:
 	case AUTO_DOOR_OPEN:
 	case MANUAL_DOOR_OPEN:
-	case ABYSS:
-	case WATER:
 	case ALIEN_GRASS:
 	case GRAVEL:
+		return true;
+
+	case WATER:
+	case ABYSS:
+		m_robot_type = RobotType::DEAD;
+		setup_visible_time();
 		return true;
 
 	case ROOT_SERVER:
