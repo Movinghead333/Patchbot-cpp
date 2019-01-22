@@ -1,9 +1,11 @@
 #include "ai_controller.h"
 
+// default constructor
 AIController::AIController()
 {
 }
 
+// receives a std::shared_ptr<Robot> and updates the corresponding robot
 void AIController::update_ai(std::shared_ptr<Robot>& p_robot)
 {
 	switch (p_robot->get_robot_type())
@@ -38,16 +40,7 @@ void AIController::update_ai(std::shared_ptr<Robot>& p_robot)
 	}
 }
 
-void AIController::set_colony_ptr(std::shared_ptr<Colony> p_colony)
-{
-	m_colony = p_colony;
-}
-
-bool AIController::is_setup()
-{
-	return m_colony != nullptr;
-}
-
+// methods for the bugger AI
 void AIController::update_bugger(std::shared_ptr<Robot>& p_robot)
 {
 	// get a reference to the bugger subclass to access Bugger related data
@@ -194,13 +187,29 @@ void AIController::check_wait(Bugger& bugger)
 	
 }
 
+
+// methods for LineRobots AI
 void AIController::update_line_robot(std::shared_ptr<Robot>& p_robot)
 {
 	LineRobot& line_robot = static_cast<LineRobot&>(*p_robot);
 }
 
+
+// methods for PathfindingRobots
 void AIController::update_pathfinder_robot(std::shared_ptr<Robot>& p_robot)
 {
 	PathfinderRobot& pathfinder_robot = static_cast<PathfinderRobot&>(*p_robot);
 }
 
+
+// setup the colony pointer
+void AIController::set_colony_ptr(std::shared_ptr<Colony> p_colony)
+{
+	m_colony = p_colony;
+}
+
+// check if the colony pointer is setup
+bool AIController::is_setup()
+{
+	return m_colony != nullptr;
+}
