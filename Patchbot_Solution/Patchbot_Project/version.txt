@@ -335,11 +335,21 @@ vc 97:
 	- AI should be implemented as controller which receives robot instances
 	  as parameters and calculates their move
 
+vc 98:
+	- added AI for the Bugger robot
+	- added AIController
+	- lots of code cleanup necessary
+
 
 
 TODO:
 
+
 HIGH PRIORITY:
+	- clean up code
+	- add collision to patchbot for the AI
+	- add AI for LineRobots and PathfinderRobots
+	- added the other features requested in task 7
 
 LOW PRIORITY:
 

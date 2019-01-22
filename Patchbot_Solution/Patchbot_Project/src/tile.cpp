@@ -4,10 +4,12 @@
 
 Tile::Tile(
 	TileType p_tile_type,
-	BestPath p_nav_mesh_value)
+	BestPath p_nav_mesh_value,
+	bool p_occupied)
 	:
 	m_tile_type(p_tile_type),
-	m_best_path(p_nav_mesh_value)
+	m_best_path(p_nav_mesh_value),
+	m_occupied(p_occupied)
 {
 };
 
@@ -51,4 +53,14 @@ void Tile::set_m_best_path(BestPath p_new_direction)
 BestPath Tile::get_m_best_path() const
 {
 	return m_best_path;
+}
+
+void Tile::set_occupied(bool is_occupied)
+{
+	m_occupied = is_occupied;
+}
+
+bool Tile::get_occupied() const
+{
+	return m_occupied;
 }

@@ -10,6 +10,7 @@
 #include "texture.h"
 #include "patchbot_move.h"
 #include "game_state.h"
+#include "ai_controller.h"
 
 class GameController
 {
@@ -167,6 +168,9 @@ private:
 
 	// stores the images for debugging dijkstra algorithm
 	std::map<BestPath, std::shared_ptr<QImage>> m_arrow_textures;
+
+	// ai controller for calculating ai movements
+	AIController m_ai_controller;
 };
 
 #endif

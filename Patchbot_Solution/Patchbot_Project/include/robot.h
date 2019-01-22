@@ -4,6 +4,7 @@
 #include <iostream> //DEBUG
 
 #include "robot_type.h"
+#include "point.h"
 
 // A base-class for all robots holding the core functionalities
 // like position and robot-type
@@ -21,21 +22,25 @@ public:
 	virtual void update();
 
 	// getter methods for member-fields
+	void set_x_coordinate(int p_x);
 	int get_x_coordinate() const;
 
+	void set_y_coordinate(int p_y);
 	int get_y_coordinate() const;
+
+	void set_coordinates(Point2D p_position);
 
 	RobotType get_robot_type() const;
 
 	void update_position(int p_new_x, int p_new_y);
 
-	void reset_position();
+	virtual void reset_robot();
 
 	void set_m_blocked(bool p_blocked);
 	bool get_m_blocked() const;
 
 
-private:
+protected:
 
 	// A robot's coordinates starting from (0, 0)
 	// representing the tile in top left corner

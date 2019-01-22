@@ -261,6 +261,7 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ai_controller.cpp" />
     <ClCompile Include="src\bugger.cpp" />
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\door.cpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="src\node.cpp" />
     <ClCompile Include="src\patchbot_move.cpp" />
     <ClCompile Include="src\pathfinder_robot.cpp" />
+    <ClCompile Include="src\point.cpp" />
     <ClCompile Include="src\renderwidget.cpp" />
     <ClCompile Include="src\robot.cpp" />
     <ClCompile Include="src\texture.cpp" />
@@ -278,8 +280,11 @@
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ai_controller.h" />
     <ClInclude Include="include\best_path.h" />
     <ClInclude Include="include\bugger.h" />
+    <ClInclude Include="include\bugger_directions.h" />
+    <ClInclude Include="include\bugger_states.h" />
     <ClInclude Include="include\colony.h" />
     <ClInclude Include="include\door.h" />
     <ClInclude Include="include\exceptions.h" />
@@ -300,6 +305,7 @@
     <ClInclude Include="include\node.h" />
     <ClInclude Include="include\patchbot_move.h" />
     <ClInclude Include="include\pathfinder_robot.h" />
+    <ClInclude Include="include\point.h" />
     <ClInclude Include="include\robot.h" />
     <ClInclude Include="include\robot_type.h" />
     <ClInclude Include="include\texture.h" />

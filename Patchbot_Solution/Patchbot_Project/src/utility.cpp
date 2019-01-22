@@ -82,3 +82,33 @@ int Utility::get_distance_from_tile_Type(TileType p_tile_type)
 		return 1;
 	}
 }
+
+BuggerDirections Utility::get_next_direction(BuggerDirections p_dir)
+{
+	switch (p_dir)
+	{
+	case NORTH:
+		return BuggerDirections::EAST;
+		break;
+	case EAST:
+		return BuggerDirections::SOUTH;
+		break;
+	case SOUTH:
+		return BuggerDirections::WEST;
+		break;
+	case WEST:
+		return BuggerDirections::NORTH;
+		break;
+	}
+}
+
+bool Utility::check_boundries(int x, int y, int x_limit, int y_limit)
+{
+	return x >= 0 && x < x_limit && y >= 0 && y < y_limit;
+}
+
+bool Utility::check_boundries(Point2D position, int x_limit, int y_limit)
+{
+	return position.x >= 0 && position.x < x_limit &&
+		   position.y >= 0 && position.y < y_limit;
+}

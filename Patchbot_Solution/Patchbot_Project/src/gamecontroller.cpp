@@ -18,6 +18,12 @@ void GameController::load_and_initialize_colony(
 	// load a colony from file into controller
 	m_current_colony = std::make_shared<Colony>(
 		*Colony::load_colony(p_file_path));
+
+	// check if the AIController is linked with colony if not link it
+	if (!m_ai_controller.is_setup())
+	{
+		m_ai_controller.set_colony_ptr(m_current_colony);
+	}
 	m_current_program = std::vector<PatchbotMove>();
 
 	m_current_colony->generate_nav_mesh();
@@ -431,9 +437,9 @@ void GameController::execute_single_step()
 	}
 
 	// update all robots
-	for (std::shared_ptr<Robot> robot : m_current_colony->get_robots())
+	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
-		robot->update();
+		m_ai_controller.update_ai(robot);
 	}
 
 	// update doors
@@ -491,7 +497,13 @@ void GameController::reset_robots()
 {
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
-		robot->reset_position();
+		m_current_colony->get_editable_tile_ref_by_coordiantes(
+			robot->get_x_coordinate(), robot->get_y_coordinate()).
+			set_occupied(false);
+		robot->reset_robot();
+		m_current_colony->get_editable_tile_ref_by_coordiantes(
+			robot->get_x_coordinate(), robot->get_y_coordinate()).
+			set_occupied(true);
 	}
 }
 

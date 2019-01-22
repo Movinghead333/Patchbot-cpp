@@ -31,6 +31,12 @@ void Colony::set_tile_type_by_coordinates(int x, int y, TileType p_tile_type)
 {
 	m_tiles[x + (m_width * y)].set_m_tile_type(p_tile_type);
 }
+
+void Colony::change_occupation(Tile & old_tile, Tile & new_tile)
+{
+	old_tile.set_occupied(false);
+	new_tile.set_occupied(true);
+}
 											
 int Colony::get_width() const				
 {											
@@ -202,7 +208,9 @@ Colony* Colony::load_colony(const std::string& file_name)
 							
 				
 							temp_tiles.push_back(
-								Tile(ENEMY_SPAWN, current_nav_mesh_value));
+								Tile(ENEMY_SPAWN,
+									 current_nav_mesh_value,
+									 true));
 						}
 					}
 					// if the read char is not a number,
@@ -215,7 +223,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							Utility::char_to_tile_type(current_char);
 						
 						temp_tiles.push_back(
-							Tile(tile_type, current_nav_mesh_value));
+							Tile(tile_type, current_nav_mesh_value, false));
 						
 						if (tile_type == TileType::MANUAL_DOOR_CLOSED ||
 							tile_type == TileType::AUTO_DOOR_CLOSED)
@@ -234,6 +242,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							{
 								patchbot_x = x;
 								patchbot_y = y;
+								temp_tiles.back().set_occupied(true);
 								hasStart = true;
 							}
 							else

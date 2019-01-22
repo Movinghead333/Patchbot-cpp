@@ -38,6 +38,8 @@ public:
 
 	void set_tile_type_by_coordinates(int x, int y, TileType p_tile_type);
 
+	static void change_occupation(Tile& old_tile, Tile& new_tile);
+
 	// get a ref to the vector storing all the robots from the current colony
 	// these getters are no const so the returned references can change the 
 	// current colony object
