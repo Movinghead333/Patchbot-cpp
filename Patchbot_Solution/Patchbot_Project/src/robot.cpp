@@ -13,6 +13,11 @@ void Robot::update()
 	std::cout << "robot updated!" << std::endl;
 }
 
+bool Robot::check_collision(const Tile& p_target_tile)
+{
+	return false;
+}
+
 void Robot::update_visible_time()
 {
 	if (time_visible > 0)
@@ -26,7 +31,7 @@ void Robot::setup_visible_time()
 	time_visible = 5;
 }
 
-bool Robot::get_visibility()
+bool Robot::get_visibility() const
 {
 	return time_visible == 0;
 }

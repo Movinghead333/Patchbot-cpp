@@ -52,6 +52,11 @@ const std::vector<Tile>& Colony::get_tiles() const
 	return *m_robots[m_robots.size()-1];
 }
 
+ std::shared_ptr<Robot>& Colony::get_robot_by_id(int p_id)
+ {
+	 return m_robots[p_id];
+ }
+
  std::vector<Door>& Colony::get_doors()
  {
 	 return m_doors;
@@ -71,7 +76,6 @@ std::vector<std::shared_ptr<Robot>>& Colony::get_robots()
 {
 	return m_robots;
 }
-
 
 // load a colony by filename and return a pointer to the created object
 Colony* Colony::load_colony(const std::string& file_name)
@@ -205,7 +209,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							temp_tiles.push_back(
 								Tile(ENEMY_SPAWN,
 									 current_nav_mesh_value,
-									 true));
+									 temp_robots.size() - 1));
 						}
 					}
 					// if the read char is not a number,
@@ -218,7 +222,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							Utility::char_to_tile_type(current_char);
 						
 						temp_tiles.push_back(
-							Tile(tile_type, current_nav_mesh_value, false));
+							Tile(tile_type, current_nav_mesh_value, -1));
 						
 						if (tile_type == TileType::MANUAL_DOOR_CLOSED ||
 							tile_type == TileType::AUTO_DOOR_CLOSED)
@@ -237,7 +241,6 @@ Colony* Colony::load_colony(const std::string& file_name)
 							{
 								patchbot_x = x;
 								patchbot_y = y;
-								temp_tiles.back().set_occupied(true);
 								hasStart = true;
 							}
 							else
@@ -295,6 +298,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 	{
 		temp_robots.push_back(std::make_shared<Robot>(
 			Robot(Point2D(patchbot_x, patchbot_y), RobotType::PATCHBOT)));
+		temp_tiles[patchbot_y * width + patchbot_x].set_robot_id(
+			temp_robots.size() - 1);
 	}
 	if (hasEnd == false)
 	{
@@ -308,6 +313,24 @@ Colony* Colony::load_colony(const std::string& file_name)
 		new Colony(width, height, temp_robots, temp_tiles, temp_doors);
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
+}
+
+void Colony::reset_colony()
+{
+	for (Tile& tile : m_tiles)
+	{
+		tile.reset();
+	}
+
+	for (std::shared_ptr<Robot>& robot : m_robots)
+	{
+		robot->reset_robot();
+	}
+
+	for (Door& door : m_doors)
+	{
+		door.reset();
+	}
 }
 
 // generates the navigation mesh for the currently loaded colony 
@@ -447,16 +470,42 @@ void Colony::generate_nav_mesh()
 	}
 }
 
+void Colony::print_robot_id_matrix() const
+{
+	for (int y = 0; y < m_height; y++)
+	{
+		for (int x = 0; x < m_width; x++)
+		{
+			if (m_tiles[y * m_width + x].get_robot_id() != -1)
+			{
+				std::cout << m_tiles[y * m_width + x].get_robot_id() << " ";
+			}
+			else
+			{
+				std::cout << "+ ";
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 {
+	// get an editable ref to old tile
+	Tile& old_tile =
+		get_editable_tile_ref_by_coordiantes(p_robot.get_position());
+
+	// temp robot_id
+	int robot_id = old_tile.get_robot_id();
+
 	// set old tile to free
-	get_editable_tile_ref_by_coordiantes(p_robot.get_position()).
-		set_occupied(false);
+	old_tile.set_robot_id(-1);
 
 	// update the robot's position to its new target position
 	p_robot.update_position(p_target_position);
 
 	// set the new tile to occupied
 	get_editable_tile_ref_by_coordiantes(p_robot.get_position()).
-		set_occupied(true);
+		set_robot_id(robot_id);
 }

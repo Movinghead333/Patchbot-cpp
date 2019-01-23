@@ -9,7 +9,10 @@ class Tile
 {
 public:
 	// constructor receiving a TileType for creating a new tile
-	Tile(TileType p_tile_type, BestPath p_nav_mesh_value, bool p_occupied);
+	Tile(TileType p_tile_type, BestPath p_nav_mesh_value, int p_robot_id);
+
+	// reset tile
+	void reset();
 	
 	// returns the char, from which the input tile-object was created
 	static char get_source_char(const Tile& input_tile);
@@ -22,7 +25,9 @@ public:
 	void set_m_best_path(BestPath p_new_direction);
 	BestPath get_m_best_path() const;
 
-	void set_occupied(bool is_occupied);
+	void set_robot_id(int p_robot_id);
+	int get_robot_id() const;
+
 	bool get_occupied() const;
 
 	
@@ -31,7 +36,12 @@ protected:
 	TileType m_tile_type;
 	BestPath m_best_path;
 
-	bool m_occupied;
+	// stores the id of the robot that is on this tile
+	// if there is no robot on this tile the id is -1
+	int m_robot_id;
+
+	// back up robot id for map reset
+	const int m_robot_id_backup;
 };
 
 #endif

@@ -44,6 +44,8 @@ public:
 	std::vector<std::shared_ptr<Robot>>& get_robots();
 	Robot& get_patch_bot();
 
+	std::shared_ptr<Robot>& get_robot_by_id(int p_id);
+
 	// get changable vector of all doors
 	std::vector<Door>& get_doors();
 
@@ -51,16 +53,26 @@ public:
 
 	Tile& get_editable_tile_ref_by_coordiantes(Point2D p_position);
 
+
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
+
+	// MEMBER METHODS
+
+	void reset_colony();
 
 	// updates the colony's nav mesh for patchbots current position
 	// upper complexity boundry:
 	// O(colony_width * colony_height * log(colony_width * colony_height))
 	void generate_nav_mesh();
 
-	// moves a robot and updates the occupation flag for the involved tiles
+	// moves a robot and updates the occupation flags for the involved tiles
+	// note that this method does not check if the given position is a valid 
+	// move this check has to be performed by the caller
 	void move_robot_on_map(Robot& p_robot, Point2D p_target_position);
+
+	//DEBUG
+	void print_robot_id_matrix() const;
 
 private:
 	// number of tiles along the x-axis
@@ -80,6 +92,8 @@ private:
 	// and their properties (e.g. x and y coordiante)
 	// stores the player in its last element
 	std::vector<std::shared_ptr<Robot>> m_robots;
+
+
 };
 
 #endif

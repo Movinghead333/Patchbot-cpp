@@ -47,19 +47,8 @@ void Door::update(int p_patchbot_x, int p_patchbot_y, Tile& p_door_tile)
 	}
 }
 
-void Door::reset(Tile& p_door_tile)
+void Door::reset()
 {
-	if (m_open_timer != 0)
-	{
-		m_open_timer = 0;
-		if (p_door_tile.get_tile_type() == TileType::MANUAL_DOOR_OPEN)
-		{
-			p_door_tile.set_m_tile_type(TileType::MANUAL_DOOR_CLOSED);
-		}
-		else if (p_door_tile.get_tile_type() == TileType::AUTO_DOOR_OPEN)
-		{
-			p_door_tile.set_m_tile_type(TileType::AUTO_DOOR_CLOSED);
-		}
-	}
+	m_open_timer = 0;	
 }
 ;

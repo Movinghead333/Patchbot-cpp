@@ -55,17 +55,11 @@ public:
 	// execute a single time step in the current program
 	void execute_single_step();
 
-	// patchbot can make a move or false if
+	// returns true if the coordinates represent a valid move
 	bool calculate_collision(int x, int y);
-
-	// reset all robots after the game ends
-	void reset_robots();
 
 	// update all doors on the map
 	void update_doors(int p_patchbot_x, int p_patchbot_y);
-
-	// reset all doors
-	void reset_doors();
 
 	// reset current run
 	void reset_current_run();

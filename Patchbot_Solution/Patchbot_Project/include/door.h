@@ -19,7 +19,7 @@ struct Door
 
 	// resets the door object and the corresponding tile object via the 
 	// passed reference
-	void reset(Tile& p_door_tile);
+	void reset();
 };
 
 #endif

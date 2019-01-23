@@ -365,6 +365,16 @@ vc 104:
 	  in order to move the robt and change the occupation of the tiles involved
 	- further code clean up in ai_controller.cpp
 
+vc 105:
+	- Tiles now store the id of the robot which is on the tile instead of a
+	  flag which just indicated if there is a robot on the field
+	- added the functionality for patchbot to push other robot's if the
+	  environment allows it
+
+vc 106:
+	- resetting the colony is now done in the colony class itself instead
+	  of in the gamecontroller
+	- moved other resetting functionalities accordingly
 
 
 TODO:

@@ -27,9 +27,6 @@ void GameController::load_and_initialize_colony(
 
 	// reset the patchbot program
 	m_current_program = std::vector<PatchbotMove>();
-
-	// initial nav_mesh generation
-	m_current_colony->generate_nav_mesh();
 }
 
 // loads all needed textures into memory for later rendering
@@ -351,6 +348,9 @@ void GameController::start_current_program()
 	m_program_index = 0;
 	m_current_move = m_current_program[m_program_index];
 	set_game_state(GameState::IN_PROGRESS);
+
+	// initial nav_mesh generation
+	m_current_colony->generate_nav_mesh();
 }
 
 void GameController::execute_single_step()
@@ -390,20 +390,71 @@ void GameController::execute_single_step()
 		break;
 	}
 
+	// get a const ref to the current target tile
+	const Tile& target_tile = m_current_colony->
+		get_tile_by_coordinates(current_x, current_y);
+	bool occ = target_tile.get_occupied();
+
 	// check if the current movetype is a direction if so check if patchbot
 	// needs to be moved
 	if (m_current_move.m_move_type != MoveType::WAIT)
 	{
+		// if this is true the target field is no wall
 		if (calculate_collision(current_x, current_y))
 		{
-			//move the player
-			//patchbot_ref.update_position(Point2D(current_x, current_y));
-			m_current_colony->move_robot_on_map(
-				patchbot_ref, Point2D(current_x, current_y));
+			// if this is true the target_tile is occupied by another robot
+			if (target_tile.get_occupied())
+			{
+				Point2D enemy_target_pos = Point2D(current_x, current_y);
+				switch (m_current_move.m_move_type)
+				{
+				case UP:
+					enemy_target_pos.y--;
+					break;
+				case RIGHT:
+					enemy_target_pos.x++;
+					break;
+				case DOWN:
+					enemy_target_pos.y++;
+					break;
+				case LEFT:
+					enemy_target_pos.x--;
+					break;
+				}
+				const Tile& enemy_target_tile = m_current_colony->
+					get_editable_tile_ref_by_coordiantes(
+						enemy_target_pos.x, enemy_target_pos.y);
 
-			// update the nav_mesh for the AI
-			m_current_colony->generate_nav_mesh();
+				std::shared_ptr<Robot>& target_robot = m_current_colony->
+					get_robot_by_id(target_tile.get_robot_id());
+
+				// the target tile neither a wall nor blocked by another robot
+				// thus patchbot can move the enemy robot
+				if (target_robot->check_collision(enemy_target_tile) &&
+					   !enemy_target_tile.get_occupied())
+				{
+					// first move the enemy robot
+					m_current_colony->move_robot_on_map(*target_robot,
+						enemy_target_pos);
+
+					// then move patchbot
+					m_current_colony->move_robot_on_map(patchbot_ref,
+						Point2D(current_x, current_y));
+				}
+			}
+			// else means the tile is free so patchbot can make its move
+			else
+			{
+				//move the player
+			//patchbot_ref.update_position(Point2D(current_x, current_y));
+				m_current_colony->move_robot_on_map(
+					patchbot_ref, Point2D(current_x, current_y));
+
+				// update the nav_mesh for the AI
+				m_current_colony->generate_nav_mesh();
+			}
 		}
+		// else the target tile is wall so dont move
 	}
 
 	// if the repitions amount is set to go until obstacle then check if there
@@ -412,7 +463,8 @@ void GameController::execute_single_step()
 	// NOTE: the current implementation does an extra step to confirm the next
 	//		 tile would be an obstacle
 	if (m_current_move.m_steps == -1 &&
-		!calculate_collision(current_x, current_y))
+		(!calculate_collision(current_x, current_y) ||
+		  occ))
 	{
 		m_current_move.m_steps++;
 	}
@@ -446,6 +498,7 @@ void GameController::execute_single_step()
 	{
 		m_ai_controller.update_ai(robot);
 	}
+	m_current_colony->print_robot_id_matrix();
 
 	// update doors
 	update_doors(current_x, current_y);
@@ -498,22 +551,6 @@ bool GameController::calculate_collision(int x, int y)
 	}
 }
 
-void GameController::reset_robots()
-{
-	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
-	{
-		m_current_colony->get_editable_tile_ref_by_coordiantes(
-			robot->get_position())
-				.set_occupied(false);
-
-		robot->reset_robot();
-
-		m_current_colony->get_editable_tile_ref_by_coordiantes(
-			robot->get_position())
-				.set_occupied(true);
-	}
-}
-
 void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 {
 	std::vector<Door>& doors_ref = m_current_colony->get_doors();
@@ -526,21 +563,9 @@ void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 	}
 }
 
-void GameController::reset_doors()
-{
-	std::vector<Door> temp_doors = m_current_colony->get_doors();
-	for (Door& temp_door : temp_doors)
-	{
-		Tile& temp_door_tile = get_editable_tile_ref_by_coordinates(
-			temp_door.m_x, temp_door.m_y);
-		temp_door.reset(temp_door_tile);
-	}
-}
-
 void GameController::reset_current_run()
 {
-	reset_robots();
-	reset_doors();
+	m_current_colony->reset_colony();
 	set_game_state(GameState::GAME_NOT_STARTED);
 	set_m_automatic_mode_enabled(false);
 }

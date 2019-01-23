@@ -5,6 +5,7 @@
 
 #include "robot_type.h"
 #include "point.h"
+#include "tile.h"
 
 // A base-class for all robots holding the core functionalities
 // like position and robot-type
@@ -17,11 +18,14 @@ public:
 
 	virtual void update();
 
+	// TODO change to = 0 since robot should eventually be an interface
+	virtual bool check_collision(const Tile& p_target_tile);
+
 	void update_visible_time();
 	void setup_visible_time();
 
 	// getter methods for member-fields
-	bool get_visibility();
+	bool get_visibility() const;
 
 	void set_x_coordinate(int p_x);
 	int get_x_coordinate() const;
@@ -47,12 +51,12 @@ protected:
 	Point2D m_position;
 
 	// backup coordinates for reset
-	Point2D m_position_backup;
+	const Point2D m_position_backup;
 
 	// A robot's type for later runtime-comparisons
 	RobotType m_robot_type;
 
-	RobotType m_back_up_robot_type;
+	const RobotType m_back_up_robot_type;
 
 	// indicates how long the robot gravestone remains on the map after a robot
 	// crashed default value is -1 and means the robot is still alive

@@ -27,7 +27,7 @@ void Bugger::reset_robot()
 	m_ai_state = BuggerStates::FOLLOW_WALL;
 }
 
-bool Bugger::check_collision(Tile & p_target_tile)
+bool Bugger::check_collision(const Tile& p_target_tile)
 {
 	
 	switch (p_target_tile.get_tile_type())
