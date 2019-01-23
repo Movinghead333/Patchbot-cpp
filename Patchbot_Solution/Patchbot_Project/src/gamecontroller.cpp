@@ -394,7 +394,7 @@ void GameController::execute_single_step()
 		if (calculate_collision(current_x, current_y))
 		{
 			//move the player
-			patchbot_ref.update_position(current_x, current_y);
+			patchbot_ref.update_position(Point2D(current_x, current_y));
 
 			// update the nav_mesh for the AI
 			m_current_colony->generate_nav_mesh();

@@ -29,11 +29,9 @@ public:
 	void set_y_coordinate(int p_y);
 	int get_y_coordinate() const;
 
-	void set_coordinates(Point2D p_position);
-
 	RobotType get_robot_type() const;
 
-	void update_position(int p_new_x, int p_new_y);
+	void update_position(Point2D p_new_position);
 
 	virtual void reset_robot();
 
@@ -45,8 +43,7 @@ protected:
 
 	// A robot's coordinates starting from (0, 0)
 	// representing the tile in top left corner
-	int m_x_coordinate;
-	int m_y_coordinate;
+	Point2D m_position;
 
 	// backup coordinates for reset
 	Point2D m_position_backup;

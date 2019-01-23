@@ -93,7 +93,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 				Colony::change_occupation(old_tile, target_tile);
 
 				// move to tile if it is free
-				bugger.set_coordinates(targetpos);
+				bugger.update_position(targetpos);
 			}
 		}
 		else
@@ -144,7 +144,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 					Colony::change_occupation(old_tile, target_tile);
 
 					// move to free tile
-					bugger.set_coordinates(targetpos);
+					bugger.update_position(targetpos);
 				}
 				// the target tile is not a wall but there is a robot on it
 				else

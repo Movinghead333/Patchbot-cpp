@@ -62,16 +62,16 @@ Point2D Bugger::get_target_position(BuggerDirections p_direction)
 	switch (p_direction)
 	{
 	case NORTH:
-		return Point2D(m_x_coordinate, m_y_coordinate - 1);
+		return Point2D(m_position.x, m_position.y - 1);
 		break;
 	case EAST:
-		return Point2D(m_x_coordinate + 1, m_y_coordinate);
+		return Point2D(m_position.x + 1, m_position.y);
 		break;
 	case SOUTH:
-		return Point2D(m_x_coordinate, m_y_coordinate + 1);
+		return Point2D(m_position.x, m_position.y + 1);
 		break;
 	case WEST:
-		return Point2D(m_x_coordinate - 1, m_y_coordinate);
+		return Point2D(m_position.x - 1, m_position.y);
 		break;
 	}
 }

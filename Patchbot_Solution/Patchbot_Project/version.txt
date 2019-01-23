@@ -351,6 +351,9 @@ vc 101:
 	- Robot constructor now takes a Point2D instead of two coordinates
 	- Robots backup position is now stored in a Point2D
 
+vc 102:
+	- Robots position is now stored in a Point2D instead of seperate coords
+
 
 
 TODO:
