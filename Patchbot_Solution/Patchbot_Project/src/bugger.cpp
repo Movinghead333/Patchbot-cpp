@@ -1,9 +1,9 @@
 #include "bugger.h"
 
-Bugger::Bugger(int p_x, int p_y, RobotType p_robot_type)
+Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
 	:
-	Robot(p_x, p_y, p_robot_type),
-	m_start_position(Point2D(p_x, p_y))
+	Robot(p_position, p_robot_type),
+	m_start_position(p_position)
 {
 }
 
@@ -18,7 +18,7 @@ void Bugger::reset_robot()
 	Robot::reset_robot();
 
 	// reset AI startpoint
-	m_start_position = Point2D(m_back_up_x, m_back_up_y);
+	m_start_position = m_position_backup;
 
 	// reset inital direction
 	m_current_wall = BuggerDirections::NORTH;

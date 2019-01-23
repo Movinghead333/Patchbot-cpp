@@ -13,11 +13,7 @@ class Robot
 public:
 
 	// constructor
-	Robot(
-		int p_x_coordinate,
-		int p_y_coordinate,
-		RobotType pRobotType
-	);
+	Robot(Point2D p_position, RobotType pRobotType);
 
 	virtual void update();
 
@@ -53,8 +49,7 @@ protected:
 	int m_y_coordinate;
 
 	// backup coordinates for reset
-	int m_back_up_x;
-	int m_back_up_y;
+	Point2D m_position_backup;
 
 	// A robot's type for later runtime-comparisons
 	RobotType m_robot_type;

@@ -10,7 +10,7 @@
 class Bugger : public Robot
 {
 public:
-	Bugger(int p_x, int p_y, RobotType p_robot_type);
+	Bugger(Point2D p_position, RobotType p_robot_type);
 	void update() override;
 
 	void reset_robot() override;

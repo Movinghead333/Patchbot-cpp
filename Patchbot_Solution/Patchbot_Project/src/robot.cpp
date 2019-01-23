@@ -1,14 +1,10 @@
 #include "robot.h"
 
 // Robot-constructor implementation
-Robot::Robot(
-	int p_x_coordinate,
-	int p_y_coordinate,
-	RobotType p_robot_type) :
-	m_x_coordinate(p_x_coordinate),
-	m_y_coordinate(p_y_coordinate),
-	m_back_up_x(p_x_coordinate),
-	m_back_up_y(p_y_coordinate),
+Robot::Robot(Point2D p_position, RobotType p_robot_type) :
+	m_x_coordinate(p_position.x),
+	m_y_coordinate(p_position.y),
+	m_position_backup(p_position),
 	m_robot_type(p_robot_type),
 	m_back_up_robot_type(p_robot_type)
 {
@@ -76,8 +72,8 @@ void Robot::update_position(int p_new_x, int p_new_y)
 void Robot::reset_robot()
 {
 	// reset the robot's coordinates
-	m_x_coordinate = m_back_up_x;
-	m_y_coordinate = m_back_up_y;
+	m_x_coordinate = m_position_backup.x;
+	m_y_coordinate = m_position_backup.y;
 
 	// reset RobotType
 	m_robot_type = m_back_up_robot_type;

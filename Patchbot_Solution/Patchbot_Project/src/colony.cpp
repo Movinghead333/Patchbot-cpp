@@ -165,8 +165,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							{
 							case 49:
 								temp_robots.push_back(std::make_shared<Bugger>(
-									Bugger(x,
-										y,
+									Bugger(Point2D(x, y),
 										static_cast<RobotType>(current_char)
 									)
 									));
@@ -177,8 +176,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							case 52:
 								temp_robots.push_back(
 									std::make_shared<LineRobot>(
-									LineRobot(x,
-										y,
+									LineRobot(Point2D(x, y),
 										static_cast<RobotType>(current_char)
 									)
 									));
@@ -189,8 +187,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 							case 55:
 								temp_robots.push_back(
 									std::make_shared<PathfinderRobot>(
-										PathfinderRobot(x,
-											y,
+										PathfinderRobot(Point2D(x, y),
 											static_cast<RobotType>(current_char)
 										)
 										));
@@ -198,8 +195,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 
 							default:
 								temp_robots.push_back(std::make_shared<Robot>(
-									Robot(x,
-										y,
+									Robot(Point2D(x, y),
 										static_cast<RobotType>(current_char)
 									)
 									));
@@ -299,7 +295,7 @@ Colony* Colony::load_colony(const std::string& file_name)
 	else
 	{
 		temp_robots.push_back(std::make_shared<Robot>(
-			Robot(patchbot_x, patchbot_y, RobotType::PATCHBOT)));
+			Robot(Point2D(patchbot_x, patchbot_y), RobotType::PATCHBOT)));
 	}
 	if (hasEnd == false)
 	{
