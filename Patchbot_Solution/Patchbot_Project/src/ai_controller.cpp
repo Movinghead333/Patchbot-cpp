@@ -79,7 +79,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 	{
 		// get target Tile&
 		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-			targetpos.x, targetpos.y);
+			targetpos);
 
 		// check collision
 		if (bugger.check_collision(target_tile))
@@ -88,7 +88,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 			{
 				// change occupation
 				Tile& old_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-					bugger.get_x_coordinate(), bugger.get_y_coordinate());
+					bugger.get_position());
 
 				Colony::change_occupation(old_tile, target_tile);
 
@@ -120,6 +120,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 	// else try to follow the wall
 	if (bugger.check_for_starting_position(targetpos))
 	{
+		// found starting position so search for another wall
 		bugger.set_m_ai_state(BuggerStates::FIND_ANOTHER_WALL);
 	}
 	else
@@ -129,7 +130,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 		{
 			// get target Tile&
 			Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-				targetpos.x, targetpos.y);
+				targetpos);
 
 			// check collision and if there is no robot on the tile
 			if (bugger.check_collision(target_tile))
@@ -138,8 +139,9 @@ void AIController::check_follow_wall(Bugger& bugger)
 				if (!target_tile.get_occupied())
 				{
 					// change occupation
-					Tile& old_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-						bugger.get_x_coordinate(), bugger.get_y_coordinate());
+					Tile& old_tile = m_colony->
+						get_editable_tile_ref_by_coordiantes(
+							bugger.get_position());
 
 					Colony::change_occupation(old_tile, target_tile);
 
@@ -176,15 +178,15 @@ void AIController::check_wait(Bugger& bugger)
 	{
 		// get target Tile&
 		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-			targetpos.x, targetpos.y);
+			targetpos);
 
 		// check if the target field is free
 		if (!target_tile.get_occupied())
 		{
+			// if the target tile is free again proceed following the wall
 			bugger.set_m_ai_state(BuggerStates::FOLLOW_WALL);
 		}
 	}
-	
 }
 
 

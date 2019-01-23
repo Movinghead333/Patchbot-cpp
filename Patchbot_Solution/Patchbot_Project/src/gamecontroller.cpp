@@ -498,12 +498,14 @@ void GameController::reset_robots()
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
 		m_current_colony->get_editable_tile_ref_by_coordiantes(
-			robot->get_x_coordinate(), robot->get_y_coordinate()).
-			set_occupied(false);
+			robot->get_position())
+				.set_occupied(false);
+
 		robot->reset_robot();
+
 		m_current_colony->get_editable_tile_ref_by_coordiantes(
-			robot->get_x_coordinate(), robot->get_y_coordinate()).
-			set_occupied(true);
+			robot->get_position())
+				.set_occupied(true);
 	}
 }
 

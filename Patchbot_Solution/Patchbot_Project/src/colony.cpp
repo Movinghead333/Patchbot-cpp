@@ -68,6 +68,11 @@ const std::vector<Tile>& Colony::get_tiles() const
 	 return m_tiles[p_x + (m_width * p_y)];
  }
 
+ Tile & Colony::get_editable_tile_ref_by_coordiantes(Point2D p_position)
+ {
+	 return m_tiles[p_position.x + (m_width * p_position.y)];
+ }
+
 std::vector<std::shared_ptr<Robot>>& Colony::get_robots()
 {
 	return m_robots;

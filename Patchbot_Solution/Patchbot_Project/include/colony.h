@@ -51,6 +51,8 @@ public:
 
 	Tile& get_editable_tile_ref_by_coordiantes(int p_x, int p_y);
 
+	Tile& get_editable_tile_ref_by_coordiantes(Point2D p_position);
+
 	// static laoding method for creating a colony* for given filename
 	static Colony* load_colony(const std::string& file_name);
 

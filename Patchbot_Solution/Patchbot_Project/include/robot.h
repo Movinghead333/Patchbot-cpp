@@ -32,6 +32,7 @@ public:
 	RobotType get_robot_type() const;
 
 	void update_position(Point2D p_new_position);
+	Point2D get_position() const;
 
 	virtual void reset_robot();
 

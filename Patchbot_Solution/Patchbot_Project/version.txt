@@ -354,6 +354,10 @@ vc 101:
 vc 102:
 	- Robots position is now stored in a Point2D instead of seperate coords
 
+vc 103:
+	- editable tiles can now be retrieved via 2 coordinates or a Point2D
+	- changes usage of get editable tile to Point2D where it made sense
+
 
 
 TODO:

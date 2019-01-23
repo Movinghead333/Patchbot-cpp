@@ -61,6 +61,11 @@ void Robot::update_position(Point2D p_new_position)
 	m_position = p_new_position;
 }
 
+Point2D Robot::get_position() const
+{
+	return m_position;
+}
+
 void Robot::reset_robot()
 {
 	// reset the robot's coordinates
