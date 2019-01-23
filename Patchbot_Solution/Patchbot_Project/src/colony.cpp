@@ -31,12 +31,6 @@ void Colony::set_tile_type_by_coordinates(int x, int y, TileType p_tile_type)
 {
 	m_tiles[x + (m_width * y)].set_m_tile_type(p_tile_type);
 }
-
-void Colony::change_occupation(Tile & old_tile, Tile & new_tile)
-{
-	old_tile.set_occupied(false);
-	new_tile.set_occupied(true);
-}
 											
 int Colony::get_width() const				
 {											
@@ -451,4 +445,18 @@ void Colony::generate_nav_mesh()
 		
 		
 	}
+}
+
+void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
+{
+	// set old tile to free
+	get_editable_tile_ref_by_coordiantes(p_robot.get_position()).
+		set_occupied(false);
+
+	// update the robot's position to its new target position
+	p_robot.update_position(p_target_position);
+
+	// set the new tile to occupied
+	get_editable_tile_ref_by_coordiantes(p_robot.get_position()).
+		set_occupied(true);
 }

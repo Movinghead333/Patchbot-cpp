@@ -86,14 +86,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 		{
 			if (!target_tile.get_occupied())
 			{
-				// change occupation
-				Tile& old_tile = m_colony->get_editable_tile_ref_by_coordiantes(
-					bugger.get_position());
-
-				Colony::change_occupation(old_tile, target_tile);
-
-				// move to tile if it is free
-				bugger.update_position(targetpos);
+				m_colony->move_robot_on_map(bugger, targetpos);
 			}
 		}
 		else
@@ -138,15 +131,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 				// the target is not a wall and there is no robot on it
 				if (!target_tile.get_occupied())
 				{
-					// change occupation
-					Tile& old_tile = m_colony->
-						get_editable_tile_ref_by_coordiantes(
-							bugger.get_position());
-
-					Colony::change_occupation(old_tile, target_tile);
-
-					// move to free tile
-					bugger.update_position(targetpos);
+					m_colony->move_robot_on_map(bugger, targetpos);
 				}
 				// the target tile is not a wall but there is a robot on it
 				else

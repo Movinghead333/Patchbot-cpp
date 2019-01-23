@@ -38,8 +38,6 @@ public:
 
 	void set_tile_type_by_coordinates(int x, int y, TileType p_tile_type);
 
-	static void change_occupation(Tile& old_tile, Tile& new_tile);
-
 	// get a ref to the vector storing all the robots from the current colony
 	// these getters are no const so the returned references can change the 
 	// current colony object
@@ -60,6 +58,9 @@ public:
 	// upper complexity boundry:
 	// O(colony_width * colony_height * log(colony_width * colony_height))
 	void generate_nav_mesh();
+
+	// moves a robot and updates the occupation flag for the involved tiles
+	void move_robot_on_map(Robot& p_robot, Point2D p_target_position);
 
 private:
 	// number of tiles along the x-axis

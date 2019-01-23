@@ -358,6 +358,13 @@ vc 103:
 	- editable tiles can now be retrieved via 2 coordinates or a Point2D
 	- changes usage of get editable tile to Point2D where it made sense
 
+vc 104:
+	- added collision to patchbot
+	- remove the static method for calculating occupation change and instead
+	  created a member method with takes a robot and its target position
+	  in order to move the robt and change the occupation of the tiles involved
+	- further code clean up in ai_controller.cpp
+
 
 
 TODO:
