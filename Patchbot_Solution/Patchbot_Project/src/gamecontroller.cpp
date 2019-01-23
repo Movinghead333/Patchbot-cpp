@@ -422,7 +422,7 @@ void GameController::execute_single_step()
 					break;
 				}
 				const Tile& enemy_target_tile = m_current_colony->
-					get_editable_tile_ref_by_coordiantes(
+					get_editable_tile_ref_by_coordinates(
 						enemy_target_pos.x, enemy_target_pos.y);
 
 				std::shared_ptr<Robot>& target_robot = m_current_colony->
@@ -501,7 +501,7 @@ void GameController::execute_single_step()
 	m_current_colony->print_robot_id_matrix();
 
 	// update doors
-	update_doors(current_x, current_y);
+	update_doors();
 }
 
 bool GameController::calculate_collision(int x, int y)
@@ -543,6 +543,8 @@ bool GameController::calculate_collision(int x, int y)
 	case TileType::AUTO_DOOR_CLOSED:
 		return false;
 	case TileType::MANUAL_DOOR_CLOSED:
+		m_current_colony->get_editable_tile_ref_by_coordinates(x, y).
+			set_m_tile_type(TileType::MANUAL_DOOR_OPEN);
 		//TODO: decide wether a door takes one or 2 moves
 		//m_current_move.m_steps++;
 		return false;
@@ -551,7 +553,7 @@ bool GameController::calculate_collision(int x, int y)
 	}
 }
 
-void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
+void GameController::update_doors()
 {
 	std::vector<Door>& doors_ref = m_current_colony->get_doors();
 
@@ -559,7 +561,7 @@ void GameController::update_doors(int p_patchbot_x, int p_patchbot_y)
 	{
 		Tile& temp_door_tile = get_editable_tile_ref_by_coordinates(
 			temp_door.m_x, temp_door.m_y);
-		temp_door.update(p_patchbot_x, p_patchbot_y, temp_door_tile);
+		temp_door.update(temp_door_tile);
 	}
 }
 
@@ -572,7 +574,7 @@ void GameController::reset_current_run()
 
 Tile& GameController::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
 {
-	return m_current_colony->get_editable_tile_ref_by_coordiantes(
+	return m_current_colony->get_editable_tile_ref_by_coordinates(
 		p_x, p_y);
 }
 

@@ -62,12 +62,12 @@ const std::vector<Tile>& Colony::get_tiles() const
 	 return m_doors;
  }
 
- Tile& Colony::get_editable_tile_ref_by_coordiantes(int p_x, int p_y)
+ Tile& Colony::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
  {
 	 return m_tiles[p_x + (m_width * p_y)];
  }
 
- Tile & Colony::get_editable_tile_ref_by_coordiantes(Point2D p_position)
+ Tile & Colony::get_editable_tile_ref_by_coordinates(Point2D p_position)
  {
 	 return m_tiles[p_position.x + (m_width * p_position.y)];
  }
@@ -300,6 +300,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 			Robot(Point2D(patchbot_x, patchbot_y), RobotType::PATCHBOT)));
 		temp_tiles[patchbot_y * width + patchbot_x].set_robot_id(
 			temp_robots.size() - 1);
+		temp_tiles[patchbot_y * width + patchbot_x].set_robot_id_back_up(
+			temp_robots.size() - 1);
 	}
 	if (hasEnd == false)
 	{
@@ -333,6 +335,16 @@ void Colony::reset_colony()
 	}
 }
 
+void Colony::update_doors()
+{
+	for (Door& temp_door : m_doors)
+	{
+		Tile& temp_door_tile = get_editable_tile_ref_by_coordinates(
+			temp_door.m_x, temp_door.m_y);
+		temp_door.update(temp_door_tile);
+	}
+}
+
 // generates the navigation mesh for the currently loaded colony 
 void Colony::generate_nav_mesh()
 {
@@ -351,7 +363,7 @@ void Colony::generate_nav_mesh()
 	int p_patchbot_y = patchbot.get_y_coordinate();
 
 	// set the tile patchbot is on as target for pathfinding
-	Tile& patchbot_tile = get_editable_tile_ref_by_coordiantes(
+	Tile& patchbot_tile = get_editable_tile_ref_by_coordinates(
 		p_patchbot_x, p_patchbot_y);
 
 	patchbot_tile.set_m_best_path(BestPath::TARGET);
@@ -378,7 +390,7 @@ void Colony::generate_nav_mesh()
 		if (current_node.m_y - 1 >= 0)
 		{
 			// get a reference to the tile which currently processed
-			Tile& up_tile = get_editable_tile_ref_by_coordiantes(
+			Tile& up_tile = get_editable_tile_ref_by_coordinates(
 				current_node.m_x, current_node.m_y - 1);
 
 			// if the tile is not set then set it
@@ -404,7 +416,7 @@ void Colony::generate_nav_mesh()
 		// right
 		if (current_node.m_x + 1 < m_width)
 		{
-			Tile& right_tile = get_editable_tile_ref_by_coordiantes(
+			Tile& right_tile = get_editable_tile_ref_by_coordinates(
 				current_node.m_x + 1, current_node.m_y);
 
 
@@ -426,7 +438,7 @@ void Colony::generate_nav_mesh()
 		// down
 		if (current_node.m_y + 1 < m_height)
 		{
-			Tile& down_tile = get_editable_tile_ref_by_coordiantes(
+			Tile& down_tile = get_editable_tile_ref_by_coordinates(
 				current_node.m_x, current_node.m_y + 1);
 
 
@@ -448,7 +460,7 @@ void Colony::generate_nav_mesh()
 		// left
 		if (current_node.m_x - 1 >= 0)
 		{
-			Tile& left_tile = get_editable_tile_ref_by_coordiantes(
+			Tile& left_tile = get_editable_tile_ref_by_coordinates(
 				current_node.m_x - 1, current_node.m_y);
 
 
@@ -494,7 +506,7 @@ void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 {
 	// get an editable ref to old tile
 	Tile& old_tile =
-		get_editable_tile_ref_by_coordiantes(p_robot.get_position());
+		get_editable_tile_ref_by_coordinates(p_robot.get_position());
 
 	// temp robot_id
 	int robot_id = old_tile.get_robot_id();
@@ -506,6 +518,6 @@ void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 	p_robot.update_position(p_target_position);
 
 	// set the new tile to occupied
-	get_editable_tile_ref_by_coordiantes(p_robot.get_position()).
+	get_editable_tile_ref_by_coordinates(p_robot.get_position()).
 		set_robot_id(robot_id);
 }

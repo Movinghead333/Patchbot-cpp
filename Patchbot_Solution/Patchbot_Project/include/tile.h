@@ -13,6 +13,9 @@ public:
 
 	// reset tile
 	void reset();
+
+	//
+	void change_door_texture_to_open();
 	
 	// returns the char, from which the input tile-object was created
 	static char get_source_char(const Tile& input_tile);
@@ -21,6 +24,8 @@ public:
 	TileType get_tile_type() const;
 
 	void set_m_tile_type(TileType p_tile_type);
+
+	void set_robot_id_back_up(int p_robot_id_backup);
 
 	void set_m_best_path(BestPath p_new_direction);
 	BestPath get_m_best_path() const;
@@ -41,7 +46,7 @@ protected:
 	int m_robot_id;
 
 	// back up robot id for map reset
-	const int m_robot_id_backup;
+	int m_robot_id_backup;
 };
 
 #endif

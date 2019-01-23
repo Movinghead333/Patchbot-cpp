@@ -8,6 +8,11 @@ AIController::AIController()
 // receives a std::shared_ptr<Robot> and updates the corresponding robot
 void AIController::update_ai(std::shared_ptr<Robot>& p_robot)
 {
+	if (p_robot->get_m_blocked())
+	{
+		p_robot->set_m_blocked(false);
+	}
+
 	switch (p_robot->get_robot_type())
 	{
 	// update all Buggers
@@ -78,7 +83,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 		m_colony->get_height()))
 	{
 		// get target Tile&
-		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
+		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
 			targetpos);
 
 		// check collision
@@ -89,7 +94,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 				m_colony->move_robot_on_map(bugger, targetpos);
 			}
 		}
-		else
+		else if (!bugger.get_m_blocked())
 		{
 			// now follow it
 			bugger.set_m_ai_state(BuggerStates::FOLLOW_WALL);
@@ -122,7 +127,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 			m_colony->get_height()))
 		{
 			// get target Tile&
-			Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
+			Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
 				targetpos);
 
 			// check collision and if there is no robot on the tile
@@ -141,7 +146,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 				}
 			}
 			// the target tile is a wall
-			else
+			else if(!bugger.get_m_blocked())
 			{
 				bugger.set_m_current_wall(
 					Utility::get_next_direction(bugger.get_m_current_wall()));
@@ -162,7 +167,7 @@ void AIController::check_wait(Bugger& bugger)
 		m_colony->get_height()))
 	{
 		// get target Tile&
-		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordiantes(
+		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
 			targetpos);
 
 		// check if the target field is free

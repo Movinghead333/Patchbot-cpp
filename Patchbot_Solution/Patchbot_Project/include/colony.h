@@ -29,7 +29,7 @@ public:
 		const std::vector<Tile>& p_tiles,
 		const std::vector<Door>& p_doors);
 
-	// getter-methods
+	// getter- and setter-methods
 	int get_width() const;
 	int get_height() const;
 
@@ -49,9 +49,9 @@ public:
 	// get changable vector of all doors
 	std::vector<Door>& get_doors();
 
-	Tile& get_editable_tile_ref_by_coordiantes(int p_x, int p_y);
+	Tile& get_editable_tile_ref_by_coordinates(int p_x, int p_y);
 
-	Tile& get_editable_tile_ref_by_coordiantes(Point2D p_position);
+	Tile& get_editable_tile_ref_by_coordinates(Point2D p_position);
 
 
 	// static laoding method for creating a colony* for given filename
@@ -59,7 +59,10 @@ public:
 
 	// MEMBER METHODS
 
+	// resets the colony to its initial state
 	void reset_colony();
+
+	void update_doors();
 
 	// updates the colony's nav mesh for patchbots current position
 	// upper complexity boundry:

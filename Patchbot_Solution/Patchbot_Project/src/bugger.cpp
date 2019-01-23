@@ -27,7 +27,7 @@ void Bugger::reset_robot()
 	m_ai_state = BuggerStates::FOLLOW_WALL;
 }
 
-bool Bugger::check_collision(const Tile& p_target_tile)
+bool Bugger::check_collision(Tile& p_target_tile)
 {
 	
 	switch (p_target_tile.get_tile_type())
@@ -47,10 +47,14 @@ bool Bugger::check_collision(const Tile& p_target_tile)
 		setup_visible_time();
 		return true;
 
-	case ROOT_SERVER:
-	case SECRET_ENTRANCE:
 	case MANUAL_DOOR_CLOSED:
 	case AUTO_DOOR_CLOSED:
+		m_blocked = true;
+		p_target_tile.change_door_texture_to_open();
+		return false;
+
+	case ROOT_SERVER:
+	case SECRET_ENTRANCE:
 	case INDESTRUCTABLE_WALL:
 	case DESTRUCTABLE_WALL:
 		return false;

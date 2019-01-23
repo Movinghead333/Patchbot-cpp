@@ -59,7 +59,7 @@ public:
 	bool calculate_collision(int x, int y);
 
 	// update all doors on the map
-	void update_doors(int p_patchbot_x, int p_patchbot_y);
+	void update_doors();
 
 	// reset current run
 	void reset_current_run();

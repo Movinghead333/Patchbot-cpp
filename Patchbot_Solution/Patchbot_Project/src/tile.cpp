@@ -25,6 +25,18 @@ void Tile::reset()
 		m_tile_type = TileType::AUTO_DOOR_OPEN;
 	}
 }
+void Tile::change_door_texture_to_open()
+{
+	if (m_tile_type == TileType::MANUAL_DOOR_CLOSED)
+	{
+		m_tile_type = TileType::MANUAL_DOOR_OPEN;
+	}
+
+	if (m_tile_type == TileType::AUTO_DOOR_CLOSED)
+	{
+		m_tile_type = TileType::AUTO_DOOR_OPEN;
+	}
+}
 ;
 
 char Tile::get_source_char(const Tile& input_tile)
@@ -57,6 +69,11 @@ TileType Tile::get_tile_type() const
 void Tile::set_m_tile_type(TileType p_tile_type)
 {
 	m_tile_type = p_tile_type;
+}
+
+void Tile::set_robot_id_back_up(int p_robot_id_backup)
+{
+	m_robot_id_backup = p_robot_id_backup;
 }
 
 void Tile::set_m_best_path(BestPath p_new_direction)

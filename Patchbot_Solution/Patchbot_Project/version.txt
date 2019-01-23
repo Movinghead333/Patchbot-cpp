@@ -376,6 +376,11 @@ vc 106:
 	  of in the gamecontroller
 	- moved other resetting functionalities accordingly
 
+vc 107:
+	- complete rework of the door systems
+	- doors now check for any robot on them
+	- fixed a bug where patchbots starting tile would not be reset correctly
+
 
 TODO:
 
