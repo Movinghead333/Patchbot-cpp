@@ -385,6 +385,10 @@ vc 108:
 	- fixed a bug where bugger would not correctly override check_collision
 	  from robot.h
 
+vc 109:
+	- move until obstacle now correctly responds to other robots in patchbot's
+	  way
+
 
 TODO:
 

@@ -393,7 +393,9 @@ void GameController::execute_single_step()
 	// get a const ref to the current target tile
 	const Tile& target_tile = m_current_colony->
 		get_tile_by_coordinates(current_x, current_y);
-	bool occ = target_tile.get_occupied();
+
+	// check if the target tile is occupied
+	bool occupied = target_tile.get_occupied();
 
 	// check if the current movetype is a direction if so check if patchbot
 	// needs to be moved
@@ -403,43 +405,49 @@ void GameController::execute_single_step()
 		if (calculate_collision(current_x, current_y))
 		{
 			// if this is true the target_tile is occupied by another robot
-			if (target_tile.get_occupied())
+			if (occupied)
 			{
-				Point2D enemy_target_pos = Point2D(current_x, current_y);
-				switch (m_current_move.m_move_type)
+				if (m_current_move.m_steps != -1)
 				{
-				case UP:
-					enemy_target_pos.y--;
-					break;
-				case RIGHT:
-					enemy_target_pos.x++;
-					break;
-				case DOWN:
-					enemy_target_pos.y++;
-					break;
-				case LEFT:
-					enemy_target_pos.x--;
-					break;
-				}
-				Tile& enemy_target_tile = m_current_colony->
-					get_editable_tile_ref_by_coordinates(
-						enemy_target_pos.x, enemy_target_pos.y);
+					Point2D enemy_target_pos = Point2D(current_x, current_y);
+					switch (m_current_move.m_move_type)
+					{
+					case UP:
+						enemy_target_pos.y--;
+						break;
+					case RIGHT:
+						enemy_target_pos.x++;
+						break;
+					case DOWN:
+						enemy_target_pos.y++;
+						break;
+					case LEFT:
+						enemy_target_pos.x--;
+						break;
+					}
+					Tile& enemy_target_tile = m_current_colony->
+						get_editable_tile_ref_by_coordinates(
+							enemy_target_pos.x, enemy_target_pos.y);
 
-				std::shared_ptr<Robot>& target_robot = m_current_colony->
-					get_robot_by_id(target_tile.get_robot_id());
+					std::shared_ptr<Robot>& target_robot = m_current_colony->
+						get_robot_by_id(target_tile.get_robot_id());
 
-				// the target tile neither a wall nor blocked by another robot
-				// thus patchbot can move the enemy robot
-				if (target_robot->check_collision(enemy_target_tile) &&
-					   !enemy_target_tile.get_occupied())
-				{
-					// first move the enemy robot
-					m_current_colony->move_robot_on_map(*target_robot,
-						enemy_target_pos);
+					// the target tile neither a wall nor blocked by another
+					// robot thus patchbot can move the enemy robot
+					if (target_robot->check_collision(enemy_target_tile) &&
+						!enemy_target_tile.get_occupied())
+					{
+						// first move the enemy robot
+						m_current_colony->move_robot_on_map(*target_robot,
+							enemy_target_pos);
 
-					// then move patchbot
-					m_current_colony->move_robot_on_map(patchbot_ref,
-						Point2D(current_x, current_y));
+						// then move patchbot
+						m_current_colony->move_robot_on_map(patchbot_ref,
+							Point2D(current_x, current_y));
+
+						// update the nav_mesh for the AI
+						m_current_colony->generate_nav_mesh();
+					}
 				}
 			}
 			// else means the tile is free so patchbot can make its move
@@ -464,7 +472,7 @@ void GameController::execute_single_step()
 	//		 tile would be an obstacle
 	if (m_current_move.m_steps == -1 &&
 		(!calculate_collision(current_x, current_y) ||
-		  occ))
+			occupied))
 	{
 		m_current_move.m_steps++;
 	}

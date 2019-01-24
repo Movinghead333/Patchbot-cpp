@@ -16,6 +16,7 @@ Tile::Tile(
 void Tile::reset()
 {
 	m_robot_id = m_robot_id_backup;
+
 	if (m_tile_type == TileType::MANUAL_DOOR_OPEN)
 	{
 		m_tile_type = TileType::MANUAL_DOOR_CLOSED;
