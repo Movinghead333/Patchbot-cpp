@@ -16,7 +16,7 @@ public:
 	void reset_robot() override;
 
 	// returns true if the targeted tile is free to move on
-	bool check_collision(Tile& p_target_tile);
+	bool check_collision(Tile& p_target_tile) override;
 
 	Point2D get_target_position(BuggerDirections p_direction);
 

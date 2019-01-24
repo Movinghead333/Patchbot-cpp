@@ -421,7 +421,7 @@ void GameController::execute_single_step()
 					enemy_target_pos.x--;
 					break;
 				}
-				const Tile& enemy_target_tile = m_current_colony->
+				Tile& enemy_target_tile = m_current_colony->
 					get_editable_tile_ref_by_coordinates(
 						enemy_target_pos.x, enemy_target_pos.y);
 
@@ -498,7 +498,8 @@ void GameController::execute_single_step()
 	{
 		m_ai_controller.update_ai(robot);
 	}
-	m_current_colony->print_robot_id_matrix();
+	//m_current_colony->print_robot_id_matrix();
+	m_current_colony->print_occupiation_matrix();
 
 	// update doors
 	update_doors();

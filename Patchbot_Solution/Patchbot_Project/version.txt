@@ -381,6 +381,10 @@ vc 107:
 	- doors now check for any robot on them
 	- fixed a bug where patchbots starting tile would not be reset correctly
 
+vc 108:
+	- fixed a bug where bugger would not correctly override check_collision
+	  from robot.h
+
 
 TODO:
 

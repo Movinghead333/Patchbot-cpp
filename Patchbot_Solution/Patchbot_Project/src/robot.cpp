@@ -13,8 +13,10 @@ void Robot::update()
 	std::cout << "robot updated!" << std::endl;
 }
 
-bool Robot::check_collision(const Tile& p_target_tile)
+bool Robot::check_collision(Tile& p_target_tile)
 {
+	//TODO change to interface
+	std::cout << "unimplemented collision used" << std::endl;
 	return false;
 }
 

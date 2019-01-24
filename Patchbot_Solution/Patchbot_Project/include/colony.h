@@ -76,6 +76,7 @@ public:
 
 	//DEBUG
 	void print_robot_id_matrix() const;
+	void print_occupiation_matrix() const;
 
 private:
 	// number of tiles along the x-axis

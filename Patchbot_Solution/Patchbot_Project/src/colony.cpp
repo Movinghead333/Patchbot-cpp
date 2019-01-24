@@ -502,6 +502,26 @@ void Colony::print_robot_id_matrix() const
 	std::cout << std::endl;
 }
 
+void Colony::print_occupiation_matrix() const
+{
+	for (int y = 0; y < m_height; y++)
+	{
+		for (int x = 0; x < m_width; x++)
+		{
+			if (m_tiles[y * m_width + x].get_occupied())
+			{
+				std::cout << "1 ";
+			}
+			else
+			{
+				std::cout << "0 ";
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 {
 	// get an editable ref to old tile

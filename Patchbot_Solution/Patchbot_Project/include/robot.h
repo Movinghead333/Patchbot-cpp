@@ -19,7 +19,7 @@ public:
 	virtual void update();
 
 	// TODO change to = 0 since robot should eventually be an interface
-	virtual bool check_collision(const Tile& p_target_tile);
+	virtual bool check_collision(Tile& p_target_tile);
 
 	void update_visible_time();
 	void setup_visible_time();
