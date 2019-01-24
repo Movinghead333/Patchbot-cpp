@@ -1,4 +1,5 @@
 #include "robot.h"
+#include "colony.h"
 
 // Robot-constructor implementation
 Robot::Robot(Point2D p_position, RobotType p_robot_type) :
@@ -8,7 +9,7 @@ Robot::Robot(Point2D p_position, RobotType p_robot_type) :
 	m_back_up_robot_type(p_robot_type)
 {
 }
-void Robot::update()
+void Robot::update(Colony& p_colony)
 {
 	std::cout << "robot updated!" << std::endl;
 }

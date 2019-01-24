@@ -389,15 +389,20 @@ vc 109:
 	- move until obstacle now correctly responds to other robots in patchbot's
 	  way
 
+vc 110:
+	- all robot classes now forward declare colony
+	- virtual void update now takes a Colony& ref as argument in order to
+	  switch to an ai implementation in the robot classes
+
 
 TODO:
 
 
 HIGH PRIORITY:
 	- clean up code
-	- add collision to patchbot for the AI
 	- add AI for LineRobots and PathfinderRobots
 	- added the other features requested in task 7
+	- rework Bugger AI into 
 
 LOW PRIORITY:
 

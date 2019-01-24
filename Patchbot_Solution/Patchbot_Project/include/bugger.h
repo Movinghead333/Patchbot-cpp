@@ -11,7 +11,7 @@ class Bugger : public Robot
 {
 public:
 	Bugger(Point2D p_position, RobotType p_robot_type);
-	void update() override;
+	void update(Colony& p_colony) override;
 
 	void reset_robot() override;
 

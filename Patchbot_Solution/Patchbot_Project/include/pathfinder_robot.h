@@ -3,10 +3,12 @@
 
 #include "robot.h"
 
+class Colony;
+
 class PathfinderRobot : public Robot
 {
 	using Robot::Robot;
-	void update() override;
+	void update(Colony& p_colony) override;
 };
 
 #endif

@@ -126,6 +126,9 @@
     <ClInclude Include="include\point.h">
       <Filter>Header Files\utility</Filter>
     </ClInclude>
+    <ClInclude Include="include\line_robot_state.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\Sven\Dropbox\Studium\3. Semester\Cpp Praktikum\Grafiken\grafiken\umgebungen\boden.tga">

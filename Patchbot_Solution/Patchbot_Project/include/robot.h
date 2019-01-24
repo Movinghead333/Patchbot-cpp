@@ -7,6 +7,8 @@
 #include "point.h"
 #include "tile.h"
 
+class Colony;
+
 // A base-class for all robots holding the core functionalities
 // like position and robot-type
 class Robot
@@ -16,7 +18,7 @@ public:
 	// constructor
 	Robot(Point2D p_position, RobotType pRobotType);
 
-	virtual void update();
+	virtual void update(Colony& p_colony);
 
 	// TODO change to = 0 since robot should eventually be an interface
 	virtual bool check_collision(Tile& p_target_tile);

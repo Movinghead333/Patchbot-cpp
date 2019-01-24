@@ -7,7 +7,7 @@ Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
 {
 }
 
-void Bugger::update()
+void Bugger::update(Colony& p_colony)
 {
 	std::cout << "bugger updated!" << std::endl;
 }
