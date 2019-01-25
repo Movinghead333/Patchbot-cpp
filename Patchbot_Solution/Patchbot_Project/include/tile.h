@@ -33,6 +33,7 @@ public:
 	void set_robot_id(int p_robot_id);
 	int get_robot_id() const;
 
+	// returns true if the tile is blocked by a robot
 	bool get_occupied() const;
 
 	

@@ -39,25 +39,25 @@ bool Bugger::check_collision(Tile& p_target_tile)
 	case MANUAL_DOOR_OPEN:
 	case ALIEN_GRASS:
 	case GRAVEL:
-		return true;
+		return false;
 
 	case WATER:
 	case ABYSS:
 		m_robot_type = RobotType::DEAD;
 		setup_visible_time();
-		return true;
+		return false;
 
 	case MANUAL_DOOR_CLOSED:
 	case AUTO_DOOR_CLOSED:
 		m_blocked = true;
 		p_target_tile.change_door_texture_to_open();
-		return false;
+		return true;
 
 	case ROOT_SERVER:
 	case SECRET_ENTRANCE:
 	case INDESTRUCTABLE_WALL:
 	case DESTRUCTABLE_WALL:
-		return false;
+		return true;
 	}
 }
 

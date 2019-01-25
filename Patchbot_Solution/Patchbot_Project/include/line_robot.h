@@ -14,8 +14,14 @@ public:
 
 	void reset_robot() override;
 
+	// returns true if the robot collides with a wall
+	bool check_collision(Tile& p_target_tile) override;
+
 private:
 	LineRobotState m_ai_state = LineRobotState::X_MOVEMENT;
+
+	void update_x_movement(Colony& p_colony);
+	void update_y_movement(Colony& p_colony);
 };
 
 #endif

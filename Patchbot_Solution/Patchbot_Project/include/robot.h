@@ -21,6 +21,7 @@ public:
 	virtual void update(Colony& p_colony);
 
 	// TODO change to = 0 since robot should eventually be an interface
+	// return true if the robot is colliding with a wall
 	virtual bool check_collision(Tile& p_target_tile);
 
 	void update_visible_time();

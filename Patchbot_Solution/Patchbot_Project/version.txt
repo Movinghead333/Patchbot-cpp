@@ -394,6 +394,11 @@ vc 110:
 	- virtual void update now takes a Colony& ref as argument in order to
 	  switch to an ai implementation in the robot classes
 
+vc 111:
+	- LineRobot x component is done --> mirror it for y direction
+	- check collision method now returns true if there is collision in all 
+	  implemented robot subclasses
+
 
 TODO:
 
@@ -402,7 +407,8 @@ HIGH PRIORITY:
 	- clean up code
 	- add AI for LineRobots and PathfinderRobots
 	- added the other features requested in task 7
-	- rework Bugger AI into 
+	- rework Bugger AI (put it in the bugger class)
+	- get rid of the ai_controller
 
 LOW PRIORITY:
 

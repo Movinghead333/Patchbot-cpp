@@ -74,6 +74,12 @@ public:
 	// move this check has to be performed by the caller
 	void move_robot_on_map(Robot& p_robot, Point2D p_target_position);
 
+	// check if a given Point2D is within map boundries
+	bool is_in_map_boundries(const Point2D& p_point) const;
+
+	// update tiles to correspond to robot move
+	void update_robot_position(Point2D p_old_pos, Point2D p_new_pos);
+
 	//DEBUG
 	void print_robot_id_matrix() const;
 	void print_occupiation_matrix() const;

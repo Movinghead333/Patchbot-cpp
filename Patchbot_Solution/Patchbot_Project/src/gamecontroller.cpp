@@ -505,6 +505,7 @@ void GameController::execute_single_step()
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
 		m_ai_controller.update_ai(robot);
+		robot->update(*m_current_colony);
 	}
 	//m_current_colony->print_robot_id_matrix();
 	m_current_colony->print_occupiation_matrix();

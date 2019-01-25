@@ -87,7 +87,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 			targetpos);
 
 		// check collision
-		if (bugger.check_collision(target_tile))
+		if (!bugger.check_collision(target_tile))
 		{
 			if (!target_tile.get_occupied())
 			{
@@ -131,7 +131,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 				targetpos);
 
 			// check collision and if there is no robot on the tile
-			if (bugger.check_collision(target_tile))
+			if (!bugger.check_collision(target_tile))
 			{
 				// the target is not a wall and there is no robot on it
 				if (!target_tile.get_occupied())

@@ -541,3 +541,26 @@ void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 	get_editable_tile_ref_by_coordinates(p_robot.get_position()).
 		set_robot_id(robot_id);
 }
+
+bool Colony::is_in_map_boundries(const Point2D & p_point) const
+{
+	return p_point.x >= 0 && p_point.x < m_width &&
+		   p_point.y >= 0 && p_point.y < m_height;
+}
+
+void Colony::update_robot_position(Point2D p_old_pos, Point2D p_new_pos)
+{
+	// get editable ref to old tile
+	Tile& old_tile = get_editable_tile_ref_by_coordinates(
+		p_old_pos.x, p_old_pos.y);
+
+	// temporarly store the robot_id
+	int robot_id = old_tile.get_robot_id();
+
+	// reset the old tile
+	old_tile.set_robot_id(-1);
+
+	// set the new tile
+	get_editable_tile_ref_by_coordinates(p_new_pos.x, p_new_pos.y).
+		set_robot_id(robot_id);
+}
