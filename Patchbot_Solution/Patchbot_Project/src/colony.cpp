@@ -10,13 +10,15 @@ Colony::Colony(
 	const int p_height,
 	const std::vector<std::shared_ptr<Robot>>& p_enemy_robots,
 	const std::vector<Tile>& p_tiles,
-	const std::vector<Door>& p_doors)
+	const std::vector<Door>& p_doors,
+	const std::vector<Point2D> p_destroyable_walls)
 	:
 	m_width(p_width),
 	m_height(p_height),
 	m_robots(p_enemy_robots),
 	m_tiles(p_tiles),
-	m_doors(p_doors)
+	m_doors(p_doors),
+	m_destroyable_walls(p_destroyable_walls)
 {
 	// TODO: add checks in constructor if necessary
 }
@@ -129,6 +131,9 @@ Colony* Colony::load_colony(const std::string& file_name)
 	// setting up temp vector for doors
 	std::vector<Door> temp_doors;
 
+	// 
+	std::vector<Point2D> temp_destroyable_walls;
+
 	bool hasStart = false;
 	bool hasEnd = false;
 
@@ -153,6 +158,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 				// iterate trough the characters of the current line
 				for (int x = 0; x < width; x++)
 				{
+					//
+
 					char current_char = current_line[x];
 					BestPath current_nav_mesh_value =
 						Utility::char_to_nav_mesh_value(current_char);
@@ -252,6 +259,10 @@ Colony* Colony::load_colony(const std::string& file_name)
 						{
 							hasEnd = true;
 						}
+						else if (current_char == 'M')
+						{
+							temp_destroyable_walls.push_back(Point2D(x, y));
+						}
 					}
 				}
 			}
@@ -311,8 +322,14 @@ Colony* Colony::load_colony(const std::string& file_name)
 
 	// if all values have been correctly setup create and return a pointer to
 	// the loaded colony
-	Colony* return_colony =
-		new Colony(width, height, temp_robots, temp_tiles, temp_doors);
+	Colony* return_colony = new Colony(
+		width,
+		height,
+		temp_robots,
+		temp_tiles,
+		temp_doors,
+		temp_destroyable_walls);
+
 	std::cout << "Colony successfully loaded!" << std::endl;
 	return return_colony;
 }
@@ -322,6 +339,11 @@ void Colony::reset_colony()
 	for (Tile& tile : m_tiles)
 	{
 		tile.reset();
+	}
+
+	for (const Point2D& destroyable_wall : m_destroyable_walls) {
+		get_editable_tile_ref_by_coordinates(destroyable_wall).
+			set_m_tile_type(TileType::DESTRUCTABLE_WALL);
 	}
 
 	for (std::shared_ptr<Robot>& robot : m_robots)

@@ -27,7 +27,8 @@ public:
 		const int p_height,
 		const std::vector<std::shared_ptr<Robot>>& p_enemy_robots, 
 		const std::vector<Tile>& p_tiles,
-		const std::vector<Door>& p_doors);
+		const std::vector<Door>& p_doors,
+		const std::vector<Point2D> p_destroyable_walls);
 
 	// getter- and setter-methods
 	int get_width() const;
@@ -97,6 +98,9 @@ private:
 	// vector holding all doors in order to update them while the game is
 	// running
 	std::vector<Door> m_doors;
+
+	// vector storing all position where destroyable tiles are located
+	std::vector<Point2D> m_destroyable_walls;
 
 	// vector storing all robots
 	// and their properties (e.g. x and y coordiante)

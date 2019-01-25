@@ -406,6 +406,10 @@ vc 113:
 	- LineRobot AI now properly updates Tile occupation when Robots get
 	  destroyed
 
+vc 114:
+	- digger can now destroy walls
+	- added vector storing all location of destroyables walls to colony
+
 
 TODO:
 	- finish LineRobot AI:

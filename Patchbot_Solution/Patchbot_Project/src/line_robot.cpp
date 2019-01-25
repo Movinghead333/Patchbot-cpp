@@ -55,7 +55,13 @@ bool LineRobot::check_collision(Tile& p_target_tile)
 	case ROOT_SERVER:
 	case SECRET_ENTRANCE:
 	case INDESTRUCTABLE_WALL:
+		return true;
+
 	case DESTRUCTABLE_WALL:
+		if (m_robot_type == RobotType::DIGGER)
+		{
+			p_target_tile.set_m_tile_type(TileType::GRAVEL);
+		}
 		return true;
 	}
 }
@@ -90,9 +96,18 @@ void LineRobot::update_x_movement(Colony& p_colony)
 	Tile& target_tile = p_colony.get_editable_tile_ref_by_coordinates(
 		target_pos);
 
+	TileType target_tile_type = target_tile.get_tile_type();
+
 	// the current tile is a wall
 	if (check_collision(target_tile))
 	{
+		// if the a digger destroyed a wall just skip the rest of the turn
+		// and do not change the direction
+		if (target_tile_type == TileType::DESTRUCTABLE_WALL &&
+			m_robot_type == RobotType::DIGGER)
+		{
+			return;
+		}
 		m_ai_state = LineRobotState::Y_MOVEMENT;
 		return;
 	}
