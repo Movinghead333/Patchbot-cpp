@@ -9,6 +9,8 @@ class PathfinderRobot : public Robot
 {
 	using Robot::Robot;
 	void update(Colony& p_colony) override;
+
+	bool check_collision(Tile& p_target_tile) override;
 };
 
 #endif

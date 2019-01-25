@@ -402,6 +402,10 @@ vc 111:
 vc 112:
 	- removed update methods for line and pathfinder robots in ai controller
 
+vc 113:
+	- LineRobot AI now properly updates Tile occupation when Robots get
+	  destroyed
+
 
 TODO:
 	- finish LineRobot AI:

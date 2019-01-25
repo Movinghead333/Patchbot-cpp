@@ -136,6 +136,11 @@ void LineRobot::update_x_movement(Colony& p_colony)
 					p_colony.update_robot_position(target_pos, enemy_target_pos);
 					enemy_robot->update_position(enemy_target_pos);
 
+					if (enemy_robot->get_robot_type() == RobotType::DEAD)
+					{
+						enemy_target_tile.set_robot_id(-1);
+					}
+
 					// move the LineRobot
 					p_colony.update_robot_position(m_position, target_pos);
 					set_x_coordinate(target_x);
@@ -160,6 +165,7 @@ void LineRobot::update_x_movement(Colony& p_colony)
 	if (m_robot_type == RobotType::DEAD)
 	{
 		m_ai_state = LineRobotState::DESTROYED;
+		target_tile.set_robot_id(-1);
 	}
 
 }
