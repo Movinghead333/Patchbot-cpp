@@ -22,11 +22,6 @@ private:
 	void check_find_another_wall(Bugger& p_bugger);
 	void check_follow_wall(Bugger& p_bugger);
 	void check_wait(Bugger& p_bugger);
-
-	void update_line_robot(std::shared_ptr<Robot>& p_robot);
-
-	void update_pathfinder_robot(std::shared_ptr<Robot>& p_robot);
-	
 };
 
 #endif

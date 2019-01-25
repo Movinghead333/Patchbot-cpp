@@ -25,14 +25,12 @@ void AIController::update_ai(std::shared_ptr<Robot>& p_robot)
 	case RobotType::PUSHER:
 	case RobotType::DIGGER:
 	case RobotType::SWIMMER:
-		update_line_robot(p_robot);
 		break;
 
 	// update all PathfinderRobots
 	case RobotType::FOLLOWER:
 	case RobotType::HUNTER:
 	case RobotType::SNIFFER:
-		update_pathfinder_robot(p_robot);
 		break;
 
 	// patchbot needs no ai update
@@ -177,20 +175,6 @@ void AIController::check_wait(Bugger& bugger)
 			bugger.set_m_ai_state(BuggerStates::FOLLOW_WALL);
 		}
 	}
-}
-
-
-// methods for LineRobots AI
-void AIController::update_line_robot(std::shared_ptr<Robot>& p_robot)
-{
-	LineRobot& line_robot = static_cast<LineRobot&>(*p_robot);
-}
-
-
-// methods for PathfindingRobots
-void AIController::update_pathfinder_robot(std::shared_ptr<Robot>& p_robot)
-{
-	PathfinderRobot& pathfinder_robot = static_cast<PathfinderRobot&>(*p_robot);
 }
 
 

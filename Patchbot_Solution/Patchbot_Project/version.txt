@@ -399,8 +399,22 @@ vc 111:
 	- check collision method now returns true if there is collision in all 
 	  implemented robot subclasses
 
+vc 112:
+	- removed update methods for line and pathfinder robots in ai controller
+
 
 TODO:
+	- finish LineRobot AI:
+		- add y direction to ai movement
+		- add destroyable walls for digger (door-like implementation storing
+		  all destructable tiles for easy reset)
+	- move bugger ai from controller into bugger class
+	- delete ai controller
+	- implement pathfinder robots
+		- implement bresenham algorithm for line of sight checking
+		- nav_mesh needs to check fields for occupation
+	- propagte loose condition if a pathfinder robot reaches patchbots location
+	- clean up colony class
 
 
 HIGH PRIORITY:
