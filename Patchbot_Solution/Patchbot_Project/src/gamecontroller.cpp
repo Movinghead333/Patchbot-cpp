@@ -544,7 +544,7 @@ bool GameController::calculate_collision(int x, int y)
 		set_game_state(GameState::FELL_INTO_WATER);
 		return true;
 
-// false cases --> collision
+	// false cases --> collision
 	case TileType::ROOT_SERVER:
 		set_game_state(GameState::SERVER_REACHED);
 		return false;

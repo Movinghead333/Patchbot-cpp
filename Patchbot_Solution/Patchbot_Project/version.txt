@@ -410,12 +410,12 @@ vc 114:
 	- digger can now destroy walls
 	- added vector storing all location of destroyables walls to colony
 
+vc 115:
+	- added y movement to LineRobots
+	- added Patchbot class (implementation wip)
+
 
 TODO:
-	- finish LineRobot AI:
-		- add y direction to ai movement
-		- add destroyable walls for digger (door-like implementation storing
-		  all destructable tiles for easy reset)
 	- move bugger ai from controller into bugger class
 	- delete ai controller
 	- implement pathfinder robots
@@ -426,11 +426,10 @@ TODO:
 
 
 HIGH PRIORITY:
-	- clean up code
-	- add AI for LineRobots and PathfinderRobots
-	- added the other features requested in task 7
-	- rework Bugger AI (put it in the bugger class)
-	- get rid of the ai_controller
+	- fix patchbot collision
+		- move collision to patchbot class
+		- change check_collision in robot to take Colony&
+		- check GameState after AI movement
 
 LOW PRIORITY:
 

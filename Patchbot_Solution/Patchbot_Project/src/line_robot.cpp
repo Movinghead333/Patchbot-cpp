@@ -182,9 +182,122 @@ void LineRobot::update_x_movement(Colony& p_colony)
 		m_ai_state = LineRobotState::DESTROYED;
 		target_tile.set_robot_id(-1);
 	}
-
 }
 
 void LineRobot::update_y_movement(Colony& p_colony)
 {
+	// get patchbot's current y
+	int patchbot_y = p_colony.get_patch_bot().get_y_coordinate();
+	// check if the y coordinate already matches patchbot's
+	if (m_position.y == patchbot_y)
+	{
+		m_ai_state = LineRobotState::X_MOVEMENT;
+		return;
+	}
+
+	// since the y coordinates don't match calculate the next position
+	int target_y = m_position.y;
+	if (target_y > patchbot_y)
+	{
+		target_y--;
+	}
+	else
+	{
+		target_y++;
+	}
+
+	Point2D target_pos = Point2D(m_position.x, target_y);
+
+	// reference to the target tile
+	// no need to check wether it is within the map boundries since the pusher
+	// can only be as far as patchbot
+	Tile& target_tile = p_colony.get_editable_tile_ref_by_coordinates(
+		target_pos);
+
+	TileType target_tile_type = target_tile.get_tile_type();
+
+	// the current tile is a wall
+	if (check_collision(target_tile))
+	{
+		// if the a digger destroyed a wall just skip the rest of the turn
+		// and do not change the direction
+		if (target_tile_type == TileType::DESTRUCTABLE_WALL &&
+			m_robot_type == RobotType::DIGGER)
+		{
+			return;
+		}
+		m_ai_state = LineRobotState::X_MOVEMENT;
+		return;
+	}
+	// the current tile is not a wall
+	else
+	{
+		// target tile is blocked by a robot
+		if (target_tile.get_occupied())
+		{
+			// set the enemeis target x based on the robots position relative
+			// to patchbot
+			int enemy_target_y = target_y;
+			if (m_position.y > patchbot_y)
+			{
+				enemy_target_y--;
+			}
+			else
+			{
+				enemy_target_y++;
+			}
+
+			// check if the enemy target_pos is inside the map
+			Point2D enemy_target_pos = Point2D(m_position.x, enemy_target_y);
+			if (p_colony.is_in_map_boundries(enemy_target_pos))
+			{
+				std::cout << "preparing for push" << std::endl;
+				Tile& enemy_target_tile = p_colony.
+					get_editable_tile_ref_by_coordinates(enemy_target_pos);
+
+				int enemy_robot_id = target_tile.get_robot_id();
+
+				std::shared_ptr<Robot>& enemy_robot = p_colony.
+					get_robot_by_id(enemy_robot_id);
+
+				// check if the tile where the other robot should be move to is
+				// neither a wall nor another robot
+				if (!enemy_target_tile.get_occupied() &&
+					!enemy_robot->check_collision(enemy_target_tile))
+				{
+					// move the other robot first
+					p_colony.update_robot_position(target_pos, enemy_target_pos);
+					enemy_robot->update_position(enemy_target_pos);
+
+					if (enemy_robot->get_robot_type() == RobotType::DEAD)
+					{
+						enemy_target_tile.set_robot_id(-1);
+					}
+
+					// move the LineRobot
+					p_colony.update_robot_position(m_position, target_pos);
+					set_y_coordinate(target_y);
+				}
+				else
+				{
+					m_ai_state = LineRobotState::X_MOVEMENT;
+					return;
+				}
+			}
+		}
+		// target tile is free
+		else
+		{
+			p_colony.update_robot_position(m_position, target_pos);
+			set_y_coordinate(target_y);
+		}
+	}
+
+	// check if the RobotType has been set to DEAD if so change state to
+	// destroyed
+	if (m_robot_type == RobotType::DEAD)
+	{
+		m_ai_state = LineRobotState::DESTROYED;
+		target_tile.set_robot_id(-1);
+	}
 }

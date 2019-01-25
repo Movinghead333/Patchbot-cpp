@@ -270,6 +270,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_window.cpp" />
     <ClCompile Include="src\node.cpp" />
+    <ClCompile Include="src\patchbot.cpp" />
     <ClCompile Include="src\patchbot_move.cpp" />
     <ClCompile Include="src\pathfinder_robot.cpp" />
     <ClCompile Include="src\point.cpp" />
@@ -304,6 +305,7 @@
     <ClInclude Include="include\line_robot_state.h" />
     <ClInclude Include="include\move_type.h" />
     <ClInclude Include="include\node.h" />
+    <ClInclude Include="include\patchbot.h" />
     <ClInclude Include="include\patchbot_move.h" />
     <ClInclude Include="include\pathfinder_robot.h" />
     <ClInclude Include="include\point.h" />
