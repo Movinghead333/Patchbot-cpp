@@ -307,8 +307,8 @@ Colony* Colony::load_colony(const std::string& file_name)
 	}
 	else
 	{
-		temp_robots.push_back(std::make_shared<Robot>(
-			Robot(Point2D(patchbot_x, patchbot_y), RobotType::PATCHBOT)));
+		temp_robots.push_back(std::make_shared<Patchbot>(
+			Patchbot(Point2D(patchbot_x, patchbot_y), RobotType::PATCHBOT)));
 		temp_tiles[patchbot_y * width + patchbot_x].set_robot_id(
 			temp_robots.size() - 1);
 		temp_tiles[patchbot_y * width + patchbot_x].set_robot_id_back_up(

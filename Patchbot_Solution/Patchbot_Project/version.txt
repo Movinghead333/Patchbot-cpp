@@ -414,6 +414,11 @@ vc 115:
 	- added y movement to LineRobots
 	- added Patchbot class (implementation wip)
 
+vc 116:
+	- fixed patchbots check_collision
+	- TODO: check GameState in controller and use patchbots new collision in
+	  controller
+
 
 TODO:
 	- move bugger ai from controller into bugger class
