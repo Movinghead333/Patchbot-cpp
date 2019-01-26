@@ -15,6 +15,7 @@ void LineRobot::update(Colony& p_colony)
 	case DESTROYED:
 		return;
 	}
+	update_visible_time();
 }
 
 void LineRobot::reset_robot()

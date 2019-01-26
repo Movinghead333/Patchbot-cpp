@@ -46,9 +46,6 @@
     <ClCompile Include="src\pathfinder_robot.cpp">
       <Filter>Source Files\core\robots</Filter>
     </ClCompile>
-    <ClCompile Include="src\ai_controller.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\point.cpp">
       <Filter>Source Files\utility</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="include\pathfinder_robot.h">
       <Filter>Header Files\core\robots</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ai_controller.h">
-      <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="include\bugger_directions.h">
       <Filter>Header Files\enums</Filter>

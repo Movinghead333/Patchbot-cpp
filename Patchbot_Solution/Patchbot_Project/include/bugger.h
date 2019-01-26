@@ -6,6 +6,7 @@
 #include "bugger_states.h"
 #include "point.h"
 #include "tile.h"
+#include "utility.h"
 
 class Bugger : public Robot
 {
@@ -23,6 +24,13 @@ public:
 	// returns true if the bugger is on its current starting position
 	bool check_for_starting_position(Point2D p_target_point);
 
+	BuggerDirections get_next_direction(BuggerDirections p_direction);
+
+	void check_find_another_wall(Colony& p_colony);
+	void check_follow_wall(Colony& p_colony);
+	void check_wait(Colony& p_colony);
+
+	// getters and setters
 	void set_m_current_wall(BuggerDirections p_current_wall);
 	BuggerDirections get_m_current_wall() const;
 

@@ -1,4 +1,5 @@
 #include "bugger.h"
+#include "colony.h"
 
 Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
 	:
@@ -9,7 +10,27 @@ Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
 
 void Bugger::update(Colony& p_colony)
 {
-	std::cout << "bugger updated!" << std::endl;
+	if (m_blocked)
+	{
+		m_blocked = false;
+	}
+	// perfom the next action based on the current AI state
+	switch (m_ai_state)
+	{
+	case BuggerStates::FIND_ANOTHER_WALL:
+		check_find_another_wall(p_colony);
+		break;
+
+	case BuggerStates::FOLLOW_WALL:
+		check_follow_wall(p_colony);
+		break;
+
+	case BuggerStates::PATH_BLOCKED:
+		check_wait(p_colony);
+		break;
+
+	}
+	update_visible_time();
 }
 
 void Bugger::reset_robot()
@@ -89,6 +110,133 @@ bool Bugger::check_for_starting_position(Point2D p_target_point)
 	else
 	{
 		return false;
+	}
+}
+
+BuggerDirections Bugger::get_next_direction(BuggerDirections p_direction)
+{
+	switch (p_direction)
+	{
+	case NORTH:
+		return BuggerDirections::EAST;
+		break;
+	case EAST:
+		return BuggerDirections::SOUTH;
+		break;
+	case SOUTH:
+		return BuggerDirections::WEST;
+		break;
+	case WEST:
+		return BuggerDirections::NORTH;
+		break;
+	}
+}
+
+void Bugger::check_find_another_wall(Colony& p_colony)
+{
+	// get target direction
+	BuggerDirections new_dir = get_next_direction(
+		get_next_direction(m_current_wall));
+
+	// get target position
+	Point2D targetpos = get_target_position(new_dir);
+
+	if (Utility::check_boundries(targetpos, p_colony.get_width(),
+		p_colony.get_height()))
+	{
+		// get target Tile&
+		Tile& target_tile = p_colony.get_tile_by_pos(
+			targetpos);
+
+		// check collision
+		if (!check_collision(target_tile))
+		{
+			if (!target_tile.get_occupied())
+			{
+				p_colony.update_robot_position(m_position, targetpos);
+				update_position(targetpos);
+			}
+		}
+		else if (!m_blocked)
+		{
+			// now follow it
+			m_ai_state=  BuggerStates::FOLLOW_WALL;
+			m_current_wall = new_dir;
+			m_start_position = targetpos;
+		}
+	}
+}
+
+void Bugger::check_follow_wall(Colony & p_colony)
+{
+	// get target direction
+	BuggerDirections new_dir = get_next_direction(m_current_wall);
+
+	// get target position
+	Point2D targetpos = get_target_position(new_dir);
+
+	// check if the bugger is at its starting location
+	// if so send it to find another wall
+	// else try to follow the wall
+	if (check_for_starting_position(targetpos))
+	{
+		// found starting position so search for another wall
+		m_ai_state = BuggerStates::FIND_ANOTHER_WALL;
+	}
+	else
+	{
+		if (Utility::check_boundries(targetpos, p_colony.get_width(),
+			p_colony.get_height()))
+		{
+			// get target Tile&
+			Tile& target_tile = p_colony.get_tile_by_pos(
+				targetpos);
+
+			// check collision and if there is no robot on the tile
+			if (!check_collision(target_tile))
+			{
+				// the target is not a wall and there is no robot on it
+				if (!target_tile.get_occupied())
+				{
+					p_colony.update_robot_position(m_position, targetpos);
+					update_position(targetpos);
+				}
+				// the target tile is not a wall but there is a robot on it
+				else
+				{
+					// wait because the target tile is blocked
+					m_ai_state = BuggerStates::PATH_BLOCKED;
+				}
+			}
+			// the target tile is a wall
+			else if (!m_blocked)
+			{
+				m_current_wall = get_next_direction(m_current_wall);
+			}
+		}
+	}
+}
+
+void Bugger::check_wait(Colony & p_colony)
+{
+	// get target direction
+	BuggerDirections new_dir = get_next_direction(m_current_wall);
+
+	// get target position
+	Point2D targetpos = get_target_position(new_dir);
+	if (Utility::check_boundries(targetpos, p_colony.get_width(),
+		p_colony.get_height()))
+	{
+		// get target Tile&
+		Tile& target_tile = p_colony.get_tile_by_pos(
+			targetpos);
+
+		// check if the target field is free
+		if (!target_tile.get_occupied())
+		{
+			// if the target tile is free again proceed following the wall
+			m_ai_state = BuggerStates::FOLLOW_WALL;
+		}
 	}
 }
 

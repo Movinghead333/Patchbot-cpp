@@ -422,6 +422,10 @@ vc 116:
 vc 117:
 	- the game is now lost when patchbot is pushed into water or abyss
 
+vc 118:
+	- moved bugger AI into bugger class
+	- removed AIController
+
 
 TODO:
 	- move bugger ai from controller into bugger class

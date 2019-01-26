@@ -261,7 +261,6 @@
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ai_controller.cpp" />
     <ClCompile Include="src\bugger.cpp" />
     <ClCompile Include="src\colony.cpp" />
     <ClCompile Include="src\door.cpp" />
@@ -281,7 +280,6 @@
     <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ai_controller.h" />
     <ClInclude Include="include\best_path.h" />
     <ClInclude Include="include\bugger.h" />
     <ClInclude Include="include\bugger_directions.h" />

@@ -27,8 +27,6 @@ public:
 
 	static int get_distance_from_tile_Type(TileType p_tile_type);
 
-	static BuggerDirections get_next_direction(BuggerDirections p_dir);
-
 	static bool check_boundries(int x, int y, int x_limit, int y_limit);
 
 	static bool check_boundries(Point2D position, int x_limit, int y_limit);

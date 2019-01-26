@@ -19,12 +19,6 @@ void GameController::load_and_initialize_colony(
 	m_current_colony = std::make_shared<Colony>(
 		*Colony::load_colony(p_file_path));
 
-	// check if the AIController is linked with colony if not link it
-	if (!m_ai_controller.is_setup())
-	{
-		m_ai_controller.set_colony_ptr(m_current_colony);
-	}
-
 	// reset the patchbot program
 	m_current_program = std::vector<PatchbotMove>();
 }
@@ -504,7 +498,6 @@ void GameController::execute_single_step()
 	// update all robots
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
-		m_ai_controller.update_ai(robot);
 		robot->update(*m_current_colony);
 		update_game_state();
 	}
