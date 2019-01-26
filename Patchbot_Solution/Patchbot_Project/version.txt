@@ -419,6 +419,9 @@ vc 116:
 	- TODO: check GameState in controller and use patchbots new collision in
 	  controller
 
+vc 117:
+	- the game is now lost when patchbot is pushed into water or abyss
+
 
 TODO:
 	- move bugger ai from controller into bugger class

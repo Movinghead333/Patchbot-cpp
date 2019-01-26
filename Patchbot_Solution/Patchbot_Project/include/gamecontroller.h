@@ -67,6 +67,8 @@ public:
 	Tile& get_editable_tile_ref_by_coordinates(int p_x, int p_y);
 
 
+	void update_game_state();
+
 	/* GETTERS AND SETTERS */
 
 	// get QImage ref according to passed TileType

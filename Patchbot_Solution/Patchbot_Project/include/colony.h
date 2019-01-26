@@ -44,7 +44,7 @@ public:
 	// these getters are no const so the returned references can change the 
 	// current colony object
 	std::vector<std::shared_ptr<Robot>>& get_robots();
-	Robot& get_patch_bot();
+	Patchbot& get_patch_bot();
 
 	std::shared_ptr<Robot>& get_robot_by_id(int p_id);
 
@@ -53,7 +53,7 @@ public:
 
 	Tile& get_editable_tile_ref_by_coordinates(int p_x, int p_y);
 
-	Tile& get_editable_tile_ref_by_coordinates(Point2D p_position);
+	Tile& get_tile_by_pos(Point2D p_position);
 
 
 	// static laoding method for creating a colony* for given filename

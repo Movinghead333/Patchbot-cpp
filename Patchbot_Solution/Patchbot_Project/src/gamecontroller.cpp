@@ -355,7 +355,7 @@ void GameController::start_current_program()
 
 void GameController::execute_single_step()
 {
-	Robot& patchbot_ref = m_current_colony->get_patch_bot();
+	Patchbot& patchbot_ref = m_current_colony->get_patch_bot();
 
 	// check if patchbot is blocked from aliengrass
 	if (patchbot_ref.get_m_blocked())
@@ -506,6 +506,7 @@ void GameController::execute_single_step()
 	{
 		m_ai_controller.update_ai(robot);
 		robot->update(*m_current_colony);
+		update_game_state();
 	}
 	//m_current_colony->print_robot_id_matrix();
 	m_current_colony->print_occupiation_matrix();
@@ -586,6 +587,27 @@ Tile& GameController::get_editable_tile_ref_by_coordinates(int p_x, int p_y)
 {
 	return m_current_colony->get_editable_tile_ref_by_coordinates(
 		p_x, p_y);
+}
+
+void GameController::update_game_state()
+{
+	const Patchbot& patchbot = m_current_colony->get_patch_bot();
+
+	const Point2D patchbot_pos = patchbot.get_position();
+
+	const Tile& patchbot_tile = m_current_colony->
+		get_tile_by_pos(patchbot_pos);
+
+	const TileType patchbot_tile_type = patchbot_tile.get_tile_type();
+
+	if (patchbot_tile_type == TileType::WATER)
+	{
+		m_game_state = GameState::FELL_INTO_WATER;
+	}
+	else if (patchbot_tile_type == TileType::ABYSS)
+	{
+		m_game_state = GameState::FELL_INTO_ABYSS;
+	}
 }
 
 // image getters for retreiving image resources from controller

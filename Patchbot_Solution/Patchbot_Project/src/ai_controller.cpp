@@ -81,7 +81,7 @@ void AIController::check_find_another_wall(Bugger& bugger)
 		m_colony->get_height()))
 	{
 		// get target Tile&
-		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
+		Tile& target_tile = m_colony->get_tile_by_pos(
 			targetpos);
 
 		// check collision
@@ -125,7 +125,7 @@ void AIController::check_follow_wall(Bugger& bugger)
 			m_colony->get_height()))
 		{
 			// get target Tile&
-			Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
+			Tile& target_tile = m_colony->get_tile_by_pos(
 				targetpos);
 
 			// check collision and if there is no robot on the tile
@@ -165,7 +165,7 @@ void AIController::check_wait(Bugger& bugger)
 		m_colony->get_height()))
 	{
 		// get target Tile&
-		Tile& target_tile = m_colony->get_editable_tile_ref_by_coordinates(
+		Tile& target_tile = m_colony->get_tile_by_pos(
 			targetpos);
 
 		// check if the target field is free

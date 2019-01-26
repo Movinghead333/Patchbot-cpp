@@ -93,7 +93,7 @@ void LineRobot::update_x_movement(Colony& p_colony)
 	// reference to the target tile
 	// no need to check wether it is within the map boundries since the pusher
 	// can only be as far as patchbot
-	Tile& target_tile = p_colony.get_editable_tile_ref_by_coordinates(
+	Tile& target_tile = p_colony.get_tile_by_pos(
 		target_pos);
 
 	TileType target_tile_type = target_tile.get_tile_type();
@@ -135,7 +135,7 @@ void LineRobot::update_x_movement(Colony& p_colony)
 			{
 				std::cout << "preparing for push" << std::endl;
 				Tile& enemy_target_tile = p_colony.
-					get_editable_tile_ref_by_coordinates(enemy_target_pos);
+					get_tile_by_pos(enemy_target_pos);
 
 				int enemy_robot_id = target_tile.get_robot_id();
 
@@ -211,7 +211,7 @@ void LineRobot::update_y_movement(Colony& p_colony)
 	// reference to the target tile
 	// no need to check wether it is within the map boundries since the pusher
 	// can only be as far as patchbot
-	Tile& target_tile = p_colony.get_editable_tile_ref_by_coordinates(
+	Tile& target_tile = p_colony.get_tile_by_pos(
 		target_pos);
 
 	TileType target_tile_type = target_tile.get_tile_type();
@@ -253,7 +253,7 @@ void LineRobot::update_y_movement(Colony& p_colony)
 			{
 				std::cout << "preparing for push" << std::endl;
 				Tile& enemy_target_tile = p_colony.
-					get_editable_tile_ref_by_coordinates(enemy_target_pos);
+					get_tile_by_pos(enemy_target_pos);
 
 				int enemy_robot_id = target_tile.get_robot_id();
 

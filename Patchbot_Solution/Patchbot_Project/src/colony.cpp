@@ -49,9 +49,9 @@ const std::vector<Tile>& Colony::get_tiles() const
 	return m_tiles;
 }
 
- Robot& Colony::get_patch_bot() 
+ Patchbot& Colony::get_patch_bot() 
 {
-	return *m_robots[m_robots.size()-1];
+	return static_cast<Patchbot&>(*m_robots[m_robots.size()-1]);
 }
 
  std::shared_ptr<Robot>& Colony::get_robot_by_id(int p_id)
@@ -69,7 +69,7 @@ const std::vector<Tile>& Colony::get_tiles() const
 	 return m_tiles[p_x + (m_width * p_y)];
  }
 
- Tile & Colony::get_editable_tile_ref_by_coordinates(Point2D p_position)
+ Tile & Colony::get_tile_by_pos(Point2D p_position)
  {
 	 return m_tiles[p_position.x + (m_width * p_position.y)];
  }
@@ -342,7 +342,7 @@ void Colony::reset_colony()
 	}
 
 	for (const Point2D& destroyable_wall : m_destroyable_walls) {
-		get_editable_tile_ref_by_coordinates(destroyable_wall).
+		get_tile_by_pos(destroyable_wall).
 			set_m_tile_type(TileType::DESTRUCTABLE_WALL);
 	}
 
@@ -548,7 +548,7 @@ void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 {
 	// get an editable ref to old tile
 	Tile& old_tile =
-		get_editable_tile_ref_by_coordinates(p_robot.get_position());
+		get_tile_by_pos(p_robot.get_position());
 
 	// temp robot_id
 	int robot_id = old_tile.get_robot_id();
@@ -560,7 +560,7 @@ void Colony::move_robot_on_map(Robot& p_robot, Point2D p_target_position)
 	p_robot.update_position(p_target_position);
 
 	// set the new tile to occupied
-	get_editable_tile_ref_by_coordinates(p_robot.get_position()).
+	get_tile_by_pos(p_robot.get_position()).
 		set_robot_id(robot_id);
 }
 
