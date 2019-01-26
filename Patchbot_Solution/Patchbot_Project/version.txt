@@ -426,10 +426,11 @@ vc 118:
 	- moved bugger AI into bugger class
 	- removed AIController
 
+vc 119:
+	- linerobots now correctly react to doors
+
 
 TODO:
-	- move bugger ai from controller into bugger class
-	- delete ai controller
 	- implement pathfinder robots
 		- implement bresenham algorithm for line of sight checking
 		- nav_mesh needs to check fields for occupation
@@ -438,10 +439,6 @@ TODO:
 
 
 HIGH PRIORITY:
-	- fix patchbot collision
-		- move collision to patchbot class
-		- change check_collision in robot to take Colony&
-		- check GameState after AI movement
 
 LOW PRIORITY:
 
