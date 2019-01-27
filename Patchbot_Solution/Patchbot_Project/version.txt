@@ -429,6 +429,12 @@ vc 118:
 vc 119:
 	- linerobots now correctly react to doors
 
+vc 120:
+	- renamed BuggerStates to BuggerState
+	- pathfinder robot AI WIP
+	- basic semantics of pathfinder ai are now implemented
+
+
 
 TODO:
 	- implement pathfinder robots
@@ -439,6 +445,8 @@ TODO:
 
 
 HIGH PRIORITY:
+	- nav mesh must persist state of unreachable tiles until they get
+	  overwritten
 
 LOW PRIORITY:
 

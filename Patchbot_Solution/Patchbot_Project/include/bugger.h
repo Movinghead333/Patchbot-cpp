@@ -3,7 +3,7 @@
 
 #include "robot.h"
 #include "bugger_directions.h"
-#include "bugger_states.h"
+#include "bugger_state.h"
 #include "point.h"
 #include "tile.h"
 #include "utility.h"
@@ -34,14 +34,14 @@ public:
 	void set_m_current_wall(BuggerDirections p_current_wall);
 	BuggerDirections get_m_current_wall() const;
 
-	void set_m_ai_state(BuggerStates p_state);
-	BuggerStates get_m_ai_state() const;
+	void set_m_ai_state(BuggerState p_state);
+	BuggerState get_m_ai_state() const;
 
 	void set_starting_position(Point2D p_position);
 
 private:
 	BuggerDirections m_current_wall = BuggerDirections::NORTH;
-	BuggerStates m_ai_state = BuggerStates::FOLLOW_WALL;
+	BuggerState m_ai_state = BuggerState::FOLLOW_WALL;
 
 	Point2D m_start_position;
 };

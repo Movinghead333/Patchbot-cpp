@@ -283,7 +283,7 @@
     <ClInclude Include="include\best_path.h" />
     <ClInclude Include="include\bugger.h" />
     <ClInclude Include="include\bugger_directions.h" />
-    <ClInclude Include="include\bugger_states.h" />
+    <ClInclude Include="include\bugger_state.h" />
     <ClInclude Include="include\colony.h" />
     <ClInclude Include="include\door.h" />
     <ClInclude Include="include\exceptions.h" />
@@ -306,6 +306,7 @@
     <ClInclude Include="include\patchbot.h" />
     <ClInclude Include="include\patchbot_move.h" />
     <ClInclude Include="include\pathfinder_robot.h" />
+    <ClInclude Include="include\pathfinder_state.h" />
     <ClInclude Include="include\point.h" />
     <ClInclude Include="include\robot.h" />
     <ClInclude Include="include\robot_type.h" />

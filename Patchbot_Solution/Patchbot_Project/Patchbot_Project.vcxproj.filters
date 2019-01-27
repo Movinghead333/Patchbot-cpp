@@ -117,9 +117,6 @@
     <ClInclude Include="include\bugger_directions.h">
       <Filter>Header Files\enums</Filter>
     </ClInclude>
-    <ClInclude Include="include\bugger_states.h">
-      <Filter>Header Files\enums</Filter>
-    </ClInclude>
     <ClInclude Include="include\point.h">
       <Filter>Header Files\utility</Filter>
     </ClInclude>
@@ -128,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="include\patchbot.h">
       <Filter>Header Files\core\robots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bugger_state.h">
+      <Filter>Header Files\enums</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pathfinder_state.h">
+      <Filter>Header Files\enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
