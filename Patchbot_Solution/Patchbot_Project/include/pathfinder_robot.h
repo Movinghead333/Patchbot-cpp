@@ -18,7 +18,7 @@ class PathfinderRobot : public Robot
 
 	bool check_collision(Tile& p_target_tile) override;
 
-	bool check_reachable();
+	bool check_reachable(Colony& p_colony);
 
 	bool check_line_of_sight();
 

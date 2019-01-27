@@ -434,6 +434,10 @@ vc 120:
 	- pathfinder robot AI WIP
 	- basic semantics of pathfinder ai are now implemented
 
+vc 121:
+	- added implementations for check_collision and check_reachable to 
+	  pathfinder AI
+
 
 
 TODO:

@@ -21,7 +21,7 @@ void PathfinderRobot::update(Colony& p_colony)
 
 void PathfinderRobot::check_waiting(Colony& p_colony)
 {
-	if (check_reachable())
+	if (check_reachable(p_colony))
 	{
 		if (m_robot_type == RobotType::SNIFFER)
 		{
@@ -44,7 +44,7 @@ void PathfinderRobot::check_following(Colony& p_colony)
 	switch (m_robot_type)
 	{
 	case FOLLOWER:
-		if (check_reachable() && check_line_of_sight())
+		if (check_reachable(p_colony) && check_line_of_sight())
 		{
 			//move_towards_patchbot();
 		}
@@ -55,7 +55,7 @@ void PathfinderRobot::check_following(Colony& p_colony)
 		break;
 
 	case HUNTER:
-		if (check_reachable() && check_line_of_sight())
+		if (check_reachable(p_colony) && check_line_of_sight())
 		{
 			//move_towards_patchbot();
 			//move_towards_patchbot();
@@ -66,7 +66,7 @@ void PathfinderRobot::check_following(Colony& p_colony)
 		}
 		break;
 	case SNIFFER:
-		if (check_reachable())
+		if (check_reachable(p_colony))
 		{
 			//move_towards_patchbot();
 		}
@@ -80,7 +80,7 @@ void PathfinderRobot::check_following(Colony& p_colony)
 
 void PathfinderRobot::check_hunting(Colony& p_colony)
 {
-	if (check_reachable() && check_line_of_sight())
+	if (check_reachable(p_colony) && check_line_of_sight())
 	{
 		m_patchbot_pos = p_colony.get_patch_bot().get_position();
 		m_ai_state = PathfinderState::FOLLOWING;
@@ -94,13 +94,44 @@ void PathfinderRobot::check_hunting(Colony& p_colony)
 
 bool PathfinderRobot::check_collision(Tile & p_target_tile)
 {
-	return false;
+	switch (p_target_tile.get_tile_type())
+	{
+	case STEELPLANKS:
+	case PATCHBOT_SPAWN:
+	case ENEMY_SPAWN:
+	case AUTO_DOOR_OPEN:
+	case MANUAL_DOOR_OPEN:
+	case ALIEN_GRASS:
+	case GRAVEL:
+		return false;
+
+	case WATER:
+	case ABYSS:
+		m_robot_type = RobotType::DEAD;
+		setup_visible_time();
+		return false;
+
+	case MANUAL_DOOR_CLOSED:
+	case AUTO_DOOR_CLOSED:
+		m_blocked = true;
+		p_target_tile.change_door_texture_to_open();
+		return true;
+
+	case ROOT_SERVER:
+	case SECRET_ENTRANCE:
+	case INDESTRUCTABLE_WALL:
+	case DESTRUCTABLE_WALL:
+		return true;
+	}
 }
 
-bool PathfinderRobot::check_reachable()
+bool PathfinderRobot::check_reachable(Colony& p_colony)
 {
-	return false;
-}
+	BestPath next_dir = p_colony.get_tile_by_pos(m_position).get_m_best_path;
+	return next_dir != BestPath::TARGET ||
+		   next_dir != BestPath::UNREACHABLE ||
+		   next_dir != BestPath::UNSET;
+} 
 
 bool PathfinderRobot::check_line_of_sight()
 {
