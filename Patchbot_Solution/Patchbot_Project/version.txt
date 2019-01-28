@@ -443,19 +443,17 @@ vc 122:
 	- fixed a bug where a wall drestroyed by digger would not be seen as 
 	  UNSET by the dijkstra pathing algorithm
 
+vc 123:
+	- added bresenham implementation for checking line of sight for pathfinder
+	  robots
+
 
 TODO:
-	- implement pathfinder robots
-		- implement bresenham algorithm for line of sight checking
-		- nav_mesh needs to check fields for occupation
 	- propagte loose condition if a pathfinder robot reaches patchbots location
 	- clean up colony class
 
 
 HIGH PRIORITY:
-	- nav mesh must persist state of unreachable tiles until they get
-	  overwritten
-	- dijkstra pathfinding should see tiles occupied by a robot as obstacle
 
 LOW PRIORITY:
 

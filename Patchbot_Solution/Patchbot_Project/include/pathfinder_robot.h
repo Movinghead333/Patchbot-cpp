@@ -20,7 +20,7 @@ class PathfinderRobot : public Robot
 
 	bool check_reachable(Colony& p_colony);
 
-	bool check_line_of_sight();
+	bool check_line_of_sight(Colony& p_colony);
 
 private: // member variables
 	PathfinderState m_ai_state = PathfinderState::WAITING;
@@ -33,6 +33,9 @@ private: // member methods
 	void move_on_best_path(Colony& p_colony);
 
 	void move_to_last_known_location(Colony& p_colony);
+
+	// returns true if the given tile could block line of sight
+	bool is_line_of_sight_obstacle(const Tile& p_tile) const;
 };
 
 #endif
