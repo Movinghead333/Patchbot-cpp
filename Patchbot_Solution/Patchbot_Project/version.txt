@@ -438,6 +438,10 @@ vc 121:
 	- added implementations for check_collision and check_reachable to 
 	  pathfinder AI
 
+vc 122:
+	- pathfinder AI now moves
+	- fixed a bug where a wall drestroyed by digger would not be seen as 
+	  UNSET by the dijkstra pathing algorithm
 
 
 TODO:
@@ -451,6 +455,7 @@ TODO:
 HIGH PRIORITY:
 	- nav mesh must persist state of unreachable tiles until they get
 	  overwritten
+	- dijkstra pathfinding should see tiles occupied by a robot as obstacle
 
 LOW PRIORITY:
 

@@ -66,6 +66,7 @@ bool LineRobot::check_collision(Tile& p_target_tile)
 		if (m_robot_type == RobotType::DIGGER)
 		{
 			p_target_tile.set_m_tile_type(TileType::GRAVEL);
+			p_target_tile.set_m_best_path(BestPath::UNSET);
 		}
 		return true;
 	}

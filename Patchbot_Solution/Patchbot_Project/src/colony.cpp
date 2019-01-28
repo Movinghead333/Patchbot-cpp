@@ -342,8 +342,10 @@ void Colony::reset_colony()
 	}
 
 	for (const Point2D& destroyable_wall : m_destroyable_walls) {
-		get_tile_by_pos(destroyable_wall).
-			set_m_tile_type(TileType::DESTRUCTABLE_WALL);
+		Tile& current_tile = get_tile_by_pos(destroyable_wall);
+
+		current_tile.set_m_tile_type(TileType::DESTRUCTABLE_WALL);
+		current_tile.set_m_best_path(BestPath::UNREACHABLE);
 	}
 
 	for (std::shared_ptr<Robot>& robot : m_robots)
@@ -585,4 +587,7 @@ void Colony::update_robot_position(Point2D p_old_pos, Point2D p_new_pos)
 	// set the new tile
 	get_editable_tile_ref_by_coordinates(p_new_pos.x, p_new_pos.y).
 		set_robot_id(robot_id);
+
+	// lastly update the robots coordinates
+	get_robot_by_id(robot_id)->update_position(p_new_pos);
 }

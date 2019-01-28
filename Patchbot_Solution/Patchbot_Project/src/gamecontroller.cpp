@@ -451,9 +451,6 @@ void GameController::execute_single_step()
 			//patchbot_ref.update_position(Point2D(current_x, current_y));
 				m_current_colony->move_robot_on_map(
 					patchbot_ref, Point2D(current_x, current_y));
-
-				// update the nav_mesh for the AI
-				m_current_colony->generate_nav_mesh();
 			}
 		}
 		// else the target tile is wall so dont move
@@ -494,6 +491,9 @@ void GameController::execute_single_step()
 			m_current_move = m_current_program[m_program_index];
 		}
 	}
+
+	// update the nav_mesh for the AI
+	m_current_colony->generate_nav_mesh();
 
 	// update all robots
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())

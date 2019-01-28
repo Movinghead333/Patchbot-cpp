@@ -39,11 +39,14 @@ public:
 
 	void set_starting_position(Point2D p_position);
 
-private:
+private: // members
 	BuggerDirections m_current_wall = BuggerDirections::NORTH;
 	BuggerState m_ai_state = BuggerState::FOLLOW_WALL;
 
 	Point2D m_start_position;
+
+private: // methods
+
 };
 
 #endif

@@ -22,10 +22,17 @@ class PathfinderRobot : public Robot
 
 	bool check_line_of_sight();
 
-private:
-	PathfinderState m_ai_state;
+private: // member variables
+	PathfinderState m_ai_state = PathfinderState::WAITING;
 
-	Point2D m_patchbot_pos;
+	// default value should never be used and thus can be (-1, -1)
+	Point2D m_patchbot_pos = Point2D(-1, -1);
+
+private: // member methods
+
+	void move_on_best_path(Colony& p_colony);
+
+	void move_to_last_known_location(Colony& p_colony);
 };
 
 #endif
