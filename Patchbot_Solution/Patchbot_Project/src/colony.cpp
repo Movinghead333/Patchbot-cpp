@@ -375,10 +375,7 @@ void Colony::generate_nav_mesh()
 	// reset nav_mesh
 	for (Tile& tile : m_tiles)
 	{
-		if (tile.get_m_best_path() != BestPath::UNREACHABLE)
-		{
-			tile.set_m_best_path(BestPath::UNSET);
-		}
+		tile.set_pathing_done(false);
 	}
 
 	// get patchbot from robots vector
@@ -418,7 +415,8 @@ void Colony::generate_nav_mesh()
 				current_node.m_x, current_node.m_y - 1);
 
 			// if the tile is not set then set it
-			if (up_tile.get_m_best_path() == BestPath::UNSET)
+			if (up_tile.get_m_best_path() != BestPath::UNREACHABLE &&
+				!up_tile.get_pathing_done())
 			{
 				// set the tiles pathing variable 
 				up_tile.set_m_best_path(BestPath::PATH_DOWN);
@@ -436,6 +434,7 @@ void Colony::generate_nav_mesh()
 						current_node.m_x,
 						current_node.m_y - 1,
 						distance);
+					up_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -448,7 +447,8 @@ void Colony::generate_nav_mesh()
 				current_node.m_x + 1, current_node.m_y);
 
 
-			if (right_tile.get_m_best_path() == BestPath::UNSET)
+			if (right_tile.get_m_best_path() != BestPath::UNREACHABLE &&
+				!right_tile.get_pathing_done())
 			{
 				right_tile.set_m_best_path(BestPath::PATH_LEFT);
 
@@ -461,6 +461,7 @@ void Colony::generate_nav_mesh()
 						current_node.m_x + 1,
 						current_node.m_y,
 						distance);
+					right_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -473,7 +474,8 @@ void Colony::generate_nav_mesh()
 				current_node.m_x, current_node.m_y + 1);
 
 
-			if (down_tile.get_m_best_path() == BestPath::UNSET)
+			if (down_tile.get_m_best_path() != BestPath::UNREACHABLE &&
+				!down_tile.get_pathing_done())
 			{
 				down_tile.set_m_best_path(BestPath::PATH_UP);
 
@@ -486,6 +488,7 @@ void Colony::generate_nav_mesh()
 						current_node.m_x,
 						current_node.m_y + 1,
 						distance);
+					down_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -498,7 +501,8 @@ void Colony::generate_nav_mesh()
 				current_node.m_x - 1, current_node.m_y);
 
 
-			if (left_tile.get_m_best_path() == BestPath::UNSET)
+			if (left_tile.get_m_best_path() != BestPath::UNREACHABLE &&
+				!left_tile.get_pathing_done())
 			{
 				left_tile.set_m_best_path(BestPath::PATH_RIGHT);
 
@@ -511,6 +515,7 @@ void Colony::generate_nav_mesh()
 						current_node.m_x - 1,
 						current_node.m_y,
 						distance);
+					left_tile.set_pathing_done(true);
 				}
 			}
 		}

@@ -33,6 +33,9 @@ public:
 	void set_robot_id(int p_robot_id);
 	int get_robot_id() const;
 
+	void set_pathing_done(bool p_pathing_done);
+	bool get_pathing_done() const;
+
 	// returns true if the tile is blocked by a robot
 	bool get_occupied() const;
 
@@ -48,6 +51,9 @@ protected:
 
 	// back up robot id for map reset
 	int m_robot_id_backup;
+
+	// indicates if tiles has been check by dijkstra algorithm
+	bool m_pathing_done = false;
 };
 
 #endif

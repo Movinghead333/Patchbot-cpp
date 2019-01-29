@@ -463,6 +463,10 @@ vc 127:
 	- fixed a bug where autodoors would not reset properly
 	- line-robots are now slowed by alien gras
 
+vc 128:
+	- dijkstra algorithm now no longer resets calculated paths which are not
+	  not currently reachable so hunter AI can work properly
+
 
 
 TODO:

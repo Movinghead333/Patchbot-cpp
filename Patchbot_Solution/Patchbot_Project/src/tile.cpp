@@ -25,6 +25,9 @@ void Tile::reset()
 	{
 		m_tile_type = TileType::AUTO_DOOR_CLOSED;
 	}
+
+	// reset flag for dijkstra algorithm
+	m_pathing_done = false;
 }
 void Tile::change_door_texture_to_open()
 {
@@ -95,6 +98,16 @@ void Tile::set_robot_id(int p_robot_id)
 int Tile::get_robot_id() const
 {
 	return m_robot_id;
+}
+
+void Tile::set_pathing_done(bool p_pathing_done)
+{
+	m_pathing_done = p_pathing_done;
+}
+
+bool Tile::get_pathing_done() const
+{
+	return m_pathing_done;
 }
 
 bool Tile::get_occupied() const
