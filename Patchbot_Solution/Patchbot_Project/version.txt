@@ -467,6 +467,9 @@ vc 128:
 	- dijkstra algorithm now no longer resets calculated paths which are not
 	  not currently reachable so hunter AI can work properly
 
+vc 129:
+	- task 7 is now on master
+
 
 
 TODO:
