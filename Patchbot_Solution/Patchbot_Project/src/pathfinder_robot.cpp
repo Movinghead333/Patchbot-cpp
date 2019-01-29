@@ -3,6 +3,12 @@
 
 void PathfinderRobot::update(Colony& p_colony)
 {
+	if (m_blocked)
+	{
+		m_blocked = false;
+		return;
+	}
+
 	switch (m_ai_state)
 	{
 	case WAITING:
@@ -100,7 +106,10 @@ bool PathfinderRobot::check_collision(Tile& p_target_tile)
 	case AUTO_DOOR_OPEN:
 	case MANUAL_DOOR_OPEN:
 	case ALIEN_GRASS:
+		return false;
+
 	case GRAVEL:
+		m_blocked = true;
 		return false;
 
 	case WATER:

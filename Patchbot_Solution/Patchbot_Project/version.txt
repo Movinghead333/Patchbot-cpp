@@ -456,6 +456,11 @@ vc 125:
 	  they are added as leaf-nodes so pathing is possible from the tile itself
 	  but they still represent a obstacle to further pathfinding
 
+vc 126:
+	- pathfinder robots are now slowed by gravel
+
+
+
 TODO:
 	- clean up colony class
 	- dijkstra should only update reachable tiles and not reset all already

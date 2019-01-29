@@ -5,7 +5,7 @@ void LineRobot::update(Colony& p_colony)
 {
 	if (m_blocked)
 	{
-		m_blocked = false;
+		//m_blocked = false;
 	}
 	std::cout << "line robot updated!" << std::endl;
 	switch (m_ai_state)
@@ -113,6 +113,7 @@ void LineRobot::update_x_movement(Colony& p_colony)
 			 m_robot_type == RobotType::DIGGER) ||
 			m_blocked)
 		{
+			m_blocked = false;
 			return;
 		}
 		m_ai_state = LineRobotState::Y_MOVEMENT;
@@ -229,8 +230,10 @@ void LineRobot::update_y_movement(Colony& p_colony)
 		// if the a digger destroyed a wall just skip the rest of the turn
 		// and do not change the direction
 		if (target_tile_type == TileType::DESTRUCTABLE_WALL &&
-			m_robot_type == RobotType::DIGGER)
+			m_robot_type == RobotType::DIGGER ||
+			m_blocked)
 		{
+			m_blocked = false;
 			return;
 		}
 		m_ai_state = LineRobotState::X_MOVEMENT;
