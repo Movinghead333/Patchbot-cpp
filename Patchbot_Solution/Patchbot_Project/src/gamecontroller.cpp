@@ -601,6 +601,11 @@ void GameController::update_game_state()
 	{
 		m_game_state = GameState::FELL_INTO_ABYSS;
 	}
+
+	if (patchbot.get_robot_type() == RobotType::DEAD)
+	{
+		m_game_state = GameState::DESTROYED_BY_ROBOT;
+	}
 }
 
 // image getters for retreiving image resources from controller

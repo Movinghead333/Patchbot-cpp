@@ -393,6 +393,9 @@ void MainWindow::check_win_and_loose_conditions()
 	case GameState::FELL_INTO_WATER:
 		message = "Patchbot fell into water. Mission failed!";
 		break;
+	case GameState::DESTROYED_BY_ROBOT:
+		message = "Patchbot has been destroyed by another robot!";
+		break;
 	case GameState::SERVER_REACHED:
 		title = "Game won!";
 		message = "Patchbot reached a server. Mission successful!";

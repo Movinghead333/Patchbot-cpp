@@ -13,6 +13,8 @@ public:
 
 	// override collision
 	bool check_collision(Tile& p_target_tile) override;
+
+	void set_patchbot_dead();
 };
 
 #endif

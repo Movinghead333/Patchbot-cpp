@@ -48,3 +48,8 @@ bool Patchbot::check_collision(Tile & p_target_tile)
 	default: return false;
 	}
 }
+
+void Patchbot::set_patchbot_dead()
+{
+	m_robot_type = RobotType::DEAD;
+}

@@ -447,9 +447,11 @@ vc 123:
 	- added bresenham implementation for checking line of sight for pathfinder
 	  robots
 
+vc 124:
+	- pathfinder robots now destroy patchbot upon reaching his location
+	  when a pathfinder robot reaches patchbot the game is lost
 
 TODO:
-	- propagte loose condition if a pathfinder robot reaches patchbots location
 	- clean up colony class
 
 

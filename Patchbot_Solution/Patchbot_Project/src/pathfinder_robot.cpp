@@ -230,6 +230,13 @@ void PathfinderRobot::move_on_best_path(Colony& p_colony)
 		p_colony.update_robot_position(m_position, target_pos);
 
 	}
+
+	Patchbot& patchbot = p_colony.get_patch_bot();
+
+	if (target_pos == patchbot.get_position())
+	{
+		patchbot.set_patchbot_dead();
+	}
 }
 
 void PathfinderRobot::move_to_last_known_location(Colony & p_colony)
