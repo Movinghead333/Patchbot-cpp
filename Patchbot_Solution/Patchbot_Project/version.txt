@@ -451,8 +451,15 @@ vc 124:
 	- pathfinder robots now destroy patchbot upon reaching his location
 	  when a pathfinder robot reaches patchbot the game is lost
 
+vc 125:
+	- dijkstra pathfinding no longer expands tiles with robots on them instead
+	  they are added as leaf-nodes so pathing is possible from the tile itself
+	  but they still represent a obstacle to further pathfinding
+
 TODO:
 	- clean up colony class
+	- dijkstra should only update reachable tiles and not reset all already
+	  calculated pathing
 
 
 HIGH PRIORITY:

@@ -423,16 +423,20 @@ void Colony::generate_nav_mesh()
 				// set the tiles pathing variable 
 				up_tile.set_m_best_path(BestPath::PATH_DOWN);
 
-				// calculate the distance to this tile for further calculations
-				int distance = Utility::get_distance_from_tile_Type(
-					up_tile.get_tile_type()) + current_node.m_distance;
-				
-				// put the current tile in the list in order for it to have
-				// its neighbours be processed aswell
-				node_stack.emplace(
-					current_node.m_x,
-					current_node.m_y - 1,
-					distance);
+				// add the node only if it is not currently occupied by a robot
+				if (!up_tile.get_occupied())
+				{
+					// calculate the distance to this tile for further calculations
+					int distance = Utility::get_distance_from_tile_Type(
+						up_tile.get_tile_type()) + current_node.m_distance;
+
+					// put the current tile in the list in order for it to have
+					// its neighbours be processed aswell
+					node_stack.emplace(
+						current_node.m_x,
+						current_node.m_y - 1,
+						distance);
+				}
 			}
 		}
 		
@@ -448,13 +452,16 @@ void Colony::generate_nav_mesh()
 			{
 				right_tile.set_m_best_path(BestPath::PATH_LEFT);
 
-				int distance = Utility::get_distance_from_tile_Type(
-					right_tile.get_tile_type()) + current_node.m_distance;
+				if (!right_tile.get_occupied())
+				{
+					int distance = Utility::get_distance_from_tile_Type(
+						right_tile.get_tile_type()) + current_node.m_distance;
 
-				node_stack.emplace(
-					current_node.m_x + 1,
-					current_node.m_y,
-					distance);
+					node_stack.emplace(
+						current_node.m_x + 1,
+						current_node.m_y,
+						distance);
+				}
 			}
 		}
 
@@ -470,13 +477,16 @@ void Colony::generate_nav_mesh()
 			{
 				down_tile.set_m_best_path(BestPath::PATH_UP);
 
-				int distance = Utility::get_distance_from_tile_Type(
-					down_tile.get_tile_type()) + current_node.m_distance;
+				if (!down_tile.get_occupied())
+				{
+					int distance = Utility::get_distance_from_tile_Type(
+						down_tile.get_tile_type()) + current_node.m_distance;
 
-				node_stack.emplace(
-					current_node.m_x,
-					current_node.m_y + 1,
-					distance);
+					node_stack.emplace(
+						current_node.m_x,
+						current_node.m_y + 1,
+						distance);
+				}
 			}
 		}
 
@@ -492,17 +502,18 @@ void Colony::generate_nav_mesh()
 			{
 				left_tile.set_m_best_path(BestPath::PATH_RIGHT);
 
-				int distance = Utility::get_distance_from_tile_Type(
-					left_tile.get_tile_type()) + current_node.m_distance;
+				if (!left_tile.get_occupied())
+				{
+					int distance = Utility::get_distance_from_tile_Type(
+						left_tile.get_tile_type()) + current_node.m_distance;
 
-				node_stack.emplace(
-					current_node.m_x - 1,
-					current_node.m_y,
-					distance);
+					node_stack.emplace(
+						current_node.m_x - 1,
+						current_node.m_y,
+						distance);
+				}
 			}
 		}
-		
-		
 	}
 }
 
