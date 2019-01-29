@@ -459,6 +459,10 @@ vc 125:
 vc 126:
 	- pathfinder robots are now slowed by gravel
 
+vc 127:
+	- fixed a bug where autodoors would not reset properly
+	- line-robots are now slowed by alien gras
+
 
 
 TODO:

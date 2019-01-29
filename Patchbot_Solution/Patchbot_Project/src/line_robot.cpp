@@ -5,7 +5,8 @@ void LineRobot::update(Colony& p_colony)
 {
 	if (m_blocked)
 	{
-		//m_blocked = false;
+		m_blocked = false;
+		return;
 	}
 	std::cout << "line robot updated!" << std::endl;
 	switch (m_ai_state)
@@ -37,8 +38,11 @@ bool LineRobot::check_collision(Tile& p_target_tile)
 	case ENEMY_SPAWN:
 	case AUTO_DOOR_OPEN:
 	case MANUAL_DOOR_OPEN:
-	case ALIEN_GRASS:
 	case GRAVEL:
+		return false;
+
+	case ALIEN_GRASS:
+		m_blocked = true;
 		return false;
 
 	case WATER:

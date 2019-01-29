@@ -23,7 +23,7 @@ void Tile::reset()
 	}
 	else if (m_tile_type == TileType::AUTO_DOOR_OPEN)
 	{
-		m_tile_type = TileType::AUTO_DOOR_OPEN;
+		m_tile_type = TileType::AUTO_DOOR_CLOSED;
 	}
 }
 void Tile::change_door_texture_to_open()
