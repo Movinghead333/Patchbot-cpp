@@ -25,6 +25,7 @@ void LineRobot::update(Colony& p_colony)
 
 void LineRobot::reset_robot()
 {
+	// first calls reset from robot to reset coordinates
 	Robot::reset_robot();
 	m_ai_state = LineRobotState::X_MOVEMENT;
 }
@@ -281,7 +282,6 @@ void LineRobot::update_y_movement(Colony& p_colony)
 				{
 					// move the other robot first
 					p_colony.update_robot_position(target_pos, enemy_target_pos);
-					enemy_robot->update_position(enemy_target_pos);
 
 					if (enemy_robot->get_robot_type() == RobotType::DEAD)
 					{
@@ -290,7 +290,6 @@ void LineRobot::update_y_movement(Colony& p_colony)
 
 					// move the LineRobot
 					p_colony.update_robot_position(m_position, target_pos);
-					set_y_coordinate(target_y);
 				}
 				else
 				{
@@ -303,7 +302,6 @@ void LineRobot::update_y_movement(Colony& p_colony)
 		else
 		{
 			p_colony.update_robot_position(m_position, target_pos);
-			set_y_coordinate(target_y);
 		}
 	}
 

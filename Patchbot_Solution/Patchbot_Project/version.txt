@@ -470,6 +470,10 @@ vc 128:
 vc 129:
 	- task 7 is now on master
 
+vc 130:
+	- documentation to the AI classes
+	- fixed a bug where navigation would not work properly
+
 
 
 TODO:

@@ -101,18 +101,6 @@ Point2D Bugger::get_target_position(BuggerDirections p_direction)
 	}
 }
 
-bool Bugger::check_for_starting_position(Point2D p_target_point)
-{
-	if (m_start_position == p_target_point)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 BuggerDirections Bugger::get_next_direction(BuggerDirections p_direction)
 {
 	switch (p_direction)
@@ -154,7 +142,6 @@ void Bugger::check_find_another_wall(Colony& p_colony)
 			if (!target_tile.get_occupied())
 			{
 				p_colony.update_robot_position(m_position, targetpos);
-				update_position(targetpos);
 			}
 		}
 		else if (!m_blocked)
@@ -178,7 +165,7 @@ void Bugger::check_follow_wall(Colony & p_colony)
 	// check if the bugger is at its starting location
 	// if so send it to find another wall
 	// else try to follow the wall
-	if (check_for_starting_position(targetpos))
+	if (m_start_position == targetpos)
 	{
 		// found starting position so search for another wall
 		m_ai_state = BuggerState::FIND_ANOTHER_WALL;
@@ -199,7 +186,6 @@ void Bugger::check_follow_wall(Colony & p_colony)
 				if (!target_tile.get_occupied())
 				{
 					p_colony.update_robot_position(m_position, targetpos);
-					update_position(targetpos);
 				}
 				// the target tile is not a wall but there is a robot on it
 				else
@@ -238,29 +224,4 @@ void Bugger::check_wait(Colony & p_colony)
 			m_ai_state = BuggerState::FOLLOW_WALL;
 		}
 	}
-}
-
-void Bugger::set_m_current_wall(BuggerDirections p_current_wall)
-{
-	m_current_wall = p_current_wall;
-}
-
-BuggerDirections Bugger::get_m_current_wall() const
-{
-	return m_current_wall;
-}
-
-void Bugger::set_m_ai_state(BuggerState p_state)
-{
-	m_ai_state = p_state;
-}
-
-BuggerState Bugger::get_m_ai_state() const
-{
-	return m_ai_state;
-}
-
-void Bugger::set_starting_position(Point2D p_position)
-{
-	m_start_position = p_position;
 }

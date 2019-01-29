@@ -82,7 +82,7 @@ public:
 	// update tiles to correspond to robot move
 	void update_robot_position(Point2D p_old_pos, Point2D p_new_pos);
 
-	//DEBUG
+	// DEBUG-methods
 	void print_robot_id_matrix() const;
 	void print_occupiation_matrix() const;
 

@@ -25,13 +25,18 @@ void PathfinderRobot::update(Colony& p_colony)
 
 void PathfinderRobot::check_waiting(Colony& p_colony)
 {
+	// if patchbot is reachable actions should be taken
 	if (check_reachable(p_colony))
 	{
+		// if the robot is a sniffer the first condition is enough to change
+		// the state to following
 		if (m_robot_type == RobotType::SNIFFER)
 		{
 			m_ai_state = PathfinderState::FOLLOWING;
 			return;
 		}
+		// if it a follower or a hunter then line of sight is required
+		// also when the current robot is hunter then save patchbot's position
 		else if (check_line_of_sight(p_colony))
 		{
 			if (m_robot_type == RobotType::HUNTER)
@@ -45,6 +50,7 @@ void PathfinderRobot::check_waiting(Colony& p_colony)
 
 void PathfinderRobot::check_following(Colony& p_colony)
 {
+	// code speaks for itself
 	switch (m_robot_type)
 	{
 	case FOLLOWER:
@@ -84,11 +90,16 @@ void PathfinderRobot::check_following(Colony& p_colony)
 
 void PathfinderRobot::check_hunting(Colony& p_colony)
 {
+	// if patchbot is reachable through pathfinding and is also in line of 
+	// sight of a hunter robot than save patchbot's position and change the
+	// state to following
 	if (check_reachable(p_colony) && check_line_of_sight(p_colony))
 	{
 		m_patchbot_pos = p_colony.get_patch_bot().get_position();
 		m_ai_state = PathfinderState::FOLLOWING;
 	}
+	// if the above conditions are not met then move to patchbots last known
+	// position
 	else
 	{
 		move_to_last_known_location(p_colony);
@@ -134,11 +145,10 @@ bool PathfinderRobot::check_collision(Tile& p_target_tile)
 
 bool PathfinderRobot::check_reachable(Colony& p_colony)
 {
-	BestPath next_dir = p_colony.get_tile_by_pos(m_position).get_m_best_path();
-	std::cout << "nav_value: " << next_dir << std::endl;
-	return next_dir != BestPath::TARGET &&
-		   next_dir != BestPath::UNREACHABLE &&
-		   next_dir != BestPath::UNSET;
+	const Tile& robot_tile = p_colony.get_tile_by_pos(m_position);
+	std::cout << robot_tile.get_pathing_done() << std::endl;
+	
+	return robot_tile.get_pathing_done();
 } 
 
 //TODO maybe add const and non const patchbot getter

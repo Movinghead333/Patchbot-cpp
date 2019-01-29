@@ -421,6 +421,9 @@ void Colony::generate_nav_mesh()
 				// set the tiles pathing variable 
 				up_tile.set_m_best_path(BestPath::PATH_DOWN);
 
+				// indicates that pathing for this tile is done
+				up_tile.set_pathing_done(true);
+
 				// add the node only if it is not currently occupied by a robot
 				if (!up_tile.get_occupied())
 				{
@@ -434,7 +437,6 @@ void Colony::generate_nav_mesh()
 						current_node.m_x,
 						current_node.m_y - 1,
 						distance);
-					up_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -452,6 +454,8 @@ void Colony::generate_nav_mesh()
 			{
 				right_tile.set_m_best_path(BestPath::PATH_LEFT);
 
+				right_tile.set_pathing_done(true);
+
 				if (!right_tile.get_occupied())
 				{
 					int distance = Utility::get_distance_from_tile_Type(
@@ -461,7 +465,6 @@ void Colony::generate_nav_mesh()
 						current_node.m_x + 1,
 						current_node.m_y,
 						distance);
-					right_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -479,6 +482,8 @@ void Colony::generate_nav_mesh()
 			{
 				down_tile.set_m_best_path(BestPath::PATH_UP);
 
+				down_tile.set_pathing_done(true);
+
 				if (!down_tile.get_occupied())
 				{
 					int distance = Utility::get_distance_from_tile_Type(
@@ -488,7 +493,6 @@ void Colony::generate_nav_mesh()
 						current_node.m_x,
 						current_node.m_y + 1,
 						distance);
-					down_tile.set_pathing_done(true);
 				}
 			}
 		}
@@ -506,6 +510,8 @@ void Colony::generate_nav_mesh()
 			{
 				left_tile.set_m_best_path(BestPath::PATH_RIGHT);
 
+				left_tile.set_pathing_done(true);
+
 				if (!left_tile.get_occupied())
 				{
 					int distance = Utility::get_distance_from_tile_Type(
@@ -515,7 +521,6 @@ void Colony::generate_nav_mesh()
 						current_node.m_x - 1,
 						current_node.m_y,
 						distance);
-					left_tile.set_pathing_done(true);
 				}
 			}
 		}
