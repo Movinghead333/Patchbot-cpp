@@ -15,6 +15,11 @@ GameController::GameController()
 void GameController::load_and_initialize_colony(
 	const std::string& p_file_path)
 {
+	// if the string is empty nothing has been selected so just do nothing
+	if (p_file_path == "")
+	{
+		return;
+	}
 	// load a colony from file into controller
 	m_current_colony = std::make_shared<Colony>(
 		*Colony::load_colony(p_file_path));
@@ -397,15 +402,13 @@ void GameController::execute_single_step()
 		// check if the target tile is occupied
 		occupied = target_tile.get_occupied();
 
-		// check if the current movetype is a direction if so check if patchbot
-		// needs to be moved
-		if (m_current_move.m_move_type != MoveType::WAIT)
+		// check if patchbot wants to make a move and if the tile he is trying
+		// to get to is a wall
+		if (m_current_move.m_move_type != MoveType::WAIT &&
+			calculate_collision(current_x, current_y))
 		{
-			// if this is true the target field is no wall
-			if (calculate_collision(current_x, current_y))
-			{
-				// if this is true the target_tile is occupied by another robot
-				if (occupied)
+			// if this is true the target_tile is occupied by another robot
+			if (occupied)
 				{
 					if (m_current_move.m_steps != -1)
 					{
@@ -453,16 +456,14 @@ void GameController::execute_single_step()
 						}
 					}
 				}
-				// else means the tile is free so patchbot can make its move
-				else
-				{
-					//move the player
-				//patchbot_ref.update_position(Point2D(current_x, current_y));
-					m_current_colony->move_robot_on_map(
-						patchbot_ref, Point2D(current_x, current_y));
-				}
+			// else means the tile is free so patchbot can make its move
+			else
+			{
+				//move the player
+			//patchbot_ref.update_position(Point2D(current_x, current_y));
+				m_current_colony->move_robot_on_map(
+					patchbot_ref, Point2D(current_x, current_y));
 			}
-			// else the target tile is wall so dont move
 		}
 	}
 

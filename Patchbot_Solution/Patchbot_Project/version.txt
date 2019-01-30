@@ -492,6 +492,11 @@ vc 134:
 	- fixed a bug where patchbot could walk out of the map causing the program
 	  to crash
 
+vc 135:
+	- the name of the currently loaded colony now gets displayed ingame
+	- selecting nothing while trying to load a new colony now no longer
+	  shows an error-message
+
 
 TODO:
 	- clean up colony class

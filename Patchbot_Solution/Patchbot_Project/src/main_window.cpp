@@ -218,13 +218,23 @@ void MainWindow::on_missionPause_clicked()
 void MainWindow::on_changeColony_clicked()
 {
 	QString filter = "Textfile (*.txt)";
-	std::string file_name = QFileDialog::getOpenFileName(
+	QString q_file_name = QFileDialog::getOpenFileName(
 		this, "Open new Colony", "C://", filter
-	).toStdString();
+	);
+
+	
+
+	std::string file_name = q_file_name.toStdString();
 
 	try
 	{
 		m_game_controller->load_and_initialize_colony(file_name);
+
+		// set the currently colony label
+		QFileInfo file_info = QFileInfo(q_file_name);
+		ui.staticColonyName->setText(
+			QString("Aktuelle Kolonie: ") + file_info.baseName());
+
 		calculate_render_details();
 		set_programming_ui_enabled(true);
 		ui.missionStart->setEnabled(true);
