@@ -483,6 +483,11 @@ vc 132:
 	- when a bugger gets destroyed the corresponding tile's occupation is reset
 	  after five time steps
 
+vc 133:
+	- fixed some missing const&
+	- fixed a bug where pathfinder robots would get slowed by alien grass 
+	  instead of gravel
+
 
 
 TODO:

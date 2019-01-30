@@ -11,7 +11,7 @@
 class Bugger : public Robot
 {
 public:
-	Bugger(Point2D p_position, RobotType p_robot_type);
+	Bugger(const Point2D& p_position, RobotType p_robot_type);
 
 	// updates the Bugger for the current time step
 	void update(Colony& p_colony) override;
@@ -26,7 +26,7 @@ public:
 	Point2D get_target_position(BuggerDirections p_direction);
 
 	// returns the next direction in clockwise manner
-	BuggerDirections get_next_direction(BuggerDirections p_direction);
+	BuggerDirections get_next_direction(BuggerDirections p_direction) const;
 
 private: // member variables
 

@@ -71,7 +71,7 @@ BestPath Utility::char_to_nav_mesh_value(const char & input_char)
 
 int Utility::get_distance_from_tile_Type(TileType p_tile_type)
 {
-	if (p_tile_type == TileType::ALIEN_GRASS ||
+	if (p_tile_type == TileType::GRAVEL ||
 		p_tile_type == TileType::AUTO_DOOR_CLOSED ||
 		p_tile_type == TileType::MANUAL_DOOR_CLOSED)
 	{

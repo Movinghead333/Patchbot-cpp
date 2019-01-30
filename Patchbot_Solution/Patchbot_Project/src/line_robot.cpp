@@ -3,12 +3,30 @@
 
 void LineRobot::update(Colony& p_colony)
 {
+	// check if the robot is dead if so decrease its visibility timer and
+	// return
+	if (m_robot_type == RobotType::DEAD)
+	{
+		update_visible_time();
+
+		Tile& robot_tile = p_colony.get_tile_by_pos(m_position);
+
+		if (time_visible == 0 && robot_tile.get_occupied())
+		{
+
+			robot_tile.set_robot_id(-1);
+		}
+		return;
+	}
+
+	// check if a linerobots has been slowed down by aliengras
 	if (m_blocked)
 	{
 		m_blocked = false;
 		return;
 	}
-	std::cout << "line robot updated!" << std::endl;
+
+	// execute AI movement
 	switch (m_ai_state)
 	{
 	case X_MOVEMENT:
@@ -20,7 +38,6 @@ void LineRobot::update(Colony& p_colony)
 	case DESTROYED:
 		return;
 	}
-	update_visible_time();
 }
 
 void LineRobot::reset_robot()

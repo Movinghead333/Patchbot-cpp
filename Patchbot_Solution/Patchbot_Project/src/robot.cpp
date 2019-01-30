@@ -2,7 +2,7 @@
 #include "colony.h"
 
 // Robot-constructor implementation
-Robot::Robot(Point2D p_position, RobotType p_robot_type) :
+Robot::Robot(const Point2D& p_position, RobotType p_robot_type) :
 	m_position(p_position),
 	m_position_backup(p_position),
 	m_robot_type(p_robot_type),

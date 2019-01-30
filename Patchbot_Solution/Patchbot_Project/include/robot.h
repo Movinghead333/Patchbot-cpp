@@ -16,7 +16,7 @@ class Robot
 public:
 
 	// constructor
-	Robot(Point2D p_position, RobotType pRobotType);
+	Robot(const Point2D& p_position, RobotType pRobotType);
 
 	virtual void update(Colony& p_colony);
 

@@ -1,7 +1,7 @@
 #include "bugger.h"
 #include "colony.h"
 
-Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
+Bugger::Bugger(const Point2D& p_position, RobotType p_robot_type)
 	:
 	Robot(p_position, p_robot_type),
 	m_start_position(p_position)
@@ -120,7 +120,7 @@ Point2D Bugger::get_target_position(BuggerDirections p_direction)
 	}
 }
 
-BuggerDirections Bugger::get_next_direction(BuggerDirections p_direction)
+BuggerDirections Bugger::get_next_direction(BuggerDirections p_direction) const
 {
 	switch (p_direction)
 	{

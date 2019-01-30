@@ -3,12 +3,32 @@
 
 void PathfinderRobot::update(Colony& p_colony)
 {
+	// if the robot has been destroyed only update his display time and 
+	// when the timer reaches zero reset the occupation of the tile the robot
+	// is standing on
+	if (m_robot_type == RobotType::DEAD)
+	{
+		update_visible_time();
+
+		Tile& robot_tile = p_colony.get_tile_by_pos(m_position);
+
+		if (time_visible == 0 && robot_tile.get_occupied())
+		{
+
+			robot_tile.set_robot_id(-1);
+		}
+		return;
+	}
+
+	// if the robots has been slowed down by gravel this is true and needs
+	// to skip a turn and reset the flag
 	if (m_blocked)
 	{
 		m_blocked = false;
 		return;
 	}
 
+	// update AI based on its current state
 	switch (m_ai_state)
 	{
 	case WAITING:
