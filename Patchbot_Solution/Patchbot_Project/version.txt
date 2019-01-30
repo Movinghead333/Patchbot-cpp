@@ -497,6 +497,9 @@ vc 135:
 	- selecting nothing while trying to load a new colony now no longer
 	  shows an error-message
 
+vc 136:
+	- cleanup in execute_single_step method
+
 
 TODO:
 	- clean up colony class

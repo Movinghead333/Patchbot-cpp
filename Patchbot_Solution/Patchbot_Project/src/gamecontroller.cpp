@@ -363,26 +363,26 @@ void GameController::execute_single_step()
 		return;
 	}
 
-	int current_x = patchbot_ref.get_x_coordinate();
-	int current_y = patchbot_ref.get_y_coordinate();
+	Point2D target_pos = Point2D(patchbot_ref.get_x_coordinate(),
+							   	 patchbot_ref.get_y_coordinate());
 
 	// do current step
 	switch (m_current_move.m_move_type)
 	{
 	case MoveType::UP:
-		current_y--;
+		target_pos.y--;
 		break;
 
 	case MoveType::RIGHT:
-		current_x++;
+		target_pos.x++;
 		break;
 
 	case MoveType::DOWN:
-		current_y++;
+		target_pos.y++;
 		break;
 
 	case MoveType::LEFT:
-		current_x--;
+		target_pos.x--;
 		break;
 
 	case MoveType::WAIT:
@@ -393,11 +393,11 @@ void GameController::execute_single_step()
 	// and collides with the map boundries he will stop
 	bool occupied = true;
 
-	if (m_current_colony->is_in_map_boundries(Point2D(current_x, current_y)))
+	if (m_current_colony->is_in_map_boundries(target_pos))
 	{
 		// get a const ref to the current target tile
 		const Tile& target_tile = m_current_colony->
-			get_tile_by_coordinates(current_x, current_y);
+			get_tile_by_pos(target_pos);
 
 		// check if the target tile is occupied
 		occupied = target_tile.get_occupied();
@@ -405,64 +405,65 @@ void GameController::execute_single_step()
 		// check if patchbot wants to make a move and if the tile he is trying
 		// to get to is a wall
 		if (m_current_move.m_move_type != MoveType::WAIT &&
-			calculate_collision(current_x, current_y))
+			!calculate_collision(target_pos))
 		{
 			// if this is true the target_tile is occupied by another robot
-			if (occupied)
+			if (occupied && m_current_move.m_steps != -1)
+			{
+				std::cout << "trying to push" << std::endl;
+
+				Point2D enemy_target_pos = target_pos;
+				switch (m_current_move.m_move_type)
 				{
-					if (m_current_move.m_steps != -1)
+				case UP:
+					enemy_target_pos.y--;
+					break;
+				case RIGHT:
+					enemy_target_pos.x++;
+					break;
+				case DOWN:
+					enemy_target_pos.y++;
+					break;
+				case LEFT:
+					enemy_target_pos.x--;
+					break;
+				}
+
+				if (m_current_colony->is_in_map_boundries(enemy_target_pos))
+				{
+					Tile& enemy_target_tile = m_current_colony->
+						get_tile_by_pos(enemy_target_pos);
+
+					std::shared_ptr<Robot>& target_robot =
+						m_current_colony->
+						get_robot_by_id(target_tile.get_robot_id());
+
+					// the target tile neither a wall nor blocked by another
+					// robot thus patchbot can move the enemy robot
+					if (!target_robot->check_collision(enemy_target_tile) &&
+						!enemy_target_tile.get_occupied())
 					{
-						Point2D enemy_target_pos =
-							Point2D(current_x, current_y);
-						switch (m_current_move.m_move_type)
-						{
-						case UP:
-							enemy_target_pos.y--;
-							break;
-						case RIGHT:
-							enemy_target_pos.x++;
-							break;
-						case DOWN:
-							enemy_target_pos.y++;
-							break;
-						case LEFT:
-							enemy_target_pos.x--;
-							break;
-						}
+						// first move the enemy robot
+						m_current_colony->update_robot_position(target_pos,
+							enemy_target_pos);
 
-						Tile& enemy_target_tile = m_current_colony->
-							get_editable_tile_ref_by_coordinates(
-								enemy_target_pos.x, enemy_target_pos.y);
+						// then move patchbot
+						m_current_colony->update_robot_position(
+							patchbot_ref.get_position(), target_pos);
 
-						std::shared_ptr<Robot>& target_robot =
-							m_current_colony->
-							get_robot_by_id(target_tile.get_robot_id());
-
-						// the target tile neither a wall nor blocked by another
-						// robot thus patchbot can move the enemy robot
-						if (target_robot->check_collision(enemy_target_tile) &&
-							!enemy_target_tile.get_occupied())
-						{
-							// first move the enemy robot
-							m_current_colony->move_robot_on_map(*target_robot,
-								enemy_target_pos);
-
-							// then move patchbot
-							m_current_colony->move_robot_on_map(patchbot_ref,
-								Point2D(current_x, current_y));
-
-							// update the nav_mesh for the AI
-							m_current_colony->generate_nav_mesh();
-						}
+						// update the nav_mesh for the AI
+						m_current_colony->generate_nav_mesh();
 					}
 				}
+				
+			}
 			// else means the tile is free so patchbot can make its move
 			else
 			{
 				//move the player
 			//patchbot_ref.update_position(Point2D(current_x, current_y));
-				m_current_colony->move_robot_on_map(
-					patchbot_ref, Point2D(current_x, current_y));
+				m_current_colony->update_robot_position(
+					patchbot_ref.get_position(), target_pos);
 			}
 		}
 	}
@@ -475,7 +476,7 @@ void GameController::execute_single_step()
 	// NOTE: the current implementation does an extra step to confirm the next
 	//		 tile would be an obstacle
 	if (m_current_move.m_steps == -1 &&
-		(!calculate_collision(current_x, current_y) ||
+		(calculate_collision(target_pos) ||
 			occupied))
 	{
 		m_current_move.m_steps++;
@@ -524,18 +525,17 @@ void GameController::execute_single_step()
 	update_doors();
 }
 
-bool GameController::calculate_collision(int x, int y)
+bool GameController::calculate_collision(Point2D p_target_pos)
 {
 	// check the boundries if the move goes out of bounds return false
-	if (x < 0 || x >= m_current_colony->get_width() ||
-		y < 0 || y >= m_current_colony->get_height())
+	if (!m_current_colony->is_in_map_boundries(p_target_pos))
 	{
-		return false;
+		return true;
 	}
 
-	switch (m_current_colony->get_tile_by_coordinates(x, y).get_tile_type())
+	switch (m_current_colony->get_tile_by_pos(p_target_pos).get_tile_type())
 	{
-	// true cases --> no collision
+	// false cases --> no collision
 	case TileType::SECRET_ENTRANCE:
 	case TileType::GRAVEL:
 	case TileType::AUTO_DOOR_OPEN:
@@ -543,33 +543,33 @@ bool GameController::calculate_collision(int x, int y)
 	case TileType::ENEMY_SPAWN:
 	case TileType::STEELPLANKS:
 	case TileType::MANUAL_DOOR_OPEN:
-		return true;
+		return false;
 	case TileType::ALIEN_GRASS:
 		m_current_colony->get_patch_bot().set_m_blocked(true);
-		return true;
+		return false;
 	case TileType::ABYSS:
 		set_game_state(GameState::FELL_INTO_ABYSS);
-		return true;
+		return false;
 	case TileType::WATER:
 		set_game_state(GameState::FELL_INTO_WATER);
-		return true;
+		return false;
 
-	// false cases --> collision
+	// true cases --> collision
 	case TileType::ROOT_SERVER:
 		set_game_state(GameState::SERVER_REACHED);
-		return false;
+		return true;
 	case TileType::INDESTRUCTABLE_WALL:
 	case TileType::DESTRUCTABLE_WALL:
 	case TileType::AUTO_DOOR_CLOSED:
-		return false;
+		return true;
 	case TileType::MANUAL_DOOR_CLOSED:
-		m_current_colony->get_editable_tile_ref_by_coordinates(x, y).
+		m_current_colony->get_tile_by_pos(p_target_pos).
 			set_m_tile_type(TileType::MANUAL_DOOR_OPEN);
 		//TODO: decide wether a door takes one or 2 moves
 		//m_current_move.m_steps++;
-		return false;
+		return true;
 
-	default: return false;
+	default: return true;
 	}
 }
 

@@ -54,8 +54,8 @@ public:
 	// execute a single time step in the current program
 	void execute_single_step();
 
-	// returns true if the coordinates represent a valid move
-	bool calculate_collision(int x, int y);
+	// returns true if patch cannot move to the given position
+	bool calculate_collision(Point2D p_target_pos);
 
 	// update all doors on the map
 	void update_doors();

@@ -38,6 +38,7 @@ public:
 	const std::vector<Tile>& get_tiles() const;
 	const Tile& get_tile_by_coordinates(int x, int y) const;
 
+	// sets a tile based on the given coordinates and the passed TileType
 	void set_tile_type_by_coordinates(int x, int y, TileType p_tile_type);
 
 	// get a ref to the vector storing all the robots from the current colony
@@ -46,13 +47,16 @@ public:
 	std::vector<std::shared_ptr<Robot>>& get_robots();
 	Patchbot& get_patch_bot();
 
+	// return a robot by the given id (the index in the robots vector
 	std::shared_ptr<Robot>& get_robot_by_id(int p_id);
 
 	// get changable vector of all doors
 	std::vector<Door>& get_doors();
 
+	// returns a reference of tile at the given coordinates
 	Tile& get_editable_tile_ref_by_coordinates(int p_x, int p_y);
 
+	// returns a reference to a tile a given position
 	Tile& get_tile_by_pos(Point2D p_position);
 
 
