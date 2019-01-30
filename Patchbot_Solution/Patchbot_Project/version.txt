@@ -488,6 +488,9 @@ vc 133:
 	- fixed a bug where pathfinder robots would get slowed by alien grass 
 	  instead of gravel
 
+vc 134:
+	- fixed a bug where patchbot could walk out of the map causing the program
+	  to crash
 
 
 TODO:
