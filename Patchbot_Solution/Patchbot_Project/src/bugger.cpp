@@ -10,10 +10,19 @@ Bugger::Bugger(Point2D p_position, RobotType p_robot_type)
 
 void Bugger::update(Colony& p_colony)
 {
+	// check if the robot is dead if so decrease its visibility timer and
+	// return
+	if (m_robot_type == RobotType::DEAD)
+	{
+		update_visible_time();
+		return;
+	}
+
 	if (m_blocked)
 	{
 		m_blocked = false;
 	}
+
 	// perfom the next action based on the current AI state
 	switch (m_ai_state)
 	{
@@ -30,7 +39,6 @@ void Bugger::update(Colony& p_colony)
 		break;
 
 	}
-	update_visible_time();
 }
 
 void Bugger::reset_robot()
@@ -64,7 +72,10 @@ bool Bugger::check_collision(Tile& p_target_tile)
 
 	case WATER:
 	case ABYSS:
+		// change robot_type to dead for rendering
 		m_robot_type = RobotType::DEAD;
+
+		// set the timer for how long the destroyed robot will be displayed
 		setup_visible_time();
 		return false;
 

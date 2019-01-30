@@ -498,8 +498,11 @@ void GameController::execute_single_step()
 	// update all robots
 	for (std::shared_ptr<Robot>& robot : m_current_colony->get_robots())
 	{
-		robot->update(*m_current_colony);
-		update_game_state();
+		if (robot->get_robot_type())
+		{
+			robot->update(*m_current_colony);
+			update_game_state();
+		}
 	}
 	//m_current_colony->print_robot_id_matrix();
 	m_current_colony->print_occupiation_matrix();

@@ -474,6 +474,11 @@ vc 130:
 	- documentation to the AI classes
 	- fixed a bug where navigation would not work properly
 
+vc 131:
+	- fixed a bug where bugger would move even after it has been destroyed
+	- bugger is now correctly destroyed and does not display on the 6th turn
+	  after the robot has been initially destroyed
+
 
 
 TODO:

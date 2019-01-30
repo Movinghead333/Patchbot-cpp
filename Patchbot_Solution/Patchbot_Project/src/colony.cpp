@@ -605,9 +605,14 @@ void Colony::update_robot_position(Point2D p_old_pos, Point2D p_new_pos)
 	// reset the old tile
 	old_tile.set_robot_id(-1);
 
-	// set the new tile
-	get_editable_tile_ref_by_coordinates(p_new_pos.x, p_new_pos.y).
-		set_robot_id(robot_id);
+	Robot& robot = *get_robot_by_id(robot_id);
+
+	Tile& new_tile = get_editable_tile_ref_by_coordinates(
+		p_new_pos.x, p_new_pos.y);
+
+	
+	new_tile.set_robot_id(robot_id);
+	
 
 	// lastly update the robots coordinates
 	get_robot_by_id(robot_id)->update_position(p_new_pos);
