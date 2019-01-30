@@ -15,6 +15,14 @@ void Bugger::update(Colony& p_colony)
 	if (m_robot_type == RobotType::DEAD)
 	{
 		update_visible_time();
+
+		Tile& robot_tile = p_colony.get_tile_by_pos(m_position);
+
+		if (time_visible == 0 && robot_tile.get_occupied())
+		{
+			
+			robot_tile.set_robot_id(-1);
+		}
 		return;
 	}
 

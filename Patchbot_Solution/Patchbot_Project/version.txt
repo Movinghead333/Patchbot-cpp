@@ -479,6 +479,10 @@ vc 131:
 	- bugger is now correctly destroyed and does not display on the 6th turn
 	  after the robot has been initially destroyed
 
+vc 132:
+	- when a bugger gets destroyed the corresponding tile's occupation is reset
+	  after five time steps
+
 
 
 TODO:
