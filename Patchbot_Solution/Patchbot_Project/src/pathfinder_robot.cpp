@@ -89,6 +89,7 @@ void PathfinderRobot::check_following(Colony& p_colony)
 		{
 			move_on_best_path(p_colony);
 			move_on_best_path(p_colony);
+			m_patchbot_pos = p_colony.get_patch_bot().get_position();
 		}
 		else
 		{
@@ -280,7 +281,7 @@ void PathfinderRobot::move_on_best_path(Colony& p_colony)
 
 void PathfinderRobot::move_to_last_known_location(Colony & p_colony)
 {
-	if (m_position == m_patchbot_pos)
+	if (!(m_position == m_patchbot_pos))
 	{
 		move_on_best_path(p_colony);
 	}

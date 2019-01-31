@@ -500,6 +500,9 @@ vc 135:
 vc 136:
 	- cleanup in execute_single_step method
 
+vc 137:
+	- fixed a bug where hunter would not correctly chase after patchbot
+
 
 TODO:
 	- clean up colony class
